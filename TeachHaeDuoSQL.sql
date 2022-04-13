@@ -438,3 +438,15 @@ REFERENCES "MEMBER" (
 	"M_ID"
 ) ON DELETE CASCADE;
 
+
+insert into MEMBER(M_ID, M_PW, M_NAME, M_NICKNAME, M_BIRTH, M_ADDRESS, M_PHONE,M_EMAIL,GENDER_FM,ROLE_ST,M_DATE) VALUES('a12345','a12345678','홍길동','홍기','111111','서울시관악구신림동50','010-1111-1111','aaa@gmail.com','F','S',default); 
+
+insert into MEMBER(M_ID, M_PW, M_NAME, M_NICKNAME, M_BIRTH, M_ADDRESS, M_PHONE,M_EMAIL,GENDER_FM,ROLE_ST,M_DATE) VALUES('b12345','b12345678','이민호','민호','222222','경기도 부천시 심곡본동 340','010-2211-1111','bbb@gmail.com','F','S',default);
+
+
+insert into MEMBER(M_ID, M_PW, M_NAME, M_NICKNAME, M_BIRTH, M_ADDRESS, M_PHONE,M_EMAIL,GENDER_FM,ROLE_ST,M_DATE) VALUES('c12345','c12345678','이영희','영희쌤','333333','서울시 강남구 논현동 224','010-3311-1111','ccc@gmail.com','M','T',default); 
+
+insert into MEMBER(M_ID, M_PW, M_NAME, M_NICKNAME, M_BIRTH, M_ADDRESS, M_PHONE,M_EMAIL,GENDER_FM,ROLE_ST,M_DATE) VALUES('d12345','d12345678','김보미','보미쌤','444444','서울시 용산구 한남동 24','010-4411-1111','ddd@gmail.com','M','T',default); 
+
+
+
