@@ -442,3 +442,40 @@ insert into MEMBER(M_ID, M_PW, M_NAME, M_NICKNAME, M_BIRTH, M_ADDRESS, M_PHONE,M
 insert into MEMBER_STUDENT VALUES('S1', 'a12345');
 insert into MEMBER_STUDENT VALUES('S2', 'b12345');
 
+-- 지역코드 삽입
+insert into AREA values('A1', '강남구');
+insert into AREA values('A2', '강동구');
+insert into AREA values('A3', '강북구');
+insert into AREA values('A4', '강서구');
+insert into AREA values('A5', '관악구');
+insert into AREA values('A6', '광진구');
+insert into AREA values('A7', '구로구');
+insert into AREA values('A8', '금천구');
+insert into AREA values('A9', '노원구');
+insert into AREA values('A10', '도봉구');
+insert into AREA values('A11', '동대문구');
+insert into AREA values('A12', '동작구');
+insert into AREA values('A13', '마포구');
+insert into AREA values('A14', '서대문구');
+insert into AREA values('A15', '서초구');
+insert into AREA values('A16', '성동구');
+insert into AREA values('A17', '성북구');
+insert into AREA values('A18', '송파구');
+insert into AREA values('A19', '양천구');
+insert into AREA values('A20', '영등포구');
+insert into AREA values('A21', '용산구');
+insert into AREA values('A22', '은평구');
+insert into AREA values('A23', '종로구');
+insert into AREA values('A24', '중구');
+insert into AREA values('A25', '중랑구');
+
+--과목코드 삽입
+insert into object(ob_code, ob_name) VALUES('OB1', '국어');
+insert into object(ob_code, ob_name) VALUES('OB2', '수학');
+insert into object(ob_code, ob_name) VALUES('OB3', '영어');
+insert into object(ob_code, ob_name) VALUES('OB4', '사회');
+insert into object(ob_code, ob_name) VALUES('OB5', '과학');
+insert into object(ob_code, ob_name) VALUES('OB6', '기타');
+
+
+
