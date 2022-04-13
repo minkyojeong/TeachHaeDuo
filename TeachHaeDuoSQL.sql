@@ -479,19 +479,41 @@ insert into object(ob_code, ob_name) VALUES('OB6', '기타');
 
 --ADMIN TABLE
 INSERT INTO ADMIN(ADMIN_ID, ADMIN_PW) VALUES('IGLOVE','IGIG');
+
 --고객센터 자주묻는질문 삽입
 insert into CS_FAQ(FAQ_NO, FAQ_QUESTION, FAQ_ANSWER, ADMIN_ID, FAQ_CNT) VALUES(1,'QUESTION_ONE', 'ANSWER_TWO', 'IGLOVE', DEFAULT); 
 insert into CS_FAQ(FAQ_NO, FAQ_QUESTION, FAQ_ANSWER, ADMIN_ID, FAQ_CNT) VALUES(2,'QUESTION_ONE', 'ANSWER_TWO', 'IGLOVE', DEFAULT); 
+
 --고객센터 공지사항 삽입
 insert into CS_NOTICE(NOTICE_NO, NOTICE_TITLE, NOTICE_CONTENT, NOTICE_CNT, NOTICE_WRITE_DATE, ADMIN_ID) VALUES(1,'연필 가격 인상', '제목과 같습니다',DEFAULT,DEFAULT, 'IGLOVE'); 
 insert into CS_NOTICE(NOTICE_NO, NOTICE_TITLE, NOTICE_CONTENT, NOTICE_CNT, NOTICE_WRITE_DATE, ADMIN_ID) VALUES(2,'연필 가격 인하', '제목과 같습니다',DEFAULT,DEFAULT, 'IGLOVE'); 
+
 --게시글 삽입
 INSERT INTO Q_BOARD(B_NO, B_CATEGORY,B_TITLE,B_CONTENT,B_WRITER,B_WRITE_DATE,B_CNT,B_REPORT_CNT,M_ID) VALUES(1,'질문하기','궁금해요','제목이 곧 내용','김인곤',default,default,default,'a12345');
 INSERT INTO Q_BOARD(B_NO, B_CATEGORY,B_TITLE,B_CONTENT,B_WRITER,B_WRITE_DATE,B_CNT,B_REPORT_CNT,M_ID) VALUES(2,'질문하기','궁금해요ㅜ','제목이 곧 내용','김인곤',default,default,default,'a12345');
+
 --게시글 신고
 INSERT INTO BOARD_REPORT(B_R_NO,B_NO,B_R_CATEGORY,B_R_WRITER,B_R_WRITE_DATE) VALUES(1,1,'광고','김인곤',default);
+
 --질문하기 게시판 댓글
 INSERT INTO Q_RECOMMENT(R_NO,R_CONTENT,R_WRITER,R_WRITE_DATE,R_REPORT_CNT,B_NO) VALUES(1,'신고할게요','김인곤',default,default,1);
 
+-- 선생님정보 삽입
+insert into t_profile VALUES('T1', '서울대학교 기계공학과 졸업', 'A', '주 2회', '월 30만원', default, default, '토익 850', default, default, 'N', null, 'c12345', '열심히 하겠습니다!', 'Y');
+insert into t_profile VALUES('T2', '이화여자대학교 경영학과 휴학중', 'Y', '주 2회', '월 20만원', default, default, default, default, default, 'Y', null, 'd12345', '눈높이 교육', 'N');
 
+-- 선생님 담당 과목 삽입
+insert into teach_object VALUES('OB2', 'T1');
+insert into teach_object VALUES('OB5', 'T1');
+insert into teach_object VALUES('OB1', 'T2');
+insert into teach_object VALUES('OB4', 'T2');
 
+-- 선생님 활동 지역 삽입
+insert into acti_area VALUES('T1', 'A1');
+insert into acti_area VALUES('T1', 'A2');
+insert into acti_area VALUES('T2', 'A3');
+insert into acti_area VALUES('T2', 'A4');
+
+-- 선생님 리뷰 삽입
+insert into t_recomment VALUES(1, 'T1', '친절하고 자세하게 알려주세요!', default, 5);
+insert into t_recomment VALUES(2, 'T2', '좋습니다.', default, 3);
