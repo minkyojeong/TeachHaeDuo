@@ -1,0 +1,12 @@
+
+@font-face {
+	font-family: MinSans-Medium;
+	src: url('./fonts/MinSans-Medium.ttf') format('truetype'),
+		url('./fonts/MinSans-Medium.ttf') format('opentype');
+}
+
+@font-face {
+	font-family: MinSans-Bold;
+	src: url('./fonts/MinSans-Bold.ttf') format('truetype'),
+		url('./fonts/MinSans-Bold.otf') format('opentype');
+}

@@ -1,0 +1,77 @@
+.btn1_1{
+    border: none;
+    border-radius: 5px;
+    background:#F3F4F6;
+    color:#504a4d;
+    font-weight: 500;
+    font-size:15px;
+    width:200px;
+    height:40px;
+    cursor: pointer;
+}
+.btn1_2{
+    border: none;
+    border-radius: 5px;
+    background:#92BC97;
+    color:#504a4d;
+    font-weight: 500;
+    font-size:15px;
+    width:200px;
+    height:40px;
+    cursor: pointer;
+}
+.btn1_3{
+    border: none;
+    border-radius: 5px;
+    background:#E7EACB;
+    color:#504a4d;
+    font-weight: 500;
+    font-size:15px;
+    width:200px;
+    height:40px;
+    cursor: pointer;
+}
+.btn2_1{
+    border: none;
+    border-radius: 5px;
+    background:#578270;
+    color:#504a4d;
+    font-weight: 500;
+    font-size:13px;
+    width:100px;
+    height:30px;
+    cursor: pointer;
+}
+.btn2_2{
+    border: none;
+    border-radius: 5px;
+    background:#D9EFF9;
+    color:#504a4d;
+    font-weight: 500;
+    font-size:13px;
+    width:100px;
+    height:30px;
+    cursor: pointer;
+}
+.btn3_1{
+    border: none;
+    border-radius: 5px;
+    background:#F3F4F6;
+    color:#504a4d;
+    font-weight: 500;
+    font-size:11px;
+    width:60px;
+    height:30px;
+    cursor: pointer;
+}
+.btn3_2{
+    border: none;
+    border-radius: 5px;
+    background:#72CDE0;
+    color:#504a4d;
+    font-weight: 500;
+    font-size:11px;
+    width:60px;
+    height:30px;
+    cursor: pointer;
+}
