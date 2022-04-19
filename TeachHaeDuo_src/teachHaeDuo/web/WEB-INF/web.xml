@@ -19,7 +19,7 @@
 	</servlet-mapping>
 	<filter>
 		<filter-name>EncodingFilter</filter-name>
-		<filter-class>common.filter.EncodingFilter</filter-class>
+		<filter-class>kh.semi.thduo.common.filter.EncodingFilter</filter-class>
 	</filter>
 	<filter-mapping>
 		<filter-name>EncodingFilter</filter-name>
@@ -32,7 +32,6 @@
   	<location>/WEB-INF/view/error/error404.jsp</location>
   	</error-page> 
 -->
-
 
 	<resource-ref>
 		<description>oracle THDUO Local DBCP</description>
