@@ -50,9 +50,6 @@ public class MemberService {
 				}
 				
 				
-			
-				
-	
 		//전체회원 조회 (관리자 회원전체 조회)
 		public ArrayList<MemberVo> readAllMember() {
 			ArrayList<MemberVo> retVolist = null;
