@@ -53,7 +53,7 @@ public class MemberDao {
 		return result; 
 	}
 	
-	// 체크
+	   // 체크
 		public int readMemberCheck(Connection conn, String str, String type) { 
 			
 			System.out.println("str2 = "+str);

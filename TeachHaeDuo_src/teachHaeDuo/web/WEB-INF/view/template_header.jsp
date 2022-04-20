@@ -13,8 +13,8 @@
 				<li><a>질문하기&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;</a></li>
 				<li><a>고객센터&nbsp;&nbsp;</a></li>
 				<li><a>이용방법&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;</a></li>
-				<li><a>로그인&nbsp;&nbsp;</a></li>
-				<li><a>회원가입</a></li>
+				<li><a href="login">로그인&nbsp;&nbsp;</a></li>
+				<li><a href="join">회원가입</a></li>
 			</ul>
 		</nav>
 	</header>
