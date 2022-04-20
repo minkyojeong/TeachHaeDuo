@@ -1,0 +1,39 @@
+footer {
+    font-family: MinSans-Medium;
+    font-size: 13px;
+    color: #504A4D;
+}
+.footerTop {
+    overflow: hidden;
+    margin-bottom: 5px;
+}
+.footerTop_section1 {
+    float: left;
+    width: 15%;
+    text-align: center;
+    vertical-align: middle;
+}
+.footerTop_section1 img {
+    width: 150px;
+}
+.footerTop_space {
+    float: left;
+    width: 15%;
+}
+.footerTop_section2 {
+    float: left;
+    line-height: 1.5em;
+    width: 35%;
+    padding-top: 5px;
+}
+.footerTop_section3 {
+    float: right;
+    width: 35%;
+}
+.footerBottom {
+    clear: both;
+    height: 50px;
+    line-height: 50px;
+    text-align: center;
+    background-color: #FA9D00;
+}

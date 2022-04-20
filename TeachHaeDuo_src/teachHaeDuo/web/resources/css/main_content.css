@@ -1,0 +1,95 @@
+.wrap.content {
+    background-color: red;
+    margin: 0 25px;
+    font-family: MinSans-Medium;
+}
+.intro {
+    background-color: brown;
+    font-family: MinSans-Bold;
+    font-size: 37px;
+    line-height: 1.5em;
+}
+.search {
+    width: 350px;
+    background-color: bisque;
+    margin-top: 50px;
+    border-bottom: 1px solid #bcc7d3;
+}
+.search > img {
+    margin-left: 10px;
+    width: 25px;
+    vertical-align: middle;
+}
+.search input {
+    background-color: transparent;
+    width: 250px;
+    height: 40px;
+}
+.search input::placeholder {
+    font-family: MinSans-Medium;
+    font-weight: 500;
+    font-size: 18px;
+    color: #bcc7d3;
+}
+.search input:focus {
+    outline: none;
+}
+.category {
+    background-color: aqua;
+    margin-top: 50px;
+    /* position: absolute; */
+    height: 400px;
+}
+.category > h2 {
+    font-family: MinSans-Bold;
+    font-size: 20px;
+    margin-bottom: 30px;
+}
+.category > a {
+    position: absolute;
+    color: black;
+}
+.object {
+    width: 150px;
+    height: 150px;
+    background-color: #ececec;
+    border-radius: 20%;
+}
+.korean {
+    position: relative;
+    left: 120px;
+}
+.math {
+    position: relative;
+    top: 600px;
+    left: 270px;
+}
+.eng {
+    position: relative;
+    left: 420px;
+}
+.social {
+    position: relative;
+    top: 600px;
+    left: 570px;
+}
+.science {
+    position: relative;
+    left: 720px;
+}
+.etc {
+    position: relative;
+    top: 600px;
+    left: 870px;
+}
+.category_name {
+    position: relative;
+    top: 10px;
+    left: 15px;
+}
+.object_icon {
+    width: 40px;
+    position: relative;
+    bottom: -100px;
+    right: -65px;
+}

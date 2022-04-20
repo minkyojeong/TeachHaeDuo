@@ -5,8 +5,7 @@
 	id="WebApp_ID" version="4.0">
 	<display-name>teachHaeDuo</display-name>
 	<welcome-file-list>
-		<welcome-file>index.jsp</welcome-file>
-		<welcome-file>WEB-INF/view/main.jsp</welcome-file>
+		<welcome-file>/WEB-INF/view/main.jsp</welcome-file>
 	</welcome-file-list>
 	<servlet-mapping>
 		<servlet-name>default</servlet-name>
