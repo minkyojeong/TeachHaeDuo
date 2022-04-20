@@ -203,8 +203,9 @@ COMMENT ON COLUMN "MEMBER_STUDENT"."S_NO" IS 'S1, S2,...';
 
 
 CREATE TABLE "DIBS" (
-	"T_NO"	VARCHAR2(5)		NOT NULL,
-	"S_NO"	VARCHAR2(10)		NOT NULL
+	"S_NO"	VARCHAR2(10)		NOT NULL,
+	"T_NO"	VARCHAR2(5)		NOT NULL
+	
 );
 
 COMMENT ON COLUMN "DIBS"."T_NO" IS 'T1,T2,...';
@@ -517,3 +518,8 @@ insert into acti_area VALUES('T2', 'A4');
 -- 선생님 리뷰 삽입
 insert into T_REVIEW VALUES(1, 'T1', '친절하고 자세하게 알려주세요!', default, 5);
 insert into T_REVIEW VALUES(2, 'T2', '좋습니다.', default, 3);
+
+-- 찜 삽입
+insert into DIBS VALUES('S1','T1');
+insert into DIBS VALUES('S1','T2');
+insert into DIBS VALUES('S2','T1');
