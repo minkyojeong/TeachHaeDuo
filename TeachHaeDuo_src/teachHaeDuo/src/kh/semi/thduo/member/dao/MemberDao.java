@@ -32,7 +32,7 @@ public class MemberDao {
 			pstmt.setString(1, vo.getmId());  
 			pstmt.setString(2, vo.getmPw());  
 			pstmt.setString(3, vo.getmName());  
-			pstmt.setString(4, vo.getmNickName());  
+			pstmt.setString(4, vo.getmNickname());  
 			pstmt.setString(5, vo.getmBirth());
             pstmt.setString(6, vo.getmAddress());
 			pstmt.setString(7, vo.getmPhone());
@@ -96,7 +96,7 @@ public class MemberDao {
 				retVo = new MemberVo();
 				retVo.setmEmail(rs.getString("m_email"));
 				retVo.setmId(rs.getString("m_Id"));
-				retVo.setmNickName(rs.getString("m_Nickname"));
+				retVo.setmNickname(rs.getString("m_Nickname"));
 				retVo.setmPw(rs.getString("m_pw"));
 				retVo.setmPhone(rs.getString("m_phone"));
 			}
@@ -197,7 +197,7 @@ public class MemberDao {
 				// 12. rs.getXxx("컬럼라벨") -rs의 각컬럼에서 값 읽기 - 읽씹no - 11또는9변수넣어주기
 				vo.setmEmail(rs.getString("m_email"));
 				vo.setmId(rs.getString("m_Id"));
-				vo.setmNickName(rs.getString("m_NickName"));
+				vo.setmNickname(rs.getString("m_NickName"));
 				vo.setmPw(rs.getString("m_pw"));
 				vo.setmPhone(rs.getString("m_phone"));
 				// 13. 리턴변수에 값 넣기
