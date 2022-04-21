@@ -15,5 +15,7 @@
         <input type="email" name="mEmail" id="mEmail" class="form-control" placeholder="이메일" required><br>
         <button id="btn-Yes" class="btn btn-lg btn-primary btn-block" type="button">비밀번호 재설정</button>
 
+
+
 </body>
 </html>
