@@ -2,6 +2,10 @@
 	rel="stylesheet" type="text/css">
 <link href="${pageContext.request.contextPath}/resources/css/button.css"
 	rel="stylesheet" type="text/css">
+	<link href="${pageContext.request.contextPath}/resources/css/mypageStudent.css"
+	rel="stylesheet" type="text/css">
+	<link href="<%=request.getContextPath()%>/resources/css/header.css" rel="stylesheet" type="text/css">
+	<link href="<%=request.getContextPath()%>/resources/css/footer.css" rel="stylesheet" type="text/css">
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -9,168 +13,18 @@
     <meta charset="UTF-8">
     <title>mypage_Student</title>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <style>
-        *{
-            font-family: MinSans, serif;
-        }
-        p{
-            font-weight: bold;
-        }
-        a:link{color:black}
-        a:visited {color: black;}
-    
-        #ms_main_wrap{
-            width:1200px;
-            display: flex;
-            margin:0 auto;
-        }
-        #ms_left_div{
-            width:70%;
-            
-        }
-        #ms_right_div{
-            width:30%;
-        }
-        #ms_top_div{
-            display: flex;
-            margin:50px 50px 50px 50px;
-        }
-        #ms_profile_div{
-            display: flex;
-        }
-        .ms_nickname_div{
-            padding: 10px 0px;
-        }
-        .ms_pencil_div{
-            display: flex;
-            padding: 10px 0px;
-            justify-content: space-between;
-        }
-        #ms_bottom_div{
-            margin-top: 50px;
-        }
-        .ms_arrow,.ms_arrow_active{
-            width:20px;
-            height:20px;
-            margin: 0 10px;
-        }
-        .ms_text_div{
-            width:50%;
-            margin:20px;
-            display:flex;
-            justify-content: space-between;
-        }
-        .ms_arrow_active{
-            display: none;
-        }
-    </style>
-    <!-- 스위치 버튼 -->
-    <style>
-        .ms_switch {
-            position: relative;
-            display: inline-block;
-            width: 50px;
-            height: 20px;
-            vertical-align:middle;
-        }
-
-        .ms_switch input {display:none;}
-
-        .ms_slider {
-        position: absolute;
-        cursor: pointer;
-        top: 0;
-        left: 0;
-        right: 0;
-        bottom: 0;
-        background-color: #ccc;
-        -webkit-transition: .4s;
-        transition: .4s;
-        }
-
-        .ms_slider:before {
-        position: absolute;
-        content: "";
-        height: 13px;
-        width: 13px;
-        left: 4px;
-        bottom: 4px;
-        background-color: white;
-        -webkit-transition: .4s;
-        transition: .4s;
-        }
-
-        input:checked + .ms_slider {
-        background-color: #2196F3;
-        }
-
-        input:focus + .ms_slider {
-        box-shadow: 0 0 1px #2196F3;
-        }
-
-        input:checked + .ms_slider:before {
-        -webkit-transform: translateX(28px);
-        -ms-transform: translateX(28px);
-        transform: translateX(28px);
-        }
-
-        /* Rounded sliders */
-        .ms_slider.ms_round {
-        border-radius: 34px;
-        }
-
-        .ms_slider.ms_round:before {
-        border-radius: 50%;
-        }
-
-        .ms_toggle_p {
-            margin:0px;
-            display:inline-block;
-            font-size:15px;
-            font-weight:bold;
-        }
-    </style>
-    <script>
-        $(function(){
-            var check = $("input[type='checkbox']");
-                check.click(function(){
-                    $(".ms_toggle_p").toggle();
-            });
-            $("#ms_text_div1").mouseover(function(){
-                $("#ms_arrow_active1").show();
-                $("#ms_arrow1").hide();
-            });
-            $("#ms_text_div1").mouseout(function(){
-                $("#ms_arrow_active1").hide();
-                $("#ms_arrow1").show();
-            });
-            $("#ms_text_div2").mouseover(function(){
-                $("#ms_arrow_active2").show();
-                $("#ms_arrow2").hide();
-            });
-            $("#ms_text_div2").mouseout(function(){
-                $("#ms_arrow_active2").hide();
-                $("#ms_arrow2").show();
-            });
-            $("#ms_text_div3").mouseover(function(){
-                $("#ms_arrow_active3").show();
-                $("#ms_arrow3").hide();
-            });
-            $("#ms_text_div3").mouseout(function(){
-                $("#ms_arrow_active3").hide();
-                $("#ms_arrow3").show();
-            });
-         
-        });
-    </script>
+    <script src="${pageContext.request.contextPath}/resources/js/mypageStudent.js"></script>
+ 
 </head>
 <body>
+	<div>
+	<jsp:include page="template_header.jsp"></jsp:include>
     <div id="ms_main_wrap">
         <div id="ms_left_div">
             <div id="ms_top_div">
                 <div id="ms_profile_div" style="width:50%">
                     <div style="width:40%">
-                        <img src="./images/profile.png" width="100" height="100">
+                        <img src="${pageContext.request.contextPath}/resources/icons/profile.png" width="100" height="100">
                     </div>
                     <div style="width:60%">
                         <div class="ms_nickname_div">
@@ -184,8 +38,8 @@
                 <div style="width:50%">
                     <div class="ms_pencil_div">
                         <div style="display:flex;">
-                            <img src="./images/pencil.png" width="25" height="25" style="margin-right:10px">
-                            <p>잔여 연필</p>
+                            <img src="${pageContext.request.contextPath}/resources/icons/pencil.png" width="25" height="25" style="margin-right:10px">
+                            <p style="line-height:30px">잔여 연필</p>
                         </div>
                         <div>
                             <a href="#"><p>0원</p></a>
@@ -193,11 +47,11 @@
                     </div>
                     <div class="ms_pencil_div">
                         <div style="display:flex;">
-                            <img src="./images/pencil.png" width="25" height="25" style="margin-right:10px">
-                            <p>연필 충전</p>
+                            <img src="${pageContext.request.contextPath}/resources/icons/pencil.png" width="25" height="25" style="margin-right:10px">
+                            <p style="line-height:30px">연필 충전</p>
                         </div>
                         <div>
-                            <a href="#"><p>충전하기</p></a>
+                            <button class="ms_charge_btn btn2_2">충전하기</button>
                         </div>
                     </div>
                 </div>
@@ -242,9 +96,38 @@
             <div style="margin:50px">
                 <button class="btn1_2" onclick="location.href='memberModify'">회원 정보 수정</button>
             </div>
-            
-
         </div>
+    </div>
+    
+    <div id="ms_pencilcharge_modal" class="ms_pencilcharge_modal_overlay">
+        <div class="ms_pencilcharge_modal_window">
+            <div class="ms_pencilcharge_modal_title">
+                <h2>연필충전</h2>
+            </div>
+            <div class="ms_pencilcharge_modal_close">X</div>
+            <div class="ms_pencilcharge_modal_content">
+                <form name="ms_charge_frm">
+                    <div class="ms_pencilcharge_won">
+                        <input type="text" name="won" id="won" value="0">
+                        <p> 원</p>
+                    </div>
+                    <div class="ms_btns">
+                        <button type="button" class="btn3_2" id="ms_btn1">-1만원</button>&nbsp;&nbsp;
+                        <button type="button" class="btn3_2" id="ms_btn2">+1만원</button>&nbsp;&nbsp;
+                        <button type="button" class="btn3_2" id="ms_btn3">+3만원</button>&nbsp;&nbsp;
+                        <button type="button" class="btn3_2" id="ms_btn4">+5만원</button>&nbsp;&nbsp;
+                        <button type="button" class="btn3_2" id="ms_btn5">+10만원</button>
+                    </div>
+                    <div class="ms_pencilcharge_btn">
+                        <button class="btn2_2" id="ms_charge" type="button">충전하기</button>
+                        <button class="btn2_2" id="reset" type="button">정정</button>
+                    </div>
+                </form>
+                
+            </div>
+        </div>
+    </div>
+    <jsp:include page="template_footer.jsp"></jsp:include>
     </div>
 </body>
 </html>

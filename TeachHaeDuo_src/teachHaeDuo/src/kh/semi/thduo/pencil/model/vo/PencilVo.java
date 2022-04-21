@@ -10,6 +10,10 @@ public class PencilVo {
 	private String mId;
 	
 	
+	public PencilVo() {
+		super();
+	}
+
 	public PencilVo(int cmNo, String cmContent, int cmPencil, Timestamp cmDate, String mId) {
 		super();
 		this.cmNo = cmNo;

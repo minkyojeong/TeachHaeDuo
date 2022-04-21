@@ -1,0 +1,31 @@
+$(function(){
+            var check = $("input[type='checkbox']");
+                check.click(function(){
+                    $(".mt_toggle_p").toggle();
+            });
+            $("#mt_text_div1").mouseover(function(){
+                $("#mt_arrow_active1").show();
+                $("#mt_arrow1").hide();
+            });
+            $("#mt_text_div1").mouseout(function(){
+                $("#mt_arrow_active1").hide();
+                $("#mt_arrow1").show();
+            });
+            $("#mt_text_div2").mouseover(function(){
+                $("#mt_arrow_active2").show();
+                $("#mt_arrow2").hide();
+            });
+            $("#mt_text_div2").mouseout(function(){
+                $("#mt_arrow_active2").hide();
+                $("#mt_arrow2").show();
+            });
+            $("#mt_text_div3").mouseover(function(){
+                $("#mt_arrow_active3").show();
+                $("#mt_arrow3").hide();
+            });
+            $("#mt_text_div3").mouseout(function(){
+                $("#mt_arrow_active3").hide();
+                $("#mt_arrow3").show();
+            });
+         
+        });
