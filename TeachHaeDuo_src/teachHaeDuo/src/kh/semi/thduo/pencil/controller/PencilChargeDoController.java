@@ -50,21 +50,33 @@ public class PencilChargeDoController extends HttpServlet {
 		}
 		// 로그인 연동 시키고 풀자 TODOTODO
 		MemberVo ssvo = (MemberVo)request.getSession().getAttribute("ssMV");
-		if(ssvo == null) {  // 로그아웃 상태라면 로그인 페이지로
+		if(ssvo == null) {  
 			response.sendRedirect("login");
-			return;  // 아래 db 저장을 할 필요가 없으니..
-		} else {  // 로그인한 상태라면 write page 진입 
+			return;  
+		} else {  
 			vo.setmId(ssvo.getmId());
 		}
 		
 		vo.setCmContent("연필충전");
 		vo.setCmPencil(wonInt);
 		int result = new PencilService().plusPencil(vo);
-		if(result < 1 ) { // 글등록 실패
-			response.sendRedirect("boardwrite");
-		} else { // 글등록 성공
-			response.sendRedirect("boardlist");
-		}
+		// 로그인 후 정보를 불러오지 못함 확인 후 열자 TODOTODO
+//		if(result < 1 ) { 
+//			request.getSession().setAttribute("mag", "충전이 실패했습니다.");
+//			if(ssvo.getRoleSt() == "S") {
+//				response.sendRedirect("mypageStudent");
+//			} else if(ssvo.getRoleSt() == "T") {
+//				response.sendRedirect("mypageTeacher");
+//			}
+//			
+//		} else { 
+//			request.getSession().setAttribute("mag", "충전이 완료되었습니다.");
+//			if(ssvo.getRoleSt() == "S") {
+//				response.sendRedirect("mypageStudent");
+//			} else if(ssvo.getRoleSt() == "T") {
+//				response.sendRedirect("mypageTeacher");
+//			}
+//		}
 		
 		
 		

@@ -94,7 +94,7 @@
         </div>
         <div id="ms_right_div">
             <div style="margin:50px">
-                <button class="btn1_2" onclick="location.href='memberModify'">회원 정보 수정</button>
+                <button class="btn1_2" onclick="location.href='memberUpdateLogin'">회원 정보 수정</button>
             </div>
         </div>
     </div>

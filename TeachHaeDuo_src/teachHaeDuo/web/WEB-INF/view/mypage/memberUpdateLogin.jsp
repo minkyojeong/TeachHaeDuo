@@ -1,8 +1,13 @@
 
+<%@page import="kh.semi.thduo.member.vo.MemberVo"%>
 <link href="<%=request.getContextPath()%>/resources/css/reset.css"
 	rel="stylesheet" type="text/css">
 <link href="${pageContext.request.contextPath}/resources/css/button.css"
 	rel="stylesheet" type="text/css">
+	<link href="${pageContext.request.contextPath}/resources/css/memberUpdateLogin.css"
+	rel="stylesheet" type="text/css">
+	<link href="<%=request.getContextPath()%>/resources/css/header.css" rel="stylesheet" type="text/css">
+	<link href="<%=request.getContextPath()%>/resources/css/footer.css" rel="stylesheet" type="text/css">
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -10,33 +15,13 @@
 <head>
     <meta charset="UTF-8">
     <title>mypage_modifymember</title>
-    <style>
-        *{
-            font-family: MinSans, serif;
-        }
-        p{
-            font-weight: bold;
-        }
-        #mm_top_div{
-            text-align: center;
-             margin-top: 20px;
-        }
-        #mm_middle_div{
-            margin: 20px 0px 50px 0px;
-        }
-        #mm_low_div{
-            text-align: center;
-        }
-        table{
-            border-spacing: 20px 20px;
-            margin: 0 auto;
-            border-collapse: separate;
-        }
-    </style>
+	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </head>
 <body>
+	<div>
+	<jsp:include page="template_header.jsp"></jsp:include>
     <div id="mm_main_wrap">
-        <form action="#" method="post">
+        <form action="memberUpdate" method="post">
             <div id="mm_top_div">
                 <p style="font-size:17px"><회원정보수정></p>
             </div>
@@ -50,7 +35,8 @@
                             :
                         </td>
                         <td>
-                            
+                            <% MemberVo ssMV = (MemberVo)request.getSession().getAttribute("ssMV"); %>
+                            <%= ssMV.getmId() %>
                         </td>
                     </tr>
                     <tr>
@@ -61,7 +47,7 @@
                             :
                         </td>
                         <td>
-                            <input type="password">
+                            <input name="pw" type="password" required="required">
                         </td>
                     </tr>
                 </table>
@@ -72,6 +58,7 @@
             </div>
         </form>
     </div>
-    
+    <jsp:include page="template_footer.jsp"></jsp:include>
+    </div>
 </body>
 </html>

@@ -1,0 +1,24 @@
+@charset "UTF-8";
+#mm_main_wrap {
+	width: 1200px;
+	height: 80%;
+	margin: 0 auto;
+}
+#mm_top_div {
+	text-align: center;
+	margin-top: 20px;
+}
+
+#mm_middle_div {
+	margin: 20px 0px 50px 0px;
+}
+
+#mm_low_div {
+	text-align: center;
+}
+
+table {
+	border-spacing: 20px 20px;
+	margin: 0 auto;
+	border-collapse: separate;
+}
