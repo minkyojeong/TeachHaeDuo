@@ -62,7 +62,7 @@ public class MemberJoinController extends HttpServlet {
 		memberVo.setmAddress(request.getParameter("mAddress1")+" "+request.getParameter("mAddress2"));
 		memberVo.setGenderFm(request.getParameter("genderFm"));
 		memberVo.setRoleSt(request.getParameter("roleSt"));
-		memberVo.setmNickName(request.getParameter("mNickName"));
+		memberVo.setmNickname(request.getParameter("mNickName"));
 		memberVo.setmBirth(request.getParameter("mBirth"));
 		
 		

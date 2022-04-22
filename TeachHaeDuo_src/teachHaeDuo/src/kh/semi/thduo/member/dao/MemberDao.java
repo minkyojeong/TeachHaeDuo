@@ -7,6 +7,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.sql.Timestamp;
 import java.util.ArrayList;
 
 import kh.semi.thduo.member.vo.MemberVo;
@@ -32,7 +33,7 @@ public class MemberDao {
 			pstmt.setString(1, vo.getmId());  
 			pstmt.setString(2, vo.getmPw());  
 			pstmt.setString(3, vo.getmName());  
-			pstmt.setString(4, vo.getmNickName());  
+			pstmt.setString(4, vo.getmNickname());  
 			pstmt.setString(5, vo.getmBirth());
             pstmt.setString(6, vo.getmAddress());
 			pstmt.setString(7, vo.getmPhone());
@@ -53,7 +54,7 @@ public class MemberDao {
 		return result; 
 	}
 	
-	// 체크
+	   // 체크
 		public int readMemberCheck(Connection conn, String str, String type) { 
 			
 			System.out.println("str2 = "+str);
@@ -83,6 +84,22 @@ public class MemberDao {
 			return result;
 		}
 	
+//		private String 			mId;			
+//		private String 			mPw; 	
+//		private String 			mName;	
+//		private String 			mNickname;	
+//		private String 			mBirth;		
+//		private String 			mAddress;	
+//		private String 			mPhone;		
+//		private String 			mEmail;		
+//		private String 			genderFm;	
+//		private String 			roleSt;		
+//		private Timestamp 		mDate;	
+//		private String 			mCertificate;
+//		private String 			mAlarmYn;
+//		
+		
+		
 	// 회원 로그인 
 	public MemberVo login(Connection conn, String mId, String pw) { 
 		MemberVo retVo = null;
@@ -94,11 +111,19 @@ public class MemberDao {
 			rs = pstmt.executeQuery();
 			if (rs.next()) {
 				retVo = new MemberVo();
-				retVo.setmEmail(rs.getString("m_email"));
+				
 				retVo.setmId(rs.getString("m_Id"));
-				retVo.setmNickName(rs.getString("m_Nickname"));
 				retVo.setmPw(rs.getString("m_pw"));
+				retVo.setmNickname(rs.getString("m_Nickname"));
+				retVo.setmBirth(rs.getString("m_Birth"));
+				retVo.setmAddress(rs.getString("m_Address"));
 				retVo.setmPhone(rs.getString("m_phone"));
+				retVo.setmEmail(rs.getString("m_email"));
+				retVo.setGenderFm(rs.getString("genderFm"));
+				retVo.setRoleSt(rs.getString("roleSt"));
+				retVo.setmDate(rs.getTimestamp("m_Date"));
+				retVo.setmCertificate(rs.getString("m_Certificate"));
+				retVo.setmAlarmYn(rs.getString("m_AlarmYn"));
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -130,6 +155,20 @@ public class MemberDao {
 		}
 		return retVo;
 	}
+	
+	//회원 PW 수정
+		public int updatePwMember(Connection conn, MemberVo vo) {
+			int result = 0;
+			String sql = "update member set m_PW=?  where m_id=?";
+			try {
+				pstmt = conn.prepareStatement(sql);
+			} catch (SQLException e) {
+				e.printStackTrace();
+			} finally {
+				close(pstmt);
+			}
+				return result;
+		}
 	
 	
 	
@@ -197,7 +236,7 @@ public class MemberDao {
 				// 12. rs.getXxx("컬럼라벨") -rs의 각컬럼에서 값 읽기 - 읽씹no - 11또는9변수넣어주기
 				vo.setmEmail(rs.getString("m_email"));
 				vo.setmId(rs.getString("m_Id"));
-				vo.setmNickName(rs.getString("m_NickName"));
+				vo.setmNickname(rs.getString("m_NickName"));
 				vo.setmPw(rs.getString("m_pw"));
 				vo.setmPhone(rs.getString("m_phone"));
 				// 13. 리턴변수에 값 넣기

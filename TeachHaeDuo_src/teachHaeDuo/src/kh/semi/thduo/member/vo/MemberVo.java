@@ -7,7 +7,7 @@ public class MemberVo {
 	private String 			mId;			
 	private String 			mPw; 	
 	private String 			mName;	
-	private String 			mNickName;	
+	private String 			mNickname;	
 	private String 			mBirth;		
 	private String 			mAddress;	
 	private String 			mPhone;		
@@ -16,6 +16,7 @@ public class MemberVo {
 	private String 			roleSt;		
 	private Timestamp 		mDate;	
 	private String 			mCertificate;
+	private String 			mAlarmYn;
 	
 	public String getmId() {
 		return mId;
@@ -35,11 +36,11 @@ public class MemberVo {
 	public void setmName(String mName) {
 		this.mName = mName;
 	}
-	public String getmNickName() {
-		return mNickName;
+	public String getmNickname() {
+		return mNickname;
 	}
-	public void setmNickName(String mNickName) {
-		this.mNickName = mNickName;
+	public void setmNickname(String mNickname) {
+		this.mNickname = mNickname;
 	}
 	public String getmBirth() {
 		return mBirth;
@@ -89,13 +90,21 @@ public class MemberVo {
 	public void setmCertificate(String mCertificate) {
 		this.mCertificate = mCertificate;
 	}
-	
+	public String getmAlarmYn() {
+		return mAlarmYn;
+	}
+	public void setmAlarmYn(String mAlarmYn) {
+		this.mAlarmYn = mAlarmYn;
+	}
 	@Override
 	public String toString() {
-		return "MemberVo [mId=" + mId + ", mPw=" + mPw + ", mName=" + mName + ", mNickName=" + mNickName + ", mBirth="
+		return "MemberVo [mId=" + mId + ", mPw=" + mPw + ", mName=" + mName + ", mNickname=" + mNickname + ", mBirth="
 				+ mBirth + ", mAddress=" + mAddress + ", mPhone=" + mPhone + ", mEmail=" + mEmail + ", genderFm="
-				+ genderFm + ", roleSt=" + roleSt + ", mDate=" + mDate + ", mCertificate=" + mCertificate + "]";
+				+ genderFm + ", roleSt=" + roleSt + ", mDate=" + mDate + ", mCertificate=" + mCertificate
+				+ ", mAlarmYn=" + mAlarmYn + "]";
 	}
+	
 }
-
+	
+	
 

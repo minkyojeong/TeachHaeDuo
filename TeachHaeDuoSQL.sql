@@ -523,3 +523,8 @@ insert into T_REVIEW VALUES(2, 'T2', '좋습니다.', default, 3);
 insert into DIBS VALUES('S1','T1');
 insert into DIBS VALUES('S1','T2');
 insert into DIBS VALUES('S2','T1');
+
+-- 알람 삽입
+insert into ALARM VALUES(1, '연락 좀 주세요', DEFAULT, 'a12345', 'c12345', 'a12345');
+insert into ALARM VALUES(2, '교습 비용 얼마인가요?', DEFAULT, 'a12345', 'd12345', 'a12345');
+insert into ALARM VALUES(3, '주당 4회 가능하신가요?', DEFAULT, 'b12345', 'c12345', 'b12345');
