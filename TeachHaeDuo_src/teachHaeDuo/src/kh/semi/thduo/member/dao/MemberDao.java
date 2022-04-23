@@ -103,7 +103,7 @@ public class MemberDao {
 	// 회원 로그인 
 	public MemberVo login(Connection conn, String mId, String pw) { 
 		MemberVo retVo = null;
-		String sql = "select * from member where M_ID=? and M_PW=?";
+		String sql = "SELECT M_ID, M_PW, M_NAME, M_NICKNAME, M_BIRTH, M_ADDRESS, M_PHONE, M_EMAIL, GENDER_FM, ROLE_ST, M_DATE, M_CERTIFICATE, M_ALARM_YN FROM MEMBER where M_ID=? and M_PW=?";
 		try {
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, mId);
@@ -114,16 +114,18 @@ public class MemberDao {
 				
 				retVo.setmId(rs.getString("m_Id"));
 				retVo.setmPw(rs.getString("m_pw"));
+				retVo.setmName(rs.getString("M_NAME"));
 				retVo.setmNickname(rs.getString("m_Nickname"));
 				retVo.setmBirth(rs.getString("m_Birth"));
 				retVo.setmAddress(rs.getString("m_Address"));
 				retVo.setmPhone(rs.getString("m_phone"));
 				retVo.setmEmail(rs.getString("m_email"));
-				retVo.setGenderFm(rs.getString("genderFm"));
-				retVo.setRoleSt(rs.getString("roleSt"));
+				retVo.setGenderFm(rs.getString("gender_Fm"));
+				retVo.setRoleSt(rs.getString("role_St"));
 				retVo.setmDate(rs.getTimestamp("m_Date"));
-				retVo.setmCertificate(rs.getString("m_Certificate"));
-				retVo.setmAlarmYn(rs.getString("m_AlarmYn"));
+				retVo.setmCertificate(rs.getString("M_CERTIFICATE"));
+				retVo.setmAlarmYn(rs.getString("M_ALARM_YN"));
+				System.out.println(retVo);
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
