@@ -21,8 +21,8 @@
  --%>
  <form action="login" method="post">
     <h3>로그인</h3> 
-    <input type="text" name="id" required="required"> <br>
-	<input type="password" name="pwd" required="required"><br>
+    <input type="text" name="id"> <br>
+	<input type="password" name="pwd"><br>
 	<%
     	MemberVo ssMV = (MemberVo)session.getAttribute("ssMV");
     	if(ssMV==null){
@@ -32,17 +32,32 @@
     	<button id="logout">Sign out</button>
   <%} %>
     <%=ssMV %>
-	<button id="btn1">마이페이지 학생</button>
-	<button id="btn2">마이페이지 선생</button>
+	<button id="btn1">마이페이지</button>
+	${ssMV.getRoleSt()}
+	<button id="btn3" type="button">메인으로</button>
 	<script>
-	$("#btn1").click(function(){
-		location.href = "mypageStudent"
+	 $("#btn1").click(function(){
+		if(ssMV != null){
+			var roleSt = "<%= ssMV.getRoleSt() %>";
+		
+			if(roleSt == "S"){
+				location.href = "mypageStudent";
+			} else if(roleSt == "T"){
+				location.href = "mypageTeacher"
+			}
+		} else {
+			alert("로그인을 해주세요.");
+			location.href = "login";
 	});
-	$("#btn2").click(function(){
-		location.href = "mypageTeacher"
-	});
+		
+		
+	
 	$("#logout").click(function(){
 		location.href="logout";
+	});
+	$("#btn3").click(function(){
+		console.log("메인으로");
+		location.href="<%= request.getContextPath() %>";
 	});
 	</script>
 </body>

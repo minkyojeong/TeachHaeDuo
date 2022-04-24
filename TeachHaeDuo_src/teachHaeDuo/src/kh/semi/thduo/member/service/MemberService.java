@@ -60,10 +60,13 @@ public class MemberService {
 		}	
 		//회원삭제 (관리자 강퇴)
 		public int deleteMember(String mId) {
+			System.out.println("회원탈퇴 service, 아이디: " + mId);
+			
 			int result = 0;
 			Connection conn = getConnection();
 			result = dao.deleteMember(conn, mId);
 			close(conn);
+			System.out.println("회원탈퇴 service, result" + result);
 			return result;
 		}
 		//회원수정 

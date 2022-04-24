@@ -1,19 +1,19 @@
 @charset "UTF-8";
-#mm_main_wrap {
+#main_wrap {
 	width: 1200px;
 	height: 80%;
 	margin: 0 auto;
 }
-#mm_top_div {
+#top_div {
 	text-align: center;
 	margin-top: 20px;
 }
 
-#mm_middle_div {
+#middle_div {
 	margin: 20px 0px 50px 0px;
 }
 
-#mm_low_div {
+#low_div {
 	text-align: center;
 }
 

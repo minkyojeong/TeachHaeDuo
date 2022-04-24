@@ -11,21 +11,20 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
-<html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>mypage_modifymember</title>
+    <title>mypage_updateMember</title>
 	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </head>
 <body>
 	<div>
 	<jsp:include page="template_header.jsp"></jsp:include>
-    <div id="mm_main_wrap">
+    <div id="main_wrap">
         <form action="memberUpdate" method="post">
-            <div id="mm_top_div">
+            <div id="top_div">
                 <p style="font-size:17px"><회원정보수정></p>
             </div>
-            <div id="mm_middle_div">
+            <div id="middle_div">
                 <table>
                     <tr>
                         <td>
@@ -47,18 +46,29 @@
                             :
                         </td>
                         <td>
-                            <input name="pw" type="password" required="required">
+                            <input name="pw" type="password">
                         </td>
                     </tr>
                 </table>
             </div>
-            <div id="mm_low_div">
-                <button class="btn2_2" type="submit">로그인</button>
-                <button class="btn2_2">취소</button>
+            <div id="low_div">
+                <button class="btn2_2" type="submit" id="login">로그인</button>
+                <button class="btn2_2" type="button" id="cancel">취소</button>
             </div>
         </form>
     </div>
     <jsp:include page="template_footer.jsp"></jsp:include>
     </div>
+    <script>
+	    $("#cancel").click(function(){
+	    	console.log("취소 버튼 클릭");
+			var roleSt = "<%= ssMV.getRoleSt() %>";
+			if(roleSt == "S"){
+	    		location.href="mypageStudent";
+			} else if(roleSt == "T"){
+	    		location.href="mypageTeacher";
+			}
+		});
+   </script>
 </body>
 </html>

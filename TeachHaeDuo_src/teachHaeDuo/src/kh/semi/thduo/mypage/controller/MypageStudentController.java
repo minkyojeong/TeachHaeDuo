@@ -26,7 +26,7 @@ public class MypageStudentController extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
+		System.out.println("마이페이지 학생");
 		request.getRequestDispatcher("WEB-INF/view/mypage/mypageStudent.jsp").forward(request, response);
 	}
 

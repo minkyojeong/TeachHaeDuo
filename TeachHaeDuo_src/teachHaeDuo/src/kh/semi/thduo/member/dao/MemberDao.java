@@ -190,10 +190,14 @@ public class MemberDao {
 
 	// 한 회원 삭제(강제 삭제)
 	public int deleteMember(Connection conn, String mId) { 
+		System.out.println("회원탈퇴 Dao, 아이디: " + mId);
 		int result = 0;
 		String sql = "delete from member where m_id=?";
 		try {
 			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, mId);
+			result = pstmt.executeUpdate();
+			
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
