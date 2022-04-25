@@ -158,18 +158,47 @@ public class MemberDao {
 		return retVo;
 	}
 	
-	//회원 PW 수정
-		public int updatePwMember(Connection conn, MemberVo vo) {
+	// pw찾기 - id, email 확인
+		public int readFindPw(Connection conn, String mId, String mEmail) { 
 			int result = 0;
-			String sql = "update member set m_PW=?  where m_id=?";
+			String sql = "select count(*) from member where M_ID = ? and M_EMAIL =?";
 			try {
 				pstmt = conn.prepareStatement(sql);
+				pstmt.setString(1, mId);
+				pstmt.setString(2, mEmail);
+				rs = pstmt.executeQuery();
+				if (rs.next()) {
+					
+					result = (rs.getInt(1)); 
+				
+				}
+			} catch (SQLException e) {
+				e.printStackTrace();
+			} finally {
+				close(rs);
+				close(pstmt);
+			}
+			System.out.println("MemberDao result: ID,이메일 확인 "+ result);
+			return result;
+		}
+		// 새(임시) 비밀번호 업데이트 
+		public int updateRandomPw(Connection conn, String mPw , String mId) {
+			int result = 0;
+			String sql = "update member set  m_PW=?  where m_id=?";
+			try {
+				pstmt = conn.prepareStatement(sql);
+				pstmt.setString(1, mPw);
+				pstmt.setString(2, mId);
+				
+				result = pstmt.executeUpdate();
+				
+				
 			} catch (SQLException e) {
 				e.printStackTrace();
 			} finally {
 				close(pstmt);
 			}
-				return result;
+			return result;
 		}
 	
 	

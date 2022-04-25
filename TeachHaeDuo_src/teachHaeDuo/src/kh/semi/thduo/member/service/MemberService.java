@@ -39,17 +39,38 @@ public class MemberService {
 			i = dao.readMemberCheck(conn, str, type);
 			close(conn);
 			return i;
+			
+		}
+		
+		
+		// pw찾기 - id, email 확인
+		public int readFindPw(String mId, String mEmail) {
+
+			int result = 0;
+			Connection conn = getConnection();
+			result = dao.readFindPw(conn, mId, mEmail);
+			close(conn);
+			System.out.println("MemberService result: id,이메일일 확인  " + result);
+			return result;
 		}
 		// id찾기-ok
-				public MemberVo readFindId(String mEmail, String mName) {
-					MemberVo retVo = null;
-					Connection conn = getConnection();
-					retVo = dao.readFindId(conn, mEmail, mName);
-					close(conn);
-					return retVo;
-				}
-				
-				
+		public MemberVo readFindId(String mEmail, String mName) {
+			MemberVo retVo = null;
+			Connection conn = getConnection();
+			retVo = dao.readFindId(conn, mEmail, mName);
+			close(conn);
+			return retVo;
+		}
+		
+		// 새(임시) 비밀번호
+		public int updateRandomPw(String mPw, String mId) {
+			int result = 0;
+			Connection conn = getConnection();
+			result = dao.updateRandomPw(conn, mPw, mId); // TODO
+			close(conn);
+			return result;
+		}	
+		
 		//전체회원 조회 (관리자 회원전체 조회)
 		public ArrayList<MemberVo> readAllMember() {
 			ArrayList<MemberVo> retVolist = null;
