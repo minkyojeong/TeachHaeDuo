@@ -27,19 +27,7 @@ public class TeacherDao {
 	// 모든 선생님 정보 읽기
 	public ArrayList<TeacherVo> readAllTeacher(Connection conn){
 		ArrayList<TeacherVo> retVolist = null;
-		String sql = "select  pro.t_major, pro.t_picture, m.m_nickname, tre.t_r_score avg_Rscore, o.ob_name object_List, a.area_name area_List"
-				+ "  FROM t_profile pro JOIN member m"
-				+ "			      ON pro.m_id = m.m_id"
-				+ "  JOIN T_REVIEW tre"
-				+ "      ON pro.t_no = tre.t_no"
-				+ "  JOIN teach_object olist"
-				+ "      ON pro.t_no = olist.t_no"
-				+ "  JOIN object o"
-				+ "      ON olist.ob_code = o.ob_code"
-				+ "  JOIN acti_area acti"
-				+ "      ON pro.t_no = acti.t_no"
-				+ "  JOIN area a"
-				+ "      ON acti.area_code = a.area_code";
+		
 		return retVolist;
 	} 
 	
@@ -110,29 +98,30 @@ public class TeacherDao {
 			
 			if (rs.next()) {
 				retVo = new TeacherVo();
-				retVo.setTNo(rs.getString("t_no"));
-				retVo.setTMajor(rs.getString("t_Major"));
-				retVo.setOnlineYna(rs.getString("online_Yna"));
-				retVo.setTTcnt(rs.getString("t_Tcnt"));
-				retVo.setTTprice(rs.getString("t_Tprice"));
-				retVo.setTWantstud(rs.getString("t_Wantstud"));
-				retVo.setTCareer(rs.getString("t_Career"));
-				retVo.setTLanguage(rs.getString("t_Language"));
-				retVo.setTSpecial(rs.getString("t_Special"));
-				retVo.setTApproval(rs.getString("t_Approval"));
-				retVo.setTPermitYn(rs.getString("t_Permit_Yn"));
-//				retVo.setTPicture(rs.getString("t_Picture"));
-				retVo.setTIntro(rs.getString("t_Intro"));
-				retVo.setTRecruitYn(rs.getString("t_Recruit_Yn"));
-				retVo.setObjectList(rs.getString("object_List"));
-				retVo.setAreaList(rs.getString("area_List"));
-				retVo.setAvgRscore(rs.getDouble("avg_Rscore"));
-				retVo.setMId(rs.getString("m_Id"));
-				retVo.setTAge(rs.getInt("t_Age"));
-				retVo.setMName(rs.getString("m_Name"));
-				retVo.setMNickname(rs.getString("m_Nickname"));
-				retVo.setGenderFm(rs.getString("gender_Fm"));
-				retVo.setMAddress(rs.getString("m_Address"));
+				
+				retVo.setT_no(rs.getString("t_no"));
+				retVo.setT_major(rs.getString("t_major"));
+				retVo.setOnline_yna(rs.getString("online_yna"));
+				retVo.setT_tcnt(rs.getString("t_tcnt"));
+				retVo.setT_tprice(rs.getString("t_tprice"));
+				retVo.setT_wantstud(rs.getString("t_wantstud"));
+				retVo.setT_career(rs.getString("t_career"));
+				retVo.setT_language(rs.getString("t_language"));
+				retVo.setT_special(rs.getString("t_special"));
+				retVo.setT_approval(rs.getString("t_approval"));
+				retVo.setT_permit_yn(rs.getString("t_permit_yn"));
+//				retVo.setT_picture(rs.getString("t_picture"));
+				retVo.setT_intro(rs.getString("t_intro"));
+				retVo.setT_recruit_yn(rs.getString("t_recruit_yn"));
+				retVo.setObject_list(rs.getString("object_list"));
+				retVo.setArea_list(rs.getString("area_List"));
+				retVo.setAvg_rscore(rs.getDouble("avg_rscore"));
+				retVo.setM_id(rs.getString("m_id"));
+				retVo.setT_age(rs.getInt("t_age"));
+				retVo.setM_name(rs.getString("m_name"));
+				retVo.setM_nickname(rs.getString("m_nickname"));
+				retVo.setGender_fm(rs.getString("gender_fm"));
+				retVo.setM_address(rs.getString("m_address"));
 			}
 		} catch(SQLException e) {
 			e.printStackTrace();
