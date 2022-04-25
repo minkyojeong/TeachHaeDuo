@@ -48,7 +48,7 @@
                             <p style="line-height:30px">잔여 연필</p>
                         </div>
                         <div>
-                            <a href="#"><p>0원</p></a>
+                            <p id="p_won" style="line-height:30px"><u>0원</u></p>
                         </div>
                     </div>
                     <div class="pencil_div">
@@ -103,7 +103,7 @@
                 <button class="btn1_2" onclick="location.href='memberUpdateLogin'">회원 정보 수정</button>
             </div>
             <div style="margin:50px">
-                <button class="btn1_2">교습 정보 수정</button>
+                <button type="button" class="btn1_2" id="teacher_update">교습 정보 수정</button>
             </div>
 
         </div>
@@ -112,9 +112,10 @@
     <div id="pencilcharge_modal" class="pencilcharge_modal_overlay">
         <div class="pencilcharge_modal_window">
             <div class="pencilcharge_modal_title">
-                <h2>연필충전</h2>
+                <img src="${pageContext.request.contextPath}/resources/icons/pencil.png" width="25" height="25" style="margin-right:10px">
+                <p style="line-height:25px">연필충전</p>
+                <div class="pencilcharge_modal_close">X</div>
             </div>
-            <div class="pencilcharge_modal_close">X</div>
             <div class="pencilcharge_modal_content">
                 <form name="charge_frm">
                     <div class="pencilcharge_won">
@@ -137,6 +138,20 @@
             </div>
         </div>
     </div>
+    
+    <div id="won_modal" class="won_modal_overlay">
+        <div class="won_modal_window">
+            <div class="won_modal_title">
+                <h2>연필 사용 내역</h2>
+            </div>
+            <div class="won_modal_close">X</div>
+            <div class="won_modal_content">
+                
+                
+            </div>
+        </div>
+    </div>
+    
     <jsp:include page="template_footer.jsp"></jsp:include>
     </div>
 </body>

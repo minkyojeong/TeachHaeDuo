@@ -56,6 +56,10 @@ a:visited {
 	margin-top: 50px;
 }
 
+#p_won{
+	cursor:pointer;
+}
+
 .arrow, .arrow_active{
 	width: 20px;
 	height: 20px;
@@ -140,7 +144,7 @@ input:checked+.slider:before {
 }
 
 
-/* modal css */
+/* modal 충전하기 */
 #pencilcharge_modal.pencilcharge_modal_overlay{
 	width: 100%;
 	height: 100%;
@@ -180,9 +184,11 @@ input:checked+.slider:before {
 	display: inline;
 	color: black;
 }
-
-#pencilcharge_modal .pencilcharge_modal_title h2 {
-	display: inline;
+.pencilcharge_modal_title img {
+	float:left;
+}
+.pencilcharge_modal_title p {
+	float:left;
 }
 
 #pencilcharge_modal .pencilcharge_modal_close {
@@ -227,4 +233,69 @@ input[type=text] {
 	color: black;
 	font-weight: bold;
 	width: 60px;
+}
+
+
+
+
+
+/* modal 0원*/
+#won_modal.won_modal_overlay{
+	width: 100%;
+	height: 100%;
+	position: absolute;
+	left: 0;
+	top: 0;
+	display: none;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	background: rgba(255, 255, 255, 0.25);
+	box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+	backdrop-filter: blur(1.5px);
+	-webkit-backdrop-filter: blur(1.5px);
+	border-radius: 10px;
+	border: 1px solid rgba(255, 255, 255, 0.18);
+}
+
+#won_modal .won_modal_window {
+	background: white;
+	box-shadow: 0 8px 32px 0 #fed08b;
+	backdrop-filter: blur(13.5px);
+	-webkit-backdrop-filter: blur(13.5px);
+	border-radius: 10px;
+	border: 1px solid rgba(255, 255, 255, 0.18);
+	width: 400px;
+	height: 500px;
+	position: fixed;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	padding: 10px;
+}
+
+#won_modal .won_modal_title {
+	padding-left: 10px;
+	display: inline;
+	color: black;
+}
+
+#won_modal .won_modal_title h2 {
+	display: inline;
+}
+
+#won_modal .won_modal_close {
+	display: inline;
+	float: right;
+	padding-right: 10px;
+	cursor: pointer;
+	text-shadow: 1px 1px 2px gray;
+	color: black;
+}
+
+#won_modal .won_modal_content {
+	margin-top: 20px;
+	padding: 0px 10px;
+	text-shadow: 1px 1px 2px gray;
+	color: black;
 }

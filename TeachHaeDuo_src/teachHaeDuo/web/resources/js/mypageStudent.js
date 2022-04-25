@@ -29,7 +29,7 @@ $(function() {
 	});
 
 
-	/* modal js */
+	/* modal 충전하기 js */
 	$(".charge_btn").click(function() {
 		$("#pencilcharge_modal").show();
 	});
@@ -88,6 +88,20 @@ $(function() {
 	});
 	
 	
+/* modal 0원 js */
+	$("#p_won").on("click",function() {
+		$("#won_modal").show();
+	});
 
+	$(".won_modal_close").click(function() {
+		$("#won_modal").hide();
+	});
+
+	won_modal.addEventListener("click", e => {
+		const evTarget = e.target
+		if (evTarget.classList.contains("won_modal_overlay")) {
+			$("#won_modal").hide();
+		}
+	})
 
 });
