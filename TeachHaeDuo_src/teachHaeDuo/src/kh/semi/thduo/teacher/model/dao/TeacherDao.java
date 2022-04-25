@@ -27,7 +27,19 @@ public class TeacherDao {
 	// 모든 선생님 정보 읽기
 	public ArrayList<TeacherVo> readAllTeacher(Connection conn){
 		ArrayList<TeacherVo> retVolist = null;
-		
+		String sql = "select  pro.t_major, pro.t_picture, m.m_nickname, tre.t_r_score avg_Rscore, o.ob_name object_List, a.area_name area_List"
+				+ "  FROM t_profile pro JOIN member m"
+				+ "			      ON pro.m_id = m.m_id"
+				+ "  JOIN T_REVIEW tre"
+				+ "      ON pro.t_no = tre.t_no"
+				+ "  JOIN teach_object olist"
+				+ "      ON pro.t_no = olist.t_no"
+				+ "  JOIN object o"
+				+ "      ON olist.ob_code = o.ob_code"
+				+ "  JOIN acti_area acti"
+				+ "      ON pro.t_no = acti.t_no"
+				+ "  JOIN area a"
+				+ "      ON acti.area_code = a.area_code";
 		return retVolist;
 	} 
 	

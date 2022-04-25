@@ -9,7 +9,7 @@
 		</div>
 		<nav class="menu">
 			<ul>
-				<li><a href="./tearcherSearch.html">선생님찾기&nbsp;&nbsp;</a></li>
+				<li><a href="${pageContext.request.contextPath}/teacherSearch">선생님찾기&nbsp;&nbsp;</a></li>
 				<li><a>질문하기&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;</a></li>
 				<li><a>고객센터&nbsp;&nbsp;</a></li>
 				<li><a>이용방법&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;</a></li>
