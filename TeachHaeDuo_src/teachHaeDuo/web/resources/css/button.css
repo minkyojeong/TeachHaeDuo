@@ -14,7 +14,7 @@
     border-radius: 5px;
     background:#92BC97;
     color:#504a4d;
-    font-weight: 500;
+    font-family: MinSans-Medium;
     font-size:15px;
     width:200px;
     height:40px;
@@ -35,8 +35,8 @@
     border: none;
     border-radius: 5px;
     background:#578270;
-    color:#504a4d;
-    font-weight: 500;
+    color:#F3F4F6;
+    font-family: MinSans-Medium;
     font-size:13px;
     width:100px;
     height:30px;
@@ -58,10 +58,11 @@
     border-radius: 5px;
     background:#F3F4F6;
     color:#504a4d;
-    font-weight: 500;
+    font-family: MinSans-Medium;
     font-size:11px;
     width:60px;
     height:30px;
+    line-height: 30px;
     cursor: pointer;
 }
 .btn3_2{

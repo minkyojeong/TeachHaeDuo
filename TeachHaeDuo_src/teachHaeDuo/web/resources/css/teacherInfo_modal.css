@@ -1,0 +1,172 @@
+button {
+    border: none;
+    cursor: pointer;
+}
+textarea {
+    resize: none;
+    font-family: MinSans-Medium;
+    border: 1px #cccccc solid;
+}
+textarea::placeholder {
+    font-family: MinSans-Medium;
+    color: #cccccc;
+}
+select {
+    font-family: MinSans-Medium;
+    border: 1px #cccccc solid;
+}
+.modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+    background-color: rgba(0, 0, 0, 0.7);
+}
+.modal > .report_content {
+    position: relative;
+    top: 100px;
+    margin: auto;
+    width: 300px;
+    background-color: #fffaf5;
+    border-radius: 10px;
+    padding: 10px;
+    font-family: MinSans-Medium;
+}
+.modal > .message_content {
+    position: relative;
+    top: 100px;
+    margin: auto;
+    width: 300px;
+    background-color: #fffaf5;
+    border-radius: 10px;
+    padding: 10px;
+    font-family: MinSans-Medium;
+}
+.modal > .review_content {
+    position: relative;
+    top: 100px;
+    margin: auto;
+    width: 300px;
+    background-color: #fffaf5;
+    border-radius: 10px;
+    padding: 10px;
+    font-family: MinSans-Medium;
+}
+.modal > .like_content {
+    position: relative;
+    top: 300px;
+    margin: auto;
+    width: 200px;
+    background-color: #9ebc97;
+    border-radius: 50px;
+    padding: 10px;
+}
+.modal > .cancle_like_content {
+    position: relative;
+    top: 300px;
+    margin: auto;
+    width: 200px;
+    background-color: #9ebc97;
+    border-radius: 50px;
+    padding: 10px;
+}
+.modal_title {
+    font-family: MinSans-Bold;
+    color: #5e5e5e;
+    font-size: 20px;
+}
+.report_content .report_sel {
+    text-align: center;
+    margin-top: 30px;
+}
+.report_content .report_input {
+    margin-top: 20px;
+    text-align: center;
+}
+.report_content .report_input > p {
+    margin-bottom: 5px;
+}
+.report_content .report_send {
+    margin-top: 10px;
+}
+.report_content .report_send button {
+    background-color: transparent;
+    font-family: MinSans-Medium;
+    font-size: 15px;
+}
+.report_content #btn_report_cancel {
+    color: #b8b6b6;
+}
+.report_content #btn_report_send {
+    float: right;
+    color: red;
+}
+.message_content .message_notice{
+    color: red;
+    font-size: 13px;
+    font-family: MinSans-Medium;
+    margin-top: 10px;
+    text-align: center;
+}
+.message_content .message_input {
+    margin-top: 20px;
+}
+.message_content .message_send {
+    margin-top: 10px;
+}
+.message_content .message_send button {
+    background-color: transparent;
+    font-family: MinSans-Medium;
+    font-size: 15px;
+}
+.message_content #btn_message_cancel {
+    color: #b8b6b6;
+}
+.message_content #btn_message_send {
+    float: right;
+    color: #82b185;
+}
+.review_content .review_notice{
+    color: red;
+    font-size: 13px;
+    font-family: MinSans-Medium;
+    margin-top: 10px;
+    text-align: center;
+}
+.review_content .review_input {
+    margin-top: 20px;
+    text-align: center;
+}
+.review_content .review_input textarea {
+    margin-top: 10px;
+}
+.review_content .review_send {
+    margin-top: 10px;
+}
+.review_content .review_send button {
+    background-color: transparent;
+    font-family: MinSans-Medium;
+    font-size: 15px;
+}
+.review_content #btn_review_cancel {
+    color: #b8b6b6;
+}
+.review_content #btn_review_send {
+    float: right;
+    color: #82b185;
+}
+.like_content > p {
+    text-align: center;
+    font-family: MinSans-Bold;
+    color: #f3f4f6;
+    font-size: 20px;
+}
+.cancle_like_content > p {
+    text-align: center;
+    font-family: MinSans-Bold;
+    color: #f3f4f6;
+    font-size: 20px;
+}

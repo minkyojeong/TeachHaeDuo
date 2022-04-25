@@ -1,12 +1,15 @@
-
 @font-face {
-	font-family: MinSans-Medium;
-	src: url('./fonts/MinSans-Medium.ttf') format('truetype'),
-		url('./fonts/MinSans-Medium.ttf') format('opentype');
+	font-family: "MinSans-Medium";
+	src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2201-2@1.0/MinSans-Medium.woff') format('woff');
+	/* src: url('./fonts/MinSans-Medium.ttf') format('truetype'),
+		url('./fonts/MinSans-Medium.ttf') format('opentype'),
+		url("<%= request.getContextPath() %>/resources/fonts/MinSans-Medium.woff2"); */
 }
 
 @font-face {
-	font-family: MinSans-Bold;
-	src: url('./fonts/MinSans-Bold.ttf') format('truetype'),
-		url('./fonts/MinSans-Bold.otf') format('opentype');
+	font-family: "MinSans-Bold";
+	src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2201-2@1.0/MinSans-Bold.woff') format('woff');
+	/* src: url('./fonts/MinSans-Bold.ttf') format('truetype'),
+		url('./fonts/MinSans-Bold.otf') format('opentype'),
+		url('web/resources/fonts/MinSans-Bold.woff2'); */
 }

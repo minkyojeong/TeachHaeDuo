@@ -7,6 +7,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import kh.semi.thduo.teacher.model.service.TeacherService;
+import kh.semi.thduo.teacher.model.vo.TeacherVo;
+
 /**
  * Servlet implementation class TeacherInfoController
  */
@@ -26,7 +29,19 @@ public class TeacherInfoController extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		request.getRequestDispatcher("WEB-INF/view/teacher/teacherInfo.jsp").forward(request, response);
+		System.out.println("doGet - teacherInfo");
+		
+		String tNo = request.getParameter("tNo");
+		TeacherVo result = new TeacherService().readTeacherInfo(tNo);
+		
+		System.out.println("TeacherVo : " + result);
+		if(result == null) {
+			System.out.println("선생님 정보가 없습니다.");
+//			response.sendRedirect("teacherSearch");
+		} else {
+			request.setAttribute("tvo", result);
+			request.getRequestDispatcher("WEB-INF/view/teacher/teacherInfo.jsp").forward(request, response);
+		}
 	}
 
 	/**
