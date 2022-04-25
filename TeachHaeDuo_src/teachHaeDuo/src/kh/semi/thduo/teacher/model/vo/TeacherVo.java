@@ -24,7 +24,7 @@ public class TeacherVo {
 	private double avgRscore;
 	private String mId;
 	private int tAge;
-	private String mNAME;
+	private String mName;
 	private String mNickname;
 	private String genderFm;
 	private String mAddress;
@@ -41,7 +41,7 @@ public class TeacherVo {
 				+ tLanguage + ", tSpecial=" + tSpecial + ", tApproval=" + tApproval + ", tPermitYn=" + tPermitYn
 				+ ", tPicture=" + tPicture + ", tIntro=" + tIntro + ", tRecruitYn=" + tRecruitYn + ", objectList="
 				+ objectList + ", areaList=" + areaList + ", avgRscore=" + avgRscore + ", mId=" + mId + ", tAge=" + tAge
-				+ ", mNAME=" + mNAME + ", mNickname=" + mNickname + ", genderFm=" + genderFm + ", mAddress=" + mAddress
+				+ ", mName=" + mName + ", mNickname=" + mNickname + ", genderFm=" + genderFm + ", mAddress=" + mAddress
 				+ ", tReview=" + tReview + "]";
 	}
 
@@ -197,12 +197,12 @@ public class TeacherVo {
 		this.tAge = tAge;
 	}
 
-	public String getMNAME() {
-		return mNAME;
+	public String getMName() {
+		return mName;
 	}
 
-	public void setMNAME(String mNAME) {
-		this.mNAME = mNAME;
+	public void setMName(String mName) {
+		this.mName = mName;
 	}
 
 	public String getMNickname() {
