@@ -15,7 +15,7 @@ DROP TABLE "BOARD_REPORT" CASCADE CONSTRAINTS;
 DROP TABLE "Q_BOARD" CASCADE CONSTRAINTS;
 DROP TABLE "MEMBER_REPORT" CASCADE CONSTRAINTS;
 DROP TABLE "ALARM" CASCADE CONSTRAINTS;
-DROP TABLE "CHECK_PENCIL" CASCADE CONSTRAINTS;
+DROP TABLE "CHECK_MONEY" CASCADE CONSTRAINTS;
 DROP TABLE "MEMBER" CASCADE CONSTRAINTS;
 
 CREATE TABLE "MEMBER" (
@@ -30,7 +30,7 @@ CREATE TABLE "MEMBER" (
 	"GENDER_FM"	CHAR(1)		NOT NULL,
 	"ROLE_ST"	CHAR(1)		NOT NULL,
 	"M_DATE"	TIMESTAMP	DEFAULT SYSTIMESTAMP	NOT NULL,
-	"M_CERTIFICATE"	VARCHAR2(150)		NULL,
+	"M_CERTIFICATE"	BLOB		NULL,
 	"M_ALARM_YN"	CHAR(1)	DEFAULT 'Y'	NOT NULL
 );
 
@@ -48,18 +48,16 @@ ALTER TABLE "MEMBER" ADD CONSTRAINT "PK_MEMBER" PRIMARY KEY (
 	"M_ID"
 );
 
-
-
-CREATE TABLE "CHECK_PENCIL" (
-	"CP_NO"	NUMBER		NOT NULL,
-	"CP_CONTENT"	VARCHAR2(30)		NOT NULL,
-	"CP_PENCIL"	NUMBER	DEFAULT 0	NOT NULL,
-	"CP_DATE"	TIMESTAMP	DEFAULT SYSTIMESTAMP	NOT NULL,
+CREATE TABLE "CHECK_MONEY" (
+	"CM_NO"	NUMBER		NOT NULL,
+	"CM_CONTENT"	VARCHAR2(30)		NOT NULL,
+	"CM_CASH"	NUMBER	DEFAULT 0	NOT NULL,
+	"CM_DATE"	TIMESTAMP	DEFAULT SYSTIMESTAMP	NOT NULL,
 	"M_ID"	VARCHAR2(15)		NOT NULL
 );
 
-ALTER TABLE "CHECK_PENCIL" ADD CONSTRAINT "PK_CHECK_PENCIL" PRIMARY KEY (
-	"CP_NO"
+ALTER TABLE "CHECK_MONEY" ADD CONSTRAINT "PK_CHECK_MONEY" PRIMARY KEY (
+	"CM_NO"
 );
 
 CREATE TABLE "ALARM" (
@@ -67,7 +65,7 @@ CREATE TABLE "ALARM" (
 	"ALARM_CONTENT"	VARCHAR2(600)		NOT NULL,
 	"ALARM_DATE"	TIMESTAMP	DEFAULT SYSTIMESTAMP	NOT NULL,
 	"ALARM_SENDID"	VARCHAR2(15)		NOT NULL,
-	"ALARM_RECEIVEID"	VARCHAR2(15)		NOT NULL,
+	"ALARM_RECIVEID"	VARCHAR2(15)		NOT NULL,
 	"M_ID"	VARCHAR2(15)		NOT NULL
 );
 
@@ -80,7 +78,7 @@ ALTER TABLE "ALARM" ADD CONSTRAINT "PK_ALARM" PRIMARY KEY (
 CREATE TABLE "MEMBER_REPORT" (
 	"M_R_NO"	NUMBER		NOT NULL,
 	"M_R_SENDID"	VARCHAR2(15)		NOT NULL,
-	"M_R_RECEIVEID"	VARCHAR2(15)		NOT NULL,
+	"M_R_RECIVEID"	VARCHAR2(15)		NOT NULL,
 	"M_R_CONTENT"	VARCHAR2(3000)		NOT NULL,
 	"M_R_DATE"	TIMESTAMP	DEFAULT SYSTIMESTAMP	NOT NULL,
 	"M_ID"	VARCHAR2(15)		NOT NULL
@@ -124,6 +122,7 @@ CREATE TABLE "Q_RECOMMENT" (
 	"R_CONTENT"	VARCHAR2(300)		NOT NULL,
 	"R_WRITER"	VARCHAR2(60)		NOT NULL,
 	"R_WRITE_DATE"	TIMESTAMP	DEFAULT CURRENT_TIMESTAMP	NOT NULL,
+	"R_REPORT_CNT"	NUMBER	DEFAULT 0	NULL,
 	"B_NO"	NUMBER		NOT NULL
 );
 
@@ -158,7 +157,7 @@ CREATE TABLE "T_PROFILE" (
 	"T_SPECIAL"	VARCHAR2(300)	DEFAULT '없음'	NULL,
 	"T_APPROVAL"	CHAR(1)	DEFAULT 'N'	NOT NULL,
 	"T_PERMIT_YN"	CHAR(1)		NOT NULL,
-	"T_PICTURE"	VARCHAR2(150)		NULL,
+	"T_PICTURE"	BLOB		NULL,
 	"M_ID"	VARCHAR2(15)		NOT NULL,
 	"T_INTRO"	VARCHAR2(3000)	DEFAULT '없음'	NULL,
 	"T_RECRUIT_YN"	CHAR(1)	NOT NULL
@@ -184,10 +183,13 @@ CREATE TABLE "T_REVIEW" (
 	"T_NO"	VARCHAR2(5)		NOT NULL,
 	"T_R_CONTENT"	VARCHAR2(300)		NOT NULL,
 	"T_R_DATE"	TIMESTAMP	DEFAULT SYSTIMESTAMP	NOT NULL,
-	"T_R_SCORE"	NUMBER	DEFAULT 0	NOT NULL
+	"T_R_SCORE"	NUMBER	DEFAULT 0	NOT NULL,
+	"T_R_WRITER"	VARCHAR2(60)		NOT NULL,
+	"M_ID"	VARCHAR2(15)		NOT NULL
 );
 
 COMMENT ON COLUMN "T_REVIEW"."T_NO" IS 'T1, T2 ....';
+COMMENT ON COLUMN "T_REVIEW"."T_R_WRITER" IS 'MEMBER(M_NICKNAME)';
 
 ALTER TABLE "T_REVIEW" ADD CONSTRAINT "PK_T_REVIEW" PRIMARY KEY (
 	"T_R_NO",
@@ -205,13 +207,10 @@ COMMENT ON COLUMN "MEMBER_STUDENT"."S_NO" IS 'S1, S2,...';
 CREATE TABLE "DIBS" (
 	"S_NO"	VARCHAR2(10)		NOT NULL,
 	"T_NO"	VARCHAR2(5)		NOT NULL
-	
 );
 
-COMMENT ON COLUMN "DIBS"."T_NO" IS 'T1,T2,...';
-
 COMMENT ON COLUMN "DIBS"."S_NO" IS 'S1, S2,...';
-
+COMMENT ON COLUMN "DIBS"."T_NO" IS 'T1,T2,...';
 
 CREATE TABLE "OBJECT" (
 	"OB_CODE"	VARCHAR2(5)		NOT NULL,
@@ -269,7 +268,6 @@ ALTER TABLE "CS_FAQ" ADD CONSTRAINT "PK_CS_FAQ" PRIMARY KEY (
 	"FAQ_NO"
 );
 
-
 CREATE TABLE "CS_NOTICE" (
 	"NOTICE_NO"	NUMBER		NOT NULL,
 	"NOTICE_TITLE"	VARCHAR2(300)		NOT NULL,
@@ -284,7 +282,6 @@ COMMENT ON COLUMN "CS_NOTICE"."ADMIN_ID" IS 'ADMIN(ADMIN_ID)';
 ALTER TABLE "CS_NOTICE" ADD CONSTRAINT "PK_CS_NOTICE" PRIMARY KEY (
 	"NOTICE_NO"
 );
-
 
 ALTER TABLE "MEMBER_REPORT" ADD CONSTRAINT "PK_MEMBER_REPORT" PRIMARY KEY (
 	"M_R_NO"
@@ -366,8 +363,13 @@ ALTER TABLE "T_REVIEW" ADD CONSTRAINT "FK_T_PROFILE_TO_T_REVIEW_1" FOREIGN KEY (
 REFERENCES "T_PROFILE" (
 	"T_NO"
 ) ON DELETE CASCADE;
-
-ALTER TABLE "CHECK_PENCIL" ADD CONSTRAINT "FK_MEMBER_TO_CHECK_PENCIL_1" FOREIGN KEY (
+ALTER TABLE "T_REVIEW" ADD CONSTRAINT "FK_MEMBER_TO_T_REVIEW_1" FOREIGN KEY (
+	"M_ID"
+)
+REFERENCES "MEMBER" (
+	"M_ID"
+) ON DELETE CASCADE;
+ALTER TABLE "CHECK_MONEY" ADD CONSTRAINT "FK_MEMBER_TO_CHECK_MONEY_1" FOREIGN KEY (
 	"M_ID"
 )
 REFERENCES "MEMBER" (
@@ -432,92 +434,73 @@ REFERENCES "MEMBER" (
 
 
 -- 학생 삽입
-insert into MEMBER(M_ID, M_PW, M_NAME, M_NICKNAME, M_BIRTH, M_ADDRESS, M_PHONE,M_EMAIL,GENDER_FM,ROLE_ST,M_DATE) VALUES('a12345','a12345678','홍길동','홍기','111111','서울시관악구신림동50','010-1111-1111','aaa@gmail.com','F','S',default); 
-insert into MEMBER(M_ID, M_PW, M_NAME, M_NICKNAME, M_BIRTH, M_ADDRESS, M_PHONE,M_EMAIL,GENDER_FM,ROLE_ST,M_DATE) VALUES('b12345','b12345678','이민호','민호','222222','경기도 부천시 심곡본동 340','010-2211-1111','bbb@gmail.com','F','S',default);
+INSERT INTO member(M_ID, M_PW, M_NAME, M_NICKNAME, M_BIRTH, M_ADDRESS, M_PHONE,M_EMAIL,GENDER_FM,ROLE_ST,M_DATE) VALUES('a12345','a12345678','홍길동','홍기','111111','서울시관악구신림동50','010-1111-1111','aaa@gmail.com','F','S',default); 
+INSERT INTO member(M_ID, M_PW, M_NAME, M_NICKNAME, M_BIRTH, M_ADDRESS, M_PHONE,M_EMAIL,GENDER_FM,ROLE_ST,M_DATE) VALUES('b12345','b12345678','이민호','민호','222222','경기도 부천시 심곡본동 340','010-2211-1111','bbb@gmail.com','F','S',default);
 
 -- 선생님 삽입
-insert into MEMBER(M_ID, M_PW, M_NAME, M_NICKNAME, M_BIRTH, M_ADDRESS, M_PHONE,M_EMAIL,GENDER_FM,ROLE_ST,M_DATE) VALUES('c12345','c12345678','이영희','영희쌤','333333','서울시 강남구 논현동 224','010-3311-1111','ccc@gmail.com','M','T',default); 
-insert into MEMBER(M_ID, M_PW, M_NAME, M_NICKNAME, M_BIRTH, M_ADDRESS, M_PHONE,M_EMAIL,GENDER_FM,ROLE_ST,M_DATE) VALUES('d12345','d12345678','김보미','보미쌤','444444','서울시 용산구 한남동 24','010-4411-1111','ddd@gmail.com','M','T',default); 
+INSERT INTO member(M_ID, M_PW, M_NAME, M_NICKNAME, M_BIRTH, M_ADDRESS, M_PHONE,M_EMAIL,GENDER_FM,ROLE_ST,M_DATE) VALUES('c12345','c12345678','이영희','영희쌤','900423','서울시 강남구 논현동 224','010-3311-1111','ccc@gmail.com','F','T',default); 
+INSERT INTO member(M_ID, M_PW, M_NAME, M_NICKNAME, M_BIRTH, M_ADDRESS, M_PHONE,M_EMAIL,GENDER_FM,ROLE_ST,M_DATE) VALUES('d12345','d12345678','김보미','보미쌤','000506','서울시 용산구 한남동 24','010-4411-1111','ddd@gmail.com','M','T',default); 
 
 -- 학생 정보 삽입
-insert into MEMBER_STUDENT VALUES('S1', 'a12345');
-insert into MEMBER_STUDENT VALUES('S2', 'b12345');
+INSERT INTO MEMBER_STUDENT VALUES('S1', 'a12345');
+INSERT INTO MEMBER_STUDENT VALUES('S2', 'b12345');
 
 -- 지역코드 삽입
-insert into AREA values('A1', '강남구');
-insert into AREA values('A2', '강동구');
-insert into AREA values('A3', '강북구');
-insert into AREA values('A4', '강서구');
-insert into AREA values('A5', '관악구');
-insert into AREA values('A6', '광진구');
-insert into AREA values('A7', '구로구');
-insert into AREA values('A8', '금천구');
-insert into AREA values('A9', '노원구');
-insert into AREA values('A10', '도봉구');
-insert into AREA values('A11', '동대문구');
-insert into AREA values('A12', '동작구');
-insert into AREA values('A13', '마포구');
-insert into AREA values('A14', '서대문구');
-insert into AREA values('A15', '서초구');
-insert into AREA values('A16', '성동구');
-insert into AREA values('A17', '성북구');
-insert into AREA values('A18', '송파구');
-insert into AREA values('A19', '양천구');
-insert into AREA values('A20', '영등포구');
-insert into AREA values('A21', '용산구');
-insert into AREA values('A22', '은평구');
-insert into AREA values('A23', '종로구');
-insert into AREA values('A24', '중구');
-insert into AREA values('A25', '중랑구');
+INSERT INTO AREA VALUES('A1', '강남구');
+INSERT INTO AREA VALUES('A2', '강동구');
+INSERT INTO AREA VALUES('A3', '강북구');
+INSERT INTO AREA VALUES('A4', '강서구');
+INSERT INTO AREA VALUES('A5', '관악구');
+INSERT INTO AREA VALUES('A6', '광진구');
+INSERT INTO AREA VALUES('A7', '구로구');
+INSERT INTO AREA VALUES('A8', '금천구');
+INSERT INTO AREA VALUES('A9', '노원구');
+INSERT INTO AREA VALUES('A10', '도봉구');
+INSERT INTO AREA VALUES('A11', '동대문구');
+INSERT INTO AREA VALUES('A12', '동작구');
+INSERT INTO AREA VALUES('A13', '마포구');
+INSERT INTO AREA VALUES('A14', '서대문구');
+INSERT INTO AREA VALUES('A15', '서초구');
+INSERT INTO AREA VALUES('A16', '성동구');
+INSERT INTO AREA VALUES('A17', '성북구');
+INSERT INTO AREA VALUES('A18', '송파구');
+INSERT INTO AREA VALUES('A19', '양천구');
+INSERT INTO AREA VALUES('A20', '영등포구');
+INSERT INTO AREA VALUES('A21', '용산구');
+INSERT INTO AREA VALUES('A22', '은평구');
+INSERT INTO AREA VALUES('A23', '종로구');
+INSERT INTO AREA VALUES('A24', '중구');
+INSERT INTO AREA VALUES('A25', '중랑구');
 
 --과목코드 삽입
-insert into object(ob_code, ob_name) VALUES('OB1', '국어');
-insert into object(ob_code, ob_name) VALUES('OB2', '수학');
-insert into object(ob_code, ob_name) VALUES('OB3', '영어');
-insert into object(ob_code, ob_name) VALUES('OB4', '사회');
-insert into object(ob_code, ob_name) VALUES('OB5', '과학');
-insert into object(ob_code, ob_name) VALUES('OB6', '기타');
-
---ADMIN TABLE
-INSERT INTO ADMIN(ADMIN_ID, ADMIN_PW) VALUES('IGLOVE','IGIG');
-
---고객센터 자주묻는질문 삽입
-insert into CS_FAQ(FAQ_NO, FAQ_QUESTION, FAQ_ANSWER, ADMIN_ID, FAQ_CNT) VALUES(1,'QUESTION_ONE', 'ANSWER_TWO', 'IGLOVE', DEFAULT); 
-insert into CS_FAQ(FAQ_NO, FAQ_QUESTION, FAQ_ANSWER, ADMIN_ID, FAQ_CNT) VALUES(2,'QUESTION_ONE', 'ANSWER_TWO', 'IGLOVE', DEFAULT); 
-
---고객센터 공지사항 삽입
-insert into CS_NOTICE(NOTICE_NO, NOTICE_TITLE, NOTICE_CONTENT, NOTICE_CNT, NOTICE_WRITE_DATE, ADMIN_ID) VALUES(1,'연필 가격 인상', '제목과 같습니다',DEFAULT,DEFAULT, 'IGLOVE'); 
-insert into CS_NOTICE(NOTICE_NO, NOTICE_TITLE, NOTICE_CONTENT, NOTICE_CNT, NOTICE_WRITE_DATE, ADMIN_ID) VALUES(2,'연필 가격 인하', '제목과 같습니다',DEFAULT,DEFAULT, 'IGLOVE'); 
-
---게시글 삽입
-INSERT INTO Q_BOARD(B_NO, B_CATEGORY,B_TITLE,B_CONTENT,B_WRITER,B_WRITE_DATE,B_CNT,B_REPORT_CNT,M_ID) VALUES(1,'질문하기','궁금해요','제목이 곧 내용','김인곤',default,default,default,'a12345');
-INSERT INTO Q_BOARD(B_NO, B_CATEGORY,B_TITLE,B_CONTENT,B_WRITER,B_WRITE_DATE,B_CNT,B_REPORT_CNT,M_ID) VALUES(2,'질문하기','궁금해요ㅜ','제목이 곧 내용','김인곤',default,default,default,'a12345');
-
---게시글 신고
-INSERT INTO BOARD_REPORT(B_R_NO,B_NO,B_R_CATEGORY,B_R_WRITER,B_R_WRITE_DATE) VALUES(1,1,'광고','김인곤',default);
-
---질문하기 게시판 댓글
-INSERT INTO Q_RECOMMENT(R_NO,R_CONTENT,R_WRITER,R_WRITE_DATE,B_NO) VALUES(1,'좋은글이네요','김인곤',default,1);
+INSERT INTO object(ob_code, ob_name) VALUES('OB1', '국어');
+INSERT INTO object(ob_code, ob_name) VALUES('OB2', '수학');
+INSERT INTO object(ob_code, ob_name) VALUES('OB3', '영어');
+INSERT INTO object(ob_code, ob_name) VALUES('OB4', '사회');
+INSERT INTO object(ob_code, ob_name) VALUES('OB5', '과학');
+INSERT INTO object(ob_code, ob_name) VALUES('OB6', '기타');
 
 -- 선생님정보 삽입
-insert into t_profile VALUES('T1', '서울대학교 기계공학과 졸업', 'A', '주 2회', '월 30만원', default, default, '토익 850', default, default, 'N', null, 'c12345', '열심히 하겠습니다!', 'Y');
-insert into t_profile VALUES('T2', '이화여자대학교 경영학과 휴학중', 'Y', '주 2회', '월 20만원', default, default, default, default, default, 'Y', null, 'd12345', '눈높이 교육', 'N');
+INSERT INTO t_profile VALUES('T1', '서울대학교 기계공학과 졸업', 'A', '주 2회', '월 30만원', default, default, '토익 850', default, default, 'N', null, 'c12345', '열심히 하겠습니다!', 'Y');
+INSERT INTO t_profile VALUES('T2', '이화여자대학교 경영학과 휴학중', 'Y', '주 2회', '월 20만원', default, default, default, default, default, 'Y', null, 'd12345', '눈높이 교육', 'N');
 
 -- 선생님 담당 과목 삽입
-insert into teach_object VALUES('OB2', 'T1');
-insert into teach_object VALUES('OB5', 'T1');
-insert into teach_object VALUES('OB1', 'T2');
-insert into teach_object VALUES('OB4', 'T2');
+INSERT INTO teach_object VALUES('OB2', 'T1');
+INSERT INTO teach_object VALUES('OB5', 'T1');
+INSERT INTO teach_object VALUES('OB1', 'T2');
+INSERT INTO teach_object VALUES('OB4', 'T2');
 
 -- 선생님 활동 지역 삽입
-insert into acti_area VALUES('T1', 'A1');
-insert into acti_area VALUES('T1', 'A2');
-insert into acti_area VALUES('T2', 'A3');
-insert into acti_area VALUES('T2', 'A4');
+INSERT INTO acti_area VALUES('T1', 'A1');
+INSERT INTO acti_area VALUES('T1', 'A2');
+INSERT INTO acti_area VALUES('T2', 'A3');
+INSERT INTO acti_area VALUES('T2', 'A4');
 
 -- 선생님 리뷰 삽입
-insert into T_REVIEW VALUES(1, 'T1', '친절하고 자세하게 알려주세요!', default, 5);
-insert into T_REVIEW VALUES(2, 'T2', '좋습니다.', default, 3);
+INSERT INTO t_review VALUES (1, 'T1', '친절하고 자세하게 알려주세요!', DEFAULT, 5, '홍기', 'a12345');
+INSERT INTO t_review VALUES (2, 'T2', '좋습니다.', DEFAULT, 3, '민호', 'b12345');
+INSERT INTO t_review VALUES (3, 'T2', '별로입니다.', DEFAULT, 2, '홍기', 'a12345');
+INSERT INTO t_review VALUES (4, 'T1', '정말 좋은 선생님이세요.', DEFAULT, 4, '민호', 'b12345');
 
 -- 찜 삽입
 insert into DIBS VALUES('S1','T1');
@@ -528,5 +511,55 @@ insert into DIBS VALUES('S2','T1');
 insert into ALARM VALUES(1, '연락 좀 주세요', DEFAULT, 'a12345', 'c12345', 'a12345');
 insert into ALARM VALUES(2, '교습 비용 얼마인가요?', DEFAULT, 'a12345', 'd12345', 'a12345');
 insert into ALARM VALUES(3, '주당 4회 가능하신가요?', DEFAULT, 'b12345', 'c12345', 'b12345');
+
+--ADMIN TABLE
+INSERT INTO ADMIN(ADMIN_ID, ADMIN_PW) VALUES('admin','admin1234');
+
+--고객센터 자주묻는질문 삽입
+insert into CS_FAQ(FAQ_NO, FAQ_QUESTION, FAQ_ANSWER, ADMIN_ID, FAQ_CNT) VALUES(1,'QUESTION_ONE', 'ANSWER_TWO', 'admin', DEFAULT); 
+insert into CS_FAQ(FAQ_NO, FAQ_QUESTION, FAQ_ANSWER, ADMIN_ID, FAQ_CNT) VALUES(2,'QUESTION_ONE', 'ANSWER_TWO', 'admin', DEFAULT); 
+
+--고객센터 공지사항 삽입
+insert into CS_NOTICE(NOTICE_NO, NOTICE_TITLE, NOTICE_CONTENT, NOTICE_CNT, NOTICE_WRITE_DATE, ADMIN_ID) VALUES(1,'연필 가격 인상', '제목과 같습니다',DEFAULT,DEFAULT, 'admin'); 
+insert into CS_NOTICE(NOTICE_NO, NOTICE_TITLE, NOTICE_CONTENT, NOTICE_CNT, NOTICE_WRITE_DATE, ADMIN_ID) VALUES(2,'연필 가격 인하', '제목과 같습니다',DEFAULT,DEFAULT, 'admin'); 
+
+--게시글 삽입
+INSERT INTO Q_BOARD(B_NO, B_CATEGORY,B_TITLE,B_CONTENT,B_WRITER,B_WRITE_DATE,B_CNT,B_REPORT_CNT,M_ID) VALUES(1,'질문하기','궁금해요','제목이 곧 내용','홍기',default,default,default,'a12345');
+INSERT INTO Q_BOARD(B_NO, B_CATEGORY,B_TITLE,B_CONTENT,B_WRITER,B_WRITE_DATE,B_CNT,B_REPORT_CNT,M_ID) VALUES(2,'질문하기','궁금해요ㅜ','제목이 곧 내용','홍기',default,default,default,'a12345');
+
+--게시글 신고
+INSERT INTO BOARD_REPORT(B_R_NO,B_NO,B_R_CATEGORY,B_R_WRITER,B_R_WRITE_DATE) VALUES(1,1,'광고','민호',default);
+
+--질문하기 게시판 댓글
+INSERT INTO Q_RECOMMENT(R_NO,R_CONTENT,R_WRITER,R_WRITE_DATE,R_REPORT_CNT,B_NO) VALUES(1,'신고할게요','민호',default,default,1);
+
+-- 선생님별, 과목 리스트 나오는 뷰 생성
+CREATE OR REPLACE VIEW view_teacher_object 
+AS
+    (SELECT m_nickname, LISTAGG(ob_name,',') WITHIN GROUP(ORDER BY t_no) AS object_list
+    FROM t_profile t1 
+        JOIN member m1 USING(m_id) 
+        JOIN teach_object t2 USING(t_no) 
+        JOIN object t3 USING(ob_code)
+    GROUP BY m_nickname);
+
+-- 선생님별, 활동 지역 리스트 나오는 뷰 생성
+CREATE OR REPLACE VIEW view_teacher_area 
+AS
+    (SELECT m_nickname, LISTAGG(t5.area_name,',') WITHIN GROUP(ORDER BY t_no) AS area_list
+    FROM t_profile t1 
+        JOIN member m1 USING(m_id) 
+        JOIN acti_area t4 USING(t_no) 
+        JOIN area t5 USING(area_code) 
+    GROUP BY m_nickname);
+
+-- 선생님별, 리뷰평균 나오는 뷰 생성
+CREATE OR REPLACE VIEW view_teacher_rscroe_avg 
+AS
+    SELECT m_nickname, AVG(t_r_score) as avg_rscore
+    FROM t_profile
+        JOIN member USING ( m_id )
+        JOIN t_review USING ( t_no )
+    GROUP BY m_nickname;
 
 COMMIT;
