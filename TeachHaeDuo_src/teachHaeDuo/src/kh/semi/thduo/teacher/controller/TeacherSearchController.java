@@ -33,7 +33,7 @@ public class TeacherSearchController extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		ArrayList<TeacherVo> volist = new TeacherService().readAllTeacher();
-		
+		request.setAttribute("teachVolist", volist);
 		request.getRequestDispatcher("WEB-INF/view/teacherSearchMain.jsp").forward(request, response);
 	}
 

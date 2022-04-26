@@ -1,3 +1,6 @@
+<%@page import="org.apache.jasper.tagplugins.jstl.core.ForEach"%>
+<%@page import="kh.semi.thduo.teacher.model.vo.TeacherVo"%>
+<%@page import="java.util.ArrayList"%>
 <link href="<%=request.getContextPath()%>/resources/css/reset.css" rel="stylesheet" type="text/css">
 <link href="<%=request.getContextPath()%>/resources/css/teacherSearchMain.css" rel="stylesheet" type="text/css">
 
@@ -11,6 +14,9 @@
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </head>
 <body>
+<%
+	ArrayList<TeacherVo> volist = (ArrayList<TeacherVo>)request.getAttribute("teachVolist");
+%>
    <!-- 선생님찾기 메인 -->
     <div class="TSearch_main">
         <h1 class="intro_2">과외선생님 찾기</h1>
@@ -59,9 +65,9 @@
                 <option value="f">여성</option>
             </select>
             <select name="area" id="area_search">
-                <option> 선생님 활동지역</option>
-                <option> 강남구</option>
-                <option> 도봉구</option>
+                <option value="init"> 선생님 활동지역</option>
+                <option value="강남구"> 강남구</option>
+                <option value="도봉구" > 도봉구</option>
                 <option> 3</option>
                 <option> 4</option>
                 <option> 5</option>
@@ -74,92 +80,83 @@
             <button type="button" id="btn_recruit"><img src="images/recruit.png">모집중</button>
             <button type="button" id="btn_like"><img src="images/like_color.png">찜</button>
         </div>
-
+        <script>
+        $("#gender").on("change", changeOption);
+        $("#area_search").on("change", changeOption);
+        function changeOption(){
+        	console.log(this);
+        	var genderVal = $("#gender").val();
+        	var areaVal = $("#area_search").val();
+        	console.log(genderVal);
+        	console.log(areaVal);
+        	// ajax
+        	$.ajax({
+        		url:"TeacherSearchWithAreaGender.ajax",
+        		type:"post",
+        		data:{gender: genderVal, area:areaVal},
+        		dataType:"json",
+        		success: function(result){
+        			console.log(result);  ///aaa
+        			$("#content1").html("");  // 텅비움. 열리고 닫히는 태그 사이 
+        			htmlVal="";
+        			htmlVal+='<div class="grid-init grid">';
+        			for(var i=0; i<result.length; i++) {
+        				vo = result[i];
+        			htmlVal+='    <div class="box-init box">';
+        			htmlVal+='        <div class="list1">';
+        			htmlVal+='            <div class="profile"></div>';
+        			htmlVal+='            <p class="nickname">'+vo.m_nickname+'</p>';
+        			htmlVal+='        </div>';
+        			htmlVal+='    </div>';
+        			htmlVal+='    <div class="box-init box"><a href="#"></a>';
+        			htmlVal+='        <div class="title">';
+        			htmlVal+='            <h2>과목리스트</h2><br>';
+        			htmlVal+='            <ul>';
+        			htmlVal+='                <li>재학중인 학교 및 전공</li>';
+        			htmlVal+='                <li>활동지역</li>';
+        			htmlVal+='                <li>평점</li>';
+        			htmlVal+='            </ul>';
+        			htmlVal+='            </a>';
+        			htmlVal+='        </div>';
+                    htmlVal+='    </div>';
+        			}
+                    htmlVal+='     </div>';
+                    
+                    $("#content1").html(htmlVal);  // 채움. 열리고 닫히는 태그 사이 
+        		}, 
+        		error: function(){
+        			
+        		}
+        	});
+        	
+        	
+        }        
+        </script>
+        
+        
+        
         <!-- 각 탭마다 프로필 -->
         <section id="content1">
             <div class="grid-init grid">
-                <div class="list1">
-                    <div class="profile"></div>
-                    <p class="nickname">닉네임</p>
+            <% for(TeacherVo vo : volist) { %>
+                <div class="box-init box">
+                    <div class="list1">
+                        <div class="profile"></div>
+                        <p class="nickname"><%=vo.getM_nickname() %></p>
+                    </div>
                 </div>
                 <div class="box-init box"><a href="#"></a>
                     <div class="title">
-                        <h2>과목리스트</h2><br>
+                        <h2>과목리스트<%=vo.getObject_list() %></h2><br>
                         <ul>
-                            <li>재학중인 학교 및 전공</li>
-                            <li>활동지역</li>
-                            <li>평점</li>
+                            <li>재학중인 학교 및 전공<%= vo.getT_major() %></li>
+                            <li>활동지역<%= vo.getArea_list() %></li>
+                            <li>평점<%= vo.getAvg_rscore() %></li>
                         </ul>
                         </a>
                     </div>
                 </div>
-                <div class="box-init box">
-                    <div class="list2">
-                        <div class="profile"></div>
-                        <p class="nickname">닉네임</p>
-
-                    </div>
-                </div>
-                <div class="box-init box">
-                    <div class="title">
-                        <h2>과목리스트</h2><br>
-                        <ul>
-                            <li>재학중인 학교 및 전공</li>
-                            <li>활동지역</li>
-                            <li>평점</li>
-                        </ul>
-                    </div>
-                </div>
-                <div class="box-init box">
-                    <div class="list3">
-                        <div class="profile"></div>
-                        <p class="nickname">닉네임</p>
-
-                    </div>
-                </div>
-                <div class="box-init box">
-                    <div class="title">
-                        <h2>과목리스트</h2><br>
-                        <ul>
-                            <li>재학중인 학교 및 전공</li>
-                            <li>활동지역</li>
-                            <li>평점</li>
-                        </ul>
-                    </div>
-                </div>
-                <div class="box-init box">
-                    <div class="list4">
-                        <div class="profile"></div>
-                        <p class="nickname">닉네임</p>
-                    </div>
-                </div>
-                <div class="box-init box">
-                    <div class="title">
-                        <h2>과목리스트</h2><br>
-                        <ul>
-                            <li>재학중인 학교 및 전공</li>
-                            <li>활동지역</li>
-                            <li>평점</li>
-                        </ul>
-                    </div>
-                </div>
-                <div class="box-init box">
-                    <div class="list5">
-                        <div class="profile"></div>
-                        <p class="nickname">닉네임</p>
-
-                    </div>
-                </div>
-                <div class="box-init box">
-                    <div class="title">
-                        <h2>과목리스트</h2><br>
-                        <ul>
-                            <li>재학중인 학교 및 전공</li>
-                            <li>활동지역</li>
-                            <li>평점</li>
-                        </ul>
-                    </div>
-                </div>
+                <% } %>
 
             </div>
 

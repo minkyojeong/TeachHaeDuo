@@ -72,6 +72,18 @@ public class TeacherService {
 		return retVolist;
 	}
 	
+	// 성별 , 활동지역 맞는 선생님 정보 읽기
+	public ArrayList<TeacherVo> readAreaGenderTeacher(String genderFm, String area){
+		ArrayList<TeacherVo> retVolist = null;
+		Connection conn = getConnection();
+		
+		retVolist = dao.readAreaGenderTeacher(conn, genderFm, area);
+		
+		close(conn);
+		
+		return retVolist;
+	}
+	
 	// 온-오프 여부에 맞는 선생님 정보 읽기
 	public ArrayList<TeacherVo> readOnlineTeacher(String onlineYna){
 		ArrayList<TeacherVo> retVolist = null;
