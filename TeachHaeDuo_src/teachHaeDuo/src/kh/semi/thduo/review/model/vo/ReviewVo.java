@@ -3,59 +3,77 @@ package kh.semi.thduo.review.model.vo;
 import java.sql.Timestamp;
 
 public class ReviewVo {
-	private int tRNo;
-	private String tNo;
-	private String tRContent;
-	private Timestamp tRDate; 
-	private int tRScore;
+	private int t_r_no;
+	private String t_no;
+	private String t_r_content;
+	private Timestamp t_r_date; 
+	private int t_r_score;
+	private String t_r_writer;
+	private String m_id;
 	
 	public ReviewVo() {
-		super();
+		
 	}
 
 	@Override
 	public String toString() {
-		return "ReviewVo [tRNo=" + tRNo + ", tNo=" + tNo + ", tRContent=" + tRContent + ", tRDate=" + tRDate
-				+ ", tRScore=" + tRScore + "]";
+		return "ReviewVo [t_r_no=" + t_r_no + ", t_no=" + t_no + ", t_r_content=" + t_r_content + ", t_r_date="
+				+ t_r_date + ", t_r_score=" + t_r_score + ", t_r_writer=" + t_r_writer + ", m_id=" + m_id + "]";
 	}
 
-	public int getTRNo() {
-		return tRNo;
+	public int getT_r_no() {
+		return t_r_no;
 	}
 
-	public void setTRNo(int tRNo) {
-		this.tRNo = tRNo;
+	public void setT_r_no(int t_r_no) {
+		this.t_r_no = t_r_no;
 	}
 
-	public String getTNo() {
-		return tNo;
+	public String getT_no() {
+		return t_no;
 	}
 
-	public void setTNo(String tNo) {
-		this.tNo = tNo;
+	public void setT_no(String t_no) {
+		this.t_no = t_no;
 	}
 
-	public String getTRContent() {
-		return tRContent;
+	public String getT_r_content() {
+		return t_r_content;
 	}
 
-	public void setTRContent(String tRContent) {
-		this.tRContent = tRContent;
+	public void setT_r_content(String t_r_content) {
+		this.t_r_content = t_r_content;
 	}
 
-	public Timestamp getTRDate() {
-		return tRDate;
+	public Timestamp getT_r_date() {
+		return t_r_date;
 	}
 
-	public void setTRDate(Timestamp tRDate) {
-		this.tRDate = tRDate;
+	public void setT_r_date(Timestamp t_r_date) {
+		this.t_r_date = t_r_date;
 	}
 
-	public int getTRScore() {
-		return tRScore;
+	public int getT_r_score() {
+		return t_r_score;
 	}
 
-	public void setTRScore(int tRScore) {
-		this.tRScore = tRScore;
+	public void setT_r_score(int t_r_score) {
+		this.t_r_score = t_r_score;
+	}
+
+	public String getT_r_writer() {
+		return t_r_writer;
+	}
+
+	public void setT_r_writer(String t_r_writer) {
+		this.t_r_writer = t_r_writer;
+	}
+
+	public String getM_id() {
+		return m_id;
+	}
+
+	public void setM_id(String m_id) {
+		this.m_id = m_id;
 	}
 }

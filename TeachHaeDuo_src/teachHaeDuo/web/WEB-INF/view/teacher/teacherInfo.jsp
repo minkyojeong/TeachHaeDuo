@@ -52,8 +52,8 @@
 				<textarea cols="35" rows="10" name="message" placeholder="쪽지 내용을 입력해주세요." required></textarea>
 			</div>
 			<div class="message_send">
-				<button id="btn_message_cancel">취소</button>
-				<button id="btn_message_send">보내기</button>
+				<button type="button" id="btn_message_cancel">취소</button>
+				<button type="button" id="btn_message_send">보내기</button>
 			</div>
 		</div>
 	</div>
@@ -63,18 +63,19 @@
 			<p class="review_notice">* 리뷰는 해당 선생님에게 쪽지를 보낸 사람만 가능해요 *</p>
 			<div class="review_input">
 				<span>별점 선택</span>
-				<select name="score" id="score">
+				<select name="t_r_score" id="t_r_score">
 					<option value="1">1</option>
 					<option value="2">2</option>
 					<option value="3">3</option>
 					<option value="4">4</option>
 					<option value="5">5</option>
 				</select>
-				<textarea cols="35" rows="10" name="review" placeholder="리뷰를 입력해주세요." required></textarea>
+				<input type="hidden" name="t_no" id="t_no" value="${tvo.t_no}">
+				<textarea cols="35" rows="10" name="t_r_content" id="t_r_content" placeholder="리뷰를 입력해주세요." required></textarea>
 			</div>
 			<div class="review_send">
-				<button id="btn_review_cancel">취소</button>
-				<button id="btn_review_send">등록</button>
+				<button type="button" id="btn_review_cancel">취소</button>
+				<button type="button" id="btn_review_send">등록</button>
 			</div>
 		</div>
 	</div>
@@ -188,6 +189,9 @@
 			                                    </c:forEach>
 		                                    </span>
 		                                    <span>${rvo.t_r_date}</span>
+		                                    <!-- TODO : 세션 닉네임이랑 리뷰 닉네임 비교해서 같으면 삭제버튼 나오게 하기 -->
+		                                    <input type="hidden" name="t_r_no" id="t_r_no" value="${rvo.t_r_no}">
+		                                    <button type="button" id="btn_review_delete" class="btn3_1">리뷰삭제</button>
 		                                </div>
 	                                	<p>${rvo.t_r_content}</p>
 									</c:forEach>

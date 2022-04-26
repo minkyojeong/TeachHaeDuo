@@ -78,12 +78,58 @@ $(".review").on('click', function() {
 		$(".review").hide();
 	}
 });
-// 리뷰 등록 성공 시, 내용 입력 창 초기화 후 알럿창 띄우고 모달창 닫기
+// 리뷰쓰기 버튼 클릭 시 처리 내용
 $("#btn_review_send").on('click', function() {
-	alert("리뷰가 등록되었습니다.");
-	$(".review_input select").val("1").prop("selected", true);
-	$(".review_input textarea").val("");
-	$(".review").hide();
+	$.ajax({
+		url: "reviewInsert.ax",
+		type: "post",
+		data: {
+			t_no: $("#t_no").val(),
+			t_r_content: $("#t_r_content").val(),
+			t_r_score: $("#t_r_score").val()
+		},
+		success: function(result) {
+			console.log(result);
+			if  (result == 1) {
+				alert("리뷰가 등록되었습니다.");
+				location.reload();
+			} else if (result == -1) {
+				alert("리뷰 내용을 입력해주세요.");
+				$(".review_input textarea").focus();
+			} else if (result == 0) {
+				alert("로그인을 한 후에 리뷰 등록이 가능합니다. 로그인 페이지로 이동");
+				location.href = "login";
+			}
+		},
+		error: function(request, status, error) {
+			console.log("code:" + request.status + "\n" + "message:" + request.responseText + "\n" + "error:" + error);
+		}
+	});
+});
+//리뷰삭제 버튼 클릭 시 처리 내용
+$("#btn_review_delete").on('click', function() {
+	$.ajax({
+		url: "reviewDelete.ax",
+		type: "post",
+		data: {
+			t_r_no: $("#t_r_no").val()
+		},
+		success: function(result) {
+			console.log(result);
+			if (result == 1) {
+				alert("리뷰가 삭제되었습니다.");
+				location.reload();
+			} else if (result == -1) {
+				alert("리뷰가 삭제되지 않았습니다. 다시 시도해주세요.");
+			} else if (result == 0) {
+				alert("로그인을 한 후에 리뷰 삭제가 가능합니다. 로그인 페이지로 이동");
+				location.href = "login";
+			}
+		},
+		error: function(request, status, error) {
+			console.log("code:" + request.status + "\n" + "message:" + request.responseText + "\n" + "error:" + error);
+		}
+	});
 });
 
 var cnt = 1;
