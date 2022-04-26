@@ -9,7 +9,7 @@ import kh.semi.thduo.review.model.dao.ReviewDao;
 import kh.semi.thduo.review.model.vo.ReviewVo;
 
 public class ReviewService {
-	ReviewDao dao = new ReviewDao();
+	private ReviewDao dao = new ReviewDao();
 	
 	// 리뷰 삽입
 	public int insertReview(ReviewVo vo) {

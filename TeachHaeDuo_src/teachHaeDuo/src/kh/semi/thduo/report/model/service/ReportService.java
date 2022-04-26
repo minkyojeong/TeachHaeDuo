@@ -9,7 +9,7 @@ import kh.semi.thduo.report.model.dao.ReportDao;
 import kh.semi.thduo.report.model.vo.ReportVo;
 
 public class ReportService {
-	ReportDao dao = new ReportDao(); 
+	private ReportDao dao = new ReportDao(); 
 	//신고 삽입
 	public int insertReport(ReportVo vo) {
 		int result = 0;
