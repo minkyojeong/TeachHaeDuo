@@ -145,6 +145,20 @@
     color:black;
 }
 
-.review_content {
+.review_list_content {
     clear: both;
+}
+
+.review_info span {
+    margin-right: 10px;
+}
+
+.review_info span > img {
+	width: 13px;
+}
+
+.review_list_content p {
+   margin-top: 10px;
+   margin-bottom: 15px;
+   line-height: 1.2em;
 }

@@ -1,4 +1,3 @@
-<%@page import="kh.semi.thduo.teacher.model.vo.TeacherVo"%>
 <link href="<%=request.getContextPath()%>/resources/css/reset.css" rel="stylesheet" type="text/css">
 <link href="${pageContext.request.contextPath}/resources/css/button.css" rel="stylesheet" type="text/css">
 <link href="<%=request.getContextPath()%>/resources/css/font.css" rel="stylesheet" type="text/css">
@@ -22,24 +21,27 @@
 	<div class="modal report">
 		<div class="report_content">
 			<p class="modal_title">신고하기</p>
-			<div class="report_sel">
-				<span>신고사유 선택</span>
-				<select name="report_category" id="report_category">
-					<option value="blame">비난</option>
-					<option value="sexual">성희롱적 발언</option>
-					<option value="ad">광고</option>
-					<option value="loop">도배</option>
-					<option value="etc">기타</option>
-				</select>
-			</div>
-			<div class="report_input">
-				<p>신고 내용 입력</p>
-				<textarea cols="35" rows="10" name="report" placeholder="신고 내용을 입력해주세요." required></textarea>
-			</div>
-			<div class="report_send">
-				<button id="btn_report_cancel">취소</button>
-				<button id="btn_report_send">신고</button>
-			</div>
+			<!-- <form> -->
+				<div class="report_sel">
+					<span>신고사유 선택</span>
+					<select name="report_category" id="report_category">
+						<option value="blame">비난</option>
+						<option value="sexual">성희롱적 발언</option>
+						<option value="ad">광고</option>
+						<option value="loop">도배</option>
+						<option value="etc">기타</option>
+					</select>
+				</div>
+				<div class="report_input">
+					<p>신고 내용 입력</p>
+					<input type="hidden" name="m_r_receiveid" id="m_r_receiveid" value="${tvo.m_id}">
+					<textarea cols="35" rows="10" name="m_r_content" id="m_r_content" placeholder="신고 내용을 입력해주세요." required></textarea>
+				</div>
+				<div class="report_send">
+					<button type="button" id="btn_report_cancel">취소</button>
+					<button type="button" id="btn_report_send">신고</button>
+				</div>
+			<!-- </form> -->
 		</div>
 	</div>
 	<div class="modal message">
@@ -68,7 +70,7 @@
 					<option value="4">4</option>
 					<option value="5">5</option>
 				</select>
-				<textarea cols="35" rows="10" name="review" placeholder="쪽지 내용을 입력해주세요." required></textarea>
+				<textarea cols="35" rows="10" name="review" placeholder="리뷰를 입력해주세요." required></textarea>
 			</div>
 			<div class="review_send">
 				<button id="btn_review_cancel">취소</button>
@@ -176,9 +178,19 @@
 							<article id="t_review">
 								<h1>리뷰</h1>
 								<button id="btn_review" class="btn1_2">리뷰쓰기</button>
-								<div class="review_content">
-									<p>리뷰1</p>
-									<p>리뷰2</p>
+								<div class="review_list_content">
+									<c:forEach items="${tvo.t_review}" var="rvo">
+		                                <div class="review_info">
+		                                    <span>${rvo.t_r_writer}</span>
+		                                    <span>
+			                                    <c:forEach begin="1" end="${rvo.t_r_score}">
+			                                    	<img src="<%=request.getContextPath()%>/resources/icons/star.png">
+			                                    </c:forEach>
+		                                    </span>
+		                                    <span>${rvo.t_r_date}</span>
+		                                </div>
+	                                	<p>${rvo.t_r_content}</p>
+									</c:forEach>
 								</div>
 							</article>
 						</div>
