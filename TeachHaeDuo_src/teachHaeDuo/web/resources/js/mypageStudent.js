@@ -86,10 +86,10 @@ $(function() {
 			alert("충전 금액은 0원 초과로 입력해주세요");
 		}
 	});
-	
-	
-/* modal 0원 js */
-	$("#p_won").on("click",function() {
+
+
+	/* modal 0원 js */
+	$("#p_won").on("click", function() {
 		$("#won_modal").show();
 	});
 
@@ -104,4 +104,61 @@ $(function() {
 		}
 	})
 
+
+	/* modal 연락 요청 보낸 내역 js + 리스트 ajax */
+	$("#p_send_alarm").on("click", function() {
+		$("#send_alarm_modal").show();
+		
+		$.ajax({
+			url: "sendAlarmList.ax",
+			type:"post",
+			success: function(result){
+				console.log(result);
+				var html = "";
+				for(var i = 0; i < result.length; i++){
+					var vo = result[i];
+					html += '<tr>';
+					html += '<td><img src="${pageContext.request.contextPath}/resources/icons/message.png" width="20" height="20"></td>';
+					html += '<td>' + vo.Alarm_receiveid + '</td>';
+					html += '<td>' + vo.Alarm_date + '</td>';
+					html += '</tr>';
+				}
+				$("#send_alarm_table").append(html);
+			},
+			error: function(){
+			
+			}
+		
+		});
+	});
+
+	$(".send_alarm_modal_close").click(function() {
+		$("#send_alarm_modal").hide();
+	});
+
+	send_alarm_modal.addEventListener("click", e => {
+		const evTarget = e.target
+		if (evTarget.classList.contains("send_alarm_modal_overlay")) {
+			$("#send_alarm_modal").hide();
+		}
+	})
+	
+	
+	
+	/* modal 내가 찜한 선생님 js */
+	$("#p_like").on("click", function() {
+		$("#like_modal").show();
+	});
+
+	$(".like_modal_close").click(function() {
+		$("#like_modal").hide();
+	});
+
+	like_modal.addEventListener("click", e => {
+		const evTarget = e.target
+		if (evTarget.classList.contains("like_modal_overlay")) {
+			$("#like_modal").hide();
+		}
+	})
+	
 });

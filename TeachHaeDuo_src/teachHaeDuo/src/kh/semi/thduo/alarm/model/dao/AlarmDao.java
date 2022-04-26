@@ -42,7 +42,7 @@ public class AlarmDao {
 	
 	public ArrayList<AlarmVo> sendListAlarm(Connection conn, String mId){
 		ArrayList<AlarmVo> voList = null;
-		String sql = "select * from ALARM where ALARM_SENDID = ?";
+		String sql = "select alarm_content,alarm_date,alarm_receiveid from ALARM where ALARM_SENDID = ?";
 		
 		try {
 			pstmt = conn.prepareStatement(sql);
@@ -51,13 +51,20 @@ public class AlarmDao {
 			
 			if(rs != null) {
 				voList = new ArrayList<AlarmVo>();
-				// TODO
+				while(rs.next()) {
+					AlarmVo vo = new AlarmVo();
+					vo.setAlarm_content(rs.getString("alarm_content"));
+					vo.setAlarm_date(rs.getTimestamp("alarm_date"));
+					vo.setAlarm_receiveid(rs.getString("alarm_receiveid"));
+					voList.add(vo);
+				}
 				
 			}
 		} catch (SQLException e) {
 			
 			e.printStackTrace();
 		} finally {
+			close(rs);
 			close(pstmt);
 		}
 		

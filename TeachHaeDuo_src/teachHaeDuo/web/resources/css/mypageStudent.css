@@ -2,12 +2,16 @@
 
 @charset "UTF-8";
 
+
 * {
-	font-family: MinSans, serif;
+	font-family: MinSans-Medium;
+}
+div#wrap p {
+	font-family: MinSans-Medium;
 }
 
-p {
-	font-weight: bold;
+a{
+	text-decoration:none;
 }
 
 a:link {
@@ -57,6 +61,14 @@ a:visited {
 }
 
 #p_won{
+	cursor:pointer;
+}
+
+#p_send_alarm{
+	cursor:pointer;
+}
+
+#p_like{
 	cursor:pointer;
 }
 
@@ -144,6 +156,95 @@ input:checked+.slider:before {
 }
 
 
+
+
+/* modal 0원*/
+#won_modal.won_modal_overlay{
+	width: 100%;
+	height: 100%;
+	position: absolute;
+	left: 0;
+	top: 0;
+	display: none;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	background-color: rgba(0, 0, 0, 0.7);
+	border-radius: 10px;
+	border: 1px solid black;
+}
+
+#won_modal .won_modal_window {
+	background: white;
+	border-radius: 10px;
+	border: 1px solid black;
+	width: 400px;
+	height: 500px;
+	position: fixed;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	padding: 10px;
+	overflow: auto;
+}
+
+#won_modal .won_modal_title {
+	padding-left: 10px;
+	display: inline;
+	color: black;
+	
+}
+.won_modal_title p {
+	
+}
+.won_modal_title img {
+	float:left;
+}
+.won_modal_title p {
+	float:left;
+}
+
+#won_modal .won_modal_close {
+	display: inline;
+	float: right;
+	padding-right: 10px;
+	cursor: pointer;
+	color: black;
+}
+
+#won_modal .won_modal_content {
+	margin-top: 50px;
+	padding: 0px 10px;
+	color: black;
+}
+
+table#won_table{
+	width:100%;
+	text-align:center;
+	border-spacing: 20px 20px;
+	margin: 0 auto;
+	border-collapse: separate;
+}
+table th{
+	font-family: MinSans-Bold;
+	border-bottom: 1px solid gray;
+	height:30px;
+}
+table td {
+	font-family: MinSans-Medium;
+}
+table  tr:first-child  th:nth-child(1){
+	width: 10%;
+}
+table  tr:first-child  th:nth-child(2){
+	width: 70%;
+}
+table  tr:first-child  th:nth-child(3){
+	width: 20%;
+}
+
+
+
 /* modal 충전하기 */
 #pencilcharge_modal.pencilcharge_modal_overlay{
 	width: 100%;
@@ -155,21 +256,15 @@ input:checked+.slider:before {
 	flex-direction: column;
 	align-items: center;
 	justify-content: center;
-	background: rgba(255, 255, 255, 0.25);
-	box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
-	backdrop-filter: blur(1.5px);
-	-webkit-backdrop-filter: blur(1.5px);
+	background-color: rgba(0, 0, 0, 0.7);
 	border-radius: 10px;
 	border: 1px solid rgba(255, 255, 255, 0.18);
 }
 
 #pencilcharge_modal .pencilcharge_modal_window {
 	background: white;
-	box-shadow: 0 8px 32px 0 #fed08b;
-	backdrop-filter: blur(13.5px);
-	-webkit-backdrop-filter: blur(13.5px);
 	border-radius: 10px;
-	border: 1px solid rgba(255, 255, 255, 0.18);
+	border: 1px solid black;
 	width: 400px;
 	height: 500px;
 	position: fixed;
@@ -177,6 +272,7 @@ input:checked+.slider:before {
 	left: 50%;
 	transform: translate(-50%, -50%);
 	padding: 10px;
+	overflow: auto;
 }
 
 #pencilcharge_modal .pencilcharge_modal_title {
@@ -196,14 +292,12 @@ input:checked+.slider:before {
 	float: right;
 	padding-right: 10px;
 	cursor: pointer;
-	text-shadow: 1px 1px 2px gray;
 	color: black;
 }
 
 #pencilcharge_modal .pencilcharge_modal_content {
 	margin-top: 20px;
 	padding: 0px 10px;
-	text-shadow: 1px 1px 2px gray;
 	color: black;
 }
 
@@ -229,18 +323,14 @@ input:checked+.slider:before {
 
 input[type=text] {
 	border: none;
-	text-shadow: 1px 1px 2px gray;
 	color: black;
 	font-weight: bold;
 	width: 60px;
 }
 
 
-
-
-
-/* modal 0원*/
-#won_modal.won_modal_overlay{
+/* modal 연락 요청 보낸 내역*/
+#send_alarm_modal.send_alarm_modal_overlay{
 	width: 100%;
 	height: 100%;
 	position: absolute;
@@ -250,21 +340,15 @@ input[type=text] {
 	flex-direction: column;
 	align-items: center;
 	justify-content: center;
-	background: rgba(255, 255, 255, 0.25);
-	box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
-	backdrop-filter: blur(1.5px);
-	-webkit-backdrop-filter: blur(1.5px);
+	background-color: rgba(0, 0, 0, 0.7);
 	border-radius: 10px;
-	border: 1px solid rgba(255, 255, 255, 0.18);
+	border: 1px solid black;
 }
 
-#won_modal .won_modal_window {
+#send_alarm_modal .send_alarm_modal_window {
 	background: white;
-	box-shadow: 0 8px 32px 0 #fed08b;
-	backdrop-filter: blur(13.5px);
-	-webkit-backdrop-filter: blur(13.5px);
 	border-radius: 10px;
-	border: 1px solid rgba(255, 255, 255, 0.18);
+	border: 1px solid black;
 	width: 400px;
 	height: 500px;
 	position: fixed;
@@ -272,30 +356,108 @@ input[type=text] {
 	left: 50%;
 	transform: translate(-50%, -50%);
 	padding: 10px;
+	overflow: auto;
 }
 
-#won_modal .won_modal_title {
+#send_alarm_modal .send_alarm_modal_title {
 	padding-left: 10px;
 	display: inline;
 	color: black;
 }
 
-#won_modal .won_modal_title h2 {
-	display: inline;
+.send_alarm_modal_title img {
+	float:left;
+}
+.send_alarm_modal_title p {
+	float:left;
 }
 
-#won_modal .won_modal_close {
+#send_alarm_modal .send_alarm_modal_close {
 	display: inline;
 	float: right;
 	padding-right: 10px;
 	cursor: pointer;
-	text-shadow: 1px 1px 2px gray;
 	color: black;
 }
 
-#won_modal .won_modal_content {
+#send_alarm_modal .send_alarm_modal_content {
 	margin-top: 20px;
 	padding: 0px 10px;
-	text-shadow: 1px 1px 2px gray;
 	color: black;
+}
+
+table#send_alarm_table{
+	width:100%;
+	text-align:center;
+	border-spacing: 20px 20px;
+	margin: 0 auto;
+	border-collapse: separate;
+}
+
+
+
+
+/* modal 내가 찜한 선생님*/
+#like_modal.like_modal_overlay{
+	width: 100%;
+	height: 100%;
+	position: absolute;
+	left: 0;
+	top: 0;
+	display: none;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	background-color: rgba(0, 0, 0, 0.7);
+	border-radius: 10px;
+	border: 1px solid black;
+}
+
+#like_modal .like_modal_window {
+	background: white;
+	border-radius: 10px;
+	border: 1px solid black;
+	width: 400px;
+	height: 500px;
+	position: fixed;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	padding: 10px;
+	overflow: auto;
+}
+
+#like_modal .like_modal_title {
+	padding-left: 10px;
+	display: inline;
+	color: black;
+}
+
+.like_modal_title img {
+	float:left;
+}
+.like_modal_title p {
+	float:left;
+}
+
+#like_modal .like_modal_close {
+	display: inline;
+	float: right;
+	padding-right: 10px;
+	cursor: pointer;
+	color: black;
+}
+
+#like_modal .like_modal_content {
+	margin-top: 20px;
+	padding: 0px 10px;
+	color: black;
+}
+
+table#like_table{
+	width:100%;
+	text-align:center;
+	border-spacing: 20px 20px;
+	margin: 0 auto;
+	border-collapse: separate;
 }

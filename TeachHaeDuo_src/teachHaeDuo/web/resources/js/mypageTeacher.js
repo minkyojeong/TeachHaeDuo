@@ -109,5 +109,20 @@ $(function() {
 		}
 	})
 
+/* modal 연락 요청 받은 내역 js */
+	$("#p_receive_alarm").on("click", function() {
+		$("#receive_alarm_modal").show();
+	});
+
+	$(".receive_alarm_modal_close").click(function() {
+		$("#receive_alarm_modal").hide();
+	});
+
+	receive_alarm_modal.addEventListener("click", e => {
+		const evTarget = e.target
+		if (evTarget.classList.contains("receive_alarm_modal_overlay")) {
+			$("#receive_alarm_modal").hide();
+		}
+	})
 
 });

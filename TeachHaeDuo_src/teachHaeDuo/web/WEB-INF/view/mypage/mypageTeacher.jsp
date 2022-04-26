@@ -1,12 +1,10 @@
 <%@page import="kh.semi.thduo.member.vo.MemberVo"%>
-<link href="<%=request.getContextPath()%>/resources/css/reset.css"
-	rel="stylesheet" type="text/css">
-<link href="${pageContext.request.contextPath}/resources/css/button.css"
-	rel="stylesheet" type="text/css">
-	<link href="${pageContext.request.contextPath}/resources/css/mypageTeacher.css"
-	rel="stylesheet" type="text/css">
-	<link href="<%=request.getContextPath()%>/resources/css/header.css" rel="stylesheet" type="text/css">
-	<link href="<%=request.getContextPath()%>/resources/css/footer.css" rel="stylesheet" type="text/css">
+<link href="<%=request.getContextPath()%>/resources/css/reset.css" rel="stylesheet" type="text/css">
+<link href="${pageContext.request.contextPath}/resources/css/button.css" rel="stylesheet" type="text/css">
+<link href="${pageContext.request.contextPath}/resources/css/mypageTeacher.css" rel="stylesheet" type="text/css">
+<link href="<%=request.getContextPath()%>/resources/css/header.css" rel="stylesheet" type="text/css">
+<link href="<%=request.getContextPath()%>/resources/css/footer.css" rel="stylesheet" type="text/css">
+<link href="<%=request.getContextPath()%>/resources/css/font.css" rel="stylesheet" type="text/css">
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -18,7 +16,7 @@
 </head>
 <body>
 <% MemberVo ssMV = (MemberVo)request.getSession().getAttribute("ssMV"); %>
-	<div>
+	<div id="wrap">
 	<jsp:include page="template_header.jsp"></jsp:include>
     <div id="main_wrap">
         <div id="left_div">
@@ -48,7 +46,7 @@
                             <p style="line-height:30px">잔여 연필</p>
                         </div>
                         <div>
-                            <p id="p_won" style="line-height:30px"><u>0원</u></p>
+                            <p id="p_won" style="line-height:30px"><u><span>0</span>원</u></p>
                         </div>
                     </div>
                     <div class="pencil_div">
@@ -82,19 +80,11 @@
                     <div style="display:flex">
                         <img class="arrow" id="arrow2" src="${pageContext.request.contextPath}/resources/icons/arrow_normal.png">
                         <img class="arrow_active" id="arrow_active2" src="${pageContext.request.contextPath}/resources/icons/arrow_active.png">
-                        <p class="text_div_p">연락 요청 보낸 내역</p>
+                        <p class="text_div_p">연락 요청 받은 내역</p>
                     </div>
                     <div>
-                    <a href="#">이번 달 0건</a>
+                    <p id="p_receive_alarm"><u>이번 달 <span>0</span>건</u></p>
                     </div>
-                </div>
-                <div class="text_div" id="text_div3">
-                    <div style="display:flex">
-                        <img class="arrow" id="arrow3" src="${pageContext.request.contextPath}/resources/icons/arrow_normal.png">
-                        <img class="arrow_active" id="arrow_active3" src="${pageContext.request.contextPath}/resources/icons/arrow_active.png">
-                        <p class="text_div_p">내가 찜한 선생님</p>
-                    </div>
-                    <a href="#">총 0건</a>
                 </div>
             </div>
         </div>
@@ -142,11 +132,64 @@
     <div id="won_modal" class="won_modal_overlay">
         <div class="won_modal_window">
             <div class="won_modal_title">
-                <h2>연필 사용 내역</h2>
+               <img src="${pageContext.request.contextPath}/resources/icons/pencil.png" width="30" height="30" style="margin-right:10px">
+                <p style="line-height:30px">연필 사용 내역</p>
+                <div class="won_modal_close">X</div>
             </div>
-            <div class="won_modal_close">X</div>
             <div class="won_modal_content">
+                <table id="won_table">
+                	<tr>
+                		<th>
+                			<img src="${pageContext.request.contextPath}/resources/icons/charge_updown.png" width="20" height="20">
+                		</th>
+                		<th>상세 내용</th>
+                		<th>날짜</th>
+                	</tr>
+                	<tr>
+	                	<td>
+	                		<img src="${pageContext.request.contextPath}/resources/icons/charge_up.png" width="20" height="20">
+	                	</td>
+	                	<td></td>
+	                	<td></td>
+                	</tr>
+                	<tr>
+	                	<td>
+	                		<img src="${pageContext.request.contextPath}/resources/icons/charge_down.png" width="20" height="20">
+	                	</td>
+	                	<td></td>
+	                	<td></td>
+                	</tr>
+                </table>
                 
+            </div>
+        </div>
+    </div>
+    
+    <div id="receive_alarm_modal" class="receive_alarm_modal_overlay">
+        <div class="receive_alarm_modal_window">
+            <div class="receive_alarm_modal_title">
+               <img src="${pageContext.request.contextPath}/resources/icons/alarm_icon.png" width="30" height="30" style="margin-right:10px">
+                <p style="line-height:30px">연락 요청 받은 내역</p>
+                <div class="receive_alarm_modal_close">X</div>
+            </div>
+            
+            <div class="receive_alarm_modal_content">
+                <table id="receive_alarm_table">
+                	<tr>
+                		<th>
+                			<img src="${pageContext.request.contextPath}/resources/icons/message.png" width="20" height="20">
+                		</th>
+                		<th>연락 받은 학생</th>
+                		<th>날짜</th>
+                	</tr>
+                	<tr>
+	                	<td>
+	                		<img src="${pageContext.request.contextPath}/resources/icons/receive.png" width="20" height="20">
+	                	</td>
+	                	<td></td>
+	                	<td></td>
+                	</tr>                
+                </table>
                 
             </div>
         </div>

@@ -1,11 +1,18 @@
 package kh.semi.thduo.alarm.controller;
 
 import java.io.IOException;
+import java.io.PrintWriter;
+import java.util.ArrayList;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import kh.semi.thduo.alarm.model.service.AlarmService;
+import kh.semi.thduo.alarm.model.vo.AlarmVo;
+import kh.semi.thduo.member.vo.MemberVo;
 
 /**
  * Servlet implementation class SendAlarmListAjaxController
@@ -25,17 +32,29 @@ public class SendAlarmListAjaxController extends HttpServlet {
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		
-	}
+//	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+//		
+//	}
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
-//	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-//		// TODO Auto-generated method stub
-//		doGet(request, response);
-//	}
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		System.out.println("보낸알람 컨트롤러 dopost");
+		PrintWriter out = response.getWriter();
+		MemberVo vo = (MemberVo)request.getSession().getAttribute("ssMV");
+		String mId = "";
+		if(vo == null) {
+			response.sendRedirect("login");
+		} else {
+			mId = vo.getmId();
+			System.out.println("보낸 알람 서비스 호출 mId:" + mId);
+			ArrayList<AlarmVo> result = new AlarmService().sendListAlarm(mId);
+			System.out.println("리스트 결과:" + result);
+			out.println(result);
+			out.flush();
+			out.close();
+		}
+	}
 
 }
