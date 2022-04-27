@@ -1,3 +1,4 @@
+<%@page import="kh.semi.thduo.member.vo.MemberVo"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <link href="<%=request.getContextPath()%>/resources/css/reset.css"
@@ -228,8 +229,17 @@
 		</div>
 		<jsp:include page="template_footer.jsp"></jsp:include>
 	</div>
+	<% MemberVo ssMV = (MemberVo)request.getSession().getAttribute("ssMV"); %>
 	<script>
-		
+	$("#cancel").click(function(){
+    	console.log("취소 버튼 클릭");
+		var roleSt = "<%= ssMV.getRoleSt() %>";
+		if(roleSt == "S"){
+    		location.href="mypageStudent";
+		} else if(roleSt == "T"){
+    		location.href="mypageTeacher";
+		}
+	});
 	</script>
 </body>
 </html>

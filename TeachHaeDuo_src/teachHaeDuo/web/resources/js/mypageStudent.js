@@ -1,4 +1,15 @@
 $(function() {
+console.log($("#alarm_yn").val())
+	var yn = 'Y';
+	if($("#alarm_yn").val()==yn){
+		$("#checkbox").prop("checked", true);
+		$(".toggle_p").text("ON");
+	} else{
+		$("#checkbox").prop("checked", false);
+		$(".toggle_p").text("OFF");
+	}
+
+
 	var check = $("input[type='checkbox']");
 	check.click(function() {
 		$(".toggle_p").toggle();
@@ -123,7 +134,7 @@ $(function() {
 				for(var i = 0; i < result.length; i++){
 					var vo = result[i];
 					html += '<tr>';
-					html += '<td><img src="<%= request.getContextPath() %>/resources/icons/message.png" width="20" height="20"></td>';
+					html += '<td><img src="${pageContext.request.contextPath}/resources/icons/message.png" width="20" height="20"></td>';
 					html += '<td>' + vo.alarm_receiveid + '</td>';
 					html += '<td>' + vo.alarm_date + '</td>';
 					html += '</tr>';

@@ -87,14 +87,10 @@ $(function() {
 			alert("충전 금액은 0원 초과로 입력해주세요");
 		}
 	});
-	
-	$("#teacher_update").click(function(){
-		location.href="teacherUpdate";
-	});
 
 
-/* modal 0원 js */
-	$("#p_won").on("click",function() {
+	/* modal 0원 js */
+	$("#p_won").on("click", function() {
 		$("#won_modal").show();
 	});
 
@@ -109,9 +105,39 @@ $(function() {
 		}
 	})
 
-/* modal 연락 요청 받은 내역 js */
+	/* modal 연락 요청 받은 내역 js + ajax */
 	$("#p_receive_alarm").on("click", function() {
 		$("#receive_alarm_modal").show();
+
+		$.ajax({
+			url: "receiveAlarmList.ax",
+			type: "post",
+			dataType: "json",
+			success: function(result) {
+				console.log(result);
+				console.log(result[0]);
+
+				console.log(result.alarm_receiveid);
+				console.log(result.length);
+				var html = "";
+				for (var i = 0; i < result.length; i++) {
+					var vo = result[i];
+					html += '<tr>';
+					html += '<td><img src="${pageContext.request.contextPath}/resources/icons/message.png" width="20" height="20"></td>';
+					html += '<td>' + vo.alarm_sendid + '</td>';
+					html += '<td>' + vo.alarm_date + '</td>';
+					html += '</tr>';
+
+					console.log("html:" + html);
+
+				}
+				$("#receive_alarm_table_tr1").nextAll().remove();
+				$("#receive_alarm_table").append(html);
+			},
+			error: function() {
+
+			}
+		});
 	});
 
 	$(".receive_alarm_modal_close").click(function() {

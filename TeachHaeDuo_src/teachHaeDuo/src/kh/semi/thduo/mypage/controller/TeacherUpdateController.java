@@ -1,4 +1,4 @@
-package kh.semi.thduo.member.controller;
+package kh.semi.thduo.mypage.controller;
 
 import java.io.IOException;
 import javax.servlet.ServletException;
@@ -11,16 +11,16 @@ import kh.semi.thduo.member.service.MemberService;
 import kh.semi.thduo.member.vo.MemberVo;
 
 /**
- * Servlet implementation class MemberUpdateContoller
+ * Servlet implementation class TeacherUpdateController
  */
-@WebServlet("/memberUpdate")
-public class MemberUpdateContoller extends HttpServlet {
+@WebServlet("/teacherUpdate")
+public class TeacherUpdateController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public MemberUpdateContoller() {
+    public TeacherUpdateController() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -38,17 +38,17 @@ public class MemberUpdateContoller extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODOTODO 로그인 갔다오기
-		String pw = request.getParameter("pw");
-		
-		MemberVo ssMV = (MemberVo)request.getSession().getAttribute("ssMV");
-		String mId = ssMV.getmId();
-		
-		MemberVo vo = new MemberService().login(mId, pw);
-		if(vo == null) {
-			response.sendRedirect("memberUpdateLogin");
-		} else {
-			request.getRequestDispatcher("WEB-INF/view/mypage/memberUpdate.jsp").forward(request, response);
-		}
+				String pw = request.getParameter("pw");
+				
+				MemberVo ssMV = (MemberVo)request.getSession().getAttribute("ssMV");
+				String mId = ssMV.getmId();
+				
+				MemberVo vo = new MemberService().login(mId, pw);
+				if(vo == null) {
+					response.sendRedirect("memberUpdateLogin");
+				} else {
+					request.getRequestDispatcher("WEB-INF/view/mypage/teacherUpdate.jsp").forward(request, response);
+				}
 	}
 
 }

@@ -93,7 +93,7 @@
                 <button class="btn1_2" onclick="location.href='memberUpdateLogin'">회원 정보 수정</button>
             </div>
             <div style="margin:50px">
-                <button type="button" class="btn1_2" id="teacher_update">교습 정보 수정</button>
+                <button type="button" class="btn1_2" onclick="location.href='teacherUpdateLogin'">교습 정보 수정</button>
             </div>
 
         </div>
@@ -175,7 +175,7 @@
             
             <div class="receive_alarm_modal_content">
                 <table id="receive_alarm_table">
-                	<tr>
+                	<tr id="receive_alarm_table_tr1">
                 		<th>
                 			<img src="${pageContext.request.contextPath}/resources/icons/message.png" width="20" height="20">
                 		</th>

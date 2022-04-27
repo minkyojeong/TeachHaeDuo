@@ -71,9 +71,14 @@
                         <p class="text_div_p">알람 수신거부 여부</p>
                     </div>
                     <div>
+                    	<% if(ssMV.getmAlarmYn().equals("Y")){ %>
+                    	<input type="hidden" id="alarm_yn" value="Y">
+                    	<%} else { %>
+                    	<input type="hidden" id="alarm_yn" value="N">
+                    	<%} %>
                         <p class="toggle_p">OFF</p><p class="toggle_p" style="display:none;">ON </p>
                         <label class="switch">
-                        <input type="checkbox">
+                        <input type="checkbox" id="checkbox">
                         <span class="slider round"></span>
                         </label>
                     </div>

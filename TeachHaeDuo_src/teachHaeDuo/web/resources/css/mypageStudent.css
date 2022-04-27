@@ -8,6 +8,10 @@
 }
 div#wrap p {
 	font-family: MinSans-Medium;
+	vertical-align: middle;
+}
+div#bottom_div p {
+	line-height:20px;
 }
 
 a{

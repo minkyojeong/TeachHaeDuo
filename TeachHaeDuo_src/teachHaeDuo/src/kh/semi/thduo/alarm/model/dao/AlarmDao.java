@@ -66,18 +66,24 @@ public class AlarmDao {
 		
 		return voList;
 	}
-	public ArrayList<AlarmVo> receiveListAlarm(Connection conn, String mId){
+	public ArrayList<AlarmVo> receiveListAlarm(Connection conn, String mNickname){
 		ArrayList<AlarmVo> voList = null;
-		String sql = "select * from ALARM where ALARM_RECEIVEID = ?";
+		String sql = "select alarm_content,alarm_date,alarm_sendid from ALARM where alarm_receiveid = ?";
 		
 		try {
 			pstmt = conn.prepareStatement(sql);
-			pstmt.setString(1, mId);
+			pstmt.setString(1, mNickname);
 			rs = pstmt.executeQuery();
 			
 			if(rs != null) {
 				voList = new ArrayList<AlarmVo>();
-				// TODO
+				while(rs.next()) {
+					AlarmVo vo = new AlarmVo();
+					vo.setAlarm_content(rs.getString("alarm_content"));
+					vo.setAlarm_date(rs.getTimestamp("alarm_date"));
+					vo.setAlarm_sendid(rs.getString("alarm_sendid"));
+					voList.add(vo);
+				}
 				
 			}
 		} catch (SQLException e) {

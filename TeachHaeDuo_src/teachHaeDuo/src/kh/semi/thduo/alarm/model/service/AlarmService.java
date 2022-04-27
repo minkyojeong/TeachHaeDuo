@@ -32,11 +32,11 @@ public class AlarmService {
 		
 		return voList;
 	}
-	public ArrayList<AlarmVo> receiveListAlarm(String mId){
+	public ArrayList<AlarmVo> receiveListAlarm(String mNickname){
 		
 		Connection conn = null;
 		conn = getConnection();
-		ArrayList<AlarmVo> voList = dao.sendListAlarm(conn, mId);
+		ArrayList<AlarmVo> voList = dao.receiveListAlarm(conn, mNickname);
 		close(conn);
 		
 		return voList;
