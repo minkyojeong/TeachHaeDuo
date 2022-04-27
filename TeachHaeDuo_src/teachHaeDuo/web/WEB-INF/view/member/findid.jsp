@@ -1,3 +1,11 @@
+<link href="<%=request.getContextPath()%>/resources/css/header.css" rel="stylesheet" type="text/css">
+<link href="<%=request.getContextPath()%>/resources/css/footer.css" rel="stylesheet" type="text/css">
+<link href="<%=request.getContextPath()%>/resources/icons/sun.ico" rel="shortcut icon" type="image/x-icon">
+<link href="<%=request.getContextPath()%>/resources/css/reset.css" rel="stylesheet" type="text/css">
+<link href="${pageContext.request.contextPath}/resources/css/button.css" rel="stylesheet" type="text/css">
+
+
+
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -24,7 +32,10 @@
 </style>
 
 </head>
-<body>
+<body> 
+<div class="main_wrap">
+	<jsp:include page="../template_header.jsp"></jsp:include>
+</div>
        <div class="modal">
       	<div class="modal_content">
       	        <div class="btn_close"><button>&#9932;</button></div>
@@ -97,6 +108,9 @@
            
   </script>
 
-
+   <div class="line">
+	  <hr>
+	</div>
+         <jsp:include page="../template_footer.jsp"></jsp:include>
 </body>
 </html>

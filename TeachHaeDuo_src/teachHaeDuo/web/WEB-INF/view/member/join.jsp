@@ -1,3 +1,9 @@
+<link href="<%=request.getContextPath()%>/resources/css/header.css" rel="stylesheet" type="text/css">
+<link href="<%=request.getContextPath()%>/resources/css/footer.css" rel="stylesheet" type="text/css">
+<link href="<%=request.getContextPath()%>/resources/icons/sun.ico" rel="shortcut icon" type="image/x-icon">
+<link href="<%=request.getContextPath()%>/resources/css/reset.css" rel="stylesheet" type="text/css">
+<link href="${pageContext.request.contextPath}/resources/css/button.css" rel="stylesheet" type="text/css">
+
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -228,6 +234,10 @@
 </script>
 </head>
 <body>
+<div class="main_wrap">
+	<jsp:include page="../template_header.jsp"></jsp:include>
+
+
 	<!-- div 왼쪽, 오른쪽 바깥여백을 auto로 주면 중앙정렬된다.  -->
 	<div id="wrap">
 		<br> <br> <b><font size="6" color="gray">회원가입</font></b> <br>
@@ -311,6 +321,10 @@
 				type="button" value="취소" onclick="goLoginForm()">
 		</form>
 	</div>
-
+    <div class="line">
+			<hr>
+	</div>
+         <jsp:include page="../template_footer.jsp"></jsp:include>
+</div>
 </body>
 </html>
