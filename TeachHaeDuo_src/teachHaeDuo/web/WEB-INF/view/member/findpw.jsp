@@ -36,7 +36,9 @@
 
 </head>
 <body>
-
+<div class="main_wrap">
+	<jsp:include page="../template_header.jsp"></jsp:include>
+</div>
 
 	<!--  <form action="findPw" class="" method="POST"> -->
 	<h3>비밀번호 찾기</h3>
@@ -126,6 +128,9 @@
 
 </script>
 
-
+    <div class="line">
+	  <hr>
+	</div>
+         <jsp:include page="../template_footer.jsp"></jsp:include>
 </body>
 </html>
