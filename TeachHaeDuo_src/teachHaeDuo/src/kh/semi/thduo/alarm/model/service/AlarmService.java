@@ -23,11 +23,11 @@ public class AlarmService {
 		return result;
 	}
 	
-	public ArrayList<AlarmVo> sendListAlarm(String mId){
+	public ArrayList<AlarmVo> sendListAlarm(String mNickname){
 		
 		Connection conn = null;
 		conn = getConnection();
-		ArrayList<AlarmVo> voList = dao.sendListAlarm(conn, mId);
+		ArrayList<AlarmVo> voList = dao.sendListAlarm(conn, mNickname);
 		close(conn);
 		
 		return voList;

@@ -182,7 +182,7 @@
             </div>
             <div class="send_alarm_modal_content">
                 <table id="send_alarm_table">
-                	<tr>
+                	<tr id="send_alarm_table_tr1">
                 		<th>
                 			<img src="${pageContext.request.contextPath}/resources/icons/message.png" width="20" height="20">
                 		</th>

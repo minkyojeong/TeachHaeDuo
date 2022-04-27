@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import kh.semi.thduo.alarm.model.service.AlarmService;
 import kh.semi.thduo.alarm.model.vo.AlarmVo;
+import kh.semi.thduo.member.vo.MemberVo;
 import kh.semi.thduo.review.model.service.ReviewService;
 import kh.semi.thduo.review.model.vo.ReviewVo;
 
@@ -75,7 +76,7 @@ public class SendAlarmAjaxController extends HttpServlet {
 //			out.close();
 //			return; // DB에 저장하지 않아도 되니까
 //		} else {
-//			vo.setAlarm_sendid(ssvo.getmId());
+//			vo.setAlarm_sendid(ssvo.getmNickname());
 //			vo.setM_id(ssvo.getmId());
 //		}
 //		// DB에 저장

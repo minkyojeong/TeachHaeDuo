@@ -112,17 +112,26 @@ $(function() {
 		$.ajax({
 			url: "sendAlarmList.ax",
 			type:"post",
+			dataType:"json",
 			success: function(result){
 				console.log(result);
+				console.log(result[0]);
+				
+				console.log(result.alarm_receiveid);
+				console.log(result.length);
 				var html = "";
 				for(var i = 0; i < result.length; i++){
 					var vo = result[i];
 					html += '<tr>';
-					html += '<td><img src="${pageContext.request.contextPath}/resources/icons/message.png" width="20" height="20"></td>';
-					html += '<td>' + vo.Alarm_receiveid + '</td>';
-					html += '<td>' + vo.Alarm_date + '</td>';
+					html += '<td><img src="<%= request.getContextPath() %>/resources/icons/message.png" width="20" height="20"></td>';
+					html += '<td>' + vo.alarm_receiveid + '</td>';
+					html += '<td>' + vo.alarm_date + '</td>';
 					html += '</tr>';
+					
+					console.log("html:" + html);
+					
 				}
+				$("#send_alarm_table_tr1").nextAll().remove();
 				$("#send_alarm_table").append(html);
 			},
 			error: function(){

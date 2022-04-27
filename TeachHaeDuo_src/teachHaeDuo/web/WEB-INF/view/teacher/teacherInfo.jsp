@@ -49,7 +49,7 @@
 			<p class="modal_title">쪽지 보내기</p>
 			<p class="message_notice">* 쪽지를 보낼 시, 연필이 500원 차감됩니다. *</p>
 			<div class="message_input">
-				<input type="hidden" name="alarm_receiveid" id="alarm_receiveid" value="${tvo.m_id}">
+				<input type="hidden" name="alarm_receiveid" id="alarm_receiveid" value="${tvo.m_nickname}">
 				<textarea cols="35" rows="10" name="alarm_content" id="alarm_content" placeholder="쪽지 내용을 입력해주세요." required></textarea>
 			</div>
 			<div class="message_send">

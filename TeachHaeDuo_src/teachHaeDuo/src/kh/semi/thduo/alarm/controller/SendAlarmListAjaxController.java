@@ -10,6 +10,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+
 import kh.semi.thduo.alarm.model.service.AlarmService;
 import kh.semi.thduo.alarm.model.vo.AlarmVo;
 import kh.semi.thduo.member.vo.MemberVo;
@@ -43,15 +46,17 @@ public class SendAlarmListAjaxController extends HttpServlet {
 		System.out.println("보낸알람 컨트롤러 dopost");
 		PrintWriter out = response.getWriter();
 		MemberVo vo = (MemberVo)request.getSession().getAttribute("ssMV");
-		String mId = "";
+		String mNickname = "";
 		if(vo == null) {
 			response.sendRedirect("login");
 		} else {
-			mId = vo.getmId();
-			System.out.println("보낸 알람 서비스 호출 mId:" + mId);
-			ArrayList<AlarmVo> result = new AlarmService().sendListAlarm(mId);
+			mNickname = vo.getmNickname();
+			System.out.println("보낸 알람 서비스 호출 mNickname:" + mNickname);
+			ArrayList<AlarmVo> result = new AlarmService().sendListAlarm(mNickname);
 			System.out.println("리스트 결과:" + result);
-			out.println(result);
+			Gson gobj = new GsonBuilder().setPrettyPrinting().create();
+			String resStr = gobj.toJson(result);
+			out.println(resStr);
 			out.flush();
 			out.close();
 		}

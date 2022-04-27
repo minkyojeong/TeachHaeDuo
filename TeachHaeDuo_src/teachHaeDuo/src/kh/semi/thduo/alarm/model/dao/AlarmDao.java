@@ -36,13 +36,13 @@ public class AlarmDao {
 		return result;
 	}
 	
-	public ArrayList<AlarmVo> sendListAlarm(Connection conn, String mId){
+	public ArrayList<AlarmVo> sendListAlarm(Connection conn, String mNickname){
 		ArrayList<AlarmVo> voList = null;
-		String sql = "select alarm_content,alarm_date,alarm_receiveid from ALARM where ALARM_SENDID = ?";
+		String sql = "select alarm_content,alarm_date,alarm_receiveid from ALARM where alarm_sendid = ?";
 		
 		try {
 			pstmt = conn.prepareStatement(sql);
-			pstmt.setString(1, mId);
+			pstmt.setString(1, mNickname);
 			rs = pstmt.executeQuery();
 			
 			if(rs != null) {
