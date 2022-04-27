@@ -19,20 +19,23 @@
     <button type="button" id="enroll">회원가입</button>
    
 	</form>
-	 <button type="button" id="findId">아이디찾기</button>
-	 <button type="button" id="findPwd">비밀번호찾기</button>
+	<a href="findId">아이디찾기 |</a>
+	<a href="findPw">비밀번호찾기</a>
+	
+	 <!--<button type="button" id="findId">아이디찾기</button>
+	 <button type="button" id="findPwd">비밀번호찾기</button> -->
 
 
 	<script>
 		$("#enroll").click(function(){
 			location.href = "join";
 		});
-		$("#findId").click(function(){
-			location.href = "findId";
-		});
-		$("#findPwd").click(function(){
-			location.href = "findPwd";
-		});
+		//$("#findId").click(function(){
+		//	location.href = "findId";
+		//});
+		//$("#findPwd").click(function(){
+		//	location.href = "findPwd";
+		//});
 	</script> 
   
 </html>
