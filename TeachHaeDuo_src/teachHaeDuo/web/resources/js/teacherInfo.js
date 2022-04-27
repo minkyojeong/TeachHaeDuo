@@ -30,10 +30,10 @@ $("#btn_report_send").on('click', function() {
 				$(".report_input textarea").val("");
 				$(".report").hide();
 			} else if (result == -1) {
-				alert("신고 내용을 입력해주세요.");
+				alert("신고가 되지 않았습니다. 다시 시도해주세요.");
 				$(".report_input textarea").focus();
 			} else if (result == 0) {
-				alert("로그인을 한 후에 신고가 가능합니다. 로그인 페이지로 이동");
+				alert("로그인을 한 후에 신고가 가능합니다. 로그인 페이지로 이동합니다.");
 				location.href = "login";
 			}
 		},
@@ -57,11 +57,33 @@ $(".message").on('click', function() {
 		$(".message").hide();
 	}
 });
-// 쪽지 보내기 성공 시, 별점 및 내용 입력 창 초기화 후 알럿창 띄우고 모달창 닫기
+// 쪽지 보내기 버튼 클릭 시 처리 내용
 $("#btn_message_send").on('click', function() {
-	alert("쪽지를 보냈습니다. 답장을 기다려주세요.");
-	$(".message_input textarea").val("");
-	$(".message").hide();
+	$.ajax({
+		url: "sendAlarm.ax",
+		type: "post",
+		data: {
+			alarm_receiveid: $("#alarm_receiveid").val(),
+			alarm_content: $("#alarm_content").val()
+		},
+		success: function(result) {
+			console.log(result);
+			if (result == 1) {
+				alert("쪽지를 보냈습니다. 답장을 기다려주세요.");
+				$(".message_input textarea").val("");
+				$(".message").hide();
+			} else if (result == -1) {
+				alert("쪽지가 보내지지 않았습니다. 다시 시도해주세요.");
+				$(".message_input textarea").focus();
+			} else if (result == 0) {
+				alert("로그인을 한 후에 리뷰 삭제가 가능합니다. 로그인 페이지로 이동합니다.");
+				location.href = "login";
+			}
+		},
+		error: function(request, status, error) {
+			console.log("code:" + request.status + "\n" + "message:" + request.responseText + "\n" + "error:" + error);
+		}
+	});
 });
 
 // 리뷰쓰기 버튼 클릭 시 모달창 띄우기
@@ -90,14 +112,14 @@ $("#btn_review_send").on('click', function() {
 		},
 		success: function(result) {
 			console.log(result);
-			if  (result == 1) {
+			if (result == 1) {
 				alert("리뷰가 등록되었습니다.");
 				location.reload();
 			} else if (result == -1) {
-				alert("리뷰 내용을 입력해주세요.");
+				alert("리뷰가 등록되지 않았습니다. 다시 시도해주세요.");
 				$(".review_input textarea").focus();
 			} else if (result == 0) {
-				alert("로그인을 한 후에 리뷰 등록이 가능합니다. 로그인 페이지로 이동");
+				alert("로그인을 한 후에 리뷰 등록이 가능합니다. 로그인 페이지로 이동합니다.");
 				location.href = "login";
 			}
 		},
@@ -122,7 +144,7 @@ $("#btn_review_delete").on('click', function() {
 			} else if (result == -1) {
 				alert("리뷰가 삭제되지 않았습니다. 다시 시도해주세요.");
 			} else if (result == 0) {
-				alert("로그인을 한 후에 리뷰 삭제가 가능합니다. 로그인 페이지로 이동");
+				alert("로그인을 한 후에 리뷰 삭제가 가능합니다. 로그인 페이지로 이동합니다.");
 				location.href = "login";
 			}
 		},

@@ -49,7 +49,8 @@
 			<p class="modal_title">쪽지 보내기</p>
 			<p class="message_notice">* 쪽지를 보낼 시, 연필이 500원 차감됩니다. *</p>
 			<div class="message_input">
-				<textarea cols="35" rows="10" name="message" placeholder="쪽지 내용을 입력해주세요." required></textarea>
+				<input type="hidden" name="alarm_receiveid" id="alarm_receiveid" value="${tvo.m_id}">
+				<textarea cols="35" rows="10" name="alarm_content" id="alarm_content" placeholder="쪽지 내용을 입력해주세요." required></textarea>
 			</div>
 			<div class="message_send">
 				<button type="button" id="btn_message_cancel">취소</button>
@@ -101,7 +102,6 @@
 								<div class="t_img"></div>
 								<p class="t_name">${tvo.m_nickname}</p>
 								<p class="t_age">
-									<!-- (남/20대 중반) -->
 									<c:choose>
 										<c:when test="${tvo.gender_fm == 'F'}">(여 / ${tvo.t_age}세)</c:when>
 										<c:when test="${tvo.gender_fm == 'M'}">(남 / ${tvo.t_age}세)</c:when>
@@ -149,7 +149,6 @@
 							<article id="t_train_info">
 								<h1>교습정보</h1>
 								<p>교습 과목 : ${tvo.object_list}</p>
-								<!-- <p>교습 수단 : </p> -->
 								<p>활동 지역 : [서울] ${tvo.area_list}</p>
 								<p>교습 횟수 : ${tvo.t_tcnt}</p>
 								<p>교습 비용 : ${tvo.t_tprice}</p>
@@ -178,23 +177,31 @@
 							</div>
 							<article id="t_review">
 								<h1>리뷰</h1>
+								<!-- TODO : 해당 선생님한테 쪽지 보냈던 사람한테만 리뷰쓰기 버튼 보이게 하기 OR DAO에서 처리 -->
 								<button id="btn_review" class="btn1_2">리뷰쓰기</button>
 								<div class="review_list_content">
-									<c:forEach items="${tvo.t_review}" var="rvo">
-		                                <div class="review_info">
-		                                    <span>${rvo.t_r_writer}</span>
-		                                    <span>
-			                                    <c:forEach begin="1" end="${rvo.t_r_score}">
-			                                    	<img src="<%=request.getContextPath()%>/resources/icons/star.png">
-			                                    </c:forEach>
-		                                    </span>
-		                                    <span>${rvo.t_r_date}</span>
-		                                    <!-- TODO : 세션 닉네임이랑 리뷰 닉네임 비교해서 같으면 삭제버튼 나오게 하기 -->
-		                                    <input type="hidden" name="t_r_no" id="t_r_no" value="${rvo.t_r_no}">
-		                                    <button type="button" id="btn_review_delete" class="btn3_1">리뷰삭제</button>
-		                                </div>
-	                                	<p>${rvo.t_r_content}</p>
-									</c:forEach>
+									<c:choose>
+										<c:when test="${empty tvo.t_review}">아직 리뷰가 없습니다.</c:when>
+										<c:when test="${not empty tvo.t_review}">
+											<c:forEach items="${tvo.t_review}" var="rvo">
+												<div class="review_info">
+													<span>${rvo.t_r_writer}</span> <span> <c:forEach
+															begin="1" end="${rvo.t_r_score}">
+															<img
+																src="<%=request.getContextPath()%>/resources/icons/star.png">
+														</c:forEach>
+													</span> <span>${rvo.t_r_date}</span>
+													<input type="hidden" name="t_r_no" id="t_r_no" value="${rvo.t_r_no}">
+													<!-- TODO : 세션 닉네임이랑 리뷰 닉네임 비교해서 같으면 삭제버튼 나오게 하기(아래 주석 풀어서 테스트) -->
+<%-- 													<c:if test="${ssMV.mNickname == rvo.t_r_writer}">
+														<button type="button" id="btn_review_delete" class="btn3_1">리뷰삭제</button>
+													</c:if> --%>
+													<button type="button" id="btn_review_delete" class="btn3_1">리뷰삭제</button>
+												</div>
+												<p>${rvo.t_r_content}</p>
+											</c:forEach>
+										</c:when>
+									</c:choose>
 								</div>
 							</article>
 						</div>

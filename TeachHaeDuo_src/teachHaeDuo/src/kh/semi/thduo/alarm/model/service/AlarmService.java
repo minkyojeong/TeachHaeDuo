@@ -12,12 +12,14 @@ public class AlarmService {
 	private AlarmDao dao = new AlarmDao();
 	
 	public int sendAlarm(AlarmVo vo) {
-		
+		int result = 0;
 		Connection conn = null;
+
 		conn = getConnection();
-		int result = dao.sendAlarm(conn, vo);
+		result = dao.sendAlarm(conn, vo);
+
 		close(conn);
-		
+
 		return result;
 	}
 	

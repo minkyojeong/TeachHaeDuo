@@ -17,26 +17,22 @@ public class AlarmDao {
 	
 	public int sendAlarm(Connection conn, AlarmVo vo) {
 		int result = 0;
-		String sql = "insert into ALARM VALUES(?, ?, DEFAULT, ?, ?, ?);";
-//		ALARM_NO        NOT NULL NUMBER        
-//		ALARM_CONTENT   NOT NULL VARCHAR2(600) 
-//		ALARM_DATE      NOT NULL TIMESTAMP(6)  
-//		ALARM_SENDID    NOT NULL VARCHAR2(15)  
-//		ALARM_RECEIVEID NOT NULL VARCHAR2(15)  
-//		M_ID            NOT NULL VARCHAR2(15)
+		String sql = "INSERT INTO alarm VALUES((SELECT NVL(MAX(alarm_no), 0) + 1 FROM alarm), ?, DEFAULT, ?, ?, ?)";
+
 		try {
 			pstmt = conn.prepareStatement(sql);
-			//TODO
-//			pstmt.setInt(parameterIndex, x);
-//			pstmt.setString(parameterIndex, x);
+			pstmt.setString(1, vo.getAlarm_content());
+			pstmt.setString(2, vo.getAlarm_sendid());
+			pstmt.setString(3, vo.getAlarm_receiveid());
+			pstmt.setString(4, vo.getM_id());
 			
 			result = pstmt.executeUpdate();
 		} catch (SQLException e) {
-			
 			e.printStackTrace();
 		} finally {
 			close(pstmt);
 		}
+		
 		return result;
 	}
 	
