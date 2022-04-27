@@ -33,26 +33,28 @@
 				<a class="object korean" href="#1"> 
 					<span class="category_name">국어</span>
 					<img class="object_icon" src="${pageContext.request.contextPath}/resources/icons/korean.png">
-				</a> <a class="object math" href="#2"> 
+				</a>
+				<a class="object math" href="#2"> 
 					<span class="category_name">수학</span>
 					<img class="object_icon" src="${pageContext.request.contextPath}/resources/icons/math.png">
-				</a> <a class="object eng" href="#3"> 
+				</a>
+				<a class="object eng" href="#3"> 
 					<span class="category_name">영어</span>
 					<img class="object_icon" src="${pageContext.request.contextPath}/resources/icons/eng.png">
-				</a> <a class="object social" href="#4"> 
+				</a>
+				<a class="object social" href="#4"> 
 					<span class="category_name">사회</span>
 					<img class="object_icon" src="${pageContext.request.contextPath}/resources/icons/social.png">
-				</a> <a class="object science" href="#5"> 
+				</a>
+				<a class="object science" href="#5"> 
 					<span class="category_name">과학</span> 
 					<img class="object_icon" src="${pageContext.request.contextPath}/resources/icons/science.png">
-				</a> <a class="object etc" href="#6"> 
+				</a>
+				<a class="object etc" href="#6"> 
 					<span class="category_name">기타</span>
 					<img class="object_icon" src="${pageContext.request.contextPath}/resources/icons/lightbulb.png">
 				</a>
 			</div>
-		</div>
-		<div class="line">
-			<hr>
 		</div>
 		<jsp:include page="template_footer.jsp"></jsp:include>
 	</div>

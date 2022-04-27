@@ -2,6 +2,9 @@
 	pageEncoding="UTF-8"%>
 <div class="wrap footer">
 	<footer>
+		<div class="line">
+			<hr>
+		</div>
 		<div class="footerTop">
 			<div class="footerTop_section1">
 				<a href="./">
