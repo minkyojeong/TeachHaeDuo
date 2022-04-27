@@ -1,5 +1,4 @@
 header {
-    background-color: yellow;
     overflow: hidden;
 }
 .logo {
@@ -10,7 +9,6 @@ header {
     height: 100px;
 }
 .menu {
-    background-color: yellowgreen;
     float: right;
     margin: 40px 30px 0 0;
 }

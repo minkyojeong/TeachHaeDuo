@@ -1,17 +1,14 @@
 .wrap.content {
-    background-color: red;
     margin: 0 25px;
     font-family: MinSans-Medium;
 }
 .intro {
-    background-color: brown;
     font-family: MinSans-Bold;
     font-size: 37px;
     line-height: 1.5em;
 }
 .search {
     width: 350px;
-    background-color: bisque;
     margin-top: 50px;
     border-bottom: 1px solid #bcc7d3;
 }
@@ -35,9 +32,7 @@
     outline: none;
 }
 .category {
-    background-color: aqua;
     margin-top: 50px;
-    /* position: absolute; */
     height: 400px;
 }
 .category > h2 {
