@@ -1,8 +1,14 @@
+<link href="<%=request.getContextPath()%>/resources/css/reset.css" rel="stylesheet" type="text/css">
+<link href="<%=request.getContextPath()%>/resources/css/teacherSearchMain.css" rel="stylesheet" type="text/css">
+<link href="<%=request.getContextPath()%>/resources/css/header.css" rel="stylesheet" type="text/css">
+<link href="<%=request.getContextPath()%>/resources/css/footer.css" rel="stylesheet" type="text/css">
+<link href="<%=request.getContextPath()%>/resources/icons/sun.ico" rel="shortcut icon" type="image/x-icon">
+<link href="<%=request.getContextPath()%>/resources/css/font.css" rel="stylesheet" type="text/css">
+<link href="<%=request.getContextPath()%>/resources/css/common.css" rel="stylesheet" type="text/css">
 <%@page import="org.apache.jasper.tagplugins.jstl.core.ForEach"%>
 <%@page import="kh.semi.thduo.teacher.model.vo.TeacherVo"%>
 <%@page import="java.util.ArrayList"%>
-<link href="<%=request.getContextPath()%>/resources/css/reset.css" rel="stylesheet" type="text/css">
-<link href="<%=request.getContextPath()%>/resources/css/teacherSearchMain.css" rel="stylesheet" type="text/css">
+
 
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
@@ -59,8 +65,8 @@
 
         <!-- 선택사항 버튼들 -->
         <div class="choice_option">
-            <select name="gender" id="gender">
-                <option value="init">성별</option> <img src="${pageContext.request.contextPath}/resources/icons/down.png">
+            <select name="gender" id="gender"> <img src="${pageContext.request.contextPath}/resources/icons/down.png">
+                <option value="init">성별</option>
                 <option value="m">남성</option>
                 <option value="f">여성</option>
             </select>
@@ -166,11 +172,11 @@
                 </div>
                 <div class="box-init box"><a href="#"></a>
                     <div class="title">
-                        <h2>과목리스트<%=vo.getObject_list() %></h2><br>
+                        <h2><%=vo.getObject_list() %></h2><br>
                         <ul>
-                            <li>재학중인 학교 및 전공<%= vo.getT_major() %></li>
-                            <li>활동지역<%= vo.getArea_list() %></li>
-                            <li>평점<%= vo.getAvg_rscore() %></li>
+                            <li><%= vo.getT_major() %></li>
+                            <li><%= vo.getArea_list() %></li>
+                            <li><%= vo.getAvg_rscore() %></li>
                         </ul>
                         </a>
                     </div>
@@ -183,27 +189,147 @@
 
 
         <section id="content2">
-            <p>tab menu2의 내용</p>
+        <div class="grid-init grid">
+            <% for(TeacherVo vo : volist) { %>
+                <div class="box-init box">
+                    <div class="list1">
+                        <div class="profile"></div>
+                        <p class="nickname"><%=vo.getM_nickname() %></p>
+                    </div>
+                </div>
+                <div class="box-init box"><a href="#"></a>
+                    <div class="title">
+                        <h2><%=vo.getObject_list() %></h2><br>
+                        <ul>
+                            <li><%= vo.getT_major() %></li>
+                            <li><%= vo.getArea_list() %></li>
+                            <li><%= vo.getAvg_rscore() %></li>
+                        </ul>
+                        </a>
+                    </div>
+                </div>
+                <% } %>
+            </div>
         </section>
 
         <section id="content3">
-            <p>tab menu3의 내용</p>
+        <div class="grid-init grid">
+           <% for(TeacherVo vo : volist) { %>
+                <div class="box-init box">
+                    <div class="list1">
+                        <div class="profile"></div>
+                        <p class="nickname"><%=vo.getM_nickname() %></p>
+                    </div>
+                </div>
+                <div class="box-init box"><a href="#"></a>
+                    <div class="title">
+                        <h2><%=vo.getObject_list() %></h2><br>
+                        <ul>
+                            <li><%= vo.getT_major() %></li>
+                            <li><%= vo.getArea_list() %></li>
+                            <li><%= vo.getAvg_rscore() %></li>
+                        </ul>
+                        </a>
+                    </div>
+                </div>
+                <% } %>
+            </div>
         </section>
 
         <section id="content4">
-            <p>tab menu4의 내용</p>
+        <div class="grid-init grid">
+            <% for(TeacherVo vo : volist) { %>
+                <div class="box-init box">
+                    <div class="list1">
+                        <div class="profile"></div>
+                        <p class="nickname"><%=vo.getM_nickname() %></p>
+                    </div>
+                </div>
+                <div class="box-init box"><a href="#"></a>
+                    <div class="title">
+                        <h2><%=vo.getObject_list() %></h2><br>
+                        <ul>
+                            <li><%= vo.getT_major() %></li>
+                            <li><%= vo.getArea_list() %></li>
+                            <li><%= vo.getAvg_rscore() %></li>
+                        </ul>
+                        </a>
+                    </div>
+                </div>
+                <% } %>
+            </div>
         </section>
 
         <section id="content5">
-            <p>tab menu5의 내용</p>
+        <div class="grid-init grid">
+            <% for(TeacherVo vo : volist) { %>
+                <div class="box-init box">
+                    <div class="list1">
+                        <div class="profile"></div>
+                        <p class="nickname"><%=vo.getM_nickname() %></p>
+                    </div>
+                </div>
+                <div class="box-init box"><a href="#"></a>
+                    <div class="title">
+                        <h2><%=vo.getObject_list() %></h2><br>
+                        <ul>
+                            <li><%= vo.getT_major() %></li>
+                            <li><%= vo.getArea_list() %></li>
+                            <li><%= vo.getAvg_rscore() %></li>
+                        </ul>
+                        </a>
+                    </div>
+                </div>
+                <% } %>
+            </div>
         </section>
 
         <section id="content6">
-            <p>tab menu6의 내용</p>
+        <div class="grid-init grid">
+            <% for(TeacherVo vo : volist) { %>
+                <div class="box-init box">
+                    <div class="list1">
+                        <div class="profile"></div>
+                        <p class="nickname"><%=vo.getM_nickname() %></p>
+                    </div>
+                </div>
+                <div class="box-init box"><a href="#"></a>
+                    <div class="title">
+                        <h2><%=vo.getObject_list() %></h2><br>
+                        <ul>
+                            <li><%= vo.getT_major() %></li>
+                            <li><%= vo.getArea_list() %></li>
+                            <li><%= vo.getAvg_rscore() %></li>
+                        </ul>
+                        </a>
+                    </div>
+                </div>
+                <% } %>
+            </div>
         </section>
 
         <section id="content7">
-            <p>tab menu7의 내용</p>
+        <div class="grid-init grid">
+           <% for(TeacherVo vo : volist) { %>
+                <div class="box-init box">
+                    <div class="list1">
+                        <div class="profile"></div>
+                        <p class="nickname"><%=vo.getM_nickname() %></p>
+                    </div>
+                </div>
+                <div class="box-init box"><a href="#"></a>
+                    <div class="title">
+                        <h2><%=vo.getObject_list() %></h2><br>
+                        <ul>
+                            <li><%= vo.getT_major() %></li>
+                            <li><%= vo.getArea_list() %></li>
+                            <li><%= vo.getAvg_rscore() %></li>
+                        </ul>
+                        </a>
+                    </div>
+                </div>
+                <% } %>
+            </div>
         </section>
 
     </div>
