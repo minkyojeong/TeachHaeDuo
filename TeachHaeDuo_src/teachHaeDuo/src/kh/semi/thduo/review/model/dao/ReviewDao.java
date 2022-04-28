@@ -38,14 +38,12 @@ public class ReviewDao {
 		}
 		return result;
 	}
+	
 	// 리뷰 삽입
 	public int insertReview(Connection conn, ReviewVo vo) {
 		int result = 0;
-		// 해당 선생님에게 쪽지 보낸 사람만 리뷰 쓰기 가능
-		String sql = "INSERT INTO t_review(t_r_no, t_no, t_r_content, t_r_score, t_r_writer, m_id) "
-				+ "SELECT (SELECT NVL(MAX(t_r_no), 0) + 1 FROM t_review), ?, ?, ?, ?, ? "
-				+ "FROM dual "
-				+ "WHERE 0 < (SELECT COUNT(*) FROM alarm WHERE alarm_receiveid = (SELECT m_nickname FROM t_profile JOIN member USING(m_id) WHERE t_no = ?) AND m_id=?)";
+		String sql = "INSERT INTO t_review(T_R_NO, T_NO, T_R_CONTENT, T_R_DATE, T_R_SCORE, T_R_WRITER, M_ID) "
+				+ "VALUES((SELECT NVL(MAX(t_r_no), 0) + 1 FROM t_review), ?, ?, default, ?, ?, ?)";
 		try {
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, vo.getT_no());
@@ -53,8 +51,6 @@ public class ReviewDao {
 			pstmt.setInt(3, vo.getT_r_score());
 			pstmt.setString(4, vo.getT_r_writer());
 			pstmt.setString(5, vo.getM_id());
-			pstmt.setString(6, vo.getT_no());
-			pstmt.setString(7, vo.getM_id());
 			
 			result = pstmt.executeUpdate();
 		} catch(SQLException e) {
