@@ -37,11 +37,11 @@ public class LikeService {
 	}
 
 	// 자기가 찜한 선생님 리스트 모두 보기
-	public ArrayList<LikeVo> readLikeList(String m_id) {
+	public ArrayList<LikeVo> readLikeList(String s_no) {
 		ArrayList<LikeVo> retVolist = null;
 		Connection conn = getConnection();
 
-		retVolist = dao.readLikeList(conn, m_id);
+		retVolist = dao.readLikeList(conn, s_no);
 		
 		close(conn);
 		

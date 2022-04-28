@@ -40,7 +40,7 @@ public class AlarmDao {
 	
 	public ArrayList<AlarmVo> sendListAlarm(Connection conn, String mNickname){
 		ArrayList<AlarmVo> voList = null;
-		String sql = "select alarm_content,alarm_date,alarm_receiveid from ALARM where alarm_sendid = ?";
+		String sql = "select a.alarm_content, a.alarm_date, a.ALARM_RECEIVEID,t.t_no from alarm a join member m on a.ALARM_RECEIVEID = m.m_nickname join t_profile t on t.m_id = m.m_id where alarm_sendid = ?";
 		
 		try {
 			pstmt = conn.prepareStatement(sql);
@@ -54,6 +54,7 @@ public class AlarmDao {
 					vo.setAlarm_content(rs.getString("alarm_content"));
 					vo.setAlarm_date(rs.getTimestamp("alarm_date"));
 					vo.setAlarm_receiveid(rs.getString("alarm_receiveid"));
+					vo.setT_no(rs.getString("t_no"));
 					voList.add(vo);
 				}
 				
@@ -70,7 +71,7 @@ public class AlarmDao {
 	}
 	public ArrayList<AlarmVo> receiveListAlarm(Connection conn, String mNickname){
 		ArrayList<AlarmVo> voList = null;
-		String sql = "select alarm_content,alarm_date,alarm_sendid from ALARM where alarm_receiveid = ?";
+		String sql = "select a.alarm_content, a.alarm_date, a.ALARM_RECEIVEID,t.t_no from alarm a join member m on a.ALARM_RECEIVEID = m.m_nickname join t_profile t on t.m_id = m.m_id where alarm_receiveid = ?";
 		
 		try {
 			pstmt = conn.prepareStatement(sql);
@@ -84,6 +85,7 @@ public class AlarmDao {
 					vo.setAlarm_content(rs.getString("alarm_content"));
 					vo.setAlarm_date(rs.getTimestamp("alarm_date"));
 					vo.setAlarm_sendid(rs.getString("alarm_sendid"));
+					vo.setT_no(rs.getString("t_no"));
 					voList.add(vo);
 				}
 				

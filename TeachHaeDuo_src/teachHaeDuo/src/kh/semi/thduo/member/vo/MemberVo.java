@@ -19,7 +19,14 @@ public class MemberVo {
 	private String 			mAlarmYn;
 	private String          tNo;
 	private String			tRecruitYn;
+	private String 			sNo;
 	
+	public String getsNo() {
+		return sNo;
+	}
+	public void setsNo(String sNo) {
+		this.sNo = sNo;
+	}
 	public String gettRecruitYn() {
 		return tRecruitYn;
 	}
@@ -115,7 +122,7 @@ public class MemberVo {
 		return "MemberVo [mId=" + mId + ", mPw=" + mPw + ", mName=" + mName + ", mNickname=" + mNickname + ", mBirth="
 				+ mBirth + ", mAddress=" + mAddress + ", mPhone=" + mPhone + ", mEmail=" + mEmail + ", genderFm="
 				+ genderFm + ", roleSt=" + roleSt + ", mDate=" + mDate + ", mCertificate=" + mCertificate
-				+ ", mAlarmYn=" + mAlarmYn + ", tNo=" + tNo + ", tRecruitYn=" + tRecruitYn + "]";
+				+ ", mAlarmYn=" + mAlarmYn + ", tNo=" + tNo + ", tRecruitYn=" + tRecruitYn + ", sNo=" + sNo + "]";
 	}
 	
 }

@@ -18,7 +18,7 @@
 <body>
 
 	<div id = "wrap">
-	<jsp:include page="template_header.jsp"></jsp:include>
+	<jsp:include page="../template_header.jsp"></jsp:include>
     <div id="main_wrap">
         <div id="left_div">
             <div id="top_div">
@@ -198,13 +198,6 @@
                 		<th>연락 보낸 선생님</th>
                 		<th>날짜</th>
                 	</tr>
-                	<tr>
-	                	<td>
-	                		<img src="${pageContext.request.contextPath}/resources/icons/send.png" width="20" height="20">
-	                	</td>
-	                	<td></td>
-	                	<td></td>
-                	</tr>                
                 </table>
             </div>
         </div>
@@ -219,30 +212,23 @@
             </div>
             <div class="like_modal_content">
                 <table id="like_table">
-                	<tr>
+                	<tr id="like_table_tr1">
                 		<th>
                 			<img src="${pageContext.request.contextPath}/resources/icons/like_teacher.png" width="20" height="20">
                 		</th>
                 		<th>찜한 선생님</th>
-                		<th>날짜</th>
                 	</tr>
-                	<tr>
-	                	<td>
-	                		<img src="${pageContext.request.contextPath}/resources/icons/heart.png" width="20" height="20">
-	                	</td>
-	                	<td></td>
-	                	<td></td>
-                	</tr> 
                 </table>
                 
             </div>
         </div>
     </div>
-    <jsp:include page="template_footer.jsp"></jsp:include>
+    <jsp:include page="../template_footer.jsp"></jsp:include>
     </div>
     <% String msgAlarm = (String)request.getAttribute("msgAlarm"); %>
 </body>
 <script>
+// 연락 요청 보낸 리스트 출력
 $("#p_send_alarm").on("click", function() {
 	$("#send_alarm_modal").show();
 	
@@ -251,22 +237,14 @@ $("#p_send_alarm").on("click", function() {
 		type:"post",
 		dataType:"json",
 		success: function(result){
-			console.log(result);
-			console.log(result[0]);
-			
-			console.log(result.alarm_receiveid);
-			console.log(result.length);
 			var html = "";
 			for(var i = 0; i < result.length; i++){
 				var vo = result[i];
 				html += '<tr>';
 				html += '<td><img src="${pageContext.request.contextPath}/resources/icons/send.png" width="20" height="20"></td>';
-				html += '<td>' + vo.alarm_receiveid + '</td>';
+				html += '<td><a href="teacherInfo?tNo='+vo.t_no+'">'+ vo.alarm_receiveid + '</td>';
 				html += '<td>' + vo.alarm_date + '</td>';
 				html += '</tr>';
-				
-				console.log("html:" + html);
-				
 			}
 			$("#send_alarm_table_tr1").nextAll().remove();
 			$("#send_alarm_table").append(html);
@@ -277,6 +255,37 @@ $("#p_send_alarm").on("click", function() {
 	
 	});
 });
+
+// 찜한 선생님 리스트
+$("#p_like").on("click", function() {
+	$("#like_modal").show();
+	
+	$.ajax({
+		url: "likeList.ax",
+		type:"post",
+		dataType:"json",
+		success: function(result){
+			var html = "";
+			for(var i = 0; i < result.length; i++){
+				var vo = result[i];
+				html += "<tr>";
+				html += '<td><img src="${pageContext.request.contextPath}/resources/icons/heart.png" width="20" height="20"></td>';
+				html += '<td><a href="teacherInfo?tNo='+vo.t_no+'">'+ vo.mNickname + '</td>';
+				html += '</tr>';
+				console.log(vo.t_no);
+			}
+			$("#like_table_tr1").nextAll().remove();
+			$("#like_table").append(html);
+		},
+		error: function(){
+		
+		}
+	
+	});
+});
+	
+	
+	
 var msgAlarmVal = '${msgAlarm}';
 if(msgAlarmVal != "" && msgAlarmVal != null)
 	alert('${msgAlarm}');

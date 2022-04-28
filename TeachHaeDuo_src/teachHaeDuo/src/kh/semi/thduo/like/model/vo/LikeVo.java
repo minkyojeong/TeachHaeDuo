@@ -4,10 +4,19 @@ public class LikeVo {
 	private String s_no;
 	private String t_no;
 	private String m_id;
+	private String mNickname;
 	
 	@Override
 	public String toString() {
-		return "LikeVo [s_no=" + s_no + ", t_no=" + t_no + ", m_id=" + m_id + "]";
+		return "LikeVo [s_no=" + s_no + ", t_no=" + t_no + ", m_id=" + m_id + ", mNickname=" + mNickname + "]";
+	}
+
+	public String getmNickname() {
+		return mNickname;
+	}
+
+	public void setmNickname(String mNickname) {
+		this.mNickname = mNickname;
 	}
 
 	public String getS_no() {

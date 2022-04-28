@@ -114,7 +114,7 @@ $(function() {
 	})
 
 
-	/* modal 연락 요청 보낸 내역 js + 리스트 ajax */
+	/* modal 연락 요청 보낸 내역 js */
 	
 	$(".send_alarm_modal_close").click(function() {
 		$("#send_alarm_modal").hide();
@@ -130,9 +130,7 @@ $(function() {
 	
 	
 	/* modal 내가 찜한 선생님 js */
-	$("#p_like").on("click", function() {
-		$("#like_modal").show();
-	});
+	
 
 	$(".like_modal_close").click(function() {
 		$("#like_modal").hide();

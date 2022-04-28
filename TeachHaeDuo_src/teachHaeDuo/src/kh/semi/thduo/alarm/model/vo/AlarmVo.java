@@ -10,17 +10,27 @@ public class AlarmVo {
 	private String alarm_sendid;
 	private String alarm_receiveid;
 	private String m_id;
+	private String t_no;
 	
 	public AlarmVo() {
 		super();
 	}
 
+	
+
 	@Override
 	public String toString() {
 		return "AlarmVo [alarm_no=" + alarm_no + ", alarm_content=" + alarm_content + ", alarm_date=" + alarm_date
-				+ ", alarm_sendid=" + alarm_sendid + ", alarm_receiveid=" + alarm_receiveid + ", m_id=" + m_id + "]";
+				+ ", alarm_sendid=" + alarm_sendid + ", alarm_receiveid=" + alarm_receiveid + ", m_id=" + m_id
+				+ ", t_no=" + t_no + "]";
 	}
-	
+	public String getT_no() {
+		return t_no;
+	}
+
+	public void setT_no(String t_no) {
+		this.t_no = t_no;
+	}
 	public int getAlarm_no() {
 		return alarm_no;
 	}

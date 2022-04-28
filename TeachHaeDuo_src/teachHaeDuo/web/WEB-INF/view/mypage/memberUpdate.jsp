@@ -19,7 +19,7 @@
 </head>
 <body>
 	<div>
-	<jsp:include page="template_header.jsp"></jsp:include>
+	<jsp:include page="../template_header.jsp"></jsp:include>
     <div id="main_wrap">
         <form action="#" method="post">
             <div id="top_div">
@@ -99,7 +99,7 @@
             </div>
         </form>
     </div>
-    <jsp:include page="template_footer.jsp"></jsp:include>
+    <jsp:include page="../template_footer.jsp"></jsp:include>
     </div>
     <script>
     $(function(){

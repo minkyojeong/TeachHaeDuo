@@ -33,13 +33,13 @@ public class RecruitYNChangeController extends HttpServlet {
 		System.out.println("모집중 doget");
 		MemberVo ssMV = (MemberVo)request.getSession().getAttribute("ssMV");
 		System.out.println(ssMV);
-		String roleSt = ssMV.getRoleSt();
+		String roleSt = "";
 		MemberVo vo = new MemberVo();
 		int result = 0;
 		if(ssMV == null) {
 			response.sendRedirect("login");
 		} else {
-			
+			roleSt = ssMV.getRoleSt();
 			vo.settRecruitYn(ssMV.gettRecruitYn());
 			vo.setmId(ssMV.getmId());
 			result = new RecruitYNChangeService().recruitYNChange(vo);

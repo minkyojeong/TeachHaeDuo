@@ -18,7 +18,7 @@
 <body>
 <% MemberVo ssMV = (MemberVo)request.getSession().getAttribute("ssMV"); %>
 	<div id="wrap">
-	<jsp:include page="template_header.jsp"></jsp:include>
+	<jsp:include page="../template_header.jsp"></jsp:include>
     <div id="main_wrap">
         <div id="left_div">
             <div id="top_div">
@@ -228,7 +228,7 @@
         </div>
     </div>
     
-    <jsp:include page="template_footer.jsp"></jsp:include>
+    <jsp:include page="../template_footer.jsp"></jsp:include>
     </div>
     <% String msgRecruit = (String)request.getAttribute("msgRecruit"); %>
     <% String msgAlarm = (String)request.getAttribute("msgAlarm"); %>

@@ -32,13 +32,13 @@ public class AlarmYNChangeController extends HttpServlet {
 		System.out.println("알람 수신거부 doget");
 		MemberVo ssMV = (MemberVo)request.getSession().getAttribute("ssMV");
 		System.out.println(ssMV);
-		String roleSt = ssMV.getRoleSt();
+		String roleSt = "";
 		MemberVo vo = new MemberVo();
 		int result = 0;
 		if(ssMV == null) {
 			response.sendRedirect("login");
 		} else {
-			
+			roleSt = ssMV.getRoleSt();
 			vo.setmAlarmYn(ssMV.getmAlarmYn());
 			vo.setmId(ssMV.getmId());
 			result = new AlarmService().alarmYNChange(vo);

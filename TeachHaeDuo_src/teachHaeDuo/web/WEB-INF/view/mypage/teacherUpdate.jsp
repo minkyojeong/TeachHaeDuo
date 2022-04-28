@@ -22,7 +22,7 @@
 </head>
 <body>
 	<div>
-		<jsp:include page="template_header.jsp"></jsp:include>
+		<jsp:include page="../template_header.jsp"></jsp:include>
 		<div id="main_wrap">
 			<div id="top_div">
 				<p style="font-size: 17px">
@@ -227,7 +227,7 @@
 				<button type="button" id="cancel" class="btn2_2 update_btn">취소</button>
 			</div>
 		</div>
-		<jsp:include page="template_footer.jsp"></jsp:include>
+		<jsp:include page="../template_footer.jsp"></jsp:include>
 	</div>
 	<% MemberVo ssMV = (MemberVo)request.getSession().getAttribute("ssMV"); %>
 	<script>
