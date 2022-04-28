@@ -535,6 +535,12 @@ INSERT INTO BOARD_REPORT(B_R_NO,B_NO,B_R_CATEGORY,B_R_WRITER,B_R_WRITE_DATE) VAL
 --질문하기 게시판 댓글
 INSERT INTO Q_RECOMMENT(R_NO,R_CONTENT,R_WRITER,R_WRITE_DATE,R_REPORT_CNT,B_NO) VALUES(1,'신고할게요','민호',default,default,1);
 
+-- 연필 테이블 기본 insert
+insert into check_pencil(CP_NO, M_ID, CP_CONTENT, CP_cash,CP_DATE) values(0,'a12345','회원가입',0,default);
+insert into check_pencil(CP_NO, M_ID, CP_CONTENT, CP_cash,CP_DATE) values(0,'b12345','회원가입',0,default);
+insert into check_pencil(CP_NO, M_ID, CP_CONTENT, CP_cash,CP_DATE) values(0,'c12345','회원가입',0,default);
+insert into check_pencil(CP_NO, M_ID, CP_CONTENT, CP_cash,CP_DATE) values(0,'d12345','회원가입',0,default);
+
 -- 선생님별, 과목 리스트 나오는 뷰 생성
 CREATE OR REPLACE VIEW view_teacher_object 
 AS
