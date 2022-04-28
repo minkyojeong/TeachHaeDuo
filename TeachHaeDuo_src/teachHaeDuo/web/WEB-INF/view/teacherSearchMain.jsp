@@ -27,7 +27,7 @@
     <div class="search_container">
         <span class="object_name">과목</span>
         <div class="object_input">
-            <img src="images/search.png">
+            <img src="${pageContext.request.contextPath}/resources/icons/search.png">
             <input type="text" name="object" placeholder="어느 과목 선생님을 찾으시나요?">
         </div>
         <button type="button" id="btn_search" class="btn3_1">검색</button>
@@ -60,25 +60,44 @@
         <!-- 선택사항 버튼들 -->
         <div class="choice_option">
             <select name="gender" id="gender">
-                <option value="init">성별</option>
+                <option value="init">성별</option> <img src="${pageContext.request.contextPath}/resources/icons/down.png">
                 <option value="m">남성</option>
                 <option value="f">여성</option>
             </select>
             <select name="area" id="area_search">
                 <option value="init"> 선생님 활동지역</option>
                 <option value="강남구"> 강남구</option>
-                <option value="도봉구" > 도봉구</option>
-                <option> 3</option>
-                <option> 4</option>
-                <option> 5</option>
-                <option> 6</option>
-                <option> 7</option>
+                <option value="강동구" > 강동구</option>
+                <option value="강북구">강북구</option>
+                <option value="강서구"> 강서구</option>
+                <option value="관악구"> 관악구</option>
+                <option value="광진구"> 광진구</option>
+                <option value="구로구"> 구로구</option>
+                 <option value="금천구"> 금천구</option>
+                 <option value="노원구">노원구</option>
+                 <option value="도봉구"> 도봉구</option>
+                 <option value="동대문구"> 동대문구</option>
+                 <option value="동작구"> 동작구</option>
+                 <option value="마포구"> 마포구</option>
+                 <option value="서대문구"> 서대문구</option>
+                 <option value="서초구"> 서초구</option>
+                 <option value="성동구"> 성동구</option>
+                 <option value="성북구"> 성북구</option>
+                 <option value="송파구"> 송파구</option>
+                 <option value="양천구"> 양천구</option>
+                 <option value="영등포구"> 영등포구</option>
+                 <option value="용산구"> 용산구</option>
+                 <option value="은평구"> 은평구</option>
+                 <option value="종로구"> 종로구</option>
+                 <option value="중구"> 중구</option>
+                 <option value="중랑구"> 중랑구</option>
+                                  
             </select>
-            <button type="button" id="btn_online"><img src="images/online.png">온라인 교습</button>
-            <button type="button" id="btn_offline"><img src="images/offline.png">오프라인 교습</button>
-            <button type="button" id="btn_call"><img src="images/smartphone.png">통화허용</button>
-            <button type="button" id="btn_recruit"><img src="images/recruit.png">모집중</button>
-            <button type="button" id="btn_like"><img src="images/like_color.png">찜</button>
+            <button type="button" id="btn_online"> <img src="${pageContext.request.contextPath}/resources/icons/online.png">온라인 교습</button>
+            <button type="button" id="btn_offline"> <img src="${pageContext.request.contextPath}/resources/icons/offline.png">오프라인 교습</button>
+            <button type="button" id="btn_call"> <img src="${pageContext.request.contextPath}/resources/icons/smartphone.png">통화허용</button>
+            <button type="button" id="btn_recruit"> <img src="${pageContext.request.contextPath}/resources/icons/recruit.png">모집중</button>
+            <button type="button" id="btn_like"> <img src="${pageContext.request.contextPath}/resources/icons/like_color.png">찜</button>
         </div>
         <script>
         $("#gender").on("change", changeOption);
@@ -110,11 +129,11 @@
         			htmlVal+='    </div>';
         			htmlVal+='    <div class="box-init box"><a href="#"></a>';
         			htmlVal+='        <div class="title">';
-        			htmlVal+='            <h2>과목리스트</h2><br>';
+        			htmlVal+='            <h2>'+vo.object_list+'</h2><br>';
         			htmlVal+='            <ul>';
-        			htmlVal+='                <li>재학중인 학교 및 전공</li>';
-        			htmlVal+='                <li>활동지역</li>';
-        			htmlVal+='                <li>평점</li>';
+        			htmlVal+='                <li>'+vo.t_major+'</li>';
+        			htmlVal+='                <li>'+vo.area_list+'</li>';
+        			htmlVal+='                <li>평점'+vo.avg_rscore+'</li>';
         			htmlVal+='            </ul>';
         			htmlVal+='            </a>';
         			htmlVal+='        </div>';
@@ -192,11 +211,11 @@
     <!-- 페이징처리 -->
     <div class="page_wrap">
         <div class="page_nation">
-            <a class="arrow prev" href="#"><img src="images/page_prev.png"></a>
+            <a class="arrow prev" href="#"><img src="${pageContext.request.contextPath}/resources/icons/page_prev.png"></a>
             <a href="#" class="active">1</a>
             <a href="#">2</a>
             <a href="#">3</a>
-            <a class="arrow next" href="#"><img src="images/page_next.png"></a>
+            <a class="arrow next" href="#"><img src="${pageContext.request.contextPath}/resources/icons/page_next.png"></a>
         </div>
     </div>
 

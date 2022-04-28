@@ -20,6 +20,7 @@ public class TeacherDao {
 	// 선생님 교습정보 삽입
 	public int insertTeacher(Connection conn, TeacherVo vo) {
 		int result = 0;
+		String sql = "";
 		
 		return result;
 	}
@@ -87,7 +88,7 @@ public class TeacherDao {
 		ArrayList<TeacherVo> retVolist = null;
 		String a = "%" + area + "%";
 		
-		String sql = "SELECT pro.t_major, pro.t_picture, m.m_nickname, round(rscore.avg_rscore, 2) avg_rscore, olist.object_list, alist.area_list"
+		String sql = "SELECT pro.t_no, pro.t_major, pro.t_picture, m.m_nickname, round(rscore.avg_rscore, 2) avg_rscore, olist.object_list, alist.area_list"
 				+ " FROM t_profile pro JOIN member m" //띄어쓰기 꼭하기
 				+ "                    ON pro.m_id = m.m_id"
 				+ "                    JOIN view_teacher_rscroe_avg rscore"
@@ -114,6 +115,7 @@ public class TeacherDao {
 			
 			while(rs.next()) {
 				TeacherVo vo = new TeacherVo();
+				vo.setT_no(rs.getString("t_no"));
 				vo.setT_major(rs.getString("t_major"));
 //				vo.setT_picture(rs.getString("t_picture"));
 				vo.setM_nickname(rs.getString("m_nickname"));
