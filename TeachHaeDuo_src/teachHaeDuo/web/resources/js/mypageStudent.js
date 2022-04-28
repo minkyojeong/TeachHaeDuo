@@ -1,19 +1,19 @@
 $(function() {
-console.log($("#alarm_yn").val())
+	
+
 	var yn = 'Y';
 	if($("#alarm_yn").val()==yn){
+		console.log("알람 수신ok네?")
 		$("#checkbox").prop("checked", true);
-		$(".toggle_p").text("ON");
 	} else{
 		$("#checkbox").prop("checked", false);
-		$(".toggle_p").text("OFF");
 	}
-
-
-	var check = $("input[type='checkbox']");
-	check.click(function() {
-		$(".toggle_p").toggle();
+	
+	$("#checkbox").change(function(){
+		location.href = "alarmYNChange";
 	});
+
+	
 	$("#text_div1").mouseover(function() {
 		$("#arrow_active1").show();
 		$("#arrow1").hide();
@@ -117,41 +117,7 @@ console.log($("#alarm_yn").val())
 
 
 	/* modal 연락 요청 보낸 내역 js + 리스트 ajax */
-	$("#p_send_alarm").on("click", function() {
-		$("#send_alarm_modal").show();
-		
-		$.ajax({
-			url: "sendAlarmList.ax",
-			type:"post",
-			dataType:"json",
-			success: function(result){
-				console.log(result);
-				console.log(result[0]);
-				
-				console.log(result.alarm_receiveid);
-				console.log(result.length);
-				var html = "";
-				for(var i = 0; i < result.length; i++){
-					var vo = result[i];
-					html += '<tr>';
-					html += '<td><img src="${pageContext.request.contextPath}/resources/icons/message.png" width="20" height="20"></td>';
-					html += '<td>' + vo.alarm_receiveid + '</td>';
-					html += '<td>' + vo.alarm_date + '</td>';
-					html += '</tr>';
-					
-					console.log("html:" + html);
-					
-				}
-				$("#send_alarm_table_tr1").nextAll().remove();
-				$("#send_alarm_table").append(html);
-			},
-			error: function(){
-			
-			}
-		
-		});
-	});
-
+	
 	$(".send_alarm_modal_close").click(function() {
 		$("#send_alarm_modal").hide();
 	});

@@ -1,4 +1,4 @@
-package kh.semi.thduo.mypage.controller;
+package kh.semi.thduo.alarm.controller;
 
 import java.io.IOException;
 import javax.servlet.ServletException;
@@ -7,21 +7,20 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import kh.semi.thduo.alarm.model.service.AlarmService;
 import kh.semi.thduo.member.vo.MemberVo;
-import kh.semi.thduo.teacher.model.service.TeacherService;
-import kh.semi.thduo.teacher.model.vo.TeacherVo;
 
 /**
- * Servlet implementation class MypageController
+ * Servlet implementation class AlarmYNChange
  */
-@WebServlet("/mypage")
-public class MypageController extends HttpServlet {
+@WebServlet("/alarmYNChange")
+public class AlarmYNChangeController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public MypageController() {
+    public AlarmYNChangeController() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -30,18 +29,39 @@ public class MypageController extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		System.out.println("마이페이지 doget");
+		System.out.println("알람 수신거부 doget");
 		MemberVo ssMV = (MemberVo)request.getSession().getAttribute("ssMV");
-		String mId = ssMV.getmId();
+		System.out.println(ssMV);
+		String roleSt = ssMV.getRoleSt();
+		MemberVo vo = new MemberVo();
+		int result = 0;
 		if(ssMV == null) {
 			response.sendRedirect("login");
 		} else {
-			String roleSt = ssMV.getRoleSt();
-			System.out.println(roleSt);
 			
-			if(roleSt == null) {
-				response.sendRedirect("login");
-			} else if(roleSt.equals("T")) {
+			vo.setmAlarmYn(ssMV.getmAlarmYn());
+			vo.setmId(ssMV.getmId());
+			result = new AlarmService().alarmYNChange(vo);
+		}
+		
+		if(result == 1) {
+			if(vo.getmAlarmYn().equals("Y")) {
+				vo.setmAlarmYn("N");
+			} else {
+				vo.setmAlarmYn("Y");
+			}
+			request.setAttribute("msgAlarm", "알람 수신 여부가 변경되었습니다.");
+			ssMV.setmAlarmYn(vo.getmAlarmYn());
+			if(roleSt.equals("T")) {
+				System.out.println("선생 마이페이지 진입");
+				request.getRequestDispatcher("WEB-INF/view/mypage/mypageTeacher.jsp").forward(request, response);
+			} else if(roleSt.equals("S")) {
+				System.out.println("학생 마이페이지 진입");
+				request.getRequestDispatcher("WEB-INF/view/mypage/mypageStudent.jsp").forward(request, response);
+			}
+		} else {
+			request.setAttribute("msgAlarm", "알람 수신 여부 변경이 실패했습니다.");
+			if(roleSt.equals("T")) {
 				System.out.println("선생 마이페이지 진입");
 				request.getRequestDispatcher("WEB-INF/view/mypage/mypageTeacher.jsp").forward(request, response);
 			} else if(roleSt.equals("S")) {
@@ -49,7 +69,6 @@ public class MypageController extends HttpServlet {
 				request.getRequestDispatcher("WEB-INF/view/mypage/mypageStudent.jsp").forward(request, response);
 			}
 		}
-		
 		
 	}
 

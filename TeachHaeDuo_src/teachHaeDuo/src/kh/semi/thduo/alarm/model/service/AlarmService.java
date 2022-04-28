@@ -7,6 +7,7 @@ import java.util.ArrayList;
 
 import kh.semi.thduo.alarm.model.dao.AlarmDao;
 import kh.semi.thduo.alarm.model.vo.AlarmVo;
+import kh.semi.thduo.member.vo.MemberVo;
 
 public class AlarmService {
 	private AlarmDao dao = new AlarmDao();
@@ -40,6 +41,22 @@ public class AlarmService {
 		close(conn);
 		
 		return voList;
+	}
+	
+	public int alarmYNChange(MemberVo vo) {
+		int result = 0;
+		Connection conn = null;
+
+		conn = getConnection();
+		result = dao.alarmYNChange(conn, vo);
+		if(result == 1) {
+			commit(conn);
+		} else {
+			rollback(conn);
+		}
+		close(conn);
+
+		return result;
 	}
 	
 }

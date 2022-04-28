@@ -103,7 +103,7 @@ public class MemberDao {
 	// 회원 로그인 
 	public MemberVo login(Connection conn, String mId, String pw) { 
 		MemberVo retVo = null;
-		String sql = "SELECT M_ID, M_PW, M_NAME, M_NICKNAME, M_BIRTH, M_ADDRESS, M_PHONE, M_EMAIL, GENDER_FM, ROLE_ST, M_DATE, M_CERTIFICATE, M_ALARM_YN FROM MEMBER where M_ID=? and M_PW=?";
+		String sql = "SELECT M_ID, M_PW, M_NAME, M_NICKNAME, M_BIRTH, M_ADDRESS, M_PHONE, M_EMAIL, GENDER_FM, ROLE_ST, M_DATE, M_CERTIFICATE, M_ALARM_YN, t_no, T_RECRUIT_YN FROM MEMBER left outer join t_profile using(m_id) where M_ID=? and M_PW=?";
 		try {
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, mId);
@@ -125,6 +125,9 @@ public class MemberDao {
 				retVo.setmDate(rs.getTimestamp("m_Date"));
 				retVo.setmCertificate(rs.getString("M_CERTIFICATE"));
 				retVo.setmAlarmYn(rs.getString("M_ALARM_YN"));
+				retVo.settNo(rs.getString("t_no"));
+				retVo.settRecruitYn(rs.getString("t_Recruit_Yn"));
+				
 				System.out.println(retVo);
 			}
 		} catch (SQLException e) {

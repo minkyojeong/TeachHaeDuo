@@ -71,16 +71,18 @@
                         <p class="text_div_p">알람 수신거부 여부</p>
                     </div>
                     <div>
+                    	<%= ssMV.getmAlarmYn() %>
                     	<% if(ssMV.getmAlarmYn().equals("Y")){ %>
                     	<input type="hidden" id="alarm_yn" value="Y">
                     	<%} else { %>
                     	<input type="hidden" id="alarm_yn" value="N">
                     	<%} %>
-                        <p class="toggle_p">OFF</p><p class="toggle_p" style="display:none;">ON </p>
+                        <p class="toggle_p" id="off">OFF</p>
                         <label class="switch">
                         <input type="checkbox" id="checkbox">
                         <span class="slider round"></span>
                         </label>
+                        <p class="toggle_p" id="on">ON</p>
                     </div>
                 </div>
                 <div class="text_div" id="text_div2">
@@ -236,5 +238,45 @@
     </div>
     <jsp:include page="template_footer.jsp"></jsp:include>
     </div>
+    <% String msgAlarm = (String)request.getAttribute("msgAlarm"); %>
 </body>
+<script>
+$("#p_send_alarm").on("click", function() {
+	$("#send_alarm_modal").show();
+	
+	$.ajax({
+		url: "sendAlarmList.ax",
+		type:"post",
+		dataType:"json",
+		success: function(result){
+			console.log(result);
+			console.log(result[0]);
+			
+			console.log(result.alarm_receiveid);
+			console.log(result.length);
+			var html = "";
+			for(var i = 0; i < result.length; i++){
+				var vo = result[i];
+				html += '<tr>';
+				html += '<td><img src="${pageContext.request.contextPath}/resources/icons/send.png" width="20" height="20"></td>';
+				html += '<td>' + vo.alarm_receiveid + '</td>';
+				html += '<td>' + vo.alarm_date + '</td>';
+				html += '</tr>';
+				
+				console.log("html:" + html);
+				
+			}
+			$("#send_alarm_table_tr1").nextAll().remove();
+			$("#send_alarm_table").append(html);
+		},
+		error: function(){
+		
+		}
+	
+	});
+});
+var msgAlarmVal = '${msgAlarm}';
+if(msgAlarmVal != "" && msgAlarmVal != null)
+	alert('${msgAlarm}');
+</script>
 </html>

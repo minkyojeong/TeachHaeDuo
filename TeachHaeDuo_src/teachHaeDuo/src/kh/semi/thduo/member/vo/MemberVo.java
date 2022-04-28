@@ -17,7 +17,21 @@ public class MemberVo {
 	private Timestamp 		mDate;	
 	private String 			mCertificate;
 	private String 			mAlarmYn;
+	private String          tNo;
+	private String			tRecruitYn;
 	
+	public String gettRecruitYn() {
+		return tRecruitYn;
+	}
+	public void settRecruitYn(String tRecruitYn) {
+		this.tRecruitYn = tRecruitYn;
+	}
+	public String gettNo() {
+		return tNo;
+	}
+	public void settNo(String tNo) {
+		this.tNo = tNo;
+	}
 	public String getmId() {
 		return mId;
 	}
@@ -101,7 +115,7 @@ public class MemberVo {
 		return "MemberVo [mId=" + mId + ", mPw=" + mPw + ", mName=" + mName + ", mNickname=" + mNickname + ", mBirth="
 				+ mBirth + ", mAddress=" + mAddress + ", mPhone=" + mPhone + ", mEmail=" + mEmail + ", genderFm="
 				+ genderFm + ", roleSt=" + roleSt + ", mDate=" + mDate + ", mCertificate=" + mCertificate
-				+ ", mAlarmYn=" + mAlarmYn + "]";
+				+ ", mAlarmYn=" + mAlarmYn + ", tNo=" + tNo + ", tRecruitYn=" + tRecruitYn + "]";
 	}
 	
 }
