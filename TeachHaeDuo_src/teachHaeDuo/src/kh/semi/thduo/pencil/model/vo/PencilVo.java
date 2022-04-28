@@ -3,10 +3,10 @@ package kh.semi.thduo.pencil.model.vo;
 import java.sql.Timestamp;
 
 public class PencilVo {
-	private int cmNo;
-	private String cmContent;
-	private int cmPencil;
-	private Timestamp cmDate;
+	private int cpNo;
+	private String cpContent;
+	private int cpPencil;
+	private Timestamp cpDate;
 	private String mId;
 	
 	
@@ -14,60 +14,74 @@ public class PencilVo {
 		super();
 	}
 
-	public PencilVo(int cmNo, String cmContent, int cmPencil, Timestamp cmDate, String mId) {
+
+	public PencilVo(int cpNo, String cpContent, int cpPencil, Timestamp cpDate, String mId) {
 		super();
-		this.cmNo = cmNo;
-		this.cmContent = cmContent;
-		this.cmPencil = cmPencil;
-		this.cmDate = cmDate;
+		this.cpNo = cpNo;
+		this.cpContent = cpContent;
+		this.cpPencil = cpPencil;
+		this.cpDate = cpDate;
 		this.mId = mId;
 	}
 
+
 	@Override
 	public String toString() {
-		return "PencilVo [cmNo=" + cmNo + ", cmContent=" + cmContent + ", cmPencil=" + cmPencil + ", cmDate=" + cmDate
+		return "PencilVo [cpNo=" + cpNo + ", cpContent=" + cpContent + ", cpPencil=" + cpPencil + ", cpDate=" + cpDate
 				+ ", mId=" + mId + "]";
 	}
 
-	public int getCmNo() {
-		return cmNo;
+
+	public int getCpNo() {
+		return cpNo;
 	}
 
-	public void setCmNo(int cmNo) {
-		this.cmNo = cmNo;
+
+	public void setCpNo(int cpNo) {
+		this.cpNo = cpNo;
 	}
 
-	public String getCmContent() {
-		return cmContent;
+
+	public String getCpContent() {
+		return cpContent;
 	}
 
-	public void setCmContent(String cmContent) {
-		this.cmContent = cmContent;
+
+	public void setCpContent(String cpContent) {
+		this.cpContent = cpContent;
 	}
 
-	public int getCmPencil() {
-		return cmPencil;
+
+	public int getCpPencil() {
+		return cpPencil;
 	}
 
-	public void setCmPencil(int cmPencil) {
-		this.cmPencil = cmPencil;
+
+	public void setCpPencil(int cpPencil) {
+		this.cpPencil = cpPencil;
 	}
 
-	public Timestamp getCmDate() {
-		return cmDate;
+
+	public Timestamp getCpDate() {
+		return cpDate;
 	}
 
-	public void setCmDate(Timestamp cmDate) {
-		this.cmDate = cmDate;
+
+	public void setCpDate(Timestamp cpDate) {
+		this.cpDate = cpDate;
 	}
+
 
 	public String getmId() {
 		return mId;
 	}
 
+
 	public void setmId(String mId) {
 		this.mId = mId;
 	}
+
+	
 	
 	
 }

@@ -1,8 +1,6 @@
 $(function() {
 	
-
-	var yn = 'Y';
-	if($("#alarm_yn").val()==yn){
+	if($("#alarm_yn").val()=='Y'){
 		console.log("알람 수신ok네?")
 		$("#checkbox").prop("checked", true);
 	} else{

@@ -6,8 +6,8 @@
 <link href="<%=request.getContextPath()%>/resources/css/header.css" rel="stylesheet" type="text/css">
 <link href="<%=request.getContextPath()%>/resources/css/footer.css" rel="stylesheet" type="text/css">
 <link href="<%=request.getContextPath()%>/resources/css/font.css" rel="stylesheet" type="text/css">
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <head>
     <meta charset="UTF-8">
@@ -68,10 +68,12 @@
                     <div style="display:flex">
                         <img class="arrow" id="arrow1" src="${pageContext.request.contextPath}/resources/icons/arrow_normal.png">
                         <img class="arrow_active" id="arrow_active1" src="${pageContext.request.contextPath}/resources/icons/arrow_active.png">
-                        <p class="text_div_p">알람 수신거부 여부</p>
+                        <c:choose>
+							<c:when test="${ssMV.mAlarmYn == 'Y'}"><p class="text_div_p">알림 받을거에요</p></c:when>
+							<c:when test="${ssMV.mAlarmYn == 'N'}"><p class="text_div_p">알림 안 받아요</p></c:when>
+						</c:choose>
                     </div>
                     <div>
-                    	<%= ssMV.getmAlarmYn() %>
                     	<% if(ssMV.getmAlarmYn().equals("Y")){ %>
                     	<input type="hidden" id="alarm_yn" value="Y">
                     	<%} else { %>
@@ -107,7 +109,7 @@
         </div>
         <div id="right_div">
             <div style="margin:50px">
-                <button class="btn1_2" onclick="location.href='memberUpdateLogin'">회원 정보 수정</button>
+                <button class="btn1_4" onclick="location.href='memberUpdateLogin'">회원 정보 수정</button>
             </div>
         </div>
     </div>
@@ -126,7 +128,7 @@
                 <form name="charge_frm">
                     <div class="pencilcharge_won">
                         <input type="text" name="won" id="won" value="0">
-                        <p> 원</p>
+                        <p style="line-height:20px"> 원</p>
                     </div>
                     <div class="btns">
                         <button type="button" class="btn3_1" id="btn1">-1만원</button>&nbsp;&nbsp;
@@ -136,8 +138,8 @@
                         <button type="button" class="btn3_1" id="btn5">+10만원</button>
                     </div>
                     <div class="pencilcharge_btn">
-                        <button class="btn2_2" id="charge" type="button">충전하기</button>
-                        <button class="btn2_2" id="reset" type="button" >정정</button>
+                        <button class="btn2_3" id="charge" type="button">충전하기</button>
+                        <button class="btn2_3" id="reset" type="button" >정정</button>
                     </div>
                 </form>
                 

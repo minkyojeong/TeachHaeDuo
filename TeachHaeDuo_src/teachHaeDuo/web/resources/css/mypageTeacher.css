@@ -152,7 +152,12 @@ input:checked+.slider:before {
 	font-size: 15px;
 	font-weight: bold;
 }
-
+.toggle_p2 {
+	margin: 0px;
+	display: inline-block;
+	font-size: 15px;
+	font-weight: bold;
+}
 
 
 

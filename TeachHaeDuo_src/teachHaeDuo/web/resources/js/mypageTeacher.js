@@ -1,8 +1,26 @@
 $(function() {
-	var check = $("input[type='checkbox']");
-	check.click(function() {
-		$(".toggle_p").toggle();
+	if($("#alarm_yn").val()=='Y'){
+		console.log("알람 수신ok네?")
+		$("#checkbox").prop("checked", true);
+	} else{
+		$("#checkbox").prop("checked", false);
+	}
+	
+	$("#checkbox").change(function(){
+		location.href = "alarmYNChange";
 	});
+	
+	if($("#recruit_yn").val()=='Y'){
+		console.log("알람 수신ok네?")
+		$("#checkbox2").prop("checked", true);
+	} else{
+		$("#checkbox2").prop("checked", false);
+	}
+	
+	$("#checkbox2").change(function(){
+		location.href = "recruitYNChange";
+	});
+	
 	$("#text_div1").mouseover(function() {
 		$("#arrow_active1").show();
 		$("#arrow1").hide();
@@ -77,16 +95,7 @@ $(function() {
 		$("#won").val(pencilwon);
 	});
 
-	$("charge").click(function() {
-		if (pencilwon > 0) {
-			var frm = document.charge_frm;
-			frm.action = "pencilCharge.do";
-			frm.method = "post"
-			frm.submit();
-		} else {
-			alert("충전 금액은 0원 초과로 입력해주세요");
-		}
-	});
+	
 
 
 	/* modal 0원 js */

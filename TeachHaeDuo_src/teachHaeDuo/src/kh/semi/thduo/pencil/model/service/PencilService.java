@@ -3,6 +3,7 @@ package kh.semi.thduo.pencil.model.service;
 import java.sql.Connection;
 import java.util.ArrayList;
 
+import static kh.semi.thduo.common.jdbc.JdbcTemplate.*;
 import kh.semi.thduo.pencil.model.dao.PencilDao;
 import kh.semi.thduo.pencil.model.vo.PencilVo;
 
@@ -12,6 +13,14 @@ public class PencilService {
 	public int plusPencil(PencilVo vo) {
 		int result = 0;
 		
+		Connection conn = getConnection();
+		result = dao.plusPencil(conn, vo);
+		if(result == 1) {
+			commit(conn);
+		} else {
+			rollback(conn);
+		}
+		close(conn);
 		return result;
 		
 	}

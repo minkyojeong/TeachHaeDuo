@@ -5,8 +5,9 @@
 <link href="<%=request.getContextPath()%>/resources/css/header.css" rel="stylesheet" type="text/css">
 <link href="<%=request.getContextPath()%>/resources/css/footer.css" rel="stylesheet" type="text/css">
 <link href="<%=request.getContextPath()%>/resources/css/font.css" rel="stylesheet" type="text/css">
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <head>
     <meta charset="UTF-8">
@@ -62,14 +63,16 @@
             </div>
             <hr>
             <div id="bottom_div">
-                <div class="text_div" id="text_div1">
+            <div class="text_div" id="text_div1">
                     <div style="display:flex">
                         <img class="arrow" id="arrow1" src="${pageContext.request.contextPath}/resources/icons/arrow_normal.png">
                         <img class="arrow_active" id="arrow_active1" src="${pageContext.request.contextPath}/resources/icons/arrow_active.png">
-                        <p class="text_div_p">수강생 모집 여부</p>
+                        <c:choose>
+							<c:when test="${ssMV.mAlarmYn == 'Y'}"><p class="text_div_p">알림 받을거에요</p></c:when>
+							<c:when test="${ssMV.mAlarmYn == 'N'}"><p class="text_div_p">알림 안 받아요</p></c:when>
+						</c:choose>
                     </div>
                     <div>
-                    	<%= ssMV.gettNo() %>
                     	<% if(ssMV.getmAlarmYn().equals("Y")){ %>
                     	<input type="hidden" id="alarm_yn" value="Y">
                     	<%} else { %>
@@ -78,6 +81,29 @@
                         <p class="toggle_p" id="off">OFF</p>
                         <label class="switch">
                         <input type="checkbox" id="checkbox">
+                        <span class="slider round"></span>
+                        </label>
+                        <p class="toggle_p" id="on">ON</p>
+                    </div>
+                </div>
+                <div class="text_div" id="text_div2">
+                    <div style="display:flex">
+                        <img class="arrow" id="arrow2" src="${pageContext.request.contextPath}/resources/icons/arrow_normal.png">
+                        <img class="arrow_active" id="arrow_active2" src="${pageContext.request.contextPath}/resources/icons/arrow_active.png">
+                        <c:choose>
+							<c:when test="${ssMV.tRecruitYn == 'Y'}"><p class="text_div_p">수강생 모집중</p></c:when>
+							<c:when test="${ssMV.tRecruitYn == 'N'}"><p class="text_div_p">수강생 모집 안해요</p></c:when>
+						</c:choose>
+                    </div>
+                    <div>
+                    	<% if(ssMV.gettRecruitYn().equals("Y")){ %>
+                    	<input type="hidden" id="recruit_yn" value="Y">
+                    	<%} else { %>
+                    	<input type="hidden" id="recruit_yn" value="N">
+                    	<%} %>
+                        <p class="toggle_p2" id="off">OFF</p>
+                        <label class="switch">
+                        <input type="checkbox" id="checkbox2">
                         <span class="slider round"></span>
                         </label>
                         <p class="toggle_p" id="on">ON</p>
@@ -97,10 +123,10 @@
         </div>
         <div id="right_div">
             <div style="margin:50px">
-                <button class="btn1_2" onclick="location.href='memberUpdateLogin'">회원 정보 수정</button>
+                <button class="btn1_4" onclick="location.href='memberUpdateLogin'">회원 정보 수정</button>
             </div>
             <div style="margin:50px">
-                <button type="button" class="btn1_2" onclick="location.href='teacherUpdateLogin'">교습 정보 수정</button>
+                <button type="button" class="btn1_4" onclick="location.href='teacherUpdateLogin'">교습 정보 수정</button>
             </div>
 
         </div>
@@ -117,7 +143,7 @@
                 <form name="charge_frm">
                     <div class="pencilcharge_won">
                         <input type="text" name="won" id="won" value="0">
-                        <p> 원</p>
+                        <p style="line-height:20px"> 원</p>
                     </div>
                     <div class="btns">
                         <button type="button" class="btn3_2" id="btn1">-1만원</button>&nbsp;&nbsp;
@@ -127,8 +153,8 @@
                         <button type="button" class="btn3_2" id="btn5">+10만원</button>
                     </div>
                     <div class="pencilcharge_btn">
-                        <button class="btn2_2" id="charge" type="button">충전하기</button>
-                        <button class="btn2_2" id="reset" type="button">정정</button>
+                        <button class="btn2_3" id="charge" type="button">충전하기</button>
+                        <button class="btn2_3" id="reset" type="button">정정</button>
                     </div>
                 </form>
                 
@@ -204,8 +230,24 @@
     
     <jsp:include page="template_footer.jsp"></jsp:include>
     </div>
+    <% String msgRecruit = (String)request.getAttribute("msgRecruit"); %>
+    <% String msgAlarm = (String)request.getAttribute("msgAlarm"); %>
 </body>
 <script>
+$("#charge").click(goCharge);
+
+function goCharge(){
+	console.log("충전버튼 클릭했다");
+	console.log($("#won").val());
+	if (($("#won").val()) > 0) {
+		var frm = document.charge_frm;
+		frm.action = "pencilCharge.do";
+		frm.method = "post"
+		frm.submit();
+	} else {
+		alert("충전 금액은 0원 초과로 입력해주세요");
+	}
+}
 $("#p_receive_alarm").on("click", function() {
 	$("#receive_alarm_modal").show();
 
@@ -239,5 +281,11 @@ $("#p_receive_alarm").on("click", function() {
 		}
 	});
 });
+var msgRecruitVal = '${msgRecruit}';
+if(msgRecruitVal != "" && msgRecruitVal != null)
+	alert('${msgRecruit}');
+var msgAlarmVal = '${msgAlarm}';
+if(msgAlarmVal != "" && msgAlarmVal != null)
+	alert('${msgAlarm}');
 </script>
 </html>

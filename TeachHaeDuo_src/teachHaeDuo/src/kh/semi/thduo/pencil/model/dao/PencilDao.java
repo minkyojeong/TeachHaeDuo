@@ -3,6 +3,7 @@ package kh.semi.thduo.pencil.model.dao;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 
@@ -15,6 +16,14 @@ public class PencilDao {
 	
 	public int plusPencil(Connection conn, PencilVo vo) {
 		int result = 0;
+		String sql ="";
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
 		
 		return result;
 		

@@ -41,6 +41,7 @@ public class PencilChargeDoController extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		String wonStr = request.getParameter("won");
+		System.out.println(wonStr);
 		PencilVo vo = new PencilVo();
 		int wonInt = 0;
 		try {
@@ -48,35 +49,35 @@ public class PencilChargeDoController extends HttpServlet {
 		}catch(NumberFormatException e) {
 			e.printStackTrace();
 		}
-		// 로그인 연동 시키고 풀자 TODOTODO
-		MemberVo ssvo = (MemberVo)request.getSession().getAttribute("ssMV");
-		if(ssvo == null) {  
+		
+		MemberVo ssMV = (MemberVo)request.getSession().getAttribute("ssMV");
+		if(ssMV == null) {  
 			response.sendRedirect("login");
 			return;  
 		} else {  
-			vo.setmId(ssvo.getmId());
+			vo.setmId(ssMV.getmId());
 		}
 		
-		vo.setCmContent("연필충전");
-		vo.setCmPencil(wonInt);
+		vo.setCpContent("연필충전");
+		vo.setCpPencil(wonInt);
 		int result = new PencilService().plusPencil(vo);
-		// 로그인 후 정보를 불러오지 못함 확인 후 열자 TODOTODO
-//		if(result < 1 ) { 
-//			request.getSession().setAttribute("mag", "충전이 실패했습니다.");
-//			if(ssvo.getRoleSt() == "S") {
-//				response.sendRedirect("mypageStudent");
-//			} else if(ssvo.getRoleSt() == "T") {
-//				response.sendRedirect("mypageTeacher");
-//			}
-//			
-//		} else { 
-//			request.getSession().setAttribute("mag", "충전이 완료되었습니다.");
-//			if(ssvo.getRoleSt() == "S") {
-//				response.sendRedirect("mypageStudent");
-//			} else if(ssvo.getRoleSt() == "T") {
-//				response.sendRedirect("mypageTeacher");
-//			}
-//		}
+		 
+		if(result < 1 ) { 
+			request.getSession().setAttribute("msgCharge", "충전이 실패했습니다.");
+			if(ssMV.getRoleSt() == "S") {
+				response.sendRedirect("mypageStudent");
+			} else if(ssMV.getRoleSt() == "T") {
+				response.sendRedirect("mypageTeacher");
+			}
+			
+		} else { 
+			request.getSession().setAttribute("msgCharge", "충전이 완료되었습니다.");
+			if(ssMV.getRoleSt() == "S") {
+				response.sendRedirect("mypageStudent");
+			} else if(ssMV.getRoleSt() == "T") {
+				response.sendRedirect("mypageTeacher");
+			}
+		}
 		
 		
 		
