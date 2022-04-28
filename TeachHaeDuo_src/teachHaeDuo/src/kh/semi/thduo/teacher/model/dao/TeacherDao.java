@@ -9,6 +9,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 
+import kh.semi.thduo.like.model.vo.LikeVo;
 import kh.semi.thduo.review.model.vo.ReviewVo;
 import kh.semi.thduo.teacher.model.vo.TeacherVo;
 
@@ -162,21 +163,49 @@ public class TeacherDao {
 		return retVolist;
 	}
 	
+	// 찜 여부 체크
+	public LikeVo checkLike(Connection conn, String m_id, String t_no) {
+		LikeVo retVo = null;
+		String sql = "SELECT * FROM dibs JOIN member_student USING(s_no) WHERE m_id = ? AND t_no = ?";
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, m_id);
+			pstmt.setString(2, t_no);
+			
+			rs = pstmt.executeQuery();
+			if(rs.next()) {
+				retVo = new LikeVo();
+				retVo.setS_no(rs.getString("s_no"));
+				retVo.setT_no(rs.getString("t_no"));
+				retVo.setM_id(rs.getString("m_id"));
+			}
+		} catch(SQLException e) {
+			
+		} finally {
+			close(rs);
+			close(pstmt);
+		} 
+		
+		return retVo;
+	}
+	
 	// 선생님 상세정보 읽기
 	public TeacherVo readTeacherInfo(Connection conn, String tNo){
 		TeacherVo retVo = null;
-		String sql = "SELECT pro.*, olist.object_list, alist.area_list, rscore.avg_rscore, SUBSTR(m.m_name,1,1) || LPAD('*',LENGTH(m.m_name)-1, '*') m_name, TRUNC(MONTHS_BETWEEN(TRUNC(SYSDATE,'YEAR'), m.m_birth)/12)+2 t_age, m.m_nickname, m.gender_fm, m.m_address "
+		String sql = "SELECT pro.*, olist.object_list, alist.area_list, round(rscore.avg_rscore, 2) avg_rscore, SUBSTR(m.m_name,1,1) || LPAD('*',LENGTH(m.m_name)-1, '*') m_name, TRUNC(MONTHS_BETWEEN(TRUNC(SYSDATE,'YEAR'), m.m_birth)/12)+2 t_age, m.m_nickname, m.gender_fm, m.m_address "
 				+ "FROM t_profile pro JOIN member m ON pro.m_id = m.m_id "
 				+ "JOIN view_teacher_rscroe_avg rscore ON rscore.m_nickname = m.m_nickname "
 				+ "JOIN view_teacher_object olist ON olist.m_nickname = m.m_nickname "
 				+ "JOIN view_teacher_area alist ON alist.m_nickname = m.m_nickname "
 				+ "WHERE t_no = ?";
-
+		String sql2 = "SELECT t_r_no, t_r_writer, m_id, t_no, t_r_content, TO_CHAR(t_r_date, 'YYYY-MM-DD HH24:MI:SS') t_r_date, t_r_score "
+				+ "FROM t_review WHERE t_no = ? ORDER BY t_r_date DESC";
+		
 		try {
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, tNo);
 			rs = pstmt.executeQuery();
-//			private ArrayList<ReviewVo> tReview;
 			
 			if (rs.next()) {
 				retVo = new TeacherVo();
@@ -192,7 +221,7 @@ public class TeacherDao {
 				retVo.setT_special(rs.getString("t_special"));
 				retVo.setT_approval(rs.getString("t_approval"));
 				retVo.setT_permit_yn(rs.getString("t_permit_yn"));
-//				retVo.setT_picture(rs.getString("t_picture"));
+				retVo.setT_picture(rs.getString("t_picture"));
 				retVo.setT_intro(rs.getString("t_intro"));
 				retVo.setT_recruit_yn(rs.getString("t_recruit_yn"));
 				retVo.setObject_list(rs.getString("object_list"));
@@ -204,6 +233,29 @@ public class TeacherDao {
 				retVo.setM_nickname(rs.getString("m_nickname"));
 				retVo.setGender_fm(rs.getString("gender_fm"));
 				retVo.setM_address(rs.getString("m_address"));
+				
+				close(rs);
+				close(pstmt);
+				
+				// 리뷰 읽어오기
+				pstmt = conn.prepareStatement(sql2);
+				pstmt.setString(1, tNo);
+				rs = pstmt.executeQuery();
+				if(rs.next()) {
+					ArrayList<ReviewVo> reviewList = new ArrayList<ReviewVo>();
+					do {
+						ReviewVo rvo = new ReviewVo();
+						rvo.setT_r_no(rs.getInt("t_r_no"));
+						rvo.setT_no(rs.getString("t_no"));
+						rvo.setT_r_content(rs.getString("t_r_content"));
+						rvo.setT_r_date(rs.getTimestamp("t_r_date"));
+						rvo.setT_r_score(rs.getInt("t_r_score"));
+						rvo.setT_r_writer(rs.getString("t_r_writer"));
+						rvo.setM_id(rs.getString("m_id"));
+						reviewList.add(rvo);
+					} while(rs.next());
+					retVo.setT_review(reviewList);
+				}
 			}
 		} catch(SQLException e) {
 			e.printStackTrace();

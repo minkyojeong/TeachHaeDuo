@@ -13,11 +13,11 @@ public class LikeService {
 	private LikeDao dao = new LikeDao();
 	
 	// 찜하기 삽입
-	public int insertLike(LikeVo vo) {
+	public int insertLike(String m_id, String t_no) {
 		int result = 0;
 		Connection conn = getConnection();
 		
-		result = dao.insertLike(conn, vo);
+		result = dao.insertLike(conn, m_id, t_no);
 		
 		close(conn);
 

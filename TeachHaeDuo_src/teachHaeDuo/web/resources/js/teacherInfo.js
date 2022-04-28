@@ -128,7 +128,7 @@ $("#btn_review_send").on('click', function() {
 		},
 		success: function(result) {
 			console.log(result);
-			if (result == 2){
+			if (result == 2) {
 				alert("리뷰쓰기는 해당 선생님에게 쪽지를 보낸 사람만 가능합니다. 쪽지를 보낸 후, 다시 시도해주세요.");
 				$(".review").hide();
 				$(".message").show();
@@ -174,31 +174,69 @@ $("#btn_review_delete").on('click', function() {
 	});
 });
 
-var cnt = 1;
-// 찜하기 클릭 시마다 이미지 변경
+// 찜 했다는 모달창 띄우고 내용 있는 곳 부분 제외한 곳 누르면 페이지 새로고침
+$(".like").on('click', function() {
+	if (event.target == $(".like").get(0)) {
+		/*$(".like").hide();*/
+		location.reload();
+	}
+});
+// 찜 취소했다는 모달창 띄우고 내용 있는 곳 부분 제외한 곳 누르면 페이지 새로고침
+$(".cancle_like").on('click', function() {
+	if (event.target == $(".cancle_like").get(0)) {
+		/*$(".cancle_like").hide();*/
+		location.reload();
+	}
+});
+// 찜하기 클릭 시 처리 내용(찜하기 이미지가 비어있는 경우)
 $("#btn_like").on('click', function() {
 	console.log("찜 클릭!");
-	console.log(cnt);
-	if (cnt % 2 == 1) {
-		$("#btn_like > img").attr("src", "http://localhost:8090/myWeb2/resources/icons/like_color.png");
-		// 선생님 찜 했다는 모달창 띄우기
-		$(".like").show();
-		// 모달창 띄우고 내용 있는 곳 부분 제외한 곳 누르면 모달창 닫기
-		$(".like").on('click', function() {
-			if (event.target == $(".like").get(0)) {
-				$(".like").hide();
+	$.ajax({
+		url: "likeInsert.ax",
+		type: "post",
+		data: {
+			liked_id: $("#liked_id").val(),
+			t_no: $("#t_no").val()
+		},
+		success: function(result) {
+			console.log(result);
+			if (result == 1) {
+				$(".like").show();
+			} else if (result == -1) {
+				alert("찜이 되지않았습니다. 다시 시도해주세요.");
+			} else if (result == 0) {
+				alert("로그인을 한 후에 찜이 가능합니다. 로그인 페이지로 이동합니다.");
+				location.href = "login";
 			}
-		});
-	} else {
-		$("#btn_like > img").attr("src", "http://localhost:8090/myWeb2/resources/icons/like.png");
-		// 찜 취소했다는 모달창 띄우기
-		$(".cancle_like").show();
-		// 모달창 띄우고 내용 있는 곳 부분 제외한 곳 누르면 모달창 닫기
-		$(".cancle_like").on('click', function() {
-			if (event.target == $(".cancle_like").get(0)) {
-				$(".cancle_like").hide();
+		},
+		error: function(request, status, error) {
+			console.log("code:" + request.status + "\n" + "message:" + request.responseText + "\n" + "error:" + error);
+		}
+	});
+});
+// 찜하기 클릭 시 처리 내용(찜하기 이미지가 색칠되어있는 경우)
+$("#btn_cancle_like").on('click', function() {
+	console.log("찜 취소!");
+	$.ajax({
+		url: "likeDelete.ax",
+		type: "post",
+		data: {
+			s_no: $("#s_no").val(),
+			t_no: $("#t_no").val()
+		},
+		success: function(result) {
+			console.log(result);
+			if (result == 1) {
+				$(".cancle_like").show();
+			} else if (result == -1) {
+				alert("찜이 취소 되지않았습니다. 다시 시도해주세요.");
+			} else if (result == 0) {
+				alert("로그인을 한 후에 찜 취소가 가능합니다. 로그인 페이지로 이동합니다.");
+				location.href = "login";
 			}
-		});
-	}
-	cnt++;
+		},
+		error: function(request, status, error) {
+			console.log("code:" + request.status + "\n" + "message:" + request.responseText + "\n" + "error:" + error);
+		}
+	});
 });

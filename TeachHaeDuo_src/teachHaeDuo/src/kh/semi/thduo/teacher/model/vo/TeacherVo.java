@@ -2,6 +2,7 @@ package kh.semi.thduo.teacher.model.vo;
 
 import java.util.ArrayList;
 
+import kh.semi.thduo.like.model.vo.LikeVo;
 import kh.semi.thduo.review.model.vo.ReviewVo;
 
 public class TeacherVo {
@@ -29,6 +30,7 @@ public class TeacherVo {
 	private String gender_fm;
 	private String m_address;
 	private ArrayList<ReviewVo> t_review;
+	private LikeVo like;
 	
 	public TeacherVo() {
 		super();
@@ -42,7 +44,7 @@ public class TeacherVo {
 				+ t_permit_yn + ", t_picture=" + t_picture + ", t_intro=" + t_intro + ", t_recruit_yn=" + t_recruit_yn
 				+ ", object_list=" + object_list + ", area_list=" + area_list + ", avg_rscore=" + avg_rscore + ", m_id="
 				+ m_id + ", t_age=" + t_age + ", m_name=" + m_name + ", m_nickname=" + m_nickname + ", gender_fm="
-				+ gender_fm + ", m_address=" + m_address + ", t_review=" + t_review + "]";
+				+ gender_fm + ", m_address=" + m_address + ", t_review=" + t_review + ", like=" + like + "]";
 	}
 
 	public String getT_no() {
@@ -236,5 +238,12 @@ public class TeacherVo {
 	public void setT_review(ArrayList<ReviewVo> t_review) {
 		this.t_review = t_review;
 	}
-	
+
+	public LikeVo getLike() {
+		return like;
+	}
+
+	public void setLike(LikeVo like) {
+		this.like = like;
+	}
 }

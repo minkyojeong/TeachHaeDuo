@@ -17,14 +17,16 @@ public class LikeDao {
 	private ResultSet rs = null;
 
 	// 찜하기 삽입
-	public int insertLike(Connection conn, LikeVo vo) {
+	public int insertLike(Connection conn, String m_id, String t_no) {
 		int result = 0;
-		String sql = "INSERT INTO dibs VALUES(?, ?)";
+		String sql = "INSERT INTO dibs(s_no, t_no) "
+				+ "SELECT (SELECT s_no FROM member_student WHERE m_id = ?), ? "
+				+ "FROM dual";
 
 		try {
 			pstmt = conn.prepareStatement(sql);
-			pstmt.setString(1, vo.getS_no());
-			pstmt.setString(2, vo.getT_no());
+			pstmt.setString(1, m_id);
+			pstmt.setString(2, t_no);
 			
 			result = pstmt.executeUpdate();
 		} catch (SQLException e) {

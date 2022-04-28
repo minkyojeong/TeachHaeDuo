@@ -5,6 +5,7 @@ import static kh.semi.thduo.common.jdbc.JdbcTemplate.*;
 import java.sql.Connection;
 import java.util.ArrayList;
 
+import kh.semi.thduo.like.model.vo.LikeVo;
 import kh.semi.thduo.teacher.model.dao.TeacherDao;
 import kh.semi.thduo.teacher.model.vo.TeacherVo;
 
@@ -130,6 +131,18 @@ public class TeacherService {
 		close(conn);
 		
 		return retVolist;
+	}
+	
+	// 찜 여부 체크
+	public LikeVo checkLike(String m_id, String t_no) {
+		LikeVo retVo = null;
+		Connection conn = getConnection();
+		
+		retVo = dao.checkLike(conn, m_id, t_no);
+		
+		close(conn);
+		
+		return retVo;
 	}
 	
 	// 선생님 상세정보 읽기

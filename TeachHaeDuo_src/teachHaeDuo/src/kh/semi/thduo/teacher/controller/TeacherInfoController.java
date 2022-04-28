@@ -34,11 +34,22 @@ public class TeacherInfoController extends HttpServlet {
 		String tNo = request.getParameter("tNo");
 		TeacherVo result = new TeacherService().readTeacherInfo(tNo);
 		
-		System.out.println("TeacherVo : " + result);
+//		// 로그인 여부 확인(이미 로그인 확인 했지만 로그아웃 했을 수도 있으니까 로그인 여부 다시 확인)
+//		MemberVo ssvo = (MemberVo) request.getSession().getAttribute("ssMV");
+//		if(ssvo == null) {
+//			result.setLike(null);
+//		} else {
+//			result.setLike(new TeacherService().checkLike(ssvo.getmId(), tNo));
+//		}
+
+//		System.out.println("TeacherVo : " + result);
 		if(result == null) {
+			System.out.println("TeacherVo : " + result);
 			System.out.println("선생님 정보가 없습니다.");
 //			response.sendRedirect("teacherSearch");
 		} else {
+			result.setLike(new TeacherService().checkLike("b12345", tNo));
+			System.out.println("TeacherVo : " + result);
 			request.setAttribute("tvo", result);
 			request.getRequestDispatcher("WEB-INF/view/teacher/teacherInfo.jsp").forward(request, response);
 		}
