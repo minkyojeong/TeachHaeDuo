@@ -20,6 +20,8 @@
 <div class="main_wrap">
 	<jsp:include page="../template_header.jsp"></jsp:include>
 </div>
+ <div id="loginAll">
+
 	<div class="card align-middle" style="width:25rem;">
 
       <div>
@@ -48,12 +50,11 @@
             <a href="findId">아이디 찾기 &nbsp; |</a>   <a href="findPw">&nbsp;비밀번호 찾기 &nbsp;</a>   <a href="join">| &nbsp; 회원가입</a>
     </div>
 
-    
+ </div>  
 
 
-
-
-</div>
+<div>
     <jsp:include page="../template_footer.jsp"></jsp:include>
 </div>
+
 </html>

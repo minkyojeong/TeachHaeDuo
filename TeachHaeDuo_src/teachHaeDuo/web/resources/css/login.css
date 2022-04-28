@@ -1,9 +1,7 @@
 @charset "UTF-8";
-   html {
-		height: 100%;
-	}
+ 
 	
-	body {
+	#loginAll {
 	    width:100%;
 	    height:100%;
 	    margin: 0;
@@ -123,4 +121,4 @@
     .check{
     	color : red;
     }
-    
+   
