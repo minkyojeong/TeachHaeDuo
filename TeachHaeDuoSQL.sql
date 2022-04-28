@@ -560,7 +560,7 @@ AS
     SELECT m_nickname, AVG(t_r_score) as avg_rscore
     FROM t_profile
         JOIN member USING ( m_id )
-        JOIN t_review USING ( t_no )
+        LEFT OUTER JOIN t_review USING ( t_no )
     GROUP BY m_nickname;
 
 COMMIT;
