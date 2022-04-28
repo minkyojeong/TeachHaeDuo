@@ -45,17 +45,28 @@ public class ReviewInsertAjaxController extends HttpServlet {
 		System.out.println("doPost - reviewInsert.ax");
 		PrintWriter out = response.getWriter();
 
+		String alarm_receiveid = request.getParameter("alarm_receiveid");
 		String t_no = request.getParameter("t_no");
 		String t_r_content = request.getParameter("t_r_content");
 		String strScore = request.getParameter("t_r_score");
 		int t_r_score = 0;
 
+		int check = new ReviewService().checkMessage("홍기", alarm_receiveid);
+		
+		if(check == 0) { // 해당 선생님에게 쪽지 보낸 적 없음
+			out.print(2);
+			out.flush();
+			out.close();
+			return;
+		}
+		
 		try {
 			t_r_score = Integer.parseInt(strScore);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 
+		System.out.println("alarm_receiveid : " + alarm_receiveid);
 		System.out.println("t_no : " + t_no);
 		System.out.println("t_r_content : " + t_r_content);
 		System.out.println("t_r_score : " + t_r_score);
@@ -68,9 +79,9 @@ public class ReviewInsertAjaxController extends HttpServlet {
 		vo.setM_id("a12345");
 		
 		int result = new ReviewService().insertReview(vo);
-		if(result < 1) {
+		if(result < 1) { // 리뷰등록 실패
 			out.print(-1);
-		} else {
+		} else { // 리뷰등록 성공
 			out.print(1);
 		}
 
@@ -87,15 +98,25 @@ public class ReviewInsertAjaxController extends HttpServlet {
 //			out.close();
 //			return; // DB에 저장하지 않아도 되니까
 //		} else {
-//			vo.setT_r_writer(ssvo.getmNickName);
+			// 쪽지 전송 여부 확인
+//			int check = new ReviewService().checkMessage(ssvo.getmNickName(), alarm_receiveid);
+//			
+//			if(check == 0) { // 해당 선생님에게 쪽지 보낸 적 없음
+//				out.print(2);
+//				out.flush();
+//				out.close();
+//				return;
+//			}
+//		
+//			vo.setT_r_writer(ssvo.getmNickName());
 //			vo.setM_id(ssvo.getmId());
 //		}
 //		// DB에 저장
-//		int result = new BoardService().writeBoard(vo);
-//		if (result < 1) { // 글등록 실패(글등록으로 이동)
-//			out.print("실패");
-//		} else { // 글등록 성공(글목록으로 이동)
-//			out.print("성공");
+//		int result = new ReviewService().insertReview(vo);
+//		if (result < 1) { // 리뷰등록 실패
+//			out.print(-1);
+//		} else { // 리뷰등록 성공
+//			out.print(1);
 //		}
 
 		out.flush();

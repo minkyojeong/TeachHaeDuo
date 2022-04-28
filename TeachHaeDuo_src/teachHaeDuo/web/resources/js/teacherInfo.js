@@ -14,6 +14,11 @@ $(".report").on('click', function() {
 });
 // 신고 버튼 클릭 시 처리 내용
 $("#btn_report_send").on('click', function() {
+	if ($("#m_r_content").val() == "") {
+		alert("신고 내용을 입력해주세요. 내용을 입력해야 신고가 가능합니다.");
+		$("#m_r_content").focus();
+		return;
+	}
 	$.ajax({
 		url: "reportInsert.ax",
 		type: "post",
@@ -26,12 +31,12 @@ $("#btn_report_send").on('click', function() {
 			console.log(result);
 			if (result == 1) {
 				alert("신고 되었습니다.");
-				$(".report_sel select").val("blame").prop("selected", true);
-				$(".report_input textarea").val("");
+				$("#report_category").val("비난").prop("selected", true);
+				$("#m_r_content").val("");
 				$(".report").hide();
 			} else if (result == -1) {
 				alert("신고가 되지 않았습니다. 다시 시도해주세요.");
-				$(".report_input textarea").focus();
+				$("#m_r_content").focus();
 			} else if (result == 0) {
 				alert("로그인을 한 후에 신고가 가능합니다. 로그인 페이지로 이동합니다.");
 				location.href = "login";
@@ -59,6 +64,11 @@ $(".message").on('click', function() {
 });
 // 쪽지 보내기 버튼 클릭 시 처리 내용
 $("#btn_message_send").on('click', function() {
+	if ($("#alarm_content").val() == "") {
+		alert("쪽지 내용을 입력해주세요. 내용을 입력해야 쪽지를 보낼 수 있습니다.");
+		$("#alarm_content").focus();
+		return;
+	}
 	$.ajax({
 		url: "sendAlarm.ax",
 		type: "post",
@@ -70,11 +80,11 @@ $("#btn_message_send").on('click', function() {
 			console.log(result);
 			if (result == 1) {
 				alert("쪽지를 보냈습니다. 답장을 기다려주세요.");
-				$(".message_input textarea").val("");
+				$("#alarm_content").val("");
 				$(".message").hide();
 			} else if (result == -1) {
 				alert("쪽지가 보내지지 않았습니다. 다시 시도해주세요.");
-				$(".message_input textarea").focus();
+				$("#alarm_content").focus();
 			} else if (result == 0) {
 				alert("로그인을 한 후에 리뷰 삭제가 가능합니다. 로그인 페이지로 이동합니다.");
 				location.href = "login";
@@ -102,22 +112,32 @@ $(".review").on('click', function() {
 });
 // 리뷰쓰기 버튼 클릭 시 처리 내용
 $("#btn_review_send").on('click', function() {
+	if ($("#t_r_content").val() == "") {
+		alert("리뷰를 입력해주세요. 내용을 입력해야 리뷰 등록이 가능합니다.");
+		$("#t_r_content").focus();
+		return;
+	}
 	$.ajax({
 		url: "reviewInsert.ax",
 		type: "post",
 		data: {
+			alarm_receiveid: $("#alarm_receiveid").val(),
 			t_no: $("#t_no").val(),
 			t_r_content: $("#t_r_content").val(),
 			t_r_score: $("#t_r_score").val()
 		},
 		success: function(result) {
 			console.log(result);
-			if (result == 1) {
+			if (result == 2){
+				alert("리뷰쓰기는 해당 선생님에게 쪽지를 보낸 사람만 가능합니다. 쪽지를 보낸 후, 다시 시도해주세요.");
+				$(".review").hide();
+				$(".message").show();
+			} else if (result == 1) {
 				alert("리뷰가 등록되었습니다.");
 				location.reload();
 			} else if (result == -1) {
 				alert("리뷰가 등록되지 않았습니다. 다시 시도해주세요.");
-				$(".review_input textarea").focus();
+				$("#t_r_content").focus();
 			} else if (result == 0) {
 				alert("로그인을 한 후에 리뷰 등록이 가능합니다. 로그인 페이지로 이동합니다.");
 				location.href = "login";

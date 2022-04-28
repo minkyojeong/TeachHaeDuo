@@ -25,11 +25,11 @@
 				<div class="report_sel">
 					<span>신고사유 선택</span>
 					<select name="report_category" id="report_category">
-						<option value="blame">비난</option>
-						<option value="sexual">성희롱적 발언</option>
-						<option value="ad">광고</option>
-						<option value="loop">도배</option>
-						<option value="etc">기타</option>
+						<option value="비난">비난</option>
+						<option value="성희롱적 발언">성희롱적 발언</option>
+						<option value="광고">광고</option>
+						<option value="도배">도배</option>
+						<option value="기타">기타</option>
 					</select>
 				</div>
 				<div class="report_input">
@@ -50,7 +50,7 @@
 			<p class="message_notice">* 쪽지를 보낼 시, 연필이 500원 차감됩니다. *</p>
 			<div class="message_input">
 				<input type="hidden" name="alarm_receiveid" id="alarm_receiveid" value="${tvo.m_nickname}">
-				<textarea cols="35" rows="10" name="alarm_content" id="alarm_content" placeholder="쪽지 내용을 입력해주세요." required></textarea>
+				<textarea cols="35" rows="10" name="alarm_content" id="alarm_content" placeholder="쪽지 내용을 입력해주세요."></textarea>
 			</div>
 			<div class="message_send">
 				<button type="button" id="btn_message_cancel">취소</button>
@@ -71,6 +71,7 @@
 					<option value="4">4</option>
 					<option value="5">5</option>
 				</select>
+				<input type="hidden" name="alarm_receiveid" id="alarm_receiveid" value="${tvo.m_nickname}">
 				<input type="hidden" name="t_no" id="t_no" value="${tvo.t_no}">
 				<textarea cols="35" rows="10" name="t_r_content" id="t_r_content" placeholder="리뷰를 입력해주세요." required></textarea>
 			</div>
@@ -177,7 +178,6 @@
 							</div>
 							<article id="t_review">
 								<h1>리뷰</h1>
-								<!-- TODO : 해당 선생님한테 쪽지 보냈던 사람한테만 리뷰쓰기 버튼 보이게 하기 OR DAO에서 처리 -->
 								<button id="btn_review" class="btn1_2">리뷰쓰기</button>
 								<div class="review_list_content">
 									<c:choose>
@@ -209,6 +209,7 @@
 					<aside>
 						<div class="aside_menu">
 							<div class="like_report">
+							<!-- TODO : 찜 테이블에서 찜관련 정보 조회하고 정보 있으면 채워진 사진, 없으면 비워진 사진으로 띄워야 함 -->
 								<button id="btn_like" class="btn3_1">
 									<img id="img_like" src="<%=request.getContextPath()%>/resources/icons/like.png">찜
 								</button>
