@@ -5,8 +5,9 @@ section{
 	    margin: 0;
   		padding-top: 200px ;
   		padding-bottom: 200px;
-        line-height: 1.5;
-  		font-family: "MinSans-Bold", arial, helvetica, sans-serif;
+        line-height: 1.8;
+        font-size: 17px;
+  		font-family: "MinSans-Medium";
   		background-repeat: no-repeat;
 }
 section button, input {
@@ -55,6 +56,8 @@ section #btn-Yes{
         color: white;
         border: none;
         cursor: pointer;
+        font-family: "MinSans-Bold";
+        font-size: 20px;
         
 }
     
@@ -68,7 +71,7 @@ section .form-control {
     padding: 0.375rem 0.75rem;
     font-size: 1rem;
     line-height: 1.5;
-    color: #818890;
+    color: #504A4D;
     background-color: #fff;
     background-clip: padding-box;
     border: 1px solid #ced4da;
@@ -77,10 +80,10 @@ section .form-control {
 }
    
 section .card-body{
-        padding: 20px;
+        padding: 25px;
 }
     
-section .login .form-control {
+section .form-control {
   		position: relative;
   		height: auto;
   		-webkit-box-sizing: border-box;
@@ -101,19 +104,23 @@ section .form-control:focus {
 section .checkbox{
         margin-right: 20px;
         text-align: right;
-        font-size: 13px;
+       
+        padding: 15px;
         color: #495057;
 
 }
  
 section .card-title{
+
         text-align: center;
          font-size: 37px;
+         padding: 20px;
+         font-family: "MinSans-Bold"
 }
 
 section .links{
         text-align: center;
-        margin-bottom: 10px;
+        padding: 25px;
 }
 section a{ 
     	color: #FA9D00; 
