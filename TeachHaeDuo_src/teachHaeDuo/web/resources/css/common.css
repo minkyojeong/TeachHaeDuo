@@ -1,3 +1,13 @@
+body {
+	width: 1600px;
+	box-sizing: border-box;
+}
+
+.wrap.content {
+	width: 1280px;
+	margin: 0 auto;
+}
+
 a {
     text-decoration: none;
 }
