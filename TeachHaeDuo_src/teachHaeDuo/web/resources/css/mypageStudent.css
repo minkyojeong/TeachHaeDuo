@@ -5,19 +5,12 @@
 
 * {
 	font-family: MinSans-Medium;
-}
-div#wrap p {
-	font-family: MinSans-Medium;
 	vertical-align: middle;
 }
+
 div#bottom_div p {
 	line-height:20px;
 }
-
-a{
-	text-decoration:none;
-}
-
 a:link {
 	color: black
 }
@@ -26,11 +19,9 @@ a:visited {
 	color: black;
 }
 
-#main_wrap {
-	width: 1200px;
-	height: 70vh;
+.wrap.content {
 	display: flex;
-	margin: 0 auto;
+	height:80%;
 }
 
 #left_div {

@@ -1,15 +1,12 @@
 <%@page import="kh.semi.thduo.member.vo.MemberVo"%>
-<link href="<%=request.getContextPath()%>/resources/css/reset.css"
-	rel="stylesheet" type="text/css">
-<link href="${pageContext.request.contextPath}/resources/css/button.css"
-	rel="stylesheet" type="text/css">
-	<link href="${pageContext.request.contextPath}/resources/css/mypageUpdate.css"
-	rel="stylesheet" type="text/css">
-	<link href="<%=request.getContextPath()%>/resources/css/header.css" rel="stylesheet" type="text/css">
-	<link href="<%=request.getContextPath()%>/resources/css/footer.css" rel="stylesheet" type="text/css">
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-  	<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<link href="<%=request.getContextPath()%>/resources/css/reset.css" rel="stylesheet" type="text/css">
+<link href="<%=request.getContextPath()%>/resources/css/common.css" rel="stylesheet" type="text/css">
+<link href="${pageContext.request.contextPath}/resources/css/button.css" rel="stylesheet" type="text/css">
+<link href="${pageContext.request.contextPath}/resources/css/mypageUpdate.css" rel="stylesheet" type="text/css">
+<link href="<%=request.getContextPath()%>/resources/css/header.css" rel="stylesheet" type="text/css">
+<link href="<%=request.getContextPath()%>/resources/css/footer.css" rel="stylesheet" type="text/css">
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <head>
     <meta charset="UTF-8">
@@ -18,15 +15,15 @@
 
 </head>
 <body>
-	<div>
+	<div id="main_wrap">
 	<jsp:include page="../template_header.jsp"></jsp:include>
-    <div id="main_wrap">
+    <div class="wrap content">
         <form action="#" method="post">
             <div id="top_div">
                 <p style="font-size:17px"><회원정보수정></p>
             </div>
             <div id="middle_div">
-                <table>
+                <table id="memberUpdateTable">
                     <tr>
                         <td>
                             아이디

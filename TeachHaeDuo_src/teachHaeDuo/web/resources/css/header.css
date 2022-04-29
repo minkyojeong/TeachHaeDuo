@@ -28,6 +28,7 @@ header .menu li > a {
 
 
 
+/* 알람 모달창 */
 
 label:hover{
        opacity: 1;
@@ -46,7 +47,7 @@ label:hover{
 #send_btn:checked ~ label#send_label{
 	opacity: 1;
 }
-input[type=radio]{
+.header_btn_div input[type=radio]{
 	display:none;
 }
 .header_btn{
@@ -102,7 +103,7 @@ input[type=radio]{
 	background: white;
 	border-radius: 10px;
 	border: 1px solid black;
-	width: 600px;
+	width: 850px;
 	height: 700px;
 	position: fixed;
 	top: 50%;
@@ -139,6 +140,7 @@ input[type=radio]{
 	color: black;
 }
 
+/* 받은,보낸 알람 조회 */
 table#header_alarm_table{
 	width:100%;
 	text-align:center;
@@ -147,13 +149,75 @@ table#header_alarm_table{
 	border-collapse: separate;
 }
 
+table#header_alarm_table th{
+	font-family: MinSans-Bold;
+	border-bottom: 1px solid gray;
+	height:30px;
+}
+table#header_alarm_table td{
+	vertical-align:middle;
+}
 
 table#header_alarm_table  tr:first-child  th:nth-child(1){
-	width: 10%;
+	width: 5%;
 }
 table#header_alarm_table  tr:first-child  th:nth-child(2){
 	width: 60%;
 }
 table#header_alarm_table  tr:first-child  th:nth-child(3){
-	width: 30%;
+	width: 15%;
+}
+table#header_alarm_table  tr:first-child  th:nth-child(4){
+	width: 20%;
+}
+
+table#header_alarm_table a:link {
+	color: black
+}
+
+table#header_alarm_table a:visited {
+	color: black;
+}
+
+
+/* 전체 알람 조회 */
+table#header_allalarm_table{
+	width:100%;
+	text-align:center;
+	border-spacing: 20px 20px;
+	margin: 0 auto;
+	border-collapse: separate;
+}
+
+table#header_allalarm_table th{
+	font-family: MinSans-Bold;
+	border-bottom: 1px solid gray;
+	height:30px;
+}
+table#header_allalarm_table td{
+	vertical-align:middle;
+}
+
+table#header_allalarm_table  tr:first-child  th:nth-child(1){
+	width: 5%;
+}
+table#header_allalarm_table  tr:first-child  th:nth-child(2){
+	width: 50%;
+}
+table#header_allalarm_table  tr:first-child  th:nth-child(3){
+	width: 15%;
+}
+table#header_allalarm_table  tr:first-child  th:nth-child(4){
+	width: 15%;
+}
+table#header_allalarm_table  tr:first-child  th:nth-child(5){
+	width: 15%;
+}
+
+table#header_allalarm_table a:link {
+	color: black
+}
+
+table#header_allalarm_table a:visited {
+	color: black;
 }

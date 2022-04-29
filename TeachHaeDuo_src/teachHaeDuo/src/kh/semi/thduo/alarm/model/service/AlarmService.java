@@ -11,7 +11,7 @@ import kh.semi.thduo.member.vo.MemberVo;
 
 public class AlarmService {
 	private AlarmDao dao = new AlarmDao();
-	
+
 	public int sendAlarm(AlarmVo vo) {
 		int result = 0;
 		Connection conn = null;
@@ -23,33 +23,44 @@ public class AlarmService {
 
 		return result;
 	}
-	
-	public ArrayList<AlarmVo> sendListAlarm(String mNickname){
-		
+
+	public ArrayList<AlarmVo> sendListAlarm(String mNickname) {
+
 		Connection conn = null;
 		conn = getConnection();
 		ArrayList<AlarmVo> voList = dao.sendListAlarm(conn, mNickname);
 		close(conn);
-		
+
 		return voList;
 	}
-	public ArrayList<AlarmVo> receiveListAlarm(String mNickname){
-		
+
+	public ArrayList<AlarmVo> receiveListAlarm(String mNickname) {
+
 		Connection conn = null;
 		conn = getConnection();
 		ArrayList<AlarmVo> voList = dao.receiveListAlarm(conn, mNickname);
 		close(conn);
-		
+
 		return voList;
 	}
-	
+
+	public ArrayList<AlarmVo> allListAlarm(String mNickname) {
+
+		Connection conn = null;
+		conn = getConnection();
+		ArrayList<AlarmVo> voList = dao.allListAlarm(conn, mNickname);
+		close(conn);
+
+		return voList;
+	}
+
 	public int alarmYNChange(MemberVo vo) {
 		int result = 0;
 		Connection conn = null;
 
 		conn = getConnection();
 		result = dao.alarmYNChange(conn, vo);
-		if(result == 1) {
+		if (result == 1) {
 			commit(conn);
 		} else {
 			rollback(conn);
@@ -58,5 +69,5 @@ public class AlarmService {
 
 		return result;
 	}
-	
+
 }

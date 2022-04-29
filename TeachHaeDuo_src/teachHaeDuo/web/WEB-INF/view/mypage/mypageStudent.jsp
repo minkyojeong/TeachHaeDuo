@@ -1,7 +1,7 @@
+<link href="<%=request.getContextPath()%>/resources/css/reset.css" rel="stylesheet" type="text/css">
+<link href="<%=request.getContextPath()%>/resources/css/common.css" rel="stylesheet" type="text/css">
  <link href="${pageContext.request.contextPath}/resources/css/mypageStudent.css" rel="stylesheet" type="text/css">
 <%@page import="kh.semi.thduo.member.vo.MemberVo"%>
-
-<link href="<%=request.getContextPath()%>/resources/css/reset.css" rel="stylesheet" type="text/css">
 <link href="${pageContext.request.contextPath}/resources/css/button.css" rel="stylesheet" type="text/css">
 <link href="<%=request.getContextPath()%>/resources/css/header.css" rel="stylesheet" type="text/css">
 <link href="<%=request.getContextPath()%>/resources/css/footer.css" rel="stylesheet" type="text/css">
@@ -17,9 +17,9 @@
 </head>
 <body>
 
-	<div id = "wrap">
+	<div id = "main_wrap">
 	<jsp:include page="../template_header.jsp"></jsp:include>
-    <div id="main_wrap">
+    <div class="wrap content" id="content">
         <div id="left_div">
             <div id="top_div">
                 <div id="profile_div" style="width:50%">

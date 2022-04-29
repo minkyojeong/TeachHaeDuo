@@ -18,16 +18,16 @@ import kh.semi.thduo.alarm.model.vo.AlarmVo;
 import kh.semi.thduo.member.vo.MemberVo;
 
 /**
- * Servlet implementation class ReceiveAlarmListAjaxController
+ * Servlet implementation class AllAlarmListAjaxContoller
  */
-@WebServlet("/receiveAlarmList.ax")
-public class ReceiveAlarmListAjaxController extends HttpServlet {
+@WebServlet("/allAlarmList.ax")
+public class AllAlarmListAjaxContoller extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public ReceiveAlarmListAjaxController() {
+    public AllAlarmListAjaxContoller() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -37,23 +37,24 @@ public class ReceiveAlarmListAjaxController extends HttpServlet {
 	 */
 //	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 //		// TODO Auto-generated method stub
-//		
+//		response.getWriter().append("Served at: ").append(request.getContextPath());
 //	}
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		System.out.println("받은알람 컨트롤러 dopost");
+		System.out.println("전체알람 컨트롤러 dopost");
 		PrintWriter out = response.getWriter();
 		MemberVo vo = (MemberVo)request.getSession().getAttribute("ssMV");
-		String mNickname = "";
+		String mNickname ="";
 		if(vo == null) {
 			response.sendRedirect("login");
 		} else {
+			
 			mNickname = vo.getmNickname();
-			System.out.println("받은 알람 서비스 호출 mNickname:" + mNickname);
-			ArrayList<AlarmVo> result = new AlarmService().receiveListAlarm(mNickname);
+			System.out.println("전체알람 서비스 호출 mNickname:" + mNickname);
+			ArrayList<AlarmVo> result = new AlarmService().allListAlarm(mNickname);
 			System.out.println("리스트 결과:" + result);
 			Gson gobj = new GsonBuilder().setPrettyPrinting().create();
 			String resStr = gobj.toJson(result);
@@ -61,6 +62,8 @@ public class ReceiveAlarmListAjaxController extends HttpServlet {
 			out.flush();
 			out.close();
 		}
+		
+		
 	}
 
 }
