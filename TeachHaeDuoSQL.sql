@@ -513,6 +513,9 @@ insert into DIBS VALUES('S2','T1');
 insert into ALARM VALUES(1, '연락 좀 주세요', DEFAULT, '홍기', '영희쌤', 'a12345');
 insert into ALARM VALUES(2, '교습 비용 얼마인가요?', DEFAULT, '민호', '보미쌤', 'a12345');
 insert into ALARM VALUES(3, '주당 4회 가능하신가요?', DEFAULT, '민호', '영희쌤', 'b12345');
+insert into ALARM VALUES(4, '전화 가능한가요', DEFAULT,'영희쌤', '홍기',  'c12345');
+insert into ALARM VALUES(5, '주당 100만원입니다', DEFAULT,'보미쌤', '민호',  'd12345');
+insert into ALARM VALUES(6, '주당 4회는 힘들고 주3회는 어떠세요?', DEFAULT,'영희쌤', '민호',  'c12345');
 
 --ADMIN TABLE
 INSERT INTO ADMIN(ADMIN_ID, ADMIN_PW) VALUES('admin','admin1234');
