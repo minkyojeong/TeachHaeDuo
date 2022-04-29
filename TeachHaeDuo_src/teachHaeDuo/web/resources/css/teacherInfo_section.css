@@ -1,13 +1,9 @@
-.wrap .content {
-    background-color: bisque;
-}
 .content {
     overflow: hidden;
 }
 
 .content>section {
     width: 80%;
-    background-color: blueviolet;
     float: left;
     font-family: MinSans-Medium;
 }
@@ -71,7 +67,6 @@
 }
 
 .t_menu {
-    background-color: chartreuse;
     overflow: hidden;
     padding-left: 50px;
     margin-top: 50px;
@@ -107,7 +102,6 @@
 
 .t_content {
     padding-left: 50px;
-    background-color: aquamarine;
 }
 
 .t_content p {
