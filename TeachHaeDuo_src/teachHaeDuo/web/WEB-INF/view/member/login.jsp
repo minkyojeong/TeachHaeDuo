@@ -1,9 +1,13 @@
 <link href="<%=request.getContextPath()%>/resources/css/reset.css" rel="stylesheet" type="text/css">
+<link href="${pageContext.request.contextPath}/resources/css/button.css" rel="stylesheet" type="text/css">
+<link href="<%=request.getContextPath()%>/resources/css/font.css" rel="stylesheet" type="text/css">
+<link href="<%=request.getContextPath()%>/resources/css/common.css" rel="stylesheet" type="text/css">
 <link href="<%=request.getContextPath()%>/resources/css/header.css" rel="stylesheet" type="text/css">
+<link href="<%=request.getContextPath()%>/resources/icons/sun.ico" rel="shortcut icon" type="image/x-icon">
 <link href="<%=request.getContextPath()%>/resources/css/footer.css" rel="stylesheet" type="text/css">
 <link href="<%=request.getContextPath()%>/resources/css/login.css" rel="stylesheet" type="text/css">
-<link href="<%=request.getContextPath()%>/resources/icons/sun.ico" rel="shortcut icon" type="image/x-icon">
-<link href="${pageContext.request.contextPath}/resources/css/button.css" rel="stylesheet" type="text/css">
+
+
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -19,6 +23,7 @@
 <div class="main_wrap">
 	 <jsp:include page="../template_header.jsp"></jsp:include>
 		<div class="wrap content">
+		<section>
             <div id="loginAll">
                 <div class="card align-middle" style="width:25rem;">
                     <div>
@@ -44,7 +49,7 @@
                     </div>
                 </div>
             </div>
-            
+           </section>
 		</div>
 	     <jsp:include page="../template_footer.jsp"></jsp:include>
 	</div>    
