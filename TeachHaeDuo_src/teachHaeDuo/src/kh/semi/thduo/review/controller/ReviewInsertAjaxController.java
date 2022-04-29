@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import kh.semi.thduo.member.vo.MemberVo;
 import kh.semi.thduo.review.model.service.ReviewService;
 import kh.semi.thduo.review.model.vo.ReviewVo;
 
@@ -50,15 +51,6 @@ public class ReviewInsertAjaxController extends HttpServlet {
 		String t_r_content = request.getParameter("t_r_content");
 		String strScore = request.getParameter("t_r_score");
 		int t_r_score = 0;
-
-		int check = new ReviewService().checkMessage("홍기", alarm_receiveid);
-		
-		if(check == 0) { // 해당 선생님에게 쪽지 보낸 적 없음
-			out.print(2);
-			out.flush();
-			out.close();
-			return;
-		}
 		
 		try {
 			t_r_score = Integer.parseInt(strScore);
@@ -75,49 +67,34 @@ public class ReviewInsertAjaxController extends HttpServlet {
 		vo.setT_no(t_no);
 		vo.setT_r_content(t_r_content);
 		vo.setT_r_score(t_r_score);
-		vo.setT_r_writer("홍기");
-		vo.setM_id("a12345");
 		
+		// 로그인 여부 확인
+		MemberVo ssvo = (MemberVo) request.getSession().getAttribute("ssMV");
+		if(ssvo == null) {
+			out.print(0);
+			out.flush();
+			out.close();
+			return;
+		} else {
+			// 쪽지 전송 여부 확인
+			int check = new ReviewService().checkMessage(ssvo.getmNickname(), alarm_receiveid);
+			
+			if(check == 0) { // 해당 선생님에게 쪽지 보낸 적 없음
+				out.print(2);
+				out.flush();
+				out.close();
+				return;
+			}
+			vo.setT_r_writer(ssvo.getmNickname());
+			vo.setM_id(ssvo.getmId());
+		}
+		// DB에 저장
 		int result = new ReviewService().insertReview(vo);
-		if(result < 1) { // 리뷰등록 실패
+		if (result < 1) { // 리뷰등록 실패
 			out.print(-1);
 		} else { // 리뷰등록 성공
 			out.print(1);
 		}
-
-		// 모두 완성 되면 아래 주석 풀고 확인
-//		ReportVo vo = new ReportVo();
-//		vo.setT_no(t_no);
-//		vo.setT_r_content(t_r_content);
-//		vo.setT_r_score(t_r_score);
-//		// 로그인 여부 확인(이미 로그인 확인 했지만 로그아웃 했을 수도 있으니까 로그인 여부 다시 확인)
-//		MemberVo ssvo = (MemberVo) request.getSession().getAttribute("ssMV");
-//		if(ssvo == null) {
-//			out.print(0);
-//			out.flush();
-//			out.close();
-//			return; // DB에 저장하지 않아도 되니까
-//		} else {
-			// 쪽지 전송 여부 확인
-//			int check = new ReviewService().checkMessage(ssvo.getmNickName(), alarm_receiveid);
-//			
-//			if(check == 0) { // 해당 선생님에게 쪽지 보낸 적 없음
-//				out.print(2);
-//				out.flush();
-//				out.close();
-//				return;
-//			}
-//		
-//			vo.setT_r_writer(ssvo.getmNickName());
-//			vo.setM_id(ssvo.getmId());
-//		}
-//		// DB에 저장
-//		int result = new ReviewService().insertReview(vo);
-//		if (result < 1) { // 리뷰등록 실패
-//			out.print(-1);
-//		} else { // 리뷰등록 성공
-//			out.print(1);
-//		}
 
 		out.flush();
 		out.close();

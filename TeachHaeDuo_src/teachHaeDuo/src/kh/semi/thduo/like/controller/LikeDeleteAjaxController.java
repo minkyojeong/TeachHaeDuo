@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import kh.semi.thduo.like.model.service.LikeService;
+import kh.semi.thduo.member.vo.MemberVo;
 
 /**
  * Servlet implementation class LikeDeleteAjaxController
@@ -48,30 +49,21 @@ public class LikeDeleteAjaxController extends HttpServlet {
 		System.out.println("s_no : " + s_no);
 		System.out.println("t_no : " + t_no);
 		
+		// 로그인 여부 확인
+		MemberVo ssvo = (MemberVo) request.getSession().getAttribute("ssMV");
+		if(ssvo == null) {
+			out.print(0);
+			out.flush();
+			out.close();
+			return;
+		} 
+		
 		int result = new LikeService().deleteLike(s_no, t_no);
-		if(result < 1) {
+		if (result < 1) { // 찜 취소 실패
 			out.print(-1);
-		} else {
+		} else { // 찜 취소 성공
 			out.print(1);
 		}
-		
-		// 모두 완성 되면 아래 주석 풀고 확인
-//		// 로그인 여부 확인(이미 로그인 확인 했지만 로그아웃 했을 수도 있으니까 로그인 여부 다시 확인)
-//		MemberVo ssvo = (MemberVo) request.getSession().getAttribute("ssMV");
-//		if(ssvo == null) {
-//			out.print(0);
-//			out.flush();
-//			out.close();
-//			return; // DB에 저장하지 않아도 되니까
-//		} 
-		
-//		// DB에 저장
-//		int result = new LikeService().deleteLike(s_no, t_no);
-//		if (result < 1) { // 찜 취소 실패
-//			out.print(-1);
-//		} else { // 찜 취소 성공
-//			out.print(1);
-//		}
 		
 		out.flush();
 		out.close();

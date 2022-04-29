@@ -193,11 +193,9 @@
 													</span>
 													<span>${rvo.t_r_date}</span>
 													<input type="hidden" name="t_r_no" id="t_r_no" value="${rvo.t_r_no}">
-													<!-- TODO : 세션 닉네임이랑 리뷰 닉네임 비교해서 같으면 삭제버튼 나오게 하기(아래 주석 풀어서 테스트) -->
-<%-- 													<c:if test="${ssMV.mNickname == rvo.t_r_writer}">
+													<c:if test="${ssMV.mNickname == rvo.t_r_writer}">
 														<button type="button" id="btn_review_delete" class="btn3_1">리뷰삭제</button>
-													</c:if> --%>
-													<button type="button" id="btn_review_delete" class="btn3_1">리뷰삭제</button>
+													</c:if>
 												</div>
 												<p>${rvo.t_r_content}</p>
 											</c:forEach>
@@ -210,36 +208,19 @@
 					<aside>
 						<div class="aside_menu">
 							<div class="like_report">
-							<!-- TODO : 로그인 세션 정보와 비교해서 사진 다르게 뜨나 테스트 해보기 -->
-<%-- 								<c:choose>
+								<c:choose>
 									<c:when test="${empty tvo.like}">
 										<input type="hidden" name="liked_id" id="liked_id" value="${ssMV.mId}">
 										<input type="hidden" name="t_no" id="t_no" value="${tvo.t_no}">
 										<button type="button" id="btn_like" class="btn3_1">
-											<img id="img_like" src="<%=request.getContextPath()%>/resources/icons/like.png">찜
+											<img src="<%=request.getContextPath()%>/resources/icons/like.png">찜
 										</button>
 									</c:when>
 									<c:when test="${not empty tvo.like}">
 										<input type="hidden" name="s_no" id="s_no" value="${tvo.like.s_no}">
 										<input type="hidden" name="t_no" id="t_no" value="${tvo.like.t_no}">
 										<button id="btn_cancle_like" class="btn3_1">
-											<img id="img_cancle_like" src="<%=request.getContextPath()%>/resources/icons/like_color.png">찜
-										</button>
-									</c:when>
-								</c:choose> --%>
-							<c:choose>
-									<c:when test="${empty tvo.like}">
-										<input type="hidden" name="liked_id" id="liked_id" value="b12345">
-										<input type="hidden" name="t_no" id="t_no" value="${tvo.t_no}">
-										<button type="button" id="btn_like" class="btn3_1">
-											<img id="img_like" src="<%=request.getContextPath()%>/resources/icons/like.png">찜
-										</button>
-									</c:when>
-									<c:when test="${not empty tvo.like}">
-										<input type="hidden" name="s_no" id="s_no" value="${tvo.like.s_no}">
-										<input type="hidden" name="t_no" id="t_no" value="${tvo.like.t_no}">
-										<button id="btn_cancle_like" class="btn3_1">
-											<img id="img_cancle_like" src="<%=request.getContextPath()%>/resources/icons/like_color.png">찜
+											<img src="<%=request.getContextPath()%>/resources/icons/like_color.png">찜
 										</button>
 									</c:when>
 								</c:choose>

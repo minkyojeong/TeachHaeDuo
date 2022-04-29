@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import kh.semi.thduo.member.vo.MemberVo;
 import kh.semi.thduo.review.model.service.ReviewService;
 
 /**
@@ -52,14 +53,14 @@ public class ReviewDeleteAjaxController extends HttpServlet {
 		
 		System.out.println("t_r_no : " + t_r_no);
 		
-//		// 로그인 여부 확인(이미 로그인 확인 했지만 로그아웃 했을 수도 있으니까 로그인 여부 다시 확인)
-//		MemberVo ssvo = (MemberVo) request.getSession().getAttribute("ssMV");
-//		if(ssvo == null) {
-//			out.print(0);
-//			out.flush();
-//			out.close();
-//			return; // DB에 저장하지 않아도 되니까
-//		}
+		// 로그인 여부 확인
+		MemberVo ssvo = (MemberVo) request.getSession().getAttribute("ssMV");
+		if(ssvo == null) {
+			out.print(0);
+			out.flush();
+			out.close();
+			return;
+		}
 		
 		int result = new ReviewService().deleteReview(t_r_no);
 		if(result < 1) {

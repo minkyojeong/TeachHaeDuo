@@ -9,31 +9,51 @@ import kh.semi.thduo.pencil.model.vo.PencilVo;
 
 public class PencilService {
 	private PencilDao dao = new PencilDao();
-	
+
 	public int plusPencil(PencilVo vo) {
 		int result = 0;
-		
+
 		Connection conn = getConnection();
 		result = dao.plusPencil(conn, vo);
-		if(result == 1) {
+		if (result == 1) {
 			commit(conn);
 		} else {
 			rollback(conn);
 		}
 		close(conn);
 		return result;
-		
+
 	}
+
+	// 연필 잔액 확인
+	public int checkPencil(String mId) {
+		int result = 0;
+		Connection conn = getConnection();
+		
+		result = dao.checkPencil(conn, mId);
+		
+		close(conn);
+		
+		return result;
+	}
+
+	// 연필 차감 내역 삽입
 	public int minusPencil(PencilVo vo) {
 		int result = 0;
+		Connection conn = getConnection();
 		
+		result = dao.minusPencil(conn, vo);
+		
+		close(conn);
+
 		return result;
-		
+
 	}
+
 	public ArrayList<PencilVo> listPencil(String mId) {
 		ArrayList<PencilVo> result = null;
-		
+
 		return result;
-		
+
 	}
 }
