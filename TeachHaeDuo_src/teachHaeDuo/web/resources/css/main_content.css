@@ -2,7 +2,6 @@ input {
     border: none;
 }
 .wrap.content {
-    margin: 0 25px;
     font-family: MinSans-Medium;
 }
 .intro {
@@ -55,30 +54,30 @@ input {
 }
 .korean {
     position: relative;
-    left: 120px;
+    left: 340px;
 }
 .math {
     position: relative;
     top: 600px;
-    left: 270px;
+    left: 490px;
 }
 .eng {
     position: relative;
-    left: 420px;
+    left: 640px;
 }
 .social {
     position: relative;
     top: 600px;
-    left: 570px;
+    left: 790px;
 }
 .science {
     position: relative;
-    left: 720px;
+    left: 940px;
 }
 .etc {
     position: relative;
     top: 600px;
-    left: 870px;
+    left: 1090px;
 }
 .category_name {
     position: relative;
