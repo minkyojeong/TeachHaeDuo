@@ -60,7 +60,7 @@ public class PencilChargeDoController extends HttpServlet {
 		}
 		
 		vo.setCpContent("연필충전");
-		vo.setCpPencil(wonInt);
+		vo.setCpCash(wonInt);
 		int result = new PencilService().plusPencil(vo);
 		 
 		if(result < 1 ) { 

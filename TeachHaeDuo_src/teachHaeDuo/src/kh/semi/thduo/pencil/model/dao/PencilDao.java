@@ -24,7 +24,7 @@ public class PencilDao {
 		try {
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, vo.getmId());
-			pstmt.setInt(2, vo.getCpPencil());;
+			pstmt.setInt(2, vo.getCpCash());
 			pstmt.setString(3, vo.getmId());
 			result = pstmt.executeUpdate();
 		} catch (SQLException e) {
@@ -71,7 +71,7 @@ public class PencilDao {
 		try {
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, vo.getCpContent());
-			pstmt.setInt(2, vo.getCpPencil());
+			pstmt.setInt(2, vo.getCpCash());
 			pstmt.setString(3, vo.getmId());
 			
 			result = pstmt.executeUpdate();
@@ -85,9 +85,32 @@ public class PencilDao {
 		
 	}
 	public ArrayList<PencilVo> listPencil(Connection conn, String mId) {
-		ArrayList<PencilVo> result = null;
+		ArrayList<PencilVo> voList = null;
+		String sql = "select cp_content, cp_cash, cp_date from check_pencil where m_id=? order by cp_date desc";
 		
-		return result;
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, mId);
+			rs = pstmt.executeQuery();
+			
+			if(rs != null) {
+				voList = new ArrayList<PencilVo>();
+				while(rs.next()) {
+					PencilVo vo = new PencilVo();
+					vo.setCpContent(rs.getString("cp_Content"));
+					vo.setCpDate(rs.getTimestamp("cp_Date"));
+					vo.setCpCash(rs.getInt("cp_cash"));
+					voList.add(vo);
+				}
+			}
+		} catch(SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		
+		
+		return voList;
 		
 	}
 }

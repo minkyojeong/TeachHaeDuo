@@ -93,7 +93,6 @@ public class AlarmDao {
 				
 			}
 		} catch (SQLException e) {
-			
 			e.printStackTrace();
 		} finally {
 			close(pstmt);

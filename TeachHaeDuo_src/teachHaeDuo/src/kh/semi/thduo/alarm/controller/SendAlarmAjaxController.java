@@ -72,7 +72,7 @@ public class SendAlarmAjaxController extends HttpServlet {
 			} else { // 잔액 500원 이상
 				PencilVo pvo = new PencilVo();
 				pvo.setCpContent("쪽지보내기");
-				pvo.setCpPencil(-500);
+				pvo.setCpCash(-500);
 				pvo.setmId(ssvo.getmId());
 				
 				int result = new PencilService().minusPencil(pvo);

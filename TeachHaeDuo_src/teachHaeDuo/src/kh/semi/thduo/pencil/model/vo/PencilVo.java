@@ -5,7 +5,7 @@ import java.sql.Timestamp;
 public class PencilVo {
 	private int cpNo;
 	private String cpContent;
-	private int cpPencil;
+	private int cpCash;
 	private Timestamp cpDate;
 	private String mId;
 	
@@ -15,19 +15,12 @@ public class PencilVo {
 	}
 
 
-	public PencilVo(int cpNo, String cpContent, int cpPencil, Timestamp cpDate, String mId) {
-		super();
-		this.cpNo = cpNo;
-		this.cpContent = cpContent;
-		this.cpPencil = cpPencil;
-		this.cpDate = cpDate;
-		this.mId = mId;
-	}
+
 
 
 	@Override
 	public String toString() {
-		return "PencilVo [cpNo=" + cpNo + ", cpContent=" + cpContent + ", cpPencil=" + cpPencil + ", cpDate=" + cpDate
+		return "PencilVo [cpNo=" + cpNo + ", cpContent=" + cpContent + ", cpCash=" + cpCash + ", cpDate=" + cpDate
 				+ ", mId=" + mId + "]";
 	}
 
@@ -47,18 +40,24 @@ public class PencilVo {
 	}
 
 
+	public int getCpCash() {
+		return cpCash;
+	}
+
+
+
+
+
+	public void setCpCash(int cpCash) {
+		this.cpCash = cpCash;
+	}
+
+
+
+
+
 	public void setCpContent(String cpContent) {
 		this.cpContent = cpContent;
-	}
-
-
-	public int getCpPencil() {
-		return cpPencil;
-	}
-
-
-	public void setCpPencil(int cpPencil) {
-		this.cpPencil = cpPencil;
 	}
 
 
