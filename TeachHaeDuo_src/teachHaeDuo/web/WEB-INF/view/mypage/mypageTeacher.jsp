@@ -48,7 +48,7 @@
                             <p style="line-height:30px">잔여 연필</p>
                         </div>
                         <div>
-                            <p id="p_won" style="line-height:30px"><u><span>0</span>원</u></p>
+                            <p id="p_won" style="line-height:30px"><u><%= request.getAttribute("balance") %>원</u></p>
                         </div>
                     </div>
                     <div class="pencil_div">

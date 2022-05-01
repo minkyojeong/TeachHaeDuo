@@ -48,7 +48,7 @@
                         </div>
                         <div>
                         	<!-- <p id="p"><u>잔여금액 확인</u></p> -->
-                            <p id="p_won" style="line-height:30px"><u><span id="span_won">0</span>원</u></p>
+                            <p id="p_won" style="line-height:30px"><u><%= request.getAttribute("balance") %>원</u></p>
                         </div>
                     </div>
                     <div class="pencil_div">

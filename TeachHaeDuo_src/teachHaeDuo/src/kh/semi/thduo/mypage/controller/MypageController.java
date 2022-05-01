@@ -8,6 +8,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import kh.semi.thduo.member.vo.MemberVo;
+import kh.semi.thduo.pencil.model.service.PencilService;
+import kh.semi.thduo.pencil.model.vo.PencilVo;
 import kh.semi.thduo.teacher.model.service.TeacherService;
 import kh.semi.thduo.teacher.model.vo.TeacherVo;
 
@@ -44,10 +46,17 @@ public class MypageController extends HttpServlet {
 			if(roleSt == null) {
 				response.sendRedirect("login");
 			} else if(roleSt.equals("T")) {
+				PencilVo vo = new PencilVo();
+				vo.setmId(mId);
+				int result = new PencilService().checkPencil(mId);
+				request.setAttribute("balance", result);
 				System.out.println("선생 마이페이지 진입");
-				
 				request.getRequestDispatcher("WEB-INF/view/mypage/mypageTeacher.jsp").forward(request, response);
 			} else if(roleSt.equals("S")) {
+				PencilVo vo = new PencilVo();
+				vo.setmId(mId);
+				int result = new PencilService().checkPencil(mId);
+				request.setAttribute("balance", result);
 				System.out.println("학생 마이페이지 진입");
 				request.getRequestDispatcher("WEB-INF/view/mypage/mypageStudent.jsp").forward(request, response);
 			}
