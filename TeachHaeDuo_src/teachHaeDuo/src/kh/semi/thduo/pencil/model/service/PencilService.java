@@ -11,8 +11,9 @@ public class PencilService {
 	private PencilDao dao = new PencilDao();
 
 	public int plusPencil(PencilVo vo) {
+		System.out.println("충전하기 서비스 vo:"+ vo);
 		int result = 0;
-
+		
 		Connection conn = getConnection();
 		result = dao.plusPencil(conn, vo);
 		if (result == 1) {
@@ -21,6 +22,7 @@ public class PencilService {
 			rollback(conn);
 		}
 		close(conn);
+		System.out.println("충전하기 서비스 result:"+ result);
 		return result;
 
 	}

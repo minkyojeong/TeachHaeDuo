@@ -46,6 +46,7 @@ public class PencilChargeDoController extends HttpServlet {
 		int wonInt = 0;
 		try {
 			wonInt = Integer.parseInt(wonStr);
+			System.out.println(wonInt);
 		}catch(NumberFormatException e) {
 			e.printStackTrace();
 		}
@@ -64,23 +65,11 @@ public class PencilChargeDoController extends HttpServlet {
 		 
 		if(result < 1 ) { 
 			request.getSession().setAttribute("msgCharge", "충전이 실패했습니다.");
-			if(ssMV.getRoleSt() == "S") {
-				response.sendRedirect("mypageStudent");
-			} else if(ssMV.getRoleSt() == "T") {
-				response.sendRedirect("mypageTeacher");
-			}
-			
+			response.sendRedirect("mypage");
 		} else { 
 			request.getSession().setAttribute("msgCharge", "충전이 완료되었습니다.");
-			if(ssMV.getRoleSt() == "S") {
-				response.sendRedirect("mypageStudent");
-			} else if(ssMV.getRoleSt() == "T") {
-				response.sendRedirect("mypageTeacher");
-			}
+			response.sendRedirect("mypage");
 		}
-		
-		
-		
 	}
 
 }

@@ -1,3 +1,6 @@
+/**
+ * 
+ */
 $(function() {
 	
 	if($("#alarm_yn").val()=='Y'){
@@ -85,8 +88,14 @@ $(function() {
 		$("#won").val(pencilwon);
 	});
 
-	$("charge").click(function() {
-		if (pencilwon > 0) {
+	$("#charge").click(goCharge);
+	
+	function goCharge() {
+		console.log("충전하기 들어옴");
+		var won = $("#won").val()
+		console.log(won);
+		if (won > 0) {
+			console.log("충전하기 누름");
 			var frm = document.charge_frm;
 			frm.action = "pencilCharge.do";
 			frm.method = "post"
@@ -94,7 +103,9 @@ $(function() {
 		} else {
 			alert("충전 금액은 0원 초과로 입력해주세요");
 		}
-	});
+	}
+	
+	
 
 
 	/* modal 0원 js */

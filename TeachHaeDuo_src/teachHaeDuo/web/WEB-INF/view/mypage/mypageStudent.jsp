@@ -48,7 +48,7 @@
                         </div>
                         <div>
                         	<!-- <p id="p"><u>잔여금액 확인</u></p> -->
-                            <p id="p_won" style="line-height:30px"><u><span>0</span>원</u></p>
+                            <p id="p_won" style="line-height:30px"><u><span id="span_won">0</span>원</u></p>
                         </div>
                     </div>
                     <div class="pencil_div">
@@ -225,8 +225,7 @@
     </div>
     <jsp:include page="../template_footer.jsp"></jsp:include>
     </div>
-    <% String msgAlarm = (String)request.getAttribute("msgAlarm"); %>
-</body>
+
 <script>
 // 연락 요청 보낸 리스트 출력
 $("#p_send_alarm").on("click", function() {
@@ -284,10 +283,17 @@ $("#p_like").on("click", function() {
 	});
 });
 	
-	
-	
 var msgAlarmVal = '${msgAlarm}';
-if(msgAlarmVal != "" && msgAlarmVal != null)
+if(msgAlarmVal != "" && msgAlarmVal != null){
 	alert('${msgAlarm}');
+}
+	
+var msgChargeVal = '${msgCharge}';
+if(msgChargeVal != "" && msgChargeVal != null){
+	alert('${msgCharge}');
+}
 </script>
+<% request.removeAttribute("msgAlarm"); %>
+<% request.getSession().removeAttribute("msgCharge"); %>
+</body>
 </html>

@@ -32,17 +32,20 @@ public class MypageController extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		System.out.println("마이페이지 doget");
 		MemberVo ssMV = (MemberVo)request.getSession().getAttribute("ssMV");
-		String mId = ssMV.getmId();
+		String mId = null;;
+		String roleSt = null;
 		if(ssMV == null) {
 			response.sendRedirect("login");
 		} else {
-			String roleSt = ssMV.getRoleSt();
+			mId = ssMV.getmId();
+			roleSt = ssMV.getRoleSt();
 			System.out.println(roleSt);
 			
 			if(roleSt == null) {
 				response.sendRedirect("login");
 			} else if(roleSt.equals("T")) {
 				System.out.println("선생 마이페이지 진입");
+				
 				request.getRequestDispatcher("WEB-INF/view/mypage/mypageTeacher.jsp").forward(request, response);
 			} else if(roleSt.equals("S")) {
 				System.out.println("학생 마이페이지 진입");

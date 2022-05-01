@@ -147,11 +147,11 @@
                         <p style="line-height:20px"> 원</p>
                     </div>
                     <div class="btns">
-                        <button type="button" class="btn3_2" id="btn1">-1만원</button>&nbsp;&nbsp;
-                        <button type="button" class="btn3_2" id="btn2">+1만원</button>&nbsp;&nbsp;
-                        <button type="button" class="btn3_2" id="btn3">+3만원</button>&nbsp;&nbsp;
-                        <button type="button" class="btn3_2" id="btn4">+5만원</button>&nbsp;&nbsp;
-                        <button type="button" class="btn3_2" id="btn5">+10만원</button>
+                        <button type="button" class="btn3_1" id="btn1">-1만원</button>&nbsp;&nbsp;
+                        <button type="button" class="btn3_1" id="btn2">+1만원</button>&nbsp;&nbsp;
+                        <button type="button" class="btn3_1" id="btn3">+3만원</button>&nbsp;&nbsp;
+                        <button type="button" class="btn3_1" id="btn4">+5만원</button>&nbsp;&nbsp;
+                        <button type="button" class="btn3_1" id="btn5">+10만원</button>
                     </div>
                     <div class="pencilcharge_btn">
                         <button class="btn2_3" id="charge" type="button">충전하기</button>
@@ -231,9 +231,6 @@
     
     <jsp:include page="../template_footer.jsp"></jsp:include>
     </div>
-    <% String msgRecruit = (String)request.getAttribute("msgRecruit"); %>
-    <% String msgAlarm = (String)request.getAttribute("msgAlarm"); %>
-</body>
 <script>
 $("#charge").click(goCharge);
 
@@ -283,10 +280,23 @@ $("#p_receive_alarm").on("click", function() {
 	});
 });
 var msgRecruitVal = '${msgRecruit}';
-if(msgRecruitVal != "" && msgRecruitVal != null)
+if(msgRecruitVal != "" && msgRecruitVal != null){
 	alert('${msgRecruit}');
+}
+	
 var msgAlarmVal = '${msgAlarm}';
-if(msgAlarmVal != "" && msgAlarmVal != null)
+if(msgAlarmVal != "" && msgAlarmVal != null){
 	alert('${msgAlarm}');
+}
+	
+var msgChargeVal = '${msgCharge}';
+if(msgChargeVal != "" && msgChargeVal != null){
+	alert('${msgCharge}');
+	
+}
 </script>
+<% request.removeAttribute("msgRecruit"); %>
+<% request.removeAttribute("msgAlarm"); %>
+<% request.getSession().removeAttribute("msgCharge"); %>
+</body>
 </html>
