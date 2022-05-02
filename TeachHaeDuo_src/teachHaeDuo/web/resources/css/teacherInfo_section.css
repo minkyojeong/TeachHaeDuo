@@ -24,7 +24,7 @@
     margin: 0 auto;
     border-radius: 80px;
     border: none;
-    background-image: url('http://localhost:8090/myWeb2/resources/icons/science.png');
+    background-image: url('../icons/science.png');
     background-size: cover;
     background-position: center;
 }
