@@ -4,7 +4,23 @@
 	font-family: MinSans-Medium;
 	vertical-align: middle;
 }
-
+div.nickname_div label{
+	cursor:pointer;
+}
+.uploadProfile{
+	display:inline-block;
+	border: none;
+    border-radius: 5px;
+    background:#FA9D00;
+    color:white;
+    font-weight: 500;
+    font-size:15px;
+    width:100px;
+    height:30px;
+    cursor: pointer;
+    text-align:center;
+    line-height:35px;
+}
 div#bottom_div p {
 	line-height:20px;
 }

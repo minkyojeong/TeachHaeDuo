@@ -37,7 +37,10 @@
                             </p>
                         </div>
                         <div class="nickname_div">
-                            <button class="btn2_2">사진 수정</button>
+                        	<form name="frm_profile" enctype="multipart/form-data">
+	                            <input type="file" name="uploadProfile" id="uploadProfile" style="display:none">
+	                            <label for="uploadProfile" class="uploadProfile">사진 변경</label>
+                            </form>
                         </div>
                     </div>
                 </div>
@@ -323,6 +326,16 @@ if(msgUpdateVal != "" && msgUpdateVal != null){
 	alert('${msgUpdate}');
 	
 }
+
+ $("#uploadProfile").change(function(){
+	console.log("사진선택했어");
+	var uploadProfileVal = $("#uploadProfile").val();
+	console.log(uploadProfileVal);
+	var frm = document.frm_profile;
+	frm.action="profileUpdate.do";
+	frm.method="post";
+	frm.submit();
+}); 
 </script>
 
 <% request.removeAttribute("msgRecruit"); %>
