@@ -144,6 +144,10 @@
     section .check{
             color : red;
     }
+   section .modal_content> p {
+            border: 1px solid rgb(165, 161, 161);
+            padding: 10px;
        
+        }       
     
    
