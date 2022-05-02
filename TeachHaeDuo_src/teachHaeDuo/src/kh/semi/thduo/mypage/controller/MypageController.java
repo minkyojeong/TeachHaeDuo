@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import kh.semi.thduo.alarm.model.service.AlarmService;
+import kh.semi.thduo.like.model.service.LikeService;
 import kh.semi.thduo.member.vo.MemberVo;
 import kh.semi.thduo.pencil.model.service.PencilService;
 import kh.semi.thduo.pencil.model.vo.PencilVo;
@@ -38,12 +39,14 @@ public class MypageController extends HttpServlet {
 		String mId = null;;
 		String roleSt = null;
 		String mNickname = null;
+		String sNo = null;
 		if(ssMV == null) {
 			response.sendRedirect("login");
 		} else {
 			mId = ssMV.getmId();
 			roleSt = ssMV.getRoleSt();
 			mNickname = ssMV.getmNickname();
+			sNo = ssMV.getsNo();
 			System.out.println(roleSt);
 			
 			if(roleSt == null) {
@@ -59,12 +62,13 @@ public class MypageController extends HttpServlet {
 				request.getRequestDispatcher("WEB-INF/view/mypage/mypageTeacher.jsp").forward(request, response);
 			} else if(roleSt.equals("S")) {
 				int numberOfSendAlarm = new AlarmService().numberOfSendAlarm(mNickname);
-				System.out.println("numberOfSendAlarm" + numberOfSendAlarm);
 				int numberOfReceiveAlarm = new AlarmService().numberOfReceiveAlarm(mNickname);
 				int balance = new PencilService().checkPencil(mId);
+				int numberOfLike = new LikeService().numberOfLike(sNo);
 				request.setAttribute("numberOfSendAlarm", numberOfSendAlarm);
 				request.setAttribute("numberOfReceiveAlarm", numberOfReceiveAlarm);
 				request.setAttribute("balance", balance);
+				request.setAttribute("numberOfLike", numberOfLike);
 				System.out.println("학생 마이페이지 진입");
 				request.getRequestDispatcher("WEB-INF/view/mypage/mypageStudent.jsp").forward(request, response);
 			}

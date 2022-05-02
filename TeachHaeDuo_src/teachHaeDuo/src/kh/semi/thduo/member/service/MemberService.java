@@ -1,7 +1,9 @@
 package kh.semi.thduo.member.service;
 
 import static kh.semi.thduo.common.jdbc.JdbcTemplate.close;
+import static kh.semi.thduo.common.jdbc.JdbcTemplate.commit;
 import static kh.semi.thduo.common.jdbc.JdbcTemplate.getConnection;
+import static kh.semi.thduo.common.jdbc.JdbcTemplate.rollback;
 
 import java.sql.Connection;
 import java.util.ArrayList;
@@ -95,6 +97,11 @@ public class MemberService {
 			int result = 0;
 			Connection conn = getConnection();
 			result = dao.updateMember(conn, vo);
+			if (result == 1) {
+				commit(conn);
+			} else {
+				rollback(conn);
+			}
 			close(conn);
 			return result;
 			}

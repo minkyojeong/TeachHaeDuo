@@ -57,4 +57,12 @@ public class LikeService {
 		
 		return retVolist;
 	}
+	
+	public int numberOfLike(String sNo) {
+		int result = 0 ;
+		Connection conn = getConnection();
+		result = dao.numberOfLike(conn, sNo);
+		
+		return result;
+	}
 }

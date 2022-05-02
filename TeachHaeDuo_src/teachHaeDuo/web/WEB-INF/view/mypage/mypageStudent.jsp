@@ -102,7 +102,7 @@
                         <img class="arrow_active" id="arrow_active3" src="${pageContext.request.contextPath}/resources/icons/arrow_active.png">
                         <p class="text_div_p">내가 찜한 선생님</p>
                     </div>
-                    <p id="p_like"  style="font-weight:bold"><u>총 <span>0</span>명</u></p>
+                    <p id="p_like"  style="font-weight:bold"><u>총 <%= request.getAttribute("numberOfLike") %>명</u></p>
                 </div>
             </div>
         </div>
@@ -328,8 +328,14 @@ var msgChargeVal = '${msgCharge}';
 if(msgChargeVal != "" && msgChargeVal != null){
 	alert('${msgCharge}');
 }
+var msgUpdateVal = '${msgUpdate}';
+if(msgUpdateVal != "" && msgUpdateVal != null){
+	alert('${msgUpdate}');
+	
+}
 </script>
 <% request.removeAttribute("msgAlarm"); %>
 <% request.getSession().removeAttribute("msgCharge"); %>
+<% request.getSession().removeAttribute("msgUpdate"); %>
 </body>
 </html>

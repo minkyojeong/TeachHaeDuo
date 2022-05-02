@@ -86,4 +86,26 @@ public class LikeDao {
 		
 		return retVolist;
 	}
+	
+	public int numberOfLike(Connection conn, String sNo) {
+		int result = 0 ;
+		String sql = "select count(*) cnt from dibs where s_no=?";
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, sNo);
+			rs = pstmt.executeQuery();
+			
+			if(rs != null) {
+				while(rs.next()) {
+					result = rs.getInt("cnt");
+				}
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+		
+		return result;
+	}
 }

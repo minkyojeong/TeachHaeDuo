@@ -318,10 +318,16 @@ if(msgChargeVal != "" && msgChargeVal != null){
 	alert('${msgCharge}');
 	
 }
+var msgUpdateVal = '${msgUpdate}';
+if(msgUpdateVal != "" && msgUpdateVal != null){
+	alert('${msgUpdate}');
+	
+}
 </script>
 
 <% request.removeAttribute("msgRecruit"); %>
 <% request.removeAttribute("msgAlarm"); %>
 <% request.getSession().removeAttribute("msgCharge"); %>
+<% request.getSession().removeAttribute("msgUpdate"); %>
 </body>
 </html>
