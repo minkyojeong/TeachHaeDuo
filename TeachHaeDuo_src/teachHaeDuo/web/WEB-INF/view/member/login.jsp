@@ -40,7 +40,8 @@
                         <div class="card-body">
                             <input type="text" name="id"  class="form-control" placeholder="아이디" required="required"> <br>
                             <input type="password" name="pwd" class="form-control" placeholder="비밀번호"  required="required"><br>
-                            <p id="check" class="check">${login_msg}</p><br/>
+                            <p id="check" class="check"><%request.getAttribute("login_msg"); %>${login_msg}</p><br/>
+            
                             <button type="submit" id="btn-Yes" class="form-control">로그인</button>  
                         </div>
                     </form>

@@ -113,6 +113,13 @@ public class MemberService {
 			close(conn);
 			return result;
 		}
-		
+		// 로그인시 id 확인작업 
+		public MemberVo readFindId(String mId) {
+			MemberVo retVo = null;
+			Connection conn = getConnection();
+			retVo = dao.readFindId(conn, mId);
+			close(conn);
+			return retVo;
+		}
 	
 }

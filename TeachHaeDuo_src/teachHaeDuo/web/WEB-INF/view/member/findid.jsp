@@ -60,7 +60,7 @@
                                     //
                                     $("#id_content").html("<p>찾는 아이디가 없습니다.</p>");
                                 } else{
-                                    $("#id_content").html("<p>당신의 아이디는 "+result+"입니다.</p>");
+                                    $("#id_content").html("<p>회원님의 아이디는" +result+ "입니다.</p>");
                             }
                                 $(".modal").show();
                             },

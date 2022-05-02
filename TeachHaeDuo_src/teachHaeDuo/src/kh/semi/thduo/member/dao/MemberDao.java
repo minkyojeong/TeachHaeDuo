@@ -139,6 +139,26 @@ public class MemberDao {
 		}
 		return retVo;
 	}
+	// 로그인시 id 확인작업 
+			public MemberVo readFindId(Connection conn, String mId) { 
+				MemberVo retVo = null;
+				String sql = "select * from member where M_ID = ?";
+				try {
+					pstmt = conn.prepareStatement(sql);
+					pstmt.setString(1, mId);
+					rs = pstmt.executeQuery();
+					if (rs.next()) {
+						retVo = new MemberVo();
+						retVo.setmId(rs.getString("m_Id"));
+					}
+				} catch (SQLException e) {
+					e.printStackTrace();
+				} finally {
+					close(rs);
+					close(pstmt);
+				}
+				return retVo;
+			}
 	
 	// id찾기
 	public MemberVo readFindId(Connection conn, String mEmail, String mName) { 

@@ -10,7 +10,7 @@
  .modal > .modal_content {
     position: relative;  top:100px;
     margin: auto;
-    width: 200px;
+    width: 400px;
     background-color: white;
     padding: 20px;
 }
@@ -144,9 +144,11 @@
     section .check{
             color : red;
     }
-   section .modal_content> p {
+   section #id_content {
             border: 1px solid rgb(165, 161, 161);
-            padding: 10px;
+            padding: 20px;
+            text-align: center;
+            color: #495057;
        
         }       
     
