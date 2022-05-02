@@ -67,7 +67,7 @@ public class MemberLoginController extends HttpServlet {
 			return;
 		} else {
 
-			request.getSession().setAttribute("ssMV", vo);
+			request.getSession().setAttribute("ssMV", vo2);
 			response.sendRedirect(request.getContextPath() + "/"); // 절대경로를 의미하며 -context root가 없음.
 
 			return;
