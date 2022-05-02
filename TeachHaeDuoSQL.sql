@@ -574,3 +574,24 @@ AS
     GROUP BY m_nickname;
 
 COMMIT;
+
+--q_board sequence
+CREATE SEQUENCE b_no_sequence
+       INCREMENT BY 1
+       START WITH 1
+       MINVALUE 1
+       MAXVALUE 9999
+       NOCYCLE
+       NOCACHE
+       NOORDER;
+       
+CREATE SEQUENCE b_r_no_sequence
+       INCREMENT BY 1
+       START WITH 1
+       MINVALUE 1
+       MAXVALUE 9999
+       NOCYCLE
+       NOCACHE
+       NOORDER;
+       
+       commit;
