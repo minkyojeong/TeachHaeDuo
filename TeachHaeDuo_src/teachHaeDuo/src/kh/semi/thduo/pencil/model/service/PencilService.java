@@ -59,6 +59,11 @@ public class PencilService {
 
 	public ArrayList<PencilVo> listPencil(String mId) {
 		ArrayList<PencilVo> result = null;
+		
+		Connection conn = getConnection();
+		result = dao.listPencil(conn, mId);
+		
+		close(conn);
 
 		return result;
 

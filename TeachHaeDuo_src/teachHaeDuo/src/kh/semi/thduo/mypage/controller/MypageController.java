@@ -7,6 +7,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import kh.semi.thduo.alarm.model.service.AlarmService;
 import kh.semi.thduo.member.vo.MemberVo;
 import kh.semi.thduo.pencil.model.service.PencilService;
 import kh.semi.thduo.pencil.model.vo.PencilVo;
@@ -36,27 +37,34 @@ public class MypageController extends HttpServlet {
 		MemberVo ssMV = (MemberVo)request.getSession().getAttribute("ssMV");
 		String mId = null;;
 		String roleSt = null;
+		String mNickname = null;
 		if(ssMV == null) {
 			response.sendRedirect("login");
 		} else {
 			mId = ssMV.getmId();
 			roleSt = ssMV.getRoleSt();
+			mNickname = ssMV.getmNickname();
 			System.out.println(roleSt);
 			
 			if(roleSt == null) {
 				response.sendRedirect("login");
 			} else if(roleSt.equals("T")) {
-				PencilVo vo = new PencilVo();
-				vo.setmId(mId);
-				int result = new PencilService().checkPencil(mId);
-				request.setAttribute("balance", result);
+				int numberOfSendAlarm = new AlarmService().numberOfSendAlarm(mNickname);
+				int numberOfReceiveAlarm = new AlarmService().numberOfReceiveAlarm(mNickname);
+				int balance = new PencilService().checkPencil(mId);
+				request.setAttribute("numberOfSendAlarm", numberOfSendAlarm);
+				request.setAttribute("numberOfReceiveAlarm", numberOfReceiveAlarm);
+				request.setAttribute("balance", balance);
 				System.out.println("선생 마이페이지 진입");
 				request.getRequestDispatcher("WEB-INF/view/mypage/mypageTeacher.jsp").forward(request, response);
 			} else if(roleSt.equals("S")) {
-				PencilVo vo = new PencilVo();
-				vo.setmId(mId);
-				int result = new PencilService().checkPencil(mId);
-				request.setAttribute("balance", result);
+				int numberOfSendAlarm = new AlarmService().numberOfSendAlarm(mNickname);
+				System.out.println("numberOfSendAlarm" + numberOfSendAlarm);
+				int numberOfReceiveAlarm = new AlarmService().numberOfReceiveAlarm(mNickname);
+				int balance = new PencilService().checkPencil(mId);
+				request.setAttribute("numberOfSendAlarm", numberOfSendAlarm);
+				request.setAttribute("numberOfReceiveAlarm", numberOfReceiveAlarm);
+				request.setAttribute("balance", balance);
 				System.out.println("학생 마이페이지 진입");
 				request.getRequestDispatcher("WEB-INF/view/mypage/mypageStudent.jsp").forward(request, response);
 			}

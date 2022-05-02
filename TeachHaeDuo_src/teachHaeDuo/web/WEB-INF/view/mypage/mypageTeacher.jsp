@@ -48,7 +48,7 @@
                             <p style="line-height:30px">잔여 연필</p>
                         </div>
                         <div>
-                            <p id="p_won" style="line-height:30px"><u><%= request.getAttribute("balance") %>원</u></p>
+                            <p id="p_won" style="line-height:30px; font-weight:bold"><u><%= request.getAttribute("balance") %>원</u></p>
                         </div>
                     </div>
                     <div class="pencil_div">
@@ -117,7 +117,7 @@
                         <p class="text_div_p">연락 요청 받은 내역</p>
                     </div>
                     <div>
-                    <p id="p_receive_alarm"><u>이번 달 <span>0</span>건</u></p>
+                    <p id="p_receive_alarm"  style="font-weight:bold"><u>최근 30일 <%= request.getAttribute("numberOfReceiveAlarm") %>건</u></p>
                     </div>
                 </div>
             </div>
@@ -172,29 +172,15 @@
             </div>
             <div class="won_modal_content">
                 <table id="won_table">
-                	<tr>
+                	<tr id="won_table_tr1">
                 		<th>
                 			<img src="${pageContext.request.contextPath}/resources/icons/charge_updown.png" width="20" height="20">
                 		</th>
+                		<th>연필</th>
                 		<th>상세 내용</th>
                 		<th>날짜</th>
                 	</tr>
-                	<tr>
-	                	<td>
-	                		<img src="${pageContext.request.contextPath}/resources/icons/charge_up.png" width="20" height="20">
-	                	</td>
-	                	<td></td>
-	                	<td></td>
-                	</tr>
-                	<tr>
-	                	<td>
-	                		<img src="${pageContext.request.contextPath}/resources/icons/charge_down.png" width="20" height="20">
-	                	</td>
-	                	<td></td>
-	                	<td></td>
-                	</tr>
                 </table>
-                
             </div>
         </div>
     </div>
@@ -232,20 +218,56 @@
     <jsp:include page="../template_footer.jsp"></jsp:include>
     </div>
 <script>
-$("#charge").click(goCharge);
+$("#p_won").click(function() {
+	$("#won_modal").show();
+	console.log("잔액 클릭");
+	
+	$.ajax({
+		url: "listPencil.ax",
+		type: "post",
+		dataType: "json",
+		success: function(result) {
+			console.log(result);
+			console.log(result[0]);
 
-function goCharge(){
-	console.log("충전버튼 클릭했다");
-	console.log($("#won").val());
-	if (($("#won").val()) > 0) {
-		var frm = document.charge_frm;
-		frm.action = "pencilCharge.do";
-		frm.method = "post"
-		frm.submit();
-	} else {
-		alert("충전 금액은 0원 초과로 입력해주세요");
-	}
-}
+			console.log(result.alarm_receiveid);
+			console.log(result.length);
+			var html = "";
+			for (var i = 0; i < result.length; i++) {
+				/* <table id="won_table">
+	            	<tr id="won_table_tr1">
+	            		<th>
+	            			<img src="${pageContext.request.contextPath}/resources/icons/charge_updown.png" width="20" height="20">
+	            		</th>
+	            		<th>연필</th>
+	            		<th>상세 내용</th>
+	            		<th>날짜</th>
+	            	</tr>
+           		 </table> */
+				var vo = result[i];
+				html += '<tr>';
+				if(vo.cpCash < 0){
+					html += '<td><img src="${pageContext.request.contextPath}/resources/icons/charge_down.png" width="20" height="20"></td>';
+				} else {
+					html += '<td><img src="${pageContext.request.contextPath}/resources/icons/charge_up.png" width="20" height="20"></td>';
+				}
+				html += '<td>' + vo.cpCash + '</td>';
+				html += '<td>' + vo.cpContent + '</td>';
+				html += '<td>' + vo.cpDate + '</td>';
+				html += '</tr>';
+
+				console.log("html:" + html);
+
+			}
+			$("#won_table_tr1").nextAll().remove();
+			$("#won_table").append(html);
+		},
+		error: function() {
+
+		}
+	});
+});
+
 $("#p_receive_alarm").on("click", function() {
 	$("#receive_alarm_modal").show();
 
@@ -282,11 +304,13 @@ $("#p_receive_alarm").on("click", function() {
 var msgRecruitVal = '${msgRecruit}';
 if(msgRecruitVal != "" && msgRecruitVal != null){
 	alert('${msgRecruit}');
+	location.href="mypage";
 }
 	
 var msgAlarmVal = '${msgAlarm}';
 if(msgAlarmVal != "" && msgAlarmVal != null){
 	alert('${msgAlarm}');
+	location.href="mypage";
 }
 	
 var msgChargeVal = '${msgCharge}';
@@ -295,6 +319,7 @@ if(msgChargeVal != "" && msgChargeVal != null){
 	
 }
 </script>
+
 <% request.removeAttribute("msgRecruit"); %>
 <% request.removeAttribute("msgAlarm"); %>
 <% request.getSession().removeAttribute("msgCharge"); %>

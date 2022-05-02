@@ -39,6 +39,18 @@ public class AlarmService {
 
 		return voList;
 	}
+	
+	public int numberOfSendAlarm(String mNickname) {
+		System.out.println("보낸 건수 서비스 mNickname:" + mNickname);
+		int result = 0;
+		Connection conn = null;
+		conn = getConnection();
+		result = dao.numberOfSendAlarm(conn, mNickname);
+		System.out.println("보낸 건수 서비스 result:" + result);
+		close(conn);
+
+		return result;
+	}
 
 	public ArrayList<AlarmVo> receiveListAlarm(String mNickname) {
 
@@ -48,6 +60,16 @@ public class AlarmService {
 		close(conn);
 
 		return voList;
+	}
+	
+	public int numberOfReceiveAlarm(String mNickname) {
+		int result = 0;
+		Connection conn = null;
+		conn = getConnection();
+		result = dao.numberOfReceiveAlarm(conn, mNickname);
+		close(conn);
+
+		return result;
 	}
 
 	public ArrayList<AlarmVo> allListAlarm(String mNickname) {

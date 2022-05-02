@@ -109,10 +109,6 @@ $(function() {
 
 
 	/* modal 0원 js */
-	$("#p_won").on("click", function() {
-		$("#won_modal").show();
-	});
-
 	$(".won_modal_close").click(function() {
 		$("#won_modal").hide();
 	});

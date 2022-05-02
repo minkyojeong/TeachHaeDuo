@@ -47,8 +47,7 @@
                             <p style="line-height:30px">잔여 연필</p>
                         </div>
                         <div>
-                        	<!-- <p id="p"><u>잔여금액 확인</u></p> -->
-                            <p id="p_won" style="line-height:30px"><u><%= request.getAttribute("balance") %>원</u></p>
+                            <p id="p_won" style="line-height:30px; font-weight:bold"><u><%= request.getAttribute("balance") %>원</u></p>
                         </div>
                     </div>
                     <div class="pencil_div">
@@ -94,7 +93,7 @@
                         <p class="text_div_p">연락 요청 보낸 내역</p>
                     </div>
                     <div>
-                    <p id="p_send_alarm"><u>이번 달 <span>0</span>건</u></p>
+                    <p id="p_send_alarm" style="font-weight:bold"><u>최근 30일 <%= request.getAttribute("numberOfSendAlarm") %>건</u></p>
                     </div>
                 </div>
                 <div class="text_div" id="text_div3">
@@ -103,7 +102,7 @@
                         <img class="arrow_active" id="arrow_active3" src="${pageContext.request.contextPath}/resources/icons/arrow_active.png">
                         <p class="text_div_p">내가 찜한 선생님</p>
                     </div>
-                    <p id="p_like"><u>총 <span>0</span>명</u></p>
+                    <p id="p_like"  style="font-weight:bold"><u>총 <span>0</span>명</u></p>
                 </div>
             </div>
         </div>
@@ -156,26 +155,13 @@
             </div>
             <div class="won_modal_content">
                 <table id="won_table">
-                	<tr>
+                	<tr id="won_table_tr1">
                 		<th>
                 			<img src="${pageContext.request.contextPath}/resources/icons/charge_updown.png" width="20" height="20">
                 		</th>
+                		<th>연필</th>
                 		<th>상세 내용</th>
                 		<th>날짜</th>
-                	</tr>
-                	<tr>
-	                	<td>
-	                		<img src="${pageContext.request.contextPath}/resources/icons/charge_up.png" width="20" height="20">
-	                	</td>
-	                	<td></td>
-	                	<td></td>
-                	</tr>
-                	<tr>
-	                	<td>
-	                		<img src="${pageContext.request.contextPath}/resources/icons/charge_down.png" width="20" height="20">
-	                	</td>
-	                	<td></td>
-	                	<td></td>
                 	</tr>
                 </table>
             </div>
@@ -227,6 +213,55 @@
     </div>
 
 <script>
+/* 연필 사용 내역 */
+$("#p_won").on("click", function() {
+	$("#won_modal").show();
+	
+	$.ajax({
+	url: "listPencil.ax",
+	type: "post",
+	dataType: "json",
+	success: function(result) {
+		console.log(result);
+		console.log(result[0]);
+
+		console.log(result.alarm_receiveid);
+		console.log(result.length);
+		var html = "";
+		for (var i = 0; i < result.length; i++) {
+			/* <table id="won_table">
+            	<tr id="won_table_tr1">
+            		<th>
+            			<img src="${pageContext.request.contextPath}/resources/icons/charge_updown.png" width="20" height="20">
+            		</th>
+            		<th>연필</th>
+            		<th>상세 내용</th>
+            		<th>날짜</th>
+            	</tr>
+       		 </table> */
+			var vo = result[i];
+			html += '<tr>';
+			if(vo.cpCash < 0){
+				html += '<td><img src="${pageContext.request.contextPath}/resources/icons/charge_down.png" width="20" height="20"></td>';
+			} else {
+				html += '<td><img src="${pageContext.request.contextPath}/resources/icons/charge_up.png" width="20" height="20"></td>';
+			}
+			html += '<td>' + vo.cpCash + '</td>';
+			html += '<td>' + vo.cpContent + '</td>';
+			html += '<td>' + vo.cpDate + '</td>';
+			html += '</tr>';
+
+			console.log("html:" + html);
+
+		}
+		$("#won_table_tr1").nextAll().remove();
+		$("#won_table").append(html);
+	},
+	error: function() {
+
+	}
+});
+});
 // 연락 요청 보낸 리스트 출력
 $("#p_send_alarm").on("click", function() {
 	$("#send_alarm_modal").show();
@@ -286,6 +321,7 @@ $("#p_like").on("click", function() {
 var msgAlarmVal = '${msgAlarm}';
 if(msgAlarmVal != "" && msgAlarmVal != null){
 	alert('${msgAlarm}');
+	location.href="mypage";
 }
 	
 var msgChargeVal = '${msgCharge}';

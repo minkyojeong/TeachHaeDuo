@@ -40,7 +40,8 @@ public class AlarmDao {
 	
 	public ArrayList<AlarmVo> sendListAlarm(Connection conn, String mNickname){
 		ArrayList<AlarmVo> voList = null;
-		String sql = "select a.alarm_content, a.alarm_date,a.ALARM_sendID, a.ALARM_RECEIVEID,t.t_no from alarm a join member m on a.ALARM_RECEIVEID = m.m_nickname left outer join t_profile t on t.m_id = m.m_id where alarm_sendid = ? order by alarm_date desc";
+		// 최근 30일 조회
+		String sql = "select a.alarm_content, a.alarm_date,a.ALARM_sendID, a.ALARM_RECEIVEID,t.t_no from alarm a join member m on a.ALARM_RECEIVEID = m.m_nickname left outer join t_profile t on t.m_id = m.m_id where alarm_sendid = ? and alarm_date between (sysdate-30) and sysdate order by alarm_date desc";
 		
 		try {
 			pstmt = conn.prepareStatement(sql);
@@ -70,9 +71,34 @@ public class AlarmDao {
 		
 		return voList;
 	}
+	
+	public int numberOfSendAlarm(Connection conn, String mNickname) {
+		int result = 0;
+		String sql = "select count(*) cnt from alarm where alarm_sendid=? and alarm_date between (sysdate-30) and sysdate order by alarm_date desc";
+
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, mNickname);
+			
+			rs = pstmt.executeQuery();
+			
+			if(rs != null) {
+				while(rs.next()) {
+					result = rs.getInt("cnt");
+				}
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		
+		return result;
+	}
 	public ArrayList<AlarmVo> receiveListAlarm(Connection conn, String mNickname){
 		ArrayList<AlarmVo> voList = null;
-		String sql = "select a.alarm_content, a.alarm_date,a.ALARM_sendID, a.ALARM_RECEIVEID,t.t_no from alarm a join member m on a.ALARM_RECEIVEID = m.m_nickname left outer join t_profile t on t.m_id = m.m_id where alarm_receiveid = ? order by alarm_date desc";
+		String sql = "select a.alarm_content, a.alarm_date,a.ALARM_sendID, a.ALARM_RECEIVEID,t.t_no from alarm a join member m on a.ALARM_RECEIVEID = m.m_nickname left outer join t_profile t on t.m_id = m.m_id where alarm_receiveid = ? and alarm_date between (sysdate-30) and sysdate order by alarm_date desc";
 		
 		try {
 			pstmt = conn.prepareStatement(sql);
@@ -100,6 +126,30 @@ public class AlarmDao {
 		
 		return voList;
 	}
+	
+	public int numberOfReceiveAlarm(Connection conn, String mNickname) {
+		int result = 0;
+		String sql = "select count(*) cnt from alarm where alarm_receiveid=? and alarm_date between (sysdate-30) and sysdate order by alarm_date desc";
+
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, mNickname);
+			
+			rs = pstmt.executeQuery();
+			if(rs != null) {
+				while(rs.next()) {
+					result = rs.getInt("cnt");
+				}
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		
+		return result;
+	}
+	
 	
 	public ArrayList<AlarmVo> allListAlarm(Connection conn, String mNickname){
 		ArrayList<AlarmVo> voList = null;
