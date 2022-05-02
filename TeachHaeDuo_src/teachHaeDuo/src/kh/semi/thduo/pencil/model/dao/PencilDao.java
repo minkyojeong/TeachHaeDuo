@@ -66,13 +66,14 @@ public class PencilDao {
 	public int minusPencil(Connection conn, PencilVo vo) {
 		int result = 0;
 		String sql = "INSERT INTO check_pencil(cp_no, cp_content, cp_cash, cp_date, m_id) "
-				+ "VALUES((SELECT NVL(MAX(cp_no), 0) + 1 FROM check_pencil), ?, ?, default, ?)";
+				+ "VALUES((SELECT NVL(MAX(cp_no), 0) + 1 FROM check_pencil WHERE m_id = ?), ?, ?, default, ?)";
 		
 		try {
 			pstmt = conn.prepareStatement(sql);
-			pstmt.setString(1, vo.getCpContent());
-			pstmt.setInt(2, vo.getCpCash());
-			pstmt.setString(3, vo.getmId());
+			pstmt.setString(1, vo.getmId());
+			pstmt.setString(2, vo.getCpContent());
+			pstmt.setInt(3, vo.getCpCash());
+			pstmt.setString(4, vo.getmId());
 			
 			result = pstmt.executeUpdate();
 		} catch(SQLException e) {
