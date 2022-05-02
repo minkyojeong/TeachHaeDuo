@@ -417,7 +417,11 @@ button:hover {
     color: #fff;
     border: 1px solid #42454c;
 }
-.page_nation .img {
+.page_nation .prev>img {
 	margin-top: 10px;
-	
+	  float: center;
+}
+.page_nation .next>img {
+	margin-top: 10px;
+	  float: center;
 }

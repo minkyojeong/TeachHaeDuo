@@ -20,6 +20,7 @@
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </head>
 <body>
+<jsp:include page="template_header.jsp"></jsp:include>
 <%
 	ArrayList<TeacherVo> volist = (ArrayList<TeacherVo>)request.getAttribute("teachVolist");
 %>
@@ -64,9 +65,9 @@
         <label for="tab7">기타</label>
 
         <!-- 선택사항 버튼들 -->
-        <div class="choice_option">
-            <select name="gender" id="gender"> <img src="${pageContext.request.contextPath}/resources/icons/down.png">
-                <option value="init">성별</option>
+        <div class="choice_option"> 
+            <select name="gender" id="gender">
+                <option value="init" >성별</option><img src="${pageContext.request.contextPath}/resources/icons/down.png">
                 <option value="m">남성</option>
                 <option value="f">여성</option>
             </select>
@@ -105,6 +106,8 @@
             <button type="button" id="btn_recruit"> <img src="${pageContext.request.contextPath}/resources/icons/recruit.png">모집중</button>
             <button type="button" id="btn_like"> <img src="${pageContext.request.contextPath}/resources/icons/like_color.png">찜</button>
         </div>
+<!--        탭메뉴--> 
+
         <script>
         $("#gender").on("change", changeOption);
         $("#area_search").on("change", changeOption);
@@ -153,7 +156,234 @@
         			
         		}
         	});
-        	
+        	$.ajax({
+        		url:"TeacherSearchWithAreaGender.ajax",
+        		type:"post",
+        		data:{gender: genderVal, area:areaVal},
+        		dataType:"json",
+        		success: function(result){
+        			console.log(result);  ///aaa
+        			$("#content2").html("");  // 텅비움. 열리고 닫히는 태그 사이 
+        			htmlVal="";
+        			htmlVal+='<div class="grid-init grid">';
+        			for(var i=0; i<result.length; i++) {
+        				vo = result[i];
+        			htmlVal+='    <div class="box-init box">';
+        			htmlVal+='        <div class="list1">';
+        			htmlVal+='            <div class="profile"></div>';
+        			htmlVal+='            <p class="nickname">'+vo.m_nickname+'</p>';
+        			htmlVal+='        </div>';
+        			htmlVal+='    </div>';
+        			htmlVal+='    <div class="box-init box"><a href="#"></a>';
+        			htmlVal+='        <div class="title">';
+        			htmlVal+='            <h2>'+vo.object_list+'</h2><br>';
+        			htmlVal+='            <ul>';
+        			htmlVal+='                <li>'+vo.t_major+'</li>';
+        			htmlVal+='                <li>'+vo.area_list+'</li>';
+        			htmlVal+='                <li>평점'+vo.avg_rscore+'</li>';
+        			htmlVal+='            </ul>';
+        			htmlVal+='            </a>';
+        			htmlVal+='        </div>';
+                    htmlVal+='    </div>';
+        			}
+                    htmlVal+='     </div>';
+                    
+                    $("#content2").html(htmlVal);  // 채움. 열리고 닫히는 태그 사이 
+        		}, 
+        		error: function(){
+        			
+        		}
+        	});
+        	$.ajax({
+        		url:"TeacherSearchWithAreaGender.ajax",
+        		type:"post",
+        		data:{gender: genderVal, area:areaVal},
+        		dataType:"json",
+        		success: function(result){
+        			console.log(result);  ///aaa
+        			$("#content3").html("");  // 텅비움. 열리고 닫히는 태그 사이 
+        			htmlVal="";
+        			htmlVal+='<div class="grid-init grid">';
+        			for(var i=0; i<result.length; i++) {
+        				vo = result[i];
+        			htmlVal+='    <div class="box-init box">';
+        			htmlVal+='        <div class="list1">';
+        			htmlVal+='            <div class="profile"></div>';
+        			htmlVal+='            <p class="nickname">'+vo.m_nickname+'</p>';
+        			htmlVal+='        </div>';
+        			htmlVal+='    </div>';
+        			htmlVal+='    <div class="box-init box"><a href="#"></a>';
+        			htmlVal+='        <div class="title">';
+        			htmlVal+='            <h2>'+vo.object_list+'</h2><br>';
+        			htmlVal+='            <ul>';
+        			htmlVal+='                <li>'+vo.t_major+'</li>';
+        			htmlVal+='                <li>'+vo.area_list+'</li>';
+        			htmlVal+='                <li>평점'+vo.avg_rscore+'</li>';
+        			htmlVal+='            </ul>';
+        			htmlVal+='            </a>';
+        			htmlVal+='        </div>';
+                    htmlVal+='    </div>';
+        			}
+                    htmlVal+='     </div>';
+                    
+                    $("#content3").html(htmlVal);  // 채움. 열리고 닫히는 태그 사이 
+        		}, 
+        		error: function(){
+        			
+        		}
+        	});
+        	$.ajax({
+        		url:"TeacherSearchWithAreaGender.ajax",
+        		type:"post",
+        		data:{gender: genderVal, area:areaVal},
+        		dataType:"json",
+        		success: function(result){
+        			console.log(result);  ///aaa
+        			$("#content4").html("");  // 텅비움. 열리고 닫히는 태그 사이 
+        			htmlVal="";
+        			htmlVal+='<div class="grid-init grid">';
+        			for(var i=0; i<result.length; i++) {
+        				vo = result[i];
+        			htmlVal+='    <div class="box-init box">';
+        			htmlVal+='        <div class="list1">';
+        			htmlVal+='            <div class="profile"></div>';
+        			htmlVal+='            <p class="nickname">'+vo.m_nickname+'</p>';
+        			htmlVal+='        </div>';
+        			htmlVal+='    </div>';
+        			htmlVal+='    <div class="box-init box"><a href="#"></a>';
+        			htmlVal+='        <div class="title">';
+        			htmlVal+='            <h2>'+vo.object_list+'</h2><br>';
+        			htmlVal+='            <ul>';
+        			htmlVal+='                <li>'+vo.t_major+'</li>';
+        			htmlVal+='                <li>'+vo.area_list+'</li>';
+        			htmlVal+='                <li>평점'+vo.avg_rscore+'</li>';
+        			htmlVal+='            </ul>';
+        			htmlVal+='            </a>';
+        			htmlVal+='        </div>';
+                    htmlVal+='    </div>';
+        			}
+                    htmlVal+='     </div>';
+                    
+                    $("#content4").html(htmlVal);  // 채움. 열리고 닫히는 태그 사이 
+        		}, 
+        		error: function(){
+        			
+        		}
+        	});
+        	$.ajax({
+        		url:"TeacherSearchWithAreaGender.ajax",
+        		type:"post",
+        		data:{gender: genderVal, area:areaVal},
+        		dataType:"json",
+        		success: function(result){
+        			console.log(result);  ///aaa
+        			$("#content5").html("");  // 텅비움. 열리고 닫히는 태그 사이 
+        			htmlVal="";
+        			htmlVal+='<div class="grid-init grid">';
+        			for(var i=0; i<result.length; i++) {
+        				vo = result[i];
+        			htmlVal+='    <div class="box-init box">';
+        			htmlVal+='        <div class="list1">';
+        			htmlVal+='            <div class="profile"></div>';
+        			htmlVal+='            <p class="nickname">'+vo.m_nickname+'</p>';
+        			htmlVal+='        </div>';
+        			htmlVal+='    </div>';
+        			htmlVal+='    <div class="box-init box"><a href="#"></a>';
+        			htmlVal+='        <div class="title">';
+        			htmlVal+='            <h2>'+vo.object_list+'</h2><br>';
+        			htmlVal+='            <ul>';
+        			htmlVal+='                <li>'+vo.t_major+'</li>';
+        			htmlVal+='                <li>'+vo.area_list+'</li>';
+        			htmlVal+='                <li>평점'+vo.avg_rscore+'</li>';
+        			htmlVal+='            </ul>';
+        			htmlVal+='            </a>';
+        			htmlVal+='        </div>';
+                    htmlVal+='    </div>';
+        			}
+                    htmlVal+='     </div>';
+                    
+                    $("#content5").html(htmlVal);  // 채움. 열리고 닫히는 태그 사이 
+        		}, 
+        		error: function(){
+        			
+        		}
+        	});
+        	$.ajax({
+        		url:"TeacherSearchWithOnOff",
+        		type:"post",
+        		data:{online:onlineVal , offline:offlineVal},
+        		dataType:"json",
+        		success: function(result){
+        			console.log(result);  ///aaa
+        			$("#content6").html("");  // 텅비움. 열리고 닫히는 태그 사이 
+        			htmlVal="";
+        			htmlVal+='<div class="grid-init grid">';
+        			for(var i=0; i<result.length; i++) {
+        				vo = result[i];
+        			htmlVal+='    <div class="box-init box">';
+        			htmlVal+='        <div class="list1">';
+        			htmlVal+='            <div class="profile"></div>';
+        			htmlVal+='            <p class="nickname">'+vo.m_nickname+'</p>';
+        			htmlVal+='        </div>';
+        			htmlVal+='    </div>';
+        			htmlVal+='    <div class="box-init box"><a href="#"></a>';
+        			htmlVal+='        <div class="title">';
+        			htmlVal+='            <h2>'+vo.object_list+'</h2><br>';
+        			htmlVal+='            <ul>';
+        			htmlVal+='                <li>'+vo.t_major+'</li>';
+        			htmlVal+='                <li>'+vo.area_list+'</li>';
+        			htmlVal+='                <li>평점'+vo.avg_rscore+'</li>';
+        			htmlVal+='            </ul>';
+        			htmlVal+='            </a>';
+        			htmlVal+='        </div>';
+                    htmlVal+='    </div>';
+        			}
+                    htmlVal+='     </div>';
+                    
+                    $("#content6").html(htmlVal);  // 채움. 열리고 닫히는 태그 사이 
+        		}, 
+        		error: function(){
+        			
+        		}
+        	});
+        	$.ajax({
+        		url:"TeacherSearchWithAreaGender.ajax",
+        		type:"post",
+        		data:{gender: genderVal, area:areaVal},
+        		dataType:"json",
+        		success: function(result){
+        			console.log(result);  ///aaa
+        			$("#content7").html("");  // 텅비움. 열리고 닫히는 태그 사이 
+        			htmlVal="";
+        			htmlVal+='<div class="grid-init grid">';
+        			for(var i=0; i<result.length; i++) {
+        				vo = result[i];
+        			htmlVal+='    <div class="box-init box">';
+        			htmlVal+='        <div class="list1">';
+        			htmlVal+='            <div class="profile"></div>';
+        			htmlVal+='            <p class="nickname">'+vo.m_nickname+'</p>';
+        			htmlVal+='        </div>';
+        			htmlVal+='    </div>';
+        			htmlVal+='    <div class="box-init box"><a href="#"></a>';
+        			htmlVal+='        <div class="title">';
+        			htmlVal+='            <h2>'+vo.object_list+'</h2><br>';
+        			htmlVal+='            <ul>';
+        			htmlVal+='                <li>'+vo.t_major+'</li>';
+        			htmlVal+='                <li>'+vo.area_list+'</li>';
+        			htmlVal+='                <li>평점'+vo.avg_rscore+'</li>';
+        			htmlVal+='            </ul>';
+        			htmlVal+='            </a>';
+        			htmlVal+='        </div>';
+                    htmlVal+='    </div>';
+        			}
+                    htmlVal+='     </div>';
+                    
+                    $("#content7").html(htmlVal);  // 채움. 열리고 닫히는 태그 사이 
+        		}, 
+        		error: function(){
+        			
+        		}
+        	});
         	
         }        
         </script>
@@ -346,80 +576,10 @@
     </div>
 
 
-    <!-- 활동지역검색 모달창 -->
-    <!-- <div class="modal report">
-            <div class="report_content">
-                <p class="modal_title">신고하기</p>
-                <div class="report_sel">
-                    <span>신고사유 선택</span>
-                    <select name="report_category" id="report_category">
-                    </select>
-                </div>
-                <div class="report_input">
-                    <p>신고 내용 입력</p>
-                    <textarea cols="35" rows="10" name="report" placeholder="신고 내용을 입력해주세요."></textarea>
-                </div>
-                <div class="report_send">
-                    <button id="btn_report_cancel">취소</button>
-                    <button id="btn_report_send">신고</button>
-                </div>
-            </div>
-        </div> -->
 
-    <!-- 스크립트 -->
-  <!--  <script>
-        var main = function () {
-            /* Push the body and the nav over by 285px over */
-            var isOpened = false;
 
-            $('.menu').on("mouseover", function () {
-                clearInterval(walk_through);
-            });
 
-            $('.icon-menu').on("mouseover", function () {
-                clearInterval(walk_through);
-            });
-            $('.icon-menu').click(function () {
-                isOpened = true;
 
-                $('.menu').animate({
-                    left: "0px"
-                }, 200);
-
-                $('body').animate({
-                    left: "285px"
-                }, 200);
-            });
-
-            /* Then push them back */
-            $('.icon-close').on("mouseover", function () {
-                clearInterval(walk_through);
-            });
-            $('.icon-close').click(function () {
-                isOpened = false;
-
-                $('.menu').animate({
-                    left: "-285px"
-                }, 200);
-
-                $('body').animate({
-                    left: "0px"
-                }, 200);
-            });
-
-            // Walkthrough the menu
-            var walk_through = setInterval(function () {
-                if (!isOpened) {
-                    $('.icon-menu').trigger('click');
-                }
-                else if (isOpened) {
-                    $('.icon-close').trigger('click');
-                }
-            }, 3000);
-        };
-
-        $(document).ready(main);
-    </script>  --> 
-
+<jsp:include page="template_footer.jsp"></jsp:include>
 </body>
 </html>
