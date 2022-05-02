@@ -18,6 +18,11 @@ public class LikeService {
 		Connection conn = getConnection();
 		
 		result = dao.insertLike(conn, m_id, t_no);
+		if (result == 0) {
+			rollback(conn);
+		} else {
+			commit(conn);
+		}
 		
 		close(conn);
 
@@ -30,6 +35,11 @@ public class LikeService {
 		Connection conn = getConnection();
 		
 		result = dao.deleteLike(conn, s_no, t_no);
+		if (result == 0) {
+			rollback(conn);
+		} else {
+			commit(conn);
+		}
 		
 		close(conn);
 

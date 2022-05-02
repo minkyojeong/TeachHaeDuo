@@ -17,7 +17,13 @@ public class AlarmService {
 		Connection conn = null;
 
 		conn = getConnection();
+		
 		result = dao.sendAlarm(conn, vo);
+		if (result == 0) {
+			rollback(conn);
+		} else {
+			commit(conn);
+		}
 
 		close(conn);
 

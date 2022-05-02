@@ -16,6 +16,11 @@ public class ReportService {
 		Connection conn = getConnection();
 		
 		result = dao.insertReport(conn, vo);
+		if (result == 0) {
+			rollback(conn);
+		} else {
+			commit(conn);
+		}
 
 		close(conn);
 		

@@ -29,6 +29,11 @@ public class ReviewService {
 		Connection conn = getConnection();
 
 		result = dao.insertReview(conn, vo);
+		if (result == 0) {
+			rollback(conn);
+		} else {
+			commit(conn);
+		}
 
 		close(conn);
 
@@ -41,6 +46,11 @@ public class ReviewService {
 		Connection conn = getConnection();
 
 		result = dao.deleteReview(conn, t_r_no);
+		if (result == 0) {
+			rollback(conn);
+		} else {
+			commit(conn);
+		}
 
 		close(conn);
 

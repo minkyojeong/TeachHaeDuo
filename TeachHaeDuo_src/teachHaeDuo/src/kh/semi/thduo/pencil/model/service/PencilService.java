@@ -45,6 +45,11 @@ public class PencilService {
 		Connection conn = getConnection();
 		
 		result = dao.minusPencil(conn, vo);
+		if (result == 0) {
+			rollback(conn);
+		} else {
+			commit(conn);
+		}
 		
 		close(conn);
 
