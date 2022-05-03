@@ -315,4 +315,24 @@ public class TeacherDao {
 		
 		return retsult;
 	}
+	
+	
+	public int updateProfile(Connection conn, TeacherVo tVo){
+		int result = 0;
+		String sql = "update t_profile set  T_PICTURE = ? where t_no = ?";
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, tVo.getT_picture());
+			pstmt.setString(2, tVo.getT_no());
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		
+		
+		return result;
+	}
 }

@@ -1,3 +1,4 @@
+<%@page import="kh.semi.thduo.teacher.model.vo.TeacherVo"%>
 <%@page import="kh.semi.thduo.member.vo.MemberVo"%>
 <link href="<%=request.getContextPath()%>/resources/css/reset.css" rel="stylesheet" type="text/css">
 <link href="<%=request.getContextPath()%>/resources/css/common.css" rel="stylesheet" type="text/css">
@@ -25,7 +26,13 @@
             <div id="top_div">
                 <div id="profile_div" style="width:50%">
                     <div style="width:40%">
-                        <img src="${pageContext.request.contextPath}/resources/icons/profile.png" width="100" height="100">
+                    <% TeacherVo tVo =  (TeacherVo)request.getAttribute("tVo");%>
+                    ${tVo.getT_picture == 'Y'}
+                    	<%-- <c:choose>
+							<c:when test="${tVo.getT_picture == 'Y'}"><img src="${pageContext.request.contextPath}/resources/icons/profile.png" width="100" height="100"></c:when>
+							<c:when test="${tVo.getT_picture == 'N'}"><p class="text_div_p">알림 안 받아요</p></c:when>
+						</c:choose> --%>
+                        
                     </div>
                     <div style="width:60%">
                         <div class="nickname_div">
@@ -319,12 +326,19 @@ if(msgAlarmVal != "" && msgAlarmVal != null){
 var msgChargeVal = '${msgCharge}';
 if(msgChargeVal != "" && msgChargeVal != null){
 	alert('${msgCharge}');
-	
+	location.href="mypage";
 }
+
 var msgUpdateVal = '${msgUpdate}';
 if(msgUpdateVal != "" && msgUpdateVal != null){
 	alert('${msgUpdate}');
-	
+	location.href="mypage";
+}
+
+var msgProfileVal = '${msgProfile}';
+if(msgProfileVal != "" && msgProfileVal != null){
+	alert('${msgProfile}');
+	location.href="mypage";
 }
 
  $("#uploadProfile").change(function(){
@@ -342,5 +356,6 @@ if(msgUpdateVal != "" && msgUpdateVal != null){
 <% request.removeAttribute("msgAlarm"); %>
 <% request.getSession().removeAttribute("msgCharge"); %>
 <% request.getSession().removeAttribute("msgUpdate"); %>
+<% request.getSession().removeAttribute("msgProfile"); %>
 </body>
 </html>

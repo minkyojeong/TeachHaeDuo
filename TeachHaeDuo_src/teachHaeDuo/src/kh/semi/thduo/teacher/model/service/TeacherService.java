@@ -180,4 +180,20 @@ public class TeacherService {
 		
 		return retsult;
 	}
+	
+	// 선생님 프로필 사진 등록/변경
+	public int updateProfile(TeacherVo tVo){
+		int result = 0;
+		Connection conn = getConnection();
+		
+		result = dao.updateProfile(conn, tVo);
+		if(result == 1) {
+			commit(conn);
+		} else {
+			rollback(conn);
+		}
+		close(conn);
+		
+		return result;
+	}
 }

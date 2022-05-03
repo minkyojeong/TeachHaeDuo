@@ -327,11 +327,12 @@ if(msgAlarmVal != "" && msgAlarmVal != null){
 var msgChargeVal = '${msgCharge}';
 if(msgChargeVal != "" && msgChargeVal != null){
 	alert('${msgCharge}');
+	location.href="mypage";
 }
 var msgUpdateVal = '${msgUpdate}';
 if(msgUpdateVal != "" && msgUpdateVal != null){
 	alert('${msgUpdate}');
-	
+	location.href="mypage";
 }
 </script>
 <% request.removeAttribute("msgAlarm"); %>

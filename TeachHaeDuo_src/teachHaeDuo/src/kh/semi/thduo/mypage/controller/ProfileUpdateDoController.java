@@ -13,6 +13,10 @@ import org.apache.tomcat.util.http.fileupload.servlet.ServletFileUpload;
 import com.oreilly.servlet.MultipartRequest;
 import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
 
+import kh.semi.thduo.member.vo.MemberVo;
+import kh.semi.thduo.teacher.model.service.TeacherService;
+import kh.semi.thduo.teacher.model.vo.TeacherVo;
+
 /**
  * Servlet implementation class ProfileUpdateDoController
  */
@@ -62,32 +66,31 @@ public class ProfileUpdateDoController extends HttpServlet {
 	
 		
 		// 구현중 TODOTODO
-//		String pFilePathParam= multi.getParameter("bFilePath");
+		String pFilePathParam= multi.getParameter("bFilePath");
 //			
-//		String orgFileName = multi.getOriginalFileName("uploadProfile");  // 전송되어오기전 client에서 파일이름
-//		String type = multi.getContentType("uploadProfile");	// 전송된 파일의 타입
-//		String upload = multi.getFilesystemName("uploadProfile");	// 서버에 저장된 파일이름
-//		if(upload == null && orgFileName != null) { // 파일 저장 실패
-//			
-//			response.sendRedirect("mypage");
-//			return;
-//		}
-//		String bFilePath = "";
-//		if(upload != null) {
-//			System.out.println("프로필 등록");
-//			bFilePath = fileSavePath + "/" + upload;
-//		}
-//		else if ( upload != null && pFilePathParam != null) {
-//			// 글수정 + 기존파일 있음 + 새파일이 있는경우
-//			// 기존파일 서버에서 파일 삭제
-//			File file = new File(rootPath+pFilePathParam);
-//			if(file.exists()) { // 파일명까지 적었기 때문에, 파일 존재여부 확인
-//				file.delete();
-//				System.out.println("파일삭제");
-//			} // 파일 없다면.. 아무 행동하지 않고 db 저장하러 감
-//			// 새 파일을 db에 저장
-//			bFilePath = fileSavePath + "/" + upload;  // 새파일을 db에 저장
-//		} 
+		String orgFileName = multi.getOriginalFileName("uploadProfile");  // 전송되어오기전 client에서 파일이름
+		String type = multi.getContentType("uploadProfile");	// 전송된 파일의 타입
+		String upload = multi.getFilesystemName("uploadProfile");	// 서버에 저장된 파일이름
+		if(upload == null && orgFileName != null) { // 파일 저장 실패
+			
+			response.sendRedirect("mypage");
+			return;
+		}
+		String pFilePath = "";
+		if(upload != null) {
+			System.out.println("프로필 등록");
+			pFilePath = fileSavePath + "/" + upload;
+		} else if ( upload != null && pFilePathParam != null) {
+			// 기존사진 있음 + 새사진이 있는경우
+			// 기존사진 서버에서 파일 삭제
+			File file = new File(rootPath+pFilePathParam);
+			if(file.exists()) { // 파일명까지 적었기 때문에, 파일 존재여부 확인
+				file.delete();
+				System.out.println("파일삭제");
+			} // 파일 없다면.. 아무 행동하지 않고 db 저장하러 감
+			// 새 파일을 db에 저장
+			pFilePath = fileSavePath + "/" + upload;  // 새파일을 db에 저장
+		} 
 //		System.out.println(bTitle);
 //		System.out.println(bContent);
 //		System.out.println("upload:" + upload);
@@ -98,23 +101,36 @@ public class ProfileUpdateDoController extends HttpServlet {
 //		
 //		
 //		BoardVo vo = new BoardVo();
+		TeacherVo tVo = new TeacherVo();
+		System.out.println("pFilePath: " + pFilePath);
+		
 //		vo.setbNo(bNo);
 //		vo.setbContent(bContent);
 //		vo.setbTitle(bTitle); 
 //		System.out.println("bFilePath: " + bFilePath);
 //		vo.setbFilePath(bFilePath);
 //		// 글쓰기 버튼 누를때 로그인 상태 확인했는데, 이때도 또 해줘! 왜냐면 그 사이에 로그아웃 됐을수도 있자나
-//		MemberVo ssvo = (MemberVo)request.getSession().getAttribute("ssMV");
-//		if(ssvo == null) {  // 로그아웃 상태라면 로그인 페이지로
-//			response.sendRedirect("login");
-//			return;  // 아래 db 저장을 할 필요가 없으니..
-//		} else {  // 로그인한 상태라면 write page 진입 
-//			vo.setmId(ssvo.getmId());
-//			vo.setbWriter(ssvo.getmNickname());
-//		}
+		MemberVo ssMV = (MemberVo)request.getSession().getAttribute("ssMV");
+		if(ssMV == null) {  // 로그아웃 상태라면 로그인 페이지로
+			response.sendRedirect("login");
+			return;  // 아래 db 저장을 할 필요가 없으니..
+		} else {  // 로그인한 상태라면 write page 진입 
+			tVo.setT_no(ssMV.gettNo());
+			tVo.setT_picture(pFilePath);
+		}
 //		
 //		// db저장
-//		int result = -1;
+		int result = 0;
+		result = new TeacherService().updateProfile(tVo);
+		
+		if(result == 1) {
+			request.setAttribute("tVo", tVo);
+			request.getSession().setAttribute("msgProfile", "프로필 변경이 완료되었습니다.");
+			response.sendRedirect("mypage");
+		} else {
+			request.getSession().setAttribute("msgProfile", "프로필 변경에 실패했습니다.");
+			response.sendRedirect("mypage");
+		}
 //		if(bNo>0) {
 //			result = new BoardService().updateBoard(vo);
 //		} else {
