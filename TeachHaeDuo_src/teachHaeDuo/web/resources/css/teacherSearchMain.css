@@ -117,7 +117,7 @@ h5 {
 }
 
 section {
-    display: none;
+/*     display: none; */
     padding: 20px 0 0;
     border-top: 1px solid #ddd;
     font-family: MinSans-Medium;
@@ -159,7 +159,7 @@ input:checked+label {
     /*이거 할말? - 없애면 ui설계도랑 똑같*/
     border-bottom: 1px solid #ffffff;
 }
-
+/* 
 #tab1:checked~#content1,
 #tab2:checked~#content2,
 #tab3:checked~#content3,
@@ -169,7 +169,7 @@ input:checked+label {
 #tab7:checked~#content7 {
     display: block;
 }
-
+ */
 /* 선택사항_버튼들 */
 .choice_option {
     padding: .8em .5em;
@@ -427,7 +427,11 @@ button:hover {
     color: #fff;
     border: 1px solid #42454c;
 }
-.page_nation .img {
+.page_nation .prev>img {
 	margin-top: 10px;
-	
+	  float: center;
+}
+.page_nation .next>img {
+	margin-top: 10px;
+	  float: center;
 }

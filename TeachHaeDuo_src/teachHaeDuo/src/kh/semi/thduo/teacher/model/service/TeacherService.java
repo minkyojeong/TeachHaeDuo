@@ -7,6 +7,7 @@ import java.util.ArrayList;
 
 import kh.semi.thduo.like.model.vo.LikeVo;
 import kh.semi.thduo.teacher.model.dao.TeacherDao;
+import kh.semi.thduo.teacher.model.vo.TeacherSearchSettingVo;
 import kh.semi.thduo.teacher.model.vo.TeacherVo;
 
 public class TeacherService {
@@ -43,7 +44,7 @@ public class TeacherService {
 		Connection conn = getConnection();
 		
 		retVolist = dao.readTeacher(conn, object);
-		
+
 		close(conn);
 		
 		return retVolist;
@@ -143,6 +144,15 @@ public class TeacherService {
 		close(conn);
 		
 		return retVo;
+	}
+	
+	// 선생님 통합 검색
+	public ArrayList<TeacherVo> searchTeacher(TeacherSearchSettingVo setVo) {
+		 ArrayList<TeacherVo> retVoList = null;
+		Connection conn = getConnection();
+		retVoList = dao.searchTeacher(conn, setVo);
+		close(conn);
+		return retVoList;
 	}
 	
 	// 선생님 상세정보 읽기

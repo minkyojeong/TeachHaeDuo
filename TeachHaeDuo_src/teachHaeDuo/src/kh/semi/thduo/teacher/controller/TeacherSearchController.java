@@ -9,7 +9,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import kh.semi.thduo.teacher.model.dao.TeacherDao;
 import kh.semi.thduo.teacher.model.service.TeacherService;
+import kh.semi.thduo.teacher.model.vo.TeacherSearchSettingVo;
 import kh.semi.thduo.teacher.model.vo.TeacherVo;
 
 /**
@@ -33,8 +35,15 @@ public class TeacherSearchController extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		ArrayList<TeacherVo> volist = new TeacherService().readAllTeacher();
+		
+//		TeacherSearchSettingVo setVo = new TeacherSearchSettingVo();  // 아무 값도 넣지 않고.. 넣어주기
+//		request.setAttribute("searchSetVo", setVo);
+		System.out.println("여기 volist"+ volist);
 		request.setAttribute("teachVolist", volist);
+//		request.setAttribute("teachVolist", TeacherDao.readTeacher(object));
 		request.getRequestDispatcher("WEB-INF/view/teacherSearchMain.jsp").forward(request, response);
+		
+		
 	}
 
 	/**

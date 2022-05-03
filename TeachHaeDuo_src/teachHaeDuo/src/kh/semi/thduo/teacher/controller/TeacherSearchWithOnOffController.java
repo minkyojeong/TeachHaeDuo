@@ -45,28 +45,39 @@ public class TeacherSearchWithOnOffController extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		System.out.println("TeacherSearchWithOnOff ");
 		
-		String gender = request.getParameter("online");
-//				System.out.println("online :"+ online);
+		TeacherVo setVo = new TeacherVo();
+		String sNo = null;  // 찜 기능을 원했을 경우에만 로그인한 sNo를 넣어줘야함.
 		
-		String area = request.getParameter("offline");
-//		System.out.println("offline :"+ offline);
+		String online = request.getParameter("online");
+		System.out.println("online :"+ online);
 		
-		ArrayList<TeacherVo> retVolist = new TeacherService().readAreaGenderTeacher(gender, area);
+		String offline = request.getParameter("offline");
+		System.out.println("offline :"+ offline);
+		
+		String onlineYna = null;   // 초기 값 꼭 null
+		if(online != null && !online.equals("")) {
+			onlineYna = "Y";
+		} else if (offline != null && !offline.equals("")) {
+			onlineYna = "N";
+		}
+		
+//		ArrayList<TeacherVo> retVolist = new TeacherService().searchTeacher(setVo, sNo);
 		
 		PrintWriter out = response.getWriter();
 				
 
 		Gson gobj = new GsonBuilder().setPrettyPrinting().create();
-		String resStr = gobj.toJson(retVolist);
+//		String resStr = gobj.toJson(retVolist);
 		
-		System.out.println(resStr);
-		// response�� ������ ������ ä���	
-		out.println(resStr);
+//		System.out.println(resStr);
+		// response로 전달할 데이터 채우기	
+//		out.println(resStr);
 		out.flush();
 		out.close();
 
 //		request.setAttribute("teachVolist", retVolist);
 //		request.getRequestDispatcher("WEB-INF/view/teacherSearchMain.jsp").forward(request, response);
 	}
+
 
 }
