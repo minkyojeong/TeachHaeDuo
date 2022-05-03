@@ -222,11 +222,22 @@ $("#phone").on("input", function(){
 			phoneChk = true;
 		}
 	});	
-});
+	
 //신분 선생님 클릭시 증명서 첨부 활성화 
+$("#fileupload").hide();
+ 
+$("#radioT").click(function(){
+     $("#fileupload").show();
+});
+
+$("#radioS").click(function(){
+    $("#fileupload").hide();
+});
 
 
 
+
+});  // onload 
 </script>
 </head>
 <body>
@@ -237,7 +248,7 @@ $("#phone").on("input", function(){
                 <div id="join">
                     <p><font size="17" color="#495057">회원가입</font></p>
                         <br> <br>
-                        <form action="join" method="post" onsubmit="">
+                        <form action="join" method="post" enctype = "multipart/form-data" onsubmit="return checkValue();">
                             <table>
                                 <tr>
                                     <td id="title">아이디</td>
@@ -302,14 +313,15 @@ $("#phone").on("input", function(){
                                     <td><input type="radio" name="genderFm" value="M" checked>남
                                         <input type="radio" name="genderFm" value="F">여</td>
                                 </tr>
+                                
                                 <tr>
                                     <td id="title">신분</td>
-                                    <td><input type="radio" name="roleSt" value="S" checked>학생
-                                        <input type="radio" name="roleSt"  id="radioT"value="T">선생님</td>
+                                    <td><input type="radio" name="roleSt" id="radioS" value="S" checked>학생
+                                        <input type="radio" name="roleSt"  id="radioT" value="T">선생님</td>
                                 </tr>
-                                <tr>
-                                    <td id="file">증명서첨부</td>
-                                    <td><input type="file" name="upload"></td>
+                                <tr id="fileupload">
+                                    <td id="title">증명서첨부</td>
+                                    <td><input type="file" name="joinupload" ></td>
                                 </tr>
                             </table>
                             <br> <input type="submit" id="btn_register" value="회원가입" /> <input

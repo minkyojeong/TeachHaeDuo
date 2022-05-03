@@ -53,12 +53,12 @@ public class MemberLoginController extends HttpServlet {
 		MemberVo vo = new MemberService().readFindId(mId);
 
 		if (vo == null) {
-
+            //로그인시 id 확인 작업 
 			request.setAttribute("login_msg", "아이디가 없습니다.");
 			request.getRequestDispatcher("WEB-INF/view/member/login.jsp").forward(request, response);
 			return;
 		}
-
+            // 로그인  id 와 pw 확인 시  없으면 
 		MemberVo vo2 = new MemberService().login(mId, pw);
 		if (vo2 == null) {
 
@@ -66,7 +66,7 @@ public class MemberLoginController extends HttpServlet {
 			request.getRequestDispatcher("WEB-INF/view/member/login.jsp").forward(request, response);
 			return;
 		} else {
-
+            // 로그인  id와 pw 맞으면 메인 이동 
 			request.getSession().setAttribute("ssMV", vo2);
 			response.sendRedirect(request.getContextPath() + "/"); // 절대경로를 의미하며 -context root가 없음.
 

@@ -40,7 +40,7 @@ public class MemberDao {
 			pstmt.setString(8, vo.getmEmail());
 			pstmt.setString(9, vo.getGenderFm());
 			pstmt.setString(10, vo.getRoleSt());
-			
+	
 			
 			result = pstmt.executeUpdate();
 					
