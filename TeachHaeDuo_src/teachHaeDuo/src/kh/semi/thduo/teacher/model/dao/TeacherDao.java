@@ -29,7 +29,7 @@ public class TeacherDao {
 	// 모든 선생님 정보 읽기
 	public ArrayList<TeacherVo> readAllTeacher(Connection conn){
 		ArrayList<TeacherVo> retVolist = null;
-		String sql ="SELECT pro.t_major, pro.t_picture, m.m_nickname, round(rscore.avg_rscore, 2) avg_rscore, olist.object_list, alist.area_list"
+		String sql ="SELECT pro.t_no, pro.t_major, pro.t_picture, m.m_nickname, round(rscore.avg_rscore, 2) avg_rscore, olist.object_list, alist.area_list"
 				+ " FROM t_profile pro JOIN member m"
 				+ "                    ON pro.m_id = m.m_id"
 				+ "                    JOIN view_teacher_rscroe_avg rscore"

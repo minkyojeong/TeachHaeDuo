@@ -3,10 +3,16 @@
 * {
     box-sizing: border-box;
 }
+
 button {
     cursor: pointer;
     font-family: MinSans-Medium;
 }
+
+select {
+	font-family: MinSans-Medium;
+}
+
 /* 인트로문구 2,3 */
 .intro_2 {
     /* background-color: brown; */
@@ -57,8 +63,11 @@ button {
 
 .object_input input {
     background-color: transparent;
+    border: none;
     width: 350px;
     height: 40px;
+    font-family: MinSans-Medium;
+	font-size: 17px;
 }
 
 .object_input input::placeholder {
@@ -94,7 +103,7 @@ h5 {
     text-align: left;
 }
 
-p {
+.wrap.content p {
     margin: 0 0 20px;
     line-height: 1.5;
 }
@@ -112,6 +121,13 @@ section {
     padding: 20px 0 0;
     border-top: 1px solid #ddd;
     font-family: MinSans-Medium;
+}
+
+.nothing {
+	font-family: MinSans-Bold;
+    font-size: 30px;
+    line-height: 1.5em;
+    text-align: center;
 }
 
 /*라디오버튼 숨김*/
@@ -160,11 +176,22 @@ input:checked+label {
     margin-top: 20px;
 }
 
+/* 온오프 교습 버튼 묶음 */
+.btns_on_off {
+	display: inline-block;
+	margin-left: 50px;
+} 
+
+/* 기타 버튼 묶음 */
+.btns_etc {
+	display: inline-block;
+	margin-left: 50px;
+}
+
 #gender {
     width: 100px;
     padding: .8em .5em;
     border: 1px solid #999;
-    font-family: inherit;
     background: url('../icons/down.png') no-repeat 95% 50%;
     border-radius: 0px;
     -webkit-appearance: none;
@@ -176,7 +203,6 @@ input:checked+label {
     width: 150px;
     padding: .8em .5em;
     border: 1px solid #999;
-    font-family: inherit;
     background: url('../icons/down.png') no-repeat 95% 50%;
     border-radius: 0px;
     -webkit-appearance: none;
@@ -188,9 +214,13 @@ select::-ms-expand {
     display: none;
 }
 
+.btn_text {
+	vertical-align: middle;
+}
+
 #btn_online {
     width: 110px;
-    padding: 10px;
+    padding: 8px;
     border: none;
     border-radius: 5px;
     background-color: #F3F4F6;
@@ -201,12 +231,13 @@ select::-ms-expand {
 
 #btn_online > img {
     width: 20px;
+    margin-right: 5px;
     vertical-align: middle;
 }
 
 #btn_offline {
     width: 140px;
-    padding: 10px;
+    padding: 8px;
     border: none;
     border-radius: 5px;
     background-color: #F3F4F6;
@@ -216,13 +247,14 @@ select::-ms-expand {
 
 #btn_offline > img {
     width: 20px;
+    margin-right: 5px;
     vertical-align: middle;
     
 }
 
 #btn_call {
     width: 100px;
-    padding: 10px;
+    padding: 8px;
     border: none;
     border-radius: 5px;
     background-color: #F3F4F6;
@@ -232,12 +264,13 @@ select::-ms-expand {
 
 #btn_call > img {
     width: 20px;
+    margin-right: 5px;
     vertical-align: middle;
 }
 
 #btn_recruit {
     width: 80px;
-    padding: 10px;
+    padding: 8px;
     border: none;
     border-radius: 5px;
     background-color: #F3F4F6;
@@ -247,12 +280,13 @@ select::-ms-expand {
 
 #btn_recruit > img {
     width: 20px;
+    margin-right: 5px;
     vertical-align: middle;
 }
 
 #btn_like {
     width: 60px;
-    padding: 10px;
+    padding: 8px;
     border: none;
     border-radius: 5px;
     background-color: #F3F4F6;
@@ -262,6 +296,7 @@ select::-ms-expand {
 
 #btn_like > img {
     width: 20px;
+    margin-right: 5px;
     vertical-align: middle;
 }
 
@@ -272,9 +307,9 @@ button:hover {
 /* 선생님리스트 그리드 */
 .grid {
     display: grid;
-    grid-gap: 10px;
+    grid-row-gap: 10px;
     grid-template-columns: 1fr 1fr;
-    grid-template-columns: 150px 1050px;
+    grid-template-columns: 150px 1100px;
     grid-template-rows: 150px 150px 150px 150px 150px;
 }
 
@@ -287,17 +322,26 @@ button:hover {
 .box-init {
     font-size: larger;
     color: black;
-    border-radius: 5px;
+    /* border-radius: 5px; */
     /* background-color: #2196f3;  */
     /* border: 1px solid black;  */
-    padding: 10px;
+    /* padding: 10px; */
+    cursor: pointer;
 
     /* padding */
 
     /* 박스 안에 텍스트는 flex를 이용해 가운데 정렬 */
     display: flex;
-    align-items: center;
-    justify-content: center;
+    /* align-items: center; */
+    /* justify-content: center; */
+}
+
+.list {
+	margin: 0 auto;
+}
+
+.box-init.box1 {
+	justify-content: center;
 }
 
 /* 프 사 & 닉네임 */
@@ -306,7 +350,8 @@ button:hover {
     height: 100px;
     border-radius: 70%;
     margin: 0 auto;
-    border: none;
+    /* border: none; */
+    border: 1px solid black;
     background-image: url('../icons/profile.png');
     background-size: cover;
     background-position: center;
@@ -314,54 +359,19 @@ button:hover {
 
 .nickname {
     text-align: center;
+    padding-top: 10px;
+    font-size: 15px;
+}
+
+.box2 li {
+    margin: 10px 0;
     font-size: 17px;
 }
 
-.title  li {
-    margin: 10px 0;
-}
-.h2 {
-    font-size: 15px;
-}
-
-/* 활동지역 모달창 */
-.modal_title {
-    font-family: MinSans-Bold;
-    color: #5e5e5e;
-    font-size: 20px;
-}
-
-.report_content .report_sel {
-    text-align: center;
-    margin-top: 30px;
-}
-
-.report_content .report_input {
-    margin-top: 20px;
-    text-align: center;
-}
-
-.report_content .report_input>p {
-    margin-bottom: 5px;
-}
-
-.report_content .report_send {
-    margin-top: 10px;
-}
-
-.report_content .report_send button {
-    background-color: transparent;
-    font-family: MinSans-Medium;
-    font-size: 15px;
-}
-
-.report_content #btn_report_cancel {
-    color: #b8b6b6;
-}
-
-.report_content #btn_report_send {
-    float: right;
-    color: red;
+.box2 li:first-child {
+	padding-bottom: 10px;
+	font-size: 18px;
+	font-family: MinSans-Bold;
 }
 
 /* 페이징 */
@@ -417,11 +427,7 @@ button:hover {
     color: #fff;
     border: 1px solid #42454c;
 }
-.page_nation .prev>img {
+.page_nation .img {
 	margin-top: 10px;
-	  float: center;
-}
-.page_nation .next>img {
-	margin-top: 10px;
-	  float: center;
+	
 }
