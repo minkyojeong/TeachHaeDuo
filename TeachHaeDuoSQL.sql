@@ -442,6 +442,14 @@ INSERT INTO member(M_ID, M_PW, M_NAME, M_NICKNAME, M_BIRTH, M_ADDRESS, M_PHONE,M
 -- 선생님 삽입
 INSERT INTO member(M_ID, M_PW, M_NAME, M_NICKNAME, M_BIRTH, M_ADDRESS, M_PHONE,M_EMAIL,GENDER_FM,ROLE_ST,M_DATE) VALUES('c12345','c12345678','이영희','영희쌤','900423','서울시 강남구 논현동 224','010-3311-1111','ccc@gmail.com','F','T',default); 
 INSERT INTO member(M_ID, M_PW, M_NAME, M_NICKNAME, M_BIRTH, M_ADDRESS, M_PHONE,M_EMAIL,GENDER_FM,ROLE_ST,M_DATE) VALUES('d12345','d12345678','김보미','보미쌤','000506','서울시 용산구 한남동 24','010-4411-1111','ddd@gmail.com','M','T',default); 
+INSERT INTO member(M_ID, M_PW, M_NAME, M_NICKNAME, M_BIRTH, M_ADDRESS, M_PHONE,M_EMAIL,GENDER_FM,ROLE_ST,M_DATE) VALUES('f12345','f12345678','성한나','한나나','930101','서울시 관악구 신림동 24','010-1234-4321','eee@gmail.com','F','T',default);
+INSERT INTO member(M_ID, M_PW, M_NAME, M_NICKNAME, M_BIRTH, M_ADDRESS, M_PHONE,M_EMAIL,GENDER_FM,ROLE_ST,M_DATE) VALUES('g12345','g12345678','정동한','솩솩','910102','서울시 구로구 신도림동 10','010-2345-6788' ,'rrr@gmail.com','M','T',default);
+INSERT INTO member(M_ID, M_PW, M_NAME, M_NICKNAME, M_BIRTH, M_ADDRESS, M_PHONE,M_EMAIL,GENDER_FM,ROLE_ST,M_DATE) VALUES('e12345','e12345678','송민호','MINO','940104','서울시 영등포구 신길1동','010-4411-1111','ggg@gmail.com','M','T',default);
+INSERT INTO member(M_ID, M_PW, M_NAME, M_NICKNAME, M_BIRTH, M_ADDRESS, M_PHONE,M_EMAIL,GENDER_FM,ROLE_ST,M_DATE) VALUES('h12345','h12345678','전소연','과외과외','990918','서울시 관악구 보라매동 80 ','010-7878-1131','hhh@gmail.com','F','T',default);
+INSERT INTO member(M_ID, M_PW, M_NAME, M_NICKNAME, M_BIRTH, M_ADDRESS, M_PHONE,M_EMAIL,GENDER_FM,ROLE_ST,M_DATE) VALUES('i12345','h12345678','김이안','평생가는국어','990826','서울시 도봉구 도봉동 86-7','010-7902-1081','iii@gmail.com','M','T',default);
+INSERT INTO member(M_ID, M_PW, M_NAME, M_NICKNAME, M_BIRTH, M_ADDRESS, M_PHONE,M_EMAIL,GENDER_FM,ROLE_ST,M_DATE) VALUES('j12345','j12345678','신사랑','사회1타강사','930102','서울시 중구 충무로3가','010-2449-8899','jjj@gmail.com','F','T',default);
+INSERT INTO member(M_ID, M_PW, M_NAME, M_NICKNAME, M_BIRTH, M_ADDRESS, M_PHONE,M_EMAIL,GENDER_FM,ROLE_ST,M_DATE) VALUES('k12345','k12345678','정인하','방가방가','880105','서울시 종로구 팔판동 33-2','010-5345-7428','kkk@gmail.com','F','T',default);
+INSERT INTO member(M_ID, M_PW, M_NAME, M_NICKNAME, M_BIRTH, M_ADDRESS, M_PHONE,M_EMAIL,GENDER_FM,ROLE_ST,M_DATE) VALUES('m12345','m12345678','장민우','초코송이','950505','서울시 은평구 응암3동','010-2222-3333','mmm@gmail.com','M','T',default);
 
 -- 학생 정보 삽입
 INSERT INTO MEMBER_STUDENT VALUES('S1', 'a12345');
@@ -485,18 +493,65 @@ INSERT INTO object(ob_code, ob_name) VALUES('OB6', '기타');
 -- 선생님정보 삽입
 INSERT INTO t_profile VALUES('T1', '서울대학교 기계공학과 졸업', 'A', '주 2회', '월 30만원', default, default, '토익 850', default, default, 'N', null, 'c12345', '열심히 하겠습니다!', 'Y');
 INSERT INTO t_profile VALUES('T2', '이화여자대학교 경영학과 휴학중', 'Y', '주 2회', '월 20만원', default, default, default, default, default, 'Y', null, 'd12345', '눈높이 교육', 'N');
+INSERT INTO t_profile VALUES('T3', ' 수원대학교 생명공학과', 'N', '주 1회', '월 15만원', default, default, default, default, default, 'Y', null, 'f12345', ' 간절하게 성적 올리고 싶은 학생 모집!!', 'Y');
+INSERT INTO t_profile VALUES('T4', ' 서강대학교 수학전공 졸업', 'N', '주 3회', '월 50만원', default, default, default, default, default, 'Y', null, 'g12345', ' 초중고수학/ 확실하게 올려드립니다', 'Y');
+INSERT INTO t_profile VALUES('T5', ' 홍익대학교 역사교육과 졸업', 'A', '주 2회', '월 28만원', default, default, default, default, default, 'Y', null, 'e12345', '1:1 맞춤형으로 과외해드립니다 : )', 'Y');
+INSERT INTO t_profile VALUES('T6', '숙명여자대학교 행정학과 재학', 'Y', '주 1회', '월 35만원', default, '2년이상', '토익 980,토익스피킹 레벨8', default, default, 'N', null, 'h12345', '경험 많은 과외 선생님입니다.', 'Y');
+INSERT INTO t_profile VALUES('T7', '서강대학교 컴퓨터공학전공 졸업', 'Y', '주 3회', '월 55만원', '중고등학생', default, default, default, default, 'N', null, 'i12345', '학생의 수준에 맞춰서 차근차근 실력이 늘 수 있게 맞춤지도형 수업합니다!', 'Y');
+INSERT INTO t_profile VALUES('T8', '서강대학교 중국문화전공 졸업', 'A','협의가능','협의가능', default, default, '토익 930,HSK6급', default, default, 'N', null, 'j12345', '제대로 된 문해력, 경력 7년의 현실감각 충만한 과외 장담합니다.', 'Y');
+INSERT INTO t_profile VALUES('T9', ' 홍익대학교 국어교육과 졸업', 'A', '협의가능', '협의가능', default, '10년이상', '토익 900', default, default, 'Y', null, 'k12345', '코칭으로 학습과 성적을 책임지겠습니다.', 'N');
+INSERT INTO t_profile VALUES('T10', ' 연세대학교 철학과 졸업', 'N', '주 2회', '월 45만원', default, default, '토익 930', default, default, 'N', null, 'm12345', '중하위권을 중상위권으로!', 'Y');
 
 -- 선생님 담당 과목 삽입
 INSERT INTO teach_object VALUES('OB2', 'T1');
 INSERT INTO teach_object VALUES('OB5', 'T1');
 INSERT INTO teach_object VALUES('OB1', 'T2');
 INSERT INTO teach_object VALUES('OB4', 'T2');
+INSERT INTO teach_object VALUES('OB2', 'T3');
+INSERT INTO teach_object VALUES('OB5', 'T3');
+INSERT INTO teach_object VALUES('OB6', 'T3');
+INSERT INTO teach_object VALUES('OB2', 'T4');
+INSERT INTO teach_object VALUES('OB3', 'T5');
+INSERT INTO teach_object VALUES('OB4', 'T5');
+INSERT INTO teach_object VALUES('OB1', 'T6');
+INSERT INTO teach_object VALUES('OB3', 'T6');
+INSERT INTO teach_object VALUES('OB2', 'T7');
+INSERT INTO teach_object VALUES('OB6', 'T8');
+INSERT INTO teach_object VALUES('OB4', 'T8');
+INSERT INTO teach_object VALUES('OB1', 'T9');
+INSERT INTO teach_object VALUES('OB3', 'T9');
+INSERT INTO teach_object VALUES('OB1', 'T10');
+INSERT INTO teach_object VALUES('OB3', 'T10');
+INSERT INTO teach_object VALUES('OB4', 'T10');
 
 -- 선생님 활동 지역 삽입
 INSERT INTO acti_area VALUES('T1', 'A1');
 INSERT INTO acti_area VALUES('T1', 'A2');
 INSERT INTO acti_area VALUES('T2', 'A3');
 INSERT INTO acti_area VALUES('T2', 'A4');
+INSERT INTO acti_area VALUES('T3', 'A5');
+INSERT INTO acti_area VALUES('T3', 'A7');
+INSERT INTO acti_area VALUES('T3', 'A8');
+INSERT INTO acti_area VALUES('T4', 'A7');
+INSERT INTO acti_area VALUES('T4', 'A21');
+INSERT INTO acti_area VALUES('T5', 'A20');
+INSERT INTO acti_area VALUES('T5', 'A1');
+INSERT INTO acti_area VALUES('T5', 'A15');
+INSERT INTO acti_area VALUES('T6', 'A5');
+INSERT INTO acti_area VALUES('T6', 'A8');
+INSERT INTO acti_area VALUES('T6', 'A20');
+INSERT INTO acti_area VALUES('T7', 'A10');
+INSERT INTO acti_area VALUES('T7', 'A11');
+INSERT INTO acti_area VALUES('T8', 'A23');
+INSERT INTO acti_area VALUES('T8', 'A24');
+INSERT INTO acti_area VALUES('T8', 'A25');
+INSERT INTO acti_area VALUES('T9', 'A16');
+INSERT INTO acti_area VALUES('T9', 'A17');
+INSERT INTO acti_area VALUES('T9', 'A23');
+INSERT INTO acti_area VALUES('T9', 'A13');
+INSERT INTO acti_area VALUES('T10', 'A22');
+INSERT INTO acti_area VALUES('T10', 'A18');
+INSERT INTO acti_area VALUES('T10', 'A19');
 
 -- 선생님 리뷰 삽입
 INSERT INTO t_review VALUES (1, 'T1', '친절하고 자세하게 알려주세요!', DEFAULT, 5, '홍기', 'a12345');
@@ -595,3 +650,4 @@ CREATE SEQUENCE b_r_no_sequence
        NOORDER;
        
        commit;
+       
