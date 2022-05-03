@@ -23,8 +23,8 @@
         <div id="left_div">
             <div id="top_div">
                 <div id="profile_div" style="width:50%">
-                    <div style="width:40%">
-                        <img src="${pageContext.request.contextPath}/resources/icons/profile.png" width="100" height="100">
+                    <div id="profile" style="width:40%">
+                        <img src="${pageContext.request.contextPath}/resources/icons/profile.png" width="150" height="150">
                     </div>
                     <div style="width:60%">
                         <div class="nickname_div">

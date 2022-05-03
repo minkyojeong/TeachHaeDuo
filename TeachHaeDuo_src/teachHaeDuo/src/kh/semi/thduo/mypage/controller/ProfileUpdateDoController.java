@@ -124,6 +124,7 @@ public class ProfileUpdateDoController extends HttpServlet {
 		result = new TeacherService().updateProfile(tVo);
 		
 		if(result == 1) {
+			request.setAttribute("rootPath", rootPath);
 			request.setAttribute("tVo", tVo);
 			request.getSession().setAttribute("msgProfile", "프로필 변경이 완료되었습니다.");
 			response.sendRedirect("mypage");

@@ -1,8 +1,10 @@
 @charset "UTF-8";
 
-* {
+.wrap.content p {
 	font-family: MinSans-Medium;
-	vertical-align: middle;
+}
+.wrap.content button {
+	font-family: MinSans-Medium;
 }
 div.nickname_div label{
 	cursor:pointer;
@@ -20,6 +22,10 @@ div.nickname_div label{
     cursor: pointer;
     text-align:center;
     line-height:35px;
+}
+div#profile{
+	text-align:center;
+	margin:10px 10px 10px 0px;
 }
 div#bottom_div p {
 	line-height:20px;

@@ -19,20 +19,18 @@
 </head>
 <body>
 <% MemberVo ssMV = (MemberVo)request.getSession().getAttribute("ssMV"); %>
+<% TeacherVo tVo =  (TeacherVo)request.getAttribute("tVo");%>
 	<div id="main_wrap">
 	<jsp:include page="../template_header.jsp"></jsp:include>
     <div class="wrap content">
         <div id="left_div">
             <div id="top_div">
                 <div id="profile_div" style="width:50%">
-                    <div style="width:40%">
-                    <% TeacherVo tVo =  (TeacherVo)request.getAttribute("tVo");%>
-                    ${tVo.getT_picture == 'Y'}
-                    	<%-- <c:choose>
-							<c:when test="${tVo.getT_picture == 'Y'}"><img src="${pageContext.request.contextPath}/resources/icons/profile.png" width="100" height="100"></c:when>
-							<c:when test="${tVo.getT_picture == 'N'}"><p class="text_div_p">알림 안 받아요</p></c:when>
-						</c:choose> --%>
-                        
+                    <div id="profile" style="width:40%">
+                    	<c:choose>
+							<c:when test="${tVo.t_picture == null}"><img src="${pageContext.request.contextPath}/resources/icons/profile.png" width="150" height="150"></c:when>
+							<c:when test="${tVo.t_picture != null}"><img src="${pageContext.request.contextPath}/<%= tVo.getT_picture() %>" width="150" height="150"></c:when>
+						</c:choose>
                     </div>
                     <div style="width:60%">
                         <div class="nickname_div">
@@ -48,6 +46,8 @@
 	                            <input type="file" name="uploadProfile" id="uploadProfile" style="display:none">
 	                            <label for="uploadProfile" class="uploadProfile">사진 변경</label>
                             </form>
+                            <br>
+                            <p style="color:red; font-size:13px;">*파일은 jpg,png파일만 가능합니다.</p>
                         </div>
                     </div>
                 </div>
@@ -346,6 +346,10 @@ if(msgProfileVal != "" && msgProfileVal != null){
 	var uploadProfileVal = $("#uploadProfile").val();
 	console.log(uploadProfileVal);
 	var frm = document.frm_profile;
+	if(!(uploadProfileVal.substr(uploadProfileVal.length-3) == 'jpg' || uploadProfileVal.substr(uploadProfileVal.length-3) == 'png' || uploadProfileVal.substr(uploadProfileVal.length-3) == 'JPG' || uploadProfileVal.substr(uploadProfileVal.length-3) == 'PNG')){
+		alert("jsp파일 또는 png 파일만 업로드 가능합니다.");
+		return;
+	}
 	frm.action="profileUpdate.do";
 	frm.method="post";
 	frm.submit();

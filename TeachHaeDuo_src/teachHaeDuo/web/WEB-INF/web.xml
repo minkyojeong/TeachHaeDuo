@@ -16,6 +16,8 @@
 		<url-pattern>*.ico</url-pattern>
 		<url-pattern>*.swf</url-pattern>
 		<url-pattern>*.svg</url-pattern>
+		<url-pattern>*.JPG</url-pattern>
+		<url-pattern>*.PNG</url-pattern>
 	</servlet-mapping>
 	<filter>
 		<filter-name>EncodingFilter</filter-name>

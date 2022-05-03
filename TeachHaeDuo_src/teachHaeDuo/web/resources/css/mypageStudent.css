@@ -3,11 +3,16 @@
 @charset "UTF-8";
 
 
-* {
+.wrap.content p {
 	font-family: MinSans-Medium;
-	vertical-align: middle;
 }
-
+.wrap.content button {
+	font-family: MinSans-Medium;
+}
+div#profile{
+	text-align:center;
+	margin:10px 10px 10px 0px;
+}
 div#bottom_div p {
 	line-height:20px;
 }

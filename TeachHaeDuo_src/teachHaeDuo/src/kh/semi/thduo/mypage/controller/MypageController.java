@@ -40,6 +40,7 @@ public class MypageController extends HttpServlet {
 		String roleSt = null;
 		String mNickname = null;
 		String sNo = null;
+		String tNo = null;
 		if(ssMV == null) {
 			response.sendRedirect("login");
 		} else {
@@ -47,20 +48,25 @@ public class MypageController extends HttpServlet {
 			roleSt = ssMV.getRoleSt();
 			mNickname = ssMV.getmNickname();
 			sNo = ssMV.getsNo();
+			tNo = ssMV.gettNo();
 			System.out.println(roleSt);
 			
 			if(roleSt == null) {
 				response.sendRedirect("login");
 			} else if(roleSt.equals("T")) {
+				System.out.println("선생 마이페이지 진입");
+				TeacherVo tVo = new TeacherService().readTeacherInfo(tNo);
 				int numberOfSendAlarm = new AlarmService().numberOfSendAlarm(mNickname);
 				int numberOfReceiveAlarm = new AlarmService().numberOfReceiveAlarm(mNickname);
 				int balance = new PencilService().checkPencil(mId);
+				System.out.println(tVo);
+				request.setAttribute("tVo", tVo);
 				request.setAttribute("numberOfSendAlarm", numberOfSendAlarm);
 				request.setAttribute("numberOfReceiveAlarm", numberOfReceiveAlarm);
 				request.setAttribute("balance", balance);
-				System.out.println("선생 마이페이지 진입");
 				request.getRequestDispatcher("WEB-INF/view/mypage/mypageTeacher.jsp").forward(request, response);
 			} else if(roleSt.equals("S")) {
+				System.out.println("학생 마이페이지 진입");
 				int numberOfSendAlarm = new AlarmService().numberOfSendAlarm(mNickname);
 				int numberOfReceiveAlarm = new AlarmService().numberOfReceiveAlarm(mNickname);
 				int balance = new PencilService().checkPencil(mId);
@@ -69,7 +75,6 @@ public class MypageController extends HttpServlet {
 				request.setAttribute("numberOfReceiveAlarm", numberOfReceiveAlarm);
 				request.setAttribute("balance", balance);
 				request.setAttribute("numberOfLike", numberOfLike);
-				System.out.println("학생 마이페이지 진입");
 				request.getRequestDispatcher("WEB-INF/view/mypage/mypageStudent.jsp").forward(request, response);
 			}
 		}
