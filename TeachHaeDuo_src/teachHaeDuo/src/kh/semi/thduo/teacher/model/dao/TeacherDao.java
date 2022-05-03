@@ -44,6 +44,7 @@ public class TeacherDao {
 			retVolist = new ArrayList<TeacherVo>();
 			while(rs.next()) {
 				TeacherVo vo = new TeacherVo();
+				vo.setT_no(rs.getString("t_no"));
 				vo.setT_major(rs.getString("t_major"));
 //				vo.setT_picture(rs.getString("t_picture"));
 				vo.setM_nickname(rs.getString("m_nickname"));
