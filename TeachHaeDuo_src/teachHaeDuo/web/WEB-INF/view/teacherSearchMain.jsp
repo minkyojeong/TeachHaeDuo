@@ -35,8 +35,8 @@
 			<!-- 검색창 -->
 			<div class="search_container">
 				<span class="object_name">
-					<c:if test="${empty object || empty volist}">과목</c:if>
-					<c:if test="${not empty object && not empty volist}">${object}</c:if>
+					<c:if test="${empty object || empty teachVolist}">과목</c:if>
+					<c:if test="${not empty object && not empty teachVolist}">${object}</c:if>
 				</span>
 				<!-- <span class="object_name">과목</span> -->
 				<div class="object_input">
