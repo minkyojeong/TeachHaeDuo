@@ -123,7 +123,8 @@
 				<section id="content1">
 			         <div class="grid-init grid">
 			            <% for(TeacherVo vo : volist) { %>
-			                <div class="box-init box">
+			                <div class="box-init box"
+			                onclick="location.href='teacherInfo?tNo=<%=vo.getT_no()%>'">
 			                    <div class="list1">
 			                        <div class="profile"></div>
 			                        <p class="nickname"><%=vo.getM_nickname() %></p>
