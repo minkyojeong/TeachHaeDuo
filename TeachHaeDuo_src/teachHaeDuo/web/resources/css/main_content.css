@@ -1,5 +1,7 @@
 input {
     border: none;
+    font-family: MinSans-Medium;
+    font-size: 17px;
 }
 .wrap.content {
     font-family: MinSans-Medium;
