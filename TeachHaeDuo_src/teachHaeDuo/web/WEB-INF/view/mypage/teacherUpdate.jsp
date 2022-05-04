@@ -128,93 +128,93 @@
 					<tr>
 						<td>희망 학생<sup> *</sup></td>
 						<td>:</td>
-						<td><label for="student1"> <input type="checkbox"
+						<td><label for="student1"> <input name="student" type="checkbox"
 								id="student1" value="초등학생">초등학생
-						</label> <label for="student2"> <input type="checkbox"
+						</label> <label for="student2"> <input name="student" type="checkbox"
 								id="student2" value="중학생">중학생
-						</label> <label for="student3"> <input type="checkbox"
+						</label> <label for="student3"> <input name="student" type="checkbox"
 								id="student3" value="고등학생">고등학생
-						</label> <label for="student4"> <input type="checkbox"
+						</label> <label for="student4"> <input name="student" type="checkbox"
 								id="student4" value="일반인">일반인
-						</label> <label for="student5"> <input type="checkbox"
+						</label> <label for="student5"> <input name="student" type="checkbox"
 								id="student4" value="무관">무관
 						</label></td>
 					</tr>
 					<tr>
 						<td>어학</td>
 						<td>:</td>
-						<td><select class="sel1">
+						<td><select name="language" class="sel1">
 								<option>선택해주세요.</option>
 								<option value="TOEIC">TOEIC</option>
 								<option value="TOFEL">TOFEL</option>
 								<option value="TEPS">TEPS</option>
 								<option value="JPT">JPT</option>
 								<option value="HSK">HSK</option>
-						</select> <input type="text" name="sel1_score">
+						</select> <input type="text" name="score">
 							<button type="button" id="btn">+</button></td>
 					</tr>
 					<tr id="tr2" class="language_sel">
 						<td></td>
 						<td></td>
-						<td><select class="sel2">
+						<td><select name="language" class="sel2">
 								<option>선택해주세요.</option>
 								<option value="TOEIC">TOEIC</option>
 								<option value="TOFEL">TOFEL</option>
 								<option value="TEPS">TEPS</option>
 								<option value="JPT">JPT</option>
 								<option value="HSK">HSK</option>
-						</select> <input type="text" name="sel2_score">
+						</select> <input type="text" name="score">
 							<button type="button" id="btn_2">-</button></td>
 					</tr>
 					<tr id="tr3" class="language_sel">
 						<td></td>
 						<td></td>
-						<td><select class="sel3">
+						<td><select name="language" class="sel3">
 								<option>선택해주세요.</option>
 								<option value="TOEIC">TOEIC</option>
 								<option value="TOFEL">TOFEL</option>
 								<option value="TEPS">TEPS</option>
 								<option value="JPT">JPT</option>
 								<option value="HSK">HSK</option>
-						</select> <input type="text" name="sel3_score">
+						</select> <input type="text" name="score">
 							<button type="button" id="btn_3">-</button></td>
 					</tr>
 					<tr id="tr4" class="language_sel">
 						<td></td>
 						<td></td>
-						<td><select class="sel4">
+						<td><select name="language" class="sel4">
 								<option>선택해주세요.</option>
 								<option value="TOEIC">TOEIC</option>
 								<option value="TOFEL">TOFEL</option>
 								<option value="TEPS">TEPS</option>
 								<option value="JPT">JPT</option>
 								<option value="HSK">HSK</option>
-						</select> <input type="text" name="sel4_score">
+						</select> <input type="text" name="score">
 							<button type="button" id="btn_4">-</button></td>
 					</tr>
 					<tr id="tr5" class="language_sel">
 						<td></td>
 						<td></td>
-						<td><select class="sel5">
+						<td><select name="language" class="sel5">
 								<option>선택해주세요.</option>
 								<option value="TOEIC">TOEIC</option>
 								<option value="TOFEL">TOFEL</option>
 								<option value="TEPS">TEPS</option>
 								<option value="JPT">JPT</option>
 								<option value="HSK">HSK</option>
-						</select> <input type="text" name="sel5_score">
+						</select> <input type="text" name="score">
 							<button type="button" id="btn_5">-</button></td>
 					</tr>
 					<tr>
 						<td>개인 교습 경력</td>
 						<td>:</td>
-						<td><input type="text" name="t_career" placeholder="예) 경력2년">
+						<td><input type="text" name="tCareer" placeholder="예) 경력2년">
 						</td>
 					</tr>
 					<tr>
 						<td>특이 사항</td>
 						<td>:</td>
-						<td><textarea class="text_area" name="t_special"
+						<td><textarea class="text_area" name="tSpecial"
 								placeholder="내용을 입력해주세요. (최대 한글100자)"></textarea></td>
 					</tr>
 				</table>
