@@ -1,14 +1,21 @@
 @charset "UTF-8";
-a{
-	text-decoration:none;
+
+.wrap.content p {
+	font-family: MinSans-Medium;
+	
 }
-.wrap.content {
-	height: 80%;
+.wrap.content button {
+	font-family: MinSans-Medium;
 }
+
 div#top_div {
 	text-align: center;
 	margin: 20px auto;
 	
+}
+.wrap.content {
+	height: 80%;
+	overflow:auto;
 }
 
 table#teacherUpdateTable {
@@ -22,6 +29,10 @@ table#teacherUpdateTable td{
 
 div.active {
 	display: flex;
+}
+
+table#teacherUpdateTable {
+	font-family: MinSans-Medium;
 }
 
 tr.language_sel {
@@ -41,4 +52,8 @@ div#bottom_div {
 
 .update_btn {
 	margin: 10px 20px;
+}
+
+div.active_div{
+	margin: 10px 0px;
 }

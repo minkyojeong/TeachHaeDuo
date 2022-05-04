@@ -1,0 +1,34 @@
+@charset "UTF-8";
+
+.wrap.content p {
+	font-family: MinSans-Medium;
+}
+.wrap.content button {
+	font-family: MinSans-Medium;
+}
+
+.wrap.content {
+	height: 80%;
+}
+#top_div {
+	text-align: center;
+	margin-top: 20px;
+}
+
+#middle_div {
+	margin: 20px 0px 50px 0px;
+}
+
+#low_div {
+	text-align: center;
+}
+
+table#teacherUpdateLoginTable, table#teacherUpdateLoginTable {
+	border-spacing: 20px 20px;
+	margin: 0 auto;
+	border-collapse: separate;
+}
+
+table#teacherUpdateLoginTable {
+	font-family: MinSans-Medium;
+}

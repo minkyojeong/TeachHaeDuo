@@ -10,16 +10,17 @@ $(function() {
 			console.log($(".sel").val());
 			var selVal = $(".sel").val();
 			$("#active").append(
-				"<div class='active_div'>" + "<span class='span'>"
-				+ selVal + "</span>&nbsp;&nbsp;&nbsp;"
-				+ "</div>")
-			var spantt = document.getElementsByClassName(".span")
+				"<div class='active_div'>" + "<span class='active_span'>"
+				+ selVal + "</span>"
+				+ "</div>" + "<input type='hidden' name='activeArea' value='"+selVal+"'>")
+			var spantt = document.getElementsByClassName("active_span")
 			console.log(spantt);
 		});
+		
 	// 활동지역 초기화
-	$(document).on("click", '#area_reset', function() {
+	$("#area_reset").click(function(){
 		console.log("초기화버튼");
-		$(".ggg").remove();
+		$(".active_div").nextAll().remove();
 	});
 
 	$(function() {

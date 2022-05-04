@@ -7,20 +7,17 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import kh.semi.thduo.member.service.MemberService;
-import kh.semi.thduo.member.vo.MemberVo;
-
 /**
- * Servlet implementation class TeacherUpdateController
+ * Servlet implementation class TeacherUpdateDoController
  */
-@WebServlet("/teacherUpdate")
-public class TeacherUpdateController extends HttpServlet {
+@WebServlet("/teacherUpdate.do")
+public class TeacherUpdateDoController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public TeacherUpdateController() {
+    public TeacherUpdateDoController() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -37,18 +34,25 @@ public class TeacherUpdateController extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODOTODO 로그인 갔다오기
-				String pw = request.getParameter("pw");
-				
-				MemberVo ssMV = (MemberVo)request.getSession().getAttribute("ssMV");
-				String mId = ssMV.getmId();
-				
-				MemberVo vo = new MemberService().login(mId, pw);
-				if(vo == null) {
-					response.sendRedirect("teacherUpdateLogin");
-				} else {
-					request.getRequestDispatcher("WEB-INF/view/mypage/teacherUpdate.jsp").forward(request, response);
-				}
+		System.out.println("교습정보 수정 doPost");
+		
+		//학력
+		String major = request.getParameter("major");
+		System.out.println("major :" + major);
+		// 교습 소개
+		String tIntro = request.getParameter("tIntro");
+		System.out.println("tIntro :" + tIntro);
+		//교습 과목
+		String[] object = request.getParameterValues("object");
+		for(int i = 0 ; i < object.length ; i ++) {
+			System.out.println("object :" + object[i]);
+		}
+		//교습 가능 지역
+		String[] activeArea = request.getParameterValues("activeArea");
+		for(int i = 0 ; i < activeArea.length ; i ++) {
+			System.out.println("activeArea :" + activeArea[i]);
+		}
+		
 	}
 
 }
