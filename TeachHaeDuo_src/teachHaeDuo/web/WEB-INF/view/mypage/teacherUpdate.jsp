@@ -140,70 +140,20 @@
 								id="student4" value="무관">무관
 						</label></td>
 					</tr>
-					<tr>
+					<tr id="language_tr1">
 						<td>어학</td>
 						<td>:</td>
-						<td><select name="language" class="sel1">
-								<option>선택해주세요.</option>
+						<td><select name="language">
+								<option value="">선택해주세요.</option>
 								<option value="TOEIC">TOEIC</option>
 								<option value="TOFEL">TOFEL</option>
 								<option value="TEPS">TEPS</option>
 								<option value="JPT">JPT</option>
 								<option value="HSK">HSK</option>
 						</select> <input type="text" name="score">
-							<button type="button" id="btn">+</button></td>
-					</tr>
-					<tr id="tr2" class="language_sel">
-						<td></td>
-						<td></td>
-						<td><select name="language" class="sel2">
-								<option>선택해주세요.</option>
-								<option value="TOEIC">TOEIC</option>
-								<option value="TOFEL">TOFEL</option>
-								<option value="TEPS">TEPS</option>
-								<option value="JPT">JPT</option>
-								<option value="HSK">HSK</option>
-						</select> <input type="text" name="score">
-							<button type="button" id="btn_2">-</button></td>
-					</tr>
-					<tr id="tr3" class="language_sel">
-						<td></td>
-						<td></td>
-						<td><select name="language" class="sel3">
-								<option>선택해주세요.</option>
-								<option value="TOEIC">TOEIC</option>
-								<option value="TOFEL">TOFEL</option>
-								<option value="TEPS">TEPS</option>
-								<option value="JPT">JPT</option>
-								<option value="HSK">HSK</option>
-						</select> <input type="text" name="score">
-							<button type="button" id="btn_3">-</button></td>
-					</tr>
-					<tr id="tr4" class="language_sel">
-						<td></td>
-						<td></td>
-						<td><select name="language" class="sel4">
-								<option>선택해주세요.</option>
-								<option value="TOEIC">TOEIC</option>
-								<option value="TOFEL">TOFEL</option>
-								<option value="TEPS">TEPS</option>
-								<option value="JPT">JPT</option>
-								<option value="HSK">HSK</option>
-						</select> <input type="text" name="score">
-							<button type="button" id="btn_4">-</button></td>
-					</tr>
-					<tr id="tr5" class="language_sel">
-						<td></td>
-						<td></td>
-						<td><select name="language" class="sel5">
-								<option>선택해주세요.</option>
-								<option value="TOEIC">TOEIC</option>
-								<option value="TOFEL">TOFEL</option>
-								<option value="TEPS">TEPS</option>
-								<option value="JPT">JPT</option>
-								<option value="HSK">HSK</option>
-						</select> <input type="text" name="score">
-							<button type="button" id="btn_5">-</button></td>
+							<button type="button" id="language_plus_btn" class="btn2_2">추가</button>
+							<button type="button" id="language_delete_btn" class="btn2_2">삭제</button>
+						</td>
 					</tr>
 					<tr>
 						<td>개인 교습 경력</td>

@@ -85,15 +85,16 @@ public class TeacherUpdateDoController extends HttpServlet {
 		// 어학
 		String[] language = request.getParameterValues("language");
 		String[] score = request.getParameterValues("score");
-		String[] languageScore = new String[5];
+		String[] languageScore = null;
 		if(language != null && score != null) {
 			for(int i = 0 ; i < language.length ; i ++) {
 				System.out.println("language :" + language[i]);
 				System.out.println("score :" + score[i]);
+				languageScore = new String[language.length];
 				languageScore[i] = language[i]+" "+score[i];
 				System.out.println("languageScore :" + languageScore[i]);
 			}
-		}
+		} 
 		
 		// 개인 교습 경력
 		String tCareer = request.getParameter("tCareer");

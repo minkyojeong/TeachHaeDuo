@@ -35,9 +35,6 @@ table#teacherUpdateTable {
 	font-family: MinSans-Medium;
 }
 
-tr.language_sel {
-	display: none;
-}
 
 textarea.text_area {
 	width: 400px;
