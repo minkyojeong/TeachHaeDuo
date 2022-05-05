@@ -21,14 +21,14 @@ import kh.semi.thduo.teacher.model.vo.TeacherVo;
 /**
  * Servlet implementation class TeacherSearchDoController
  */
-@WebServlet("/TeacherSearchDo")
-public class TeacherSearchDoController extends HttpServlet {
+@WebServlet("/teacherSearch.ax")
+public class TeacherSearchAjaxController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public TeacherSearchDoController() {
+    public TeacherSearchAjaxController() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -46,18 +46,19 @@ public class TeacherSearchDoController extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		System.out.println("TeacherSearchDo ajax ºÎºĞÀÓ");
+		System.out.println("teacherSearch.ax ì‹¤í–‰");
 		
 		TeacherSearchSettingVo setVo = new TeacherSearchSettingVo();
-		String sNo = null;  // Âò ±â´ÉÀ» ¿øÇßÀ» °æ¿ì¿¡¸¸ ·Î±×ÀÎÇÑ sNo¸¦ ³Ö¾îÁà¾ßÇÔ.
+		String sNo = null; // ì°œ ê¸°ëŠ¥ì„ ì›í–ˆì„ ê²½ìš°ì—ë§Œ ë¡œê·¸ì¸í•œ sNoë¥¼ ë„£ì–´ì¤˜ì•¼í•¨.
 		
-		String online_yna = request.getParameter("online_yna");  // Y, N, A, ""null ÀüÃ¼º¸±â
-		String t_permit_yn = request.getParameter("t_permit_yn");   // Y, ""null ÀüÃ¼º¸±â
-		String t_recruit_yn = request.getParameter("t_recruit_yn");   // Y, ""null ÀüÃ¼º¸±â
-		String object_list = request.getParameter("object_list");   // '±¹¾î', ""null ÀüÃ¼º¸±â
-		String area_list = request.getParameter("area_list");   // '°­³²', ""null ÀüÃ¼º¸±â
-		String gender_fm = request.getParameter("gender_fm");   // 'M','F', ""null ÀüÃ¼º¸±â
-		String liked = request.getParameter("liked");    // true, false ÀüÃ¼º¸±â
+		String online_yna = request.getParameter("online_yna");  // Y, N, A, ""null ì „ì²´ë³´ê¸°
+		String t_permit_yn = request.getParameter("t_permit_yn");   // Y, ""null ì „ì²´ë³´ê¸°
+		String t_recruit_yn = request.getParameter("t_recruit_yn");   // Y, ""null ì „ì²´ë³´ê¸°
+		String object_list = request.getParameter("object_list");   // 'ê³¼ëª©ëª…', ""null ì „ì²´ë³´ê¸°
+		String area_list = request.getParameter("area_list");   // 'í™œë™ì§€ì—­', ""null ì „ì²´ë³´ê¸°
+		String gender_fm = request.getParameter("gender_fm");   // 'M','F', ""null ì „ì²´ë³´ê¸°
+		String liked = request.getParameter("liked");    // 'Y' ""nullì „ì²´ë³´ê¸°
+		
 		setVo.setOnline_yna(online_yna);
 		setVo.setT_permit_yn(t_permit_yn);
 		setVo.setT_recruit_yn(t_recruit_yn);
@@ -66,7 +67,9 @@ public class TeacherSearchDoController extends HttpServlet {
 		setVo.setGender_fm(gender_fm);
 		setVo.setLiked(liked);
 		setVo.setsNo(sNo);
+		
 		System.out.println(setVo);
+		
 		ArrayList<TeacherVo> retVolist = new TeacherService().searchTeacher(setVo);
 		
 		PrintWriter out = response.getWriter();
@@ -79,7 +82,8 @@ public class TeacherSearchDoController extends HttpServlet {
 		String resStr = gobj.toJson(map);
 		
 		System.out.println(resStr);
-		// response·Î Àü´ŞÇÒ µ¥ÀÌÅÍ Ã¤¿ì±â	
+		
+		// responseë¡œ ì „ë‹¬í•  ë°ì´í„° ì±„ìš°ê¸°
 		out.println(resStr);
 		out.flush();
 		out.close();

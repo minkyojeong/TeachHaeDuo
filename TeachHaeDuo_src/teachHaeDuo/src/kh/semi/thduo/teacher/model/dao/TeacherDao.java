@@ -47,7 +47,7 @@ public class TeacherDao {
 				TeacherVo vo = new TeacherVo();
 				vo.setT_no(rs.getString("t_no"));
 				vo.setT_major(rs.getString("t_major"));
-//				vo.setT_picture(rs.getString("t_picture"));
+				vo.setT_picture(rs.getString("t_picture"));
 				vo.setM_nickname(rs.getString("m_nickname"));
 				vo.setAvg_rscore(rs.getDouble("avg_rscore"));
 				vo.setObject_list(rs.getString("object_list"));
@@ -69,10 +69,8 @@ public class TeacherDao {
 	// 검색한 과목에 맞는 선생님 정보 읽기
 	public ArrayList<TeacherVo> readTeacher(Connection conn, String object) {
 		ArrayList<TeacherVo> retVolist = null;
-		String a = "%" + object + "%";
-		
-		String sql = "SELECT pro.t_no, pro.t_major, pro.t_picture, m.m_nickname, round(rscore.avg_rscore, 2) avg_rscore, olist.object_list, alist.area_list"
-				+ " FROM t_profile pro JOIN member m" //띄어쓰기 꼭하기
+		String sql ="SELECT pro.t_no, pro.t_major, pro.t_picture, m.m_nickname, round(rscore.avg_rscore, 2) avg_rscore, olist.object_list, alist.area_list"
+				+ " FROM t_profile pro JOIN member m"
 				+ "                    ON pro.m_id = m.m_id"
 				+ "                    JOIN view_teacher_rscroe_avg rscore"
 				+ "                    ON rscore.m_nickname = m.m_nickname"
@@ -80,40 +78,33 @@ public class TeacherDao {
 				+ "                    ON olist.m_nickname = m.m_nickname"
 				+ "                    JOIN view_teacher_area alist"
 				+ "                    ON alist.m_nickname = m.m_nickname"
-				+ "                    WHERE  1=1 ";
-		if(!object.equals("init") && !object.equals("")){
-			sql+= "					  and alist.aobject_list like '"+a+"'";
-		}
-//		if(!genderFm.equals("init")&& !genderFm.equals("")) {
-//			genderFm = genderFm.toUpperCase();
-//			sql+= "                    and m.GENDER_FM = '"+genderFm+"'"; // "랑 ; 잘보기
-//		}
+				+ " WHERE olist.object_list LIKE ?";
 		
 		try {
 			pstmt = conn.prepareStatement(sql);
-//			pstmt.setString(1, a);
-//			pstmt.setString(2, genderFm);
+			pstmt.setString(1, "%" + object + "%");
 			rs = pstmt.executeQuery();
 			retVolist = new ArrayList<TeacherVo>();
-			
-			while(rs.next()) {
+			if(rs.next()) {
 				TeacherVo vo = new TeacherVo();
+				
 				vo.setT_no(rs.getString("t_no"));
 				vo.setT_major(rs.getString("t_major"));
-//				vo.setT_picture(rs.getString("t_picture"));
+				vo.setT_picture(rs.getString("t_picture"));
 				vo.setM_nickname(rs.getString("m_nickname"));
 				vo.setAvg_rscore(rs.getDouble("avg_rscore"));
 				vo.setObject_list(rs.getString("object_list"));
 				vo.setArea_list(rs.getString("area_list"));
+				
 				retVolist.add(vo);
 			}
-		} catch (SQLException e) {
+		} catch(SQLException e) {
 			e.printStackTrace();
 		} finally {
 			close(rs);
 			close(pstmt);
 		}
-		System.out.println("dao retVolist 1:" + retVolist);
+		
 		return retVolist;
 	} 
 	
@@ -347,17 +338,19 @@ public class TeacherDao {
 			sql+= "    AND olist.object_list like '%"+setVo.getObject_list()+"%'";   // 과목  %%
 		}
 		if(setVo.getT_recruit_yn() != null && !setVo.getT_recruit_yn().equals("")) {
-			sql+= "    AND pro.t_recruit_yn = '"+setVo.getGender_fm()+"'";// 모집중 모집중Y, 모집중아니면N"
+			sql+= "    AND pro.t_recruit_yn = '"+setVo.getT_recruit_yn()+"'";// 모집중 모집중Y, 모집중아니면N"
 		}
-		if(setVo.getOnline_yna() != null && !setVo.getOnline_yna().equals("")) {
-			sql+= "    AND pro.online_yna = 'A' and pro.online_yna = '"+setVo.getOnline_yna()+"'";  // 온오프라인
+		if(setVo.getOnline_yna() != null && !setVo.getOnline_yna().equals("") && setVo.getOnline_yna().equals("N")) {
+			sql+= "    AND pro.online_yna = 'N'";
+		}
+		if(setVo.getOnline_yna() != null && !setVo.getOnline_yna().equals("") && setVo.getOnline_yna().equals("Y")) {
+			sql+= "    AND (pro.online_yna = 'Y' OR pro.online_yna = 'A')";
 		}
 		if(setVo.getLiked().equals("Y") && setVo.getsNo() != null && !setVo.getsNo().equals("")) {
 			sql+= "    AND pro.t_no IN (select t_no from dibs where s_no ='"+setVo.getsNo()+"')"; // 찜
 		}
 		System.out.println("sql: "+ sql);
 		try {
-			
 			pstmt = conn.prepareStatement(sql);
 			rs = pstmt.executeQuery();
 			
@@ -383,12 +376,9 @@ public class TeacherDao {
 			close(pstmt);
 		} 
 		System.out.println("DAO searchTeacher:"+ retVolist);
+		
 		return retVolist;
 	}
-
-	
-	
-	
 	
 	// 선생님 상세정보 읽기
 	public TeacherVo readTeacherInfo(Connection conn, String tNo){

@@ -3,13 +3,15 @@
 <link href="<%=request.getContextPath()%>/resources/css/reset.css" rel="stylesheet" type="text/css">
 <link href="<%=request.getContextPath()%>/resources/css/common.css" rel="stylesheet" type="text/css">
 <link href="${pageContext.request.contextPath}/resources/css/button.css" rel="stylesheet" type="text/css">
-<link href="${pageContext.request.contextPath}/resources/css/memberUpdateLogin.css" rel="stylesheet" type="text/css">
+<link href="${pageContext.request.contextPath}/resources/css/teacherUpdateLogin.css" rel="stylesheet" type="text/css">
 <link href="<%=request.getContextPath()%>/resources/css/header.css" rel="stylesheet" type="text/css">
 <link href="<%=request.getContextPath()%>/resources/css/footer.css" rel="stylesheet" type="text/css">
+<link href="<%=request.getContextPath()%>/resources/css/font.css" rel="stylesheet" type="text/css">
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <head>
+
     <meta charset="UTF-8">
     <title>mypage_updateMember</title>
 	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
@@ -20,13 +22,13 @@
     <div class="wrap content">
         <form action="teacherUpdate" method="post">
             <div id="top_div">
-                <p style="font-size:17px"><회원정보수정></p>
+                <p style="font-size:17px"><교습 정보 수정></p>
             </div>
             <div id="middle_div">
                 <table id="teacherUpdateLoginTable">
                     <tr>
                         <td>
-                            아이디
+                           <p> 아이디</p>
                         </td>
                         <td>
                             :
@@ -60,12 +62,8 @@
     <script>
 	    $("#cancel").click(function(){
 	    	console.log("취소 버튼 클릭");
-			var roleSt = "<%= ssMV.getRoleSt() %>";
-			if(roleSt == "S"){
-	    		location.href="mypageStudent";
-			} else if(roleSt == "T"){
-	    		location.href="mypageTeacher";
-			}
+	    	location.href="mypage";
+			
 		});
    </script>
 </body>

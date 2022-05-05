@@ -45,7 +45,7 @@ public class TeacherUpdateController extends HttpServlet {
 				
 				MemberVo vo = new MemberService().login(mId, pw);
 				if(vo == null) {
-					response.sendRedirect("memberUpdateLogin");
+					response.sendRedirect("teacherUpdateLogin");
 				} else {
 					request.getRequestDispatcher("WEB-INF/view/mypage/teacherUpdate.jsp").forward(request, response);
 				}

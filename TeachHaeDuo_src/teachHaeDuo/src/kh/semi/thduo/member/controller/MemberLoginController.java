@@ -43,7 +43,7 @@ public class MemberLoginController extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		// 회원가입
+		// 로그인시 id, pw 받기 
 		String mId = request.getParameter("id");
 		String pw = request.getParameter("pwd");
 

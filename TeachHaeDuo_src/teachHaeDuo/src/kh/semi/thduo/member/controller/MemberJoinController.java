@@ -74,7 +74,7 @@ public class MemberJoinController extends HttpServlet {
 		);  // 파일 저장 완료
 		
 
-		// 기존 code에서 바꿔 줘여함.
+		// 기존 code에서 multi로 바꿔 줘여함.
 		MemberVo memberVo = new MemberVo();
 		
 		System.out.println("client파일명"+multi.getParameter("joinupload"));   // 업로드한 클라이언트 pc에 있던 파일명
@@ -99,8 +99,11 @@ public class MemberJoinController extends HttpServlet {
 
 		int i = new MemberService().insertMember(memberVo);
 		if (i > 0) {
+			//회원가입 실패시 로그인페이지 
 			response.sendRedirect("login");
+			
 		} else {
+			//회원가인 성공시 메인 이동 
 			response.sendRedirect(request.getContextPath() + "/"); // 절대경로를 의미하며 -context root가 없음.
 
 		}

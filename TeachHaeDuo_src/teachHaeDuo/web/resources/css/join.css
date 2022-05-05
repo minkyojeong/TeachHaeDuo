@@ -1,0 +1,43 @@
+@charset "UTF-8";
+
+/* 회원가입 전체 */
+section{
+    width:100%;
+    margin: 0;
+    padding-top: 50px ;
+    padding-bottom: 50px;
+    line-height: 1;
+    font-family: "MinSans-Medium";
+    background-repeat: no-repeat;
+}
+
+
+/* 타이틀  */
+section #join_title {
+	font-size: 20px; 
+	padding: 20px;
+	text-align: center;
+}
+	
+/* 테이블  감싸는 div */
+section #join {
+	margin: 20px 0px 50px 0px;
+}
+/*  회원가입 취소 버튼  */
+section #joinbnt {
+	text-align: center;
+	padding: 20px;
+}
+/* 테이블 전체 */
+section table#memberTable {
+	border-spacing: 20px 20px;
+	margin: 0 auto;
+	border-collapse: separate;
+}
+
+section .in_box {
+  width:300px;
+  height:30px;
+  font-size:12px;
+}
+
