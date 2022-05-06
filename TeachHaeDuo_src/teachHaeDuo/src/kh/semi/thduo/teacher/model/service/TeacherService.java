@@ -206,4 +206,14 @@ public class TeacherService {
 		
 		return result;
 	}
+	
+	// 선생님 교습정보 등록 여부 확인
+	public String checkProfile(String tNo) {
+		String result = null;
+		Connection conn = getConnection();
+		
+		result = dao.checkProfile(conn, tNo);
+		
+		return result;
+	}
 }

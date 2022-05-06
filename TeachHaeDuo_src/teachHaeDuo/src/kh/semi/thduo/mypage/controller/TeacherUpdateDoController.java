@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletResponse;
 import kh.semi.thduo.member.vo.MemberVo;
 import kh.semi.thduo.pencil.model.service.PencilService;
 import kh.semi.thduo.pencil.model.vo.PencilVo;
+import kh.semi.thduo.teacher.model.service.TeacherService;
 
 /**
  * Servlet implementation class TeacherUpdateDoController
@@ -122,6 +123,35 @@ public class TeacherUpdateDoController extends HttpServlet {
 		String mId = null;
 		int result = 0;
 		int balance = 0;
+		String profileYn = null;
+		
+		if(ssMV == null) {
+			response.sendRedirect("login");
+			return;
+		} else {
+			tNo = ssMV.gettNo();
+			profileYn = new TeacherService().checkProfile(tNo);
+			System.out.println("프로필 등록 여부: " + profileYn);
+			
+			if(profileYn.equals('N')) {
+				System.out.println("최초등록이야~");
+				mId = ssMV.getmId();
+				balance = new PencilService().checkPencil(mId);
+				System.out.println("잔액 확인:" + balance);
+				if(balance > 5000) {
+					PencilVo vo = new PencilVo();
+					vo.setCpCash(-5000);
+					vo.setCpContent("교습 정보 최초 등록");
+					vo.setmId(mId);
+					result = new PencilService().minusPencil(vo);
+					if(result == 1) {
+						
+					} else {
+						
+					}
+				}
+			}
+		}
 		// 회원가입시 선생님 번호 생성 후 해야될거같음..
 //		if(ssMV == null) {
 //			response.sendRedirect("login");
@@ -136,6 +166,7 @@ public class TeacherUpdateDoController extends HttpServlet {
 //				vo.setmId(mId);
 //				result = new PencilService().minusPencil(vo);
 //				if(result == 1) {
+					// 이거 여따 쓰는거 아니야 나중에 옮겨야돼
 //					request.setAttribute("msgTeacherUpdate", "교습 정보가 등록되었습니다.");
 //					request.getRequestDispatcher("WEB-INF/view/mypage/mypageTeacher.jsp").forward(request, response);
 //				} else {
