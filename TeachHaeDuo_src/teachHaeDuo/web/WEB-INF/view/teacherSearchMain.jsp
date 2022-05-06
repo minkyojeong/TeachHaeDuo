@@ -103,10 +103,10 @@
 						</button>
 					</div>
 					<div class="btns_etc">
-						<button type="button" id="btn_call">
+					<!-- 	<button type="button" id="btn_call">
 							<img src="${pageContext.request.contextPath}/resources/icons/smartphone.png">
 							<span class="btn_text">통화허용</span>
-						</button>
+						</button> -->
 						<button type="button" id="btn_recruit">
 							<img src="${pageContext.request.contextPath}/resources/icons/recruit.png">
 							<span class="btn_text">모집중</span>
@@ -265,20 +265,20 @@
 			}
 			searchTeacher();
 		});
-		$("#btn_call").on("click", function() {
-			if ($(this).hasClass("enabled")) {
-				$(this).html('<img src="${pageContext.request.contextPath}/resources/icons/smartphone.png"><span class="btn_text">통화허용</span>');
-				$(this).css({background : "#F3F4F6",color : "black"});
-				$(this).removeClass("enabled");
-				t_permit_yn = "";
-			} else {
-				$(this).html('<img src="${pageContext.request.contextPath}/resources/icons/smartphone_white.png"><span class="btn_text">통화허용</span>');
-				$(this).css({background : "gray",color : "white"});
-				$(this).addClass("enabled");
-				t_permit_yn = 'Y';
-			}
-			searchTeacher();
-		});
+//		$("#btn_call").on("click", function() {
+//			if ($(this).hasClass("enabled")) {
+//				$(this).html('<img src="${pageContext.request.contextPath}/resources/icons/smartphone.png"><span class="btn_text">통화허용</span>');
+//				$(this).css({background : "#F3F4F6",color : "black"});
+//				$(this).removeClass("enabled");
+//				t_permit_yn = "";
+//			} else {
+//				$(this).html('<img src="${pageContext.request.contextPath}/resources/icons/smartphone_white.png"><span class="btn_text">통화허용</span>');
+//				$(this).css({background : "gray",color : "white"});
+//				$(this).addClass("enabled");
+//				t_permit_yn = 'Y';
+//			}
+//			searchTeacher();
+//		});
 		$("#btn_online").on("click", function() {
 			if ($(this).hasClass("enabled")) {
 				$(this).html('<img src="${pageContext.request.contextPath}/resources/icons/online.png"><span class="btn_text">온라인 교습</span>');

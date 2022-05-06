@@ -252,7 +252,7 @@ select::-ms-expand {
     
 }
 
-#btn_call {
+/*#btn_call {
     width: 100px;
     padding: 8px;
     border: none;
@@ -266,7 +266,7 @@ select::-ms-expand {
     width: 20px;
     margin-right: 5px;
     vertical-align: middle;
-}
+}*/
 
 #btn_recruit {
     width: 80px;
