@@ -17,6 +17,8 @@ import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
 
 import kh.semi.thduo.member.service.MemberService;
 import kh.semi.thduo.member.vo.MemberVo;
+import kh.semi.thduo.student.service.StudentService;
+import kh.semi.thduo.student.vo.StudentVo;
 
 /**
  * Servlet implementation class MemberLoginController
@@ -98,6 +100,27 @@ public class MemberJoinController extends HttpServlet {
 		System.out.println("memberVo: "+memberVo);
 
 		int i = new MemberService().insertMember(memberVo);
+		
+		
+		if (memberVo.getRoleSt().equals("S")) {
+			
+			String sNo = new StudentService().readStudentCheck();
+			if(sNo.length() == 0) {
+				sNo="S1";
+			}else {
+				int no = Integer.parseInt(sNo.substring(1, sNo.length())) + 1;
+				sNo = "S".concat(no+"");
+			}
+			StudentVo sVo = new StudentVo();
+			sVo.setmId(memberVo.getmId());
+			sVo.setsNo(sNo);
+			i = new StudentService().insertStudent(sVo);
+		}if (multi.getParameter("roleSt").equals("T")) {
+			
+			//TO-Do 선생님 테이블 T_PROFILE  insert
+		}
+		
+		
 		if (i > 0) {
 			//회원가입 실패시 로그인페이지 
 			response.sendRedirect("login");
@@ -107,6 +130,8 @@ public class MemberJoinController extends HttpServlet {
 			response.sendRedirect(request.getContextPath() + "/"); // 절대경로를 의미하며 -context root가 없음.
 
 		}
+		
+		
 
 	}
 
