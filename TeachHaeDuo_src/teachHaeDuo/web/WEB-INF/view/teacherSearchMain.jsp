@@ -31,6 +31,9 @@
 		<div class="wrap content">
 			<div class="TSearch_main">
 				<h1 class="intro_2">과외선생님 찾기</h1>
+				<br>
+				<h5>내가 원하는 조건을 골라<br>
+				다양한 과목의 선생님을 간편하게 찾아보세요!</h5>
 			</div>
 			<!-- 검색창 -->
 			<div class="search_container">
