@@ -226,53 +226,53 @@ public class TeacherDao {
 	
 	
 	// 통화허용 여부에 맞는 선생님 정보 읽기
-	public ArrayList<TeacherVo> readCallTeacher(Connection conn, String tPermitYn){
-		ArrayList<TeacherVo> retVolist = null;
-		String sql =" SELECT pro.t_no, pro.t_major, pro.t_picture, m.m_nickname, round(rscore.avg_rscore, 2) avg_rscore, olist.object_list, alist.area_list"
-				+ " FROM t_profile pro JOIN member m"
-				+ "				                    ON pro.m_id = m.m_id"
-				+ "				                   JOIN view_teacher_rscroe_avg rscore"
-				+ "				                   ON rscore.m_nickname = m.m_nickname"
-				+ "				                    JOIN view_teacher_object olist"
-				+ "			                    ON olist.m_nickname = m.m_nickname"
-				+ "		                    JOIN view_teacher_area alist"
-				+ "				                   ON alist.m_nickname = m.m_nickname"
-				+ "			                  WHERE  t_permit_yn ='Y'";
-		String sql2= " SELECT pro.t_no, pro.t_major, pro.t_picture, m.m_nickname, round(rscore.avg_rscore, 2) avg_rscore, olist.object_list, alist.area_list"
-				+ " FROM t_profile pro JOIN member m"
-				+ "				                    ON pro.m_id = m.m_id"
-				+ "				                   JOIN view_teacher_rscroe_avg rscore"
-				+ "				                   ON rscore.m_nickname = m.m_nickname"
-				+ "				                    JOIN view_teacher_object olist"
-				+ "			                    ON olist.m_nickname = m.m_nickname"
-				+ "		                    JOIN view_teacher_area alist"
-				+ "				                   ON alist.m_nickname = m.m_nickname"
-				+ "			                  WHERE  t_permit_yn ='N'";
-		try {
-			pstmt = conn.prepareStatement(sql);
-			rs = pstmt.executeQuery();
-			retVolist = new ArrayList<TeacherVo>();
-			
-			while(rs.next()) {
-				TeacherVo vo = new TeacherVo();
-				vo.setT_no(rs.getString("t_no"));
-				vo.setT_major(rs.getString("t_major"));
-				vo.setT_picture(rs.getString("t_picture"));
-				vo.setM_nickname(rs.getString("m_nickname"));
-				vo.setAvg_rscore(rs.getDouble("avg_rscore"));
-				vo.setObject_list(rs.getString("object_list"));
-				vo.setArea_list(rs.getString("area_list"));
-				retVolist.add(vo);
-			}
-		} catch (SQLException e) {
-			e.printStackTrace();
-		} finally {
-			close(rs);
-			close(pstmt);
-		}
-		System.out.println("dao retVolist 1:" + retVolist);
-		return retVolist;
-	} 
+//	public ArrayList<TeacherVo> readCallTeacher(Connection conn, String tPermitYn){
+//		ArrayList<TeacherVo> retVolist = null;
+//		String sql =" SELECT pro.t_no, pro.t_major, pro.t_picture, m.m_nickname, round(rscore.avg_rscore, 2) avg_rscore, olist.object_list, alist.area_list"
+//				+ " FROM t_profile pro JOIN member m"
+//				+ "				                    ON pro.m_id = m.m_id"
+//				+ "				                   JOIN view_teacher_rscroe_avg rscore"
+//				+ "				                   ON rscore.m_nickname = m.m_nickname"
+//				+ "				                    JOIN view_teacher_object olist"
+//				+ "			                    ON olist.m_nickname = m.m_nickname"
+//				+ "		                    JOIN view_teacher_area alist"
+//				+ "				                   ON alist.m_nickname = m.m_nickname"
+//				+ "			                  WHERE  t_profile_yn ='Y'";
+//		String sql2= " SELECT pro.t_no, pro.t_major, pro.t_picture, m.m_nickname, round(rscore.avg_rscore, 2) avg_rscore, olist.object_list, alist.area_list"
+//				+ " FROM t_profile pro JOIN member m"
+//				+ "				                    ON pro.m_id = m.m_id"
+//				+ "				                   JOIN view_teacher_rscroe_avg rscore"
+//				+ "				                   ON rscore.m_nickname = m.m_nickname"
+//				+ "				                    JOIN view_teacher_object olist"
+//				+ "			                    ON olist.m_nickname = m.m_nickname"
+//				+ "		                    JOIN view_teacher_area alist"
+//				+ "				                   ON alist.m_nickname = m.m_nickname"
+//				+ "			                  WHERE  t_profile_yn ='N'";
+//		try {
+//			pstmt = conn.prepareStatement(sql);
+//			rs = pstmt.executeQuery();
+//			retVolist = new ArrayList<TeacherVo>();
+//			
+//			while(rs.next()) {
+//				TeacherVo vo = new TeacherVo();
+//				vo.setT_no(rs.getString("t_no"));
+//				vo.setT_major(rs.getString("t_major"));
+//				vo.setT_picture(rs.getString("t_picture"));
+//				vo.setM_nickname(rs.getString("m_nickname"));
+//				vo.setAvg_rscore(rs.getDouble("avg_rscore"));
+//				vo.setObject_list(rs.getString("object_list"));
+//				vo.setArea_list(rs.getString("area_list"));
+//				retVolist.add(vo);
+//			}
+//		} catch (SQLException e) {
+//			e.printStackTrace();
+//		} finally {
+//			close(rs);
+//			close(pstmt);
+//		}
+//		System.out.println("dao retVolist 1:" + retVolist);
+//		return retVolist;
+//	} 
 	
 	
 	// 모집 여부에 맞는 선생님 정보 읽기
@@ -325,9 +325,9 @@ public class TeacherDao {
 				+ "    JOIN view_teacher_object olist USING (m_nickname)"
 				+ "    JOIN view_teacher_area alist USING (m_nickname)"
 				+ "    WHERE  1=1 ";
-		if(setVo.getT_permit_yn() != null && !setVo.getT_permit_yn().equals("")) {
-			sql+= "    AND pro.t_permit_yn = '"+setVo.getT_permit_yn()+"'";  // 통화허용
-		}
+//		if(setVo.getT_profile_yn() != null && !setVo.getT_permit_yn().equals("")) {
+//			sql+= "    AND pro.t_permit_yn = '"+setVo.getT_permit_yn()+"'";  // 통화허용
+//		}
 		if(setVo.getArea_list() != null && !setVo.getArea_list().equals("")) {
 			sql+= "    AND alist.area_list like '%"+setVo.getArea_list()+"%'";  // 지역 %%
 		}
@@ -411,7 +411,7 @@ public class TeacherDao {
 				retVo.setT_language(rs.getString("t_language"));
 				retVo.setT_special(rs.getString("t_special"));
 				retVo.setT_approval(rs.getString("t_approval"));
-				retVo.setT_permit_yn(rs.getString("t_permit_yn"));
+				retVo.setT_profile_yn(rs.getString("t_profile_yn"));
 				retVo.setT_picture(rs.getString("t_picture"));
 				retVo.setT_intro(rs.getString("t_intro"));
 				retVo.setT_recruit_yn(rs.getString("t_recruit_yn"));

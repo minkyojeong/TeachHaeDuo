@@ -16,7 +16,7 @@ public class TeacherVo {
 	private String t_language;
 	private String t_special;
 	private String t_approval;
-	private String t_permit_yn;
+	private String t_profile_yn;
 	private String t_picture;
 	private String t_intro;
 	private String t_recruit_yn;
@@ -40,11 +40,19 @@ public class TeacherVo {
 	public String toString() {
 		return "TeacherVo [t_no=" + t_no + ", t_major=" + t_major + ", online_yna=" + online_yna + ", t_tcnt=" + t_tcnt
 				+ ", t_tprice=" + t_tprice + ", t_wantstud=" + t_wantstud + ", t_career=" + t_career + ", t_language="
-				+ t_language + ", t_special=" + t_special + ", t_approval=" + t_approval + ", t_permit_yn="
-				+ t_permit_yn + ", t_picture=" + t_picture + ", t_intro=" + t_intro + ", t_recruit_yn=" + t_recruit_yn
+				+ t_language + ", t_special=" + t_special + ", t_approval=" + t_approval + ", t_profile_yn="
+				+ t_profile_yn + ", t_picture=" + t_picture + ", t_intro=" + t_intro + ", t_recruit_yn=" + t_recruit_yn
 				+ ", object_list=" + object_list + ", area_list=" + area_list + ", avg_rscore=" + avg_rscore + ", m_id="
 				+ m_id + ", t_age=" + t_age + ", m_name=" + m_name + ", m_nickname=" + m_nickname + ", gender_fm="
 				+ gender_fm + ", m_address=" + m_address + ", t_review=" + t_review + ", like=" + like + "]";
+	}
+
+	public String getT_profile_yn() {
+		return t_profile_yn;
+	}
+
+	public void setT_profile_yn(String t_profile_yn) {
+		this.t_profile_yn = t_profile_yn;
 	}
 
 	public String getT_no() {
@@ -125,14 +133,6 @@ public class TeacherVo {
 
 	public void setT_approval(String t_approval) {
 		this.t_approval = t_approval;
-	}
-
-	public String getT_permit_yn() {
-		return t_permit_yn;
-	}
-
-	public void setT_permit_yn(String t_permit_yn) {
-		this.t_permit_yn = t_permit_yn;
 	}
 
 	public String getT_picture() {

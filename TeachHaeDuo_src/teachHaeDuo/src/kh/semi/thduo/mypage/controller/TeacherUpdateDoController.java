@@ -7,6 +7,10 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import kh.semi.thduo.member.vo.MemberVo;
+import kh.semi.thduo.pencil.model.service.PencilService;
+import kh.semi.thduo.pencil.model.vo.PencilVo;
+
 /**
  * Servlet implementation class TeacherUpdateDoController
  */
@@ -111,9 +115,65 @@ public class TeacherUpdateDoController extends HttpServlet {
 			tSpecial = "default";
 		}
 		System.out.println("tSpecial: "+ tSpecial);
+		
+		
+		MemberVo ssMV = (MemberVo)request.getSession().getAttribute("ssMV");
+		String tNo = null;
+		String mId = null;
+		int result = 0;
+		int balance = 0;
+		// 회원가입시 선생님 번호 생성 후 해야될거같음..
+//		if(ssMV == null) {
+//			response.sendRedirect("login");
+//			return;
+//		} else if(ssMV.gettNo() == null){ // 최초등록
+//			mId = ssMV.getmId();
+//			balance = new PencilService().checkPencil(mId);
+//			if(balance > 5000) {
+//				PencilVo vo = new PencilVo();
+//				vo.setCpCash(-5000);
+//				vo.setCpContent("교습 정보 최초 등록");
+//				vo.setmId(mId);
+//				result = new PencilService().minusPencil(vo);
+//				if(result == 1) {
+//					request.setAttribute("msgTeacherUpdate", "교습 정보가 등록되었습니다.");
+//					request.getRequestDispatcher("WEB-INF/view/mypage/mypageTeacher.jsp").forward(request, response);
+//				} else {
+//					request.setAttribute("msgTeacherUpdate", "교습 정보가 등록에 실패하였습니다.");
+//					request.getRequestDispatcher("WEB-INF/view/mypage/mypageTeacher.jsp").forward(request, response);
+//				}
+//			} else {
+//				request.setAttribute("msgTeacherUpdate", "잔액이 부족합니다. 충전 후 이용해주세요.");
+//				request.getRequestDispatcher("WEB-INF/view/mypage/mypageTeacher.jsp").forward(request, response);
+//			}
+//		} else if (ssMV.gettNo() != null) { // 교습 정보 수정
+//			
+//		}
+		
+		
 	}
 
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
