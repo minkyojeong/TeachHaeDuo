@@ -99,16 +99,16 @@ public class TeacherService {
 	}
 	
 	// 통화허용 여부에 맞는 선생님 정보 읽기
-	public ArrayList<TeacherVo> readCallTeacher(String tPermitYn){
-		ArrayList<TeacherVo> retVolist = null;
-		Connection conn = getConnection();
-		
-		retVolist = dao.readCallTeacher(conn, tPermitYn);
-		
-		close(conn);
-		
-		return retVolist;
-	}
+//	public ArrayList<TeacherVo> readCallTeacher(String tPermitYn){
+//		ArrayList<TeacherVo> retVolist = null;
+//		Connection conn = getConnection();
+//		
+//		retVolist = dao.readCallTeacher(conn, tPermitYn);
+//		
+//		close(conn);
+//		
+//		return retVolist;
+//	}
 	
 	// 모집 여부에 맞는 선생님 정보 읽기
 	public ArrayList<TeacherVo> readRecruitTeacher(String tRecruitYn){
