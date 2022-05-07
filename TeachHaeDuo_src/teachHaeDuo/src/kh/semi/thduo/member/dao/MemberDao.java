@@ -24,7 +24,7 @@ public class MemberDao {
 		String sql = 
 		"INSERT INTO THDUO.MEMBER"
 		+"(M_ID, M_PW, M_NAME, M_NICKNAME, M_BIRTH, M_ADDRESS, M_PHONE, M_EMAIL, GENDER_FM, ROLE_ST, M_DATE)"
-		+"VALUES(, ?, ?, ?, ?, ?, ?, ?, ?, ?, SYSTIMESTAMP)";	
+		+"VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, SYSTIMESTAMP)";	
 		
 		try { 
 			
