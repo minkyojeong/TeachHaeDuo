@@ -59,9 +59,9 @@ public class MemberFindStrAjaxController extends HttpServlet {
 		response.setContentType("text/html; charset=utf-8");
 		PrintWriter out = response.getWriter();
 		
-		MemberService memberService = new MemberService(); //멤버 서비스 이동 
-		String str = request.getParameter("str"); //?
-		String type = request.getParameter("type"); //?
+		MemberService memberService = new MemberService(); //서비스 생성
+		String str = request.getParameter("str"); //입력 받은값
+		String type = request.getParameter("type"); //id,닉네임, 이메일 타입 형식 이다. 
 		result = memberService.readMemberCheck(str, type);
 		if (result > 0) {
 			out.print("not-usable");

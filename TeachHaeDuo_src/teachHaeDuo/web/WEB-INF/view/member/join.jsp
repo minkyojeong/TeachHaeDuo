@@ -56,7 +56,7 @@
 				$.ajax({
 					type : 'post',
 					async : false, //false가 기본값임 - 비동기
-					url : 'findStr', //MemberFindStrAjaxController.java 주소 
+					url : 'findStr', //MemberFindStrAjaxController.java 주소  http://localhost:8081/findstr
 					dataType : 'text',
 					data : {
 						str : findStr,
@@ -73,8 +73,8 @@
 							idChk = false;
 						}
 					},
-					error : function(data, textStatus) {
-						console.log('error');
+					error : function(data, textStatus) { //자바 익셉션 시  ajax 실페시 
+						console.log('ajax error');
 					}
 				})
 			}
@@ -134,7 +134,7 @@
 						str : findStr,
 						type : 'mNickName'
 					},
-					success : function(data, textStatus) {//?
+					success : function(data, textStatus) {
 						if (data == 'not-usable') {
 							$("#checkNickName").html('사용할 수 없는 닉네임입니다.');
 							$("#checkNickName").attr('color', 'red');
@@ -147,7 +147,7 @@
 							
 						}
 					},
-					error : function(data, textStatus) { //? 에러
+					error : function(data, textStatus) { 
 						console.log('error');
 					}
 				}) //ajax
@@ -159,9 +159,9 @@
 		//이메일 형식 확인-ok 
 		$("#mEmail").on("input",function() {
 							//
-			var EmailRegEx = /^[A-Za-z0-9_]+[A-Za-z0-9]*[@]{1}[A-Za-z0-9]+[A-Za-z0-9]*[.]{1}[A-Za-z]{1,3}$/;
+			var EmailRegEx = /^[A-Za-z0-9_]+[A-Za-z0-9]*[@]{1}[A-Za-z0-9]+[A-Za-z0-9]*[.]{1}[A-Za-z]{1,3}$/;// 이메일 정규식 
 			var EmailVal = $("#mEmail").val();
-			if (!EmailRegEx.test(EmailVal)) {
+			if (!EmailRegEx.test(EmailVal)) { // mEmail 이메일 정규식 맞는지 체크
 				console.log("이메일 형식을 바르게 입력해주세요. console");
 				EmailChk = true;
 				$("#checkmEmail_info").html("이메일 형식이 맞지 않습니다.");
@@ -180,8 +180,8 @@
 			$.ajax({
 				type : 'post',
 				async : false, //false가 기본값임 - 비동기
-				url : 'findStr', // 컨트롤 만들기
-				dataType : 'text',
+				url : 'findStr',  //MemberFindStrAjaxController.java 주소 이동 
+				dataType : 'text', //리턴값 형식  
 				data : {
 					str : findStr,
 					type : 'mEmail'

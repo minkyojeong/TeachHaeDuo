@@ -54,24 +54,24 @@ public class MemberDao {
 		return result; 
 	}
 	
-	   // 체크
+	   // 회원가입시 중복체크 로직(id, 닉네임, 이메일)
 		public int readMemberCheck(Connection conn, String str, String type) { 
 			
 			System.out.println("str2 = "+str);
 			
-			int result = 0;
+			int result = 0;  //1. 리턴자료형으로 리턴변수 선언 + 초기값
 			String sql = "";
-			if (type.equals("mId")) {
+			if (type.equals("mId")) { //type  mId이면 sql 문 실행
 				sql = "select count(*) as cnt from member where M_ID=?";
-			}else if (type.equals("mEmail")) {
+			}else if (type.equals("mEmail")) {  //type  mEmail이면 sql 문 실행
 				sql = "select count(*) as cnt from member where M_EMAIL=?";
-			}else if (type.equals("mNickName")) {
+			}else if (type.equals("mNickName")) {//type  mNickName이면 sql 문 실행
 				sql = "select count(*) as cnt from member where M_NickName=?";
 			}
 			try {
 				pstmt = conn.prepareStatement(sql);
 				pstmt.setString(1, str);
-				rs = pstmt.executeQuery();
+				rs = pstmt.executeQuery();//  sql -executeQuery조회 
 				if (rs.next()) {
 					result = Integer.parseInt(rs.getString("cnt"));
 				}
@@ -144,9 +144,9 @@ public class MemberDao {
 				MemberVo retVo = null;
 				String sql = "select * from member where M_ID = ?";
 				try {
-					pstmt = conn.prepareStatement(sql);
-					pstmt.setString(1, mId);
-					rs = pstmt.executeQuery();
+					pstmt = conn.prepareStatement(sql);//연결
+					pstmt.setString(1, mId); //
+					rs = pstmt.executeQuery();//실행 
 					if (rs.next()) {
 						retVo = new MemberVo();
 						retVo.setmId(rs.getString("m_Id"));

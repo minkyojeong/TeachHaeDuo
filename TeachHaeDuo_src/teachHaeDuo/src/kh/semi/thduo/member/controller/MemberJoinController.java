@@ -2,7 +2,9 @@ package kh.semi.thduo.member.controller;
 
 import java.io.File;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.sql.Date;
+import java.sql.SQLException;
 import java.util.Enumeration;
 
 import javax.servlet.ServletContext;
@@ -98,41 +100,65 @@ public class MemberJoinController extends HttpServlet {
 		memberVo.setRoleSt(multi.getParameter("roleSt"));
 		
 		System.out.println("memberVo: "+memberVo);
+		PrintWriter out = response.getWriter();
 
-		int i = new MemberService().insertMember(memberVo);
-		
-		
-		if (memberVo.getRoleSt().equals("S")) {
+		try {
+			int i = new MemberService().insertMember(memberVo);
 			
-			String sNo = new StudentService().readStudentCheck();
-			if(sNo.length() == 0) {
-				sNo="S1";
-			}else {
-				int no = Integer.parseInt(sNo.substring(1, sNo.length())) + 1;
-				sNo = "S".concat(no+"");
+			if (i < 1) {
+				// 가입페이지이동
+				out.print("<script>alert('가입 실패 다시 시도해주세요.');</script>");
+				out.flush();
+				out.close();
+				request.getRequestDispatcher("WEB-INF/view/member/join.jsp").forward(request, response);
+				
+				return;
 			}
-			StudentVo sVo = new StudentVo();
-			sVo.setmId(memberVo.getmId());
-			sVo.setsNo(sNo);
-			i = new StudentService().insertStudent(sVo);
-		}if (multi.getParameter("roleSt").equals("T")) {
 			
-			//TO-Do 선생님 테이블 T_PROFILE  insert
-		}
-		
-		
-		if (i > 0) {
-			//회원가입 성공시 로그인페이지 
-			response.sendRedirect("login");
+			if (memberVo.getRoleSt().equals("S")) { //받은 값이 S이면  
+				
+				String sNo = new StudentService().readStudentCheck();//readStudentCheck  DB가서 번호 체크 
+				if(sNo.length() == 0) { // 길이가 0 같은면 S1
+					sNo="S1";   
+				}else {
+					int no = Integer.parseInt(sNo.substring(1, sNo.length())) + 1;
+					sNo = "S".concat(no+""); 
+				}
+				StudentVo sVo = new StudentVo(); //
+				sVo.setmId(memberVo.getmId());
+				sVo.setsNo(sNo);
+				
+				i = new StudentService().insertStudent(sVo);
+				
+			}if (multi.getParameter("roleSt").equals("T")) {
+				
+				//TO-Do 선생님 테이블 T_PROFILE  insert
+			}
 			
-		} else {
-			// 메인 이동 
-			response.sendRedirect(request.getContextPath() + "/"); // 절대경로를 의미하며 -context root가 없음.
+			
+			if (i > 0) {
+				//회원가입 성공시 로그인페이지 
+				response.sendRedirect("login");
+				out.print("<script>alert('가입 성공');</script>");
+				out.flush();
+				out.close();
+			} else {
+				// 가입페이지이동
+				out.print("<script>alert('가입 실패 다시 시도해주세요.');</script>");
+				out.flush();
+				out.close();
+				request.getRequestDispatcher("WEB-INF/view/member/join.jsp").forward(request, response);
+				
+				return;
 
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+			out.print("<script>alert('가입 실패 다시 시도해주세요.');</script>");
+			out.flush();
+			out.close();
+			
+			return;
 		}
-		
-		
-
 	}
-
 }
