@@ -1,7 +1,9 @@
 package kh.semi.thduo.teacher.model.dao;
 
 import static kh.semi.thduo.common.jdbc.JdbcTemplate.close;
+import static kh.semi.thduo.common.jdbc.JdbcTemplate.commit;
 import static kh.semi.thduo.common.jdbc.JdbcTemplate.getConnection;
+import static kh.semi.thduo.common.jdbc.JdbcTemplate.rollback;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -461,7 +463,7 @@ public class TeacherDao {
 		return retsult;
 	}
 
-	public int updateProfile(Connection conn, TeacherVo tVo) {
+	public int updateProfilePicture(Connection conn, TeacherVo tVo) {
 		int result = 0;
 		String sql = "update t_profile set  T_PICTURE = ? where t_no = ?";
 
@@ -488,7 +490,7 @@ public class TeacherDao {
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, tNo);
 			rs = pstmt.executeQuery();
-			if(rs.next()) {
+			if (rs.next()) {
 				result = rs.getString("T_PROFILE_YN");
 			}
 		} catch (SQLException e) {
@@ -497,6 +499,57 @@ public class TeacherDao {
 			close(pstmt);
 		}
 
+		return result;
+	}
+
+	// 선생님 담당 과목 넣기
+	public int insertObject(Connection conn, String[] object, String tNo) {
+		int result = 0;
+		String sql = "insert into TEACH_OBJECT (ob_code, t_no) values( (select ob_code from object where ob_name=?) , ?)";
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(2, tNo);
+			for (int i = 0; i < object.length; i++) {
+				pstmt.setString(1, object[i]);
+				result = pstmt.executeUpdate();
+				if (result == 0) {
+					break;
+				} else {
+					continue;
+				}
+			}
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+
+		return result;
+	}
+
+	// 선생님 활동지역 넣기
+	public int insertactiveArea(Connection conn, String[] activeArea, String tNo) {
+		int result = 0;
+		String sql = "insert into ACTI_AREA (t_no, area_code) values(?, (select area_code from area where area_name=?) )";
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, tNo);
+			for (int i = 0; i < activeArea.length; i++) {
+				pstmt.setString(2, activeArea[i]);
+				result = pstmt.executeUpdate();
+				if (result == 0) {
+					break;
+				} else {
+					continue;
+				}
+			}
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
 		return result;
 	}
 }

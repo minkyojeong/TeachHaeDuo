@@ -11,93 +11,93 @@ import kh.semi.thduo.teacher.model.vo.TeacherSearchSettingVo;
 import kh.semi.thduo.teacher.model.vo.TeacherVo;
 
 public class TeacherService {
-	
+
 	private TeacherDao dao = new TeacherDao();
-	
+
 	// 선생님 교습정보 삽입
 	public int insertTeacher(TeacherVo vo) {
 		int result = 0;
 		Connection conn = getConnection();
-		
+
 		result = dao.insertTeacher(conn, vo);
-		
+
 		close(conn);
-		
+
 		return result;
 	}
-	
+
 	// 모든 선생님 정보 읽기
-	public ArrayList<TeacherVo> readAllTeacher(){
+	public ArrayList<TeacherVo> readAllTeacher() {
 		ArrayList<TeacherVo> retVolist = null;
 		Connection conn = getConnection();
-		
+
 		retVolist = dao.readAllTeacher(conn);
-		
+
 		close(conn);
-		
+
 		return retVolist;
-	} 
-	
+	}
+
 	// 검색한 과목에 맞는 선생님 정보 읽기
 	public ArrayList<TeacherVo> readTeacher(String object) {
 		ArrayList<TeacherVo> retVolist = null;
 		Connection conn = getConnection();
-		
+
 		retVolist = dao.readTeacher(conn, object);
 
 		close(conn);
-		
+
 		return retVolist;
-	} 
-	
+	}
+
 	// 성별에 맞는 선생님 정보 읽기
-	public ArrayList<TeacherVo> readGenderTeacher(String genderFm){
+	public ArrayList<TeacherVo> readGenderTeacher(String genderFm) {
 		ArrayList<TeacherVo> retVolist = null;
 		Connection conn = getConnection();
-		
+
 		retVolist = dao.readGenderTeacher(conn, genderFm);
-		
+
 		close(conn);
-		
+
 		return retVolist;
 	}
-	
+
 	// 활동지역에 맞는 선생님 정보 읽기
-	public ArrayList<TeacherVo> readAreaTeacher(String area){
+	public ArrayList<TeacherVo> readAreaTeacher(String area) {
 		ArrayList<TeacherVo> retVolist = null;
 		Connection conn = getConnection();
-		
+
 		retVolist = dao.readAreaTeacher(conn, area);
-		
+
 		close(conn);
-		
+
 		return retVolist;
 	}
-	
+
 	// 성별 , 활동지역 맞는 선생님 정보 읽기
-	public ArrayList<TeacherVo> readAreaGenderTeacher(String genderFm, String area){
+	public ArrayList<TeacherVo> readAreaGenderTeacher(String genderFm, String area) {
 		ArrayList<TeacherVo> retVolist = null;
 		Connection conn = getConnection();
-		
+
 		retVolist = dao.readAreaGenderTeacher(conn, genderFm, area);
-		
+
 		close(conn);
-		
+
 		return retVolist;
 	}
-	
+
 	// 온-오프 여부에 맞는 선생님 정보 읽기
-	public ArrayList<TeacherVo> readOnlineTeacher(String onlineYna){
+	public ArrayList<TeacherVo> readOnlineTeacher(String onlineYna) {
 		ArrayList<TeacherVo> retVolist = null;
 		Connection conn = getConnection();
-		
+
 		retVolist = dao.readOnlineTeacher(conn, onlineYna);
-		
+
 		close(conn);
-		
+
 		return retVolist;
 	}
-	
+
 	// 통화허용 여부에 맞는 선생님 정보 읽기
 //	public ArrayList<TeacherVo> readCallTeacher(String tPermitYn){
 //		ArrayList<TeacherVo> retVolist = null;
@@ -109,111 +109,145 @@ public class TeacherService {
 //		
 //		return retVolist;
 //	}
-	
+
 	// 모집 여부에 맞는 선생님 정보 읽기
-	public ArrayList<TeacherVo> readRecruitTeacher(String tRecruitYn){
+	public ArrayList<TeacherVo> readRecruitTeacher(String tRecruitYn) {
 		ArrayList<TeacherVo> retVolist = null;
 		Connection conn = getConnection();
-		
+
 		retVolist = dao.readRecruitTeacher(conn, tRecruitYn);
-		
+
 		close(conn);
-		
+
 		return retVolist;
 	}
-	
+
 	// 찜 여부에 맞는 선생님 정보 읽기
-	public ArrayList<TeacherVo> readLikeTeacher(String sNo){
+	public ArrayList<TeacherVo> readLikeTeacher(String sNo) {
 		ArrayList<TeacherVo> retVolist = null;
 		Connection conn = getConnection();
-		
+
 		retVolist = dao.readLikeTeacher(conn, sNo);
-		
+
 		close(conn);
-		
+
 		return retVolist;
 	}
-	
+
 	// 찜 여부 체크
 	public LikeVo checkLike(String m_id, String t_no) {
 		LikeVo retVo = null;
 		Connection conn = getConnection();
-		
+
 		retVo = dao.checkLike(conn, m_id, t_no);
-		
+
 		close(conn);
-		
+
 		return retVo;
 	}
-	
+
 	// 선생님 통합 검색
 	public ArrayList<TeacherVo> searchTeacher(TeacherSearchSettingVo setVo) {
-		 ArrayList<TeacherVo> retVoList = null;
+		ArrayList<TeacherVo> retVoList = null;
 		Connection conn = getConnection();
 		retVoList = dao.searchTeacher(conn, setVo);
 		close(conn);
 		return retVoList;
 	}
-	
+
 	// 선생님 상세정보 읽기
-	public TeacherVo readTeacherInfo(String tNo){
+	public TeacherVo readTeacherInfo(String tNo) {
 		TeacherVo retVo = null;
 		Connection conn = getConnection();
-		
+
 		retVo = dao.readTeacherInfo(conn, tNo);
-		
+
 		close(conn);
-		
+
 		return retVo;
 	}
-	
+
 	// 선생님 교습정보 수정
-	public int updateTeacher(TeacherVo vo){
+	public int updateTeacher(TeacherVo vo) {
 		int retsult = 0;
 		Connection conn = getConnection();
-		
+
 		retsult = dao.updateTeacher(conn, vo);
-		
+
 		close(conn);
-		
+
 		return retsult;
 	}
-	
+
 	// 선생님 통화허용 여부 변경
-	public int updateTeacherPermit(String tNo){
+	public int updateTeacherPermit(String tNo) {
 		int retsult = 0;
 		Connection conn = getConnection();
-		
+
 		retsult = dao.updateTeacherPermit(conn, tNo);
-		
+
 		close(conn);
-		
+
 		return retsult;
 	}
-	
+
 	// 선생님 프로필 사진 등록/변경
-	public int updateProfile(TeacherVo tVo){
+	public int updateProfilePicture(TeacherVo tVo) {
 		int result = 0;
 		Connection conn = getConnection();
-		
-		result = dao.updateProfile(conn, tVo);
-		if(result == 1) {
+
+		result = dao.updateProfilePicture(conn, tVo);
+		if (result == 1) {
 			commit(conn);
 		} else {
 			rollback(conn);
 		}
 		close(conn);
-		
+
 		return result;
 	}
-	
+
 	// 선생님 교습정보 등록 여부 확인
 	public String checkProfile(String tNo) {
 		String result = null;
 		Connection conn = getConnection();
-		
+
 		result = dao.checkProfile(conn, tNo);
+		close(conn);
 		
 		return result;
 	}
+
+	// 선생님 담당 과목 넣기
+	public int insertObject(String[] object, String tNo) {
+		int result = 0;
+		Connection conn = getConnection();
+
+		result = dao.insertObject(conn, object, tNo);
+		if (result == 1) {
+			commit(conn);
+		} else {
+			rollback(conn);
+		}
+		close(conn);
+
+		return result;
+	}
+	
+	// 선생님 활동지역 넣기
+	public int insertactiveArea(String[] activeArea, String tNo) {
+		int result = 0;
+		Connection conn = getConnection();
+
+		result = dao.insertactiveArea(conn, activeArea, tNo);
+		if (result == 1) {
+			commit(conn);
+		} else {
+			rollback(conn);
+		}
+		close(conn);
+
+		return result;
+	}
+
 }

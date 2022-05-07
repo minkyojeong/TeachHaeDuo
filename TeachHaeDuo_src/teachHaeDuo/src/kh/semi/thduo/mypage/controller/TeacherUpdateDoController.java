@@ -1,6 +1,8 @@
 package kh.semi.thduo.mypage.controller;
 
 import java.io.IOException;
+import java.util.Arrays;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -11,6 +13,7 @@ import kh.semi.thduo.member.vo.MemberVo;
 import kh.semi.thduo.pencil.model.service.PencilService;
 import kh.semi.thduo.pencil.model.vo.PencilVo;
 import kh.semi.thduo.teacher.model.service.TeacherService;
+import kh.semi.thduo.teacher.model.vo.TeacherVo;
 
 /**
  * Servlet implementation class TeacherUpdateDoController
@@ -82,9 +85,9 @@ public class TeacherUpdateDoController extends HttpServlet {
 		System.out.println("tPrice: "+tPrice);
 		
 		// 희망 학생
-		String[] student = request.getParameterValues("student");
-		for(int i = 0 ; i < student.length ; i ++) {
-			System.out.println("student :" + student[i]);
+		String[] studentArr = request.getParameterValues("student");
+		for(int i = 0 ; i < studentArr.length ; i ++) {
+			System.out.println("student :" + studentArr[i]);
 		}
 		
 		// 어학
@@ -99,7 +102,7 @@ public class TeacherUpdateDoController extends HttpServlet {
 				languageScore[i] = language[i]+" "+score[i];
 				System.out.println("languageScore :" + languageScore[i]);
 			}
-		} 
+		}
 		
 		// 개인 교습 경력
 		String tCareer = request.getParameter("tCareer");
@@ -138,18 +141,44 @@ public class TeacherUpdateDoController extends HttpServlet {
 				mId = ssMV.getmId();
 				balance = new PencilService().checkPencil(mId);
 				System.out.println("잔액 확인:" + balance);
-				if(balance > 5000) {
-					PencilVo vo = new PencilVo();
-					vo.setCpCash(-5000);
-					vo.setCpContent("교습 정보 최초 등록");
-					vo.setmId(mId);
-					result = new PencilService().minusPencil(vo);
-					if(result == 1) {
-						
+				if(balance < 5000) {
+					request.setAttribute("msgTeacherUpdate", "잔액이 부족합니다. 충전 후 이용해주세요.");
+					request.getRequestDispatcher("WEB-INF/view/mypage/mypageTeacher.jsp").forward(request, response);
+				} else {
+//					PencilVo vo = new PencilVo();
+//					vo.setCpCash(-5000);
+//					vo.setCpContent("교습 정보 최초 등록");
+//					vo.setmId(mId);
+//					result = new PencilService().minusPencil(vo);
+					if(result == 0) {
+						request.setAttribute("msgTeacherUpdate", "교습 정보 등록이 실패했습니다.");
+						request.getRequestDispatcher("WEB-INF/view/mypage/mypageTeacher.jsp").forward(request, response);
 					} else {
-						
+						TeacherVo tVo = new TeacherVo();
+						tVo.setT_no(tNo);
+						tVo.setT_major(major);
+						tVo.setT_intro(tIntro);
+						int resultObject = new TeacherService().insertObject(object,tNo);
+						if(resultObject == 0) {
+							System.out.println("담당과목 넣기 실패");
+							request.setAttribute("msgTeacherUpdate", "교습 정보 등록이 실패했습니다.");
+							request.getRequestDispatcher("WEB-INF/view/mypage/mypageTeacher.jsp").forward(request, response);
+						}
+						int resultArea = new TeacherService().insertactiveArea(activeArea, tNo);
+						if(resultArea == 0) {
+							System.out.println("활동지역 넣기 실패");
+							request.setAttribute("msgTeacherUpdate", "교습 정보 등록이 실패했습니다.");
+							request.getRequestDispatcher("WEB-INF/view/mypage/mypageTeacher.jsp").forward(request, response);
+						}
+						tVo.setOnline_yna(onlineYn);
+						tVo.setT_tcnt(tCnt);
+						tVo.setT_tprice(tPrice);
+						tVo.setT_wantstud(Arrays.toString(studentArr));
+						tVo.setT_language(Arrays.toString(languageScore));
 					}
 				}
+			} else {
+				System.out.println("등록된 교습정보있어~");
 			}
 		}
 		// 회원가입시 선생님 번호 생성 후 해야될거같음..

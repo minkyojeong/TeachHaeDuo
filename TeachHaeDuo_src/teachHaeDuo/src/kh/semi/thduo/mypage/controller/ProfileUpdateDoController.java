@@ -134,7 +134,7 @@ public class ProfileUpdateDoController extends HttpServlet {
 //		// db저장
 		int result = 0;
 		tVo.setT_picture(pFilePath);
-		result = new TeacherService().updateProfile(tVo);
+		result = new TeacherService().updateProfilePicture(tVo);
 		
 		if (result == 1) {
 			request.setAttribute("rootPath", rootPath);

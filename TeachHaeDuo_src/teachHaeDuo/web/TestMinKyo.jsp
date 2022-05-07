@@ -42,6 +42,7 @@
 		<a href = "mypage">a태그 마이페이지</a>
 		${ssMV.getRoleSt()}
 		<button id="btn3" type="button">메인으로</button>
+		<button id="btn4" type="button">테스트버튼</button>
 	</form>
 	<script>
 	$("#btn1").click(function(){
@@ -53,6 +54,10 @@
 	$("#btn3").click(function(){
 		console.log("메인으로");
 		location.href="<%= request.getContextPath() %>";
+	});
+	$("#btn4").click(function(){
+		console.log("테스트버튼클릭");
+		location.href= "test";
 	});
 	</script>
 </body>
