@@ -14,7 +14,7 @@ public class StudentDao {
 	private PreparedStatement pstmt = null;
 	private ResultSet rs = null;
 
-	// 회원가입
+	// 회원가입시 학생S_no insert 
 	public int insertStudent(Connection conn, StudentVo vo) {
 		int result = 0;
 
@@ -39,7 +39,7 @@ public class StudentDao {
 		return result;
 	}
 
-	// 체크
+	// 학생S_no 체크
 	public String readStudentCheck(Connection conn) {
 
 		

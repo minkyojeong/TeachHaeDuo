@@ -122,11 +122,11 @@ public class MemberJoinController extends HttpServlet {
 		
 		
 		if (i > 0) {
-			//회원가입 실패시 로그인페이지 
+			//회원가입 성공시 로그인페이지 
 			response.sendRedirect("login");
 			
 		} else {
-			//회원가인 성공시 메인 이동 
+			// 메인 이동 
 			response.sendRedirect(request.getContextPath() + "/"); // 절대경로를 의미하며 -context root가 없음.
 
 		}

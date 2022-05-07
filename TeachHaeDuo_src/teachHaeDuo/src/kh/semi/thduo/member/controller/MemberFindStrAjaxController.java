@@ -49,7 +49,7 @@ public class MemberFindStrAjaxController extends HttpServlet {
 		int result = 0;
 		System.out.println("doPost - findStr");
 
-		Enumeration params = request.getParameterNames();
+		Enumeration params = request.getParameterNames(); //??
 		while (params.hasMoreElements()) {
 			String name = (String) params.nextElement();
 			System.out.print(name + " : " + request.getParameter(name) + "     ");
@@ -59,9 +59,9 @@ public class MemberFindStrAjaxController extends HttpServlet {
 		response.setContentType("text/html; charset=utf-8");
 		PrintWriter out = response.getWriter();
 		
-		MemberService memberService = new MemberService();
-		String str = request.getParameter("str");
-		String type = request.getParameter("type");
+		MemberService memberService = new MemberService(); //멤버 서비스 이동 
+		String str = request.getParameter("str"); //?
+		String type = request.getParameter("type"); //?
 		result = memberService.readMemberCheck(str, type);
 		if (result > 0) {
 			out.print("not-usable");
