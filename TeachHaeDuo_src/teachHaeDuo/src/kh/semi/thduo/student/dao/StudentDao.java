@@ -45,7 +45,7 @@ public class StudentDao {
 		
 		String result = "";
 		String sql = "";
-		sql = "select max(s_no) as s_no from MEMBER_STUDENT";
+		sql = "select max(to_number(substr(S_NO,2))) as s_no from MEMBER_STUDENT";
 		try {
 			pstmt = conn.prepareStatement(sql);
 			rs = pstmt.executeQuery();
