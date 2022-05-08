@@ -335,12 +335,23 @@ if(msgUpdateVal != "" && msgUpdateVal != null){
 	location.href="mypage";
 }
 
+
+var msgTeacherUpdateVal = '${msgTeacherUpdate}';
+if(msgTeacherUpdateVal != "" && msgTeacherUpdateVal != null){
+	alert('${msgTeacherUpdate}');
+	location.href="mypage";
+}
+
 var msgProfileVal = '${msgProfile}';
 if(msgProfileVal != "" && msgProfileVal != null){
 	alert('${msgProfile}');
 	location.href="mypage";
 }
-
+var msgApprovalVal = '${msgApproval}';
+if(msgApprovalVal != "" && msgApprovalVal != null){
+	alert('${msgApproval}');
+	location.href="mypage";
+}
  $("#uploadProfile").change(function(){
 	console.log("사진선택했어");
 	var uploadProfileVal = $("#uploadProfile").val();
@@ -358,8 +369,10 @@ if(msgProfileVal != "" && msgProfileVal != null){
 
 <% request.removeAttribute("msgRecruit"); %>
 <% request.removeAttribute("msgAlarm"); %>
+<% request.removeAttribute("msgTeacherUpdate"); %>
 <% request.getSession().removeAttribute("msgCharge"); %>
 <% request.getSession().removeAttribute("msgUpdate"); %>
 <% request.getSession().removeAttribute("msgProfile"); %>
+<% request.getSession().removeAttribute("msgApproval"); %>
 </body>
 </html>

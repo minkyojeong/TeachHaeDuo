@@ -450,10 +450,34 @@ public class TeacherDao {
 	}
 
 	// 선생님 교습정보 수정
-	public int updateTeacher(Connection conn, TeacherVo vo) {
-		int retsult = 0;
-
-		return retsult;
+	public int updateTeacher(Connection conn, TeacherVo tVo) {
+		int result = 0;
+		String sql = "update t_profile set t_major=? , online_yna=? , "
+				+ "t_tcnt=? , t_tprice=? , t_wantstud=? , "
+				+ "t_career=? , t_language=? , t_special=? , t_profile_yn='Y' , "
+				+ "t_intro=? where t_no=?";
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, tVo.getT_major());
+			pstmt.setString(2, tVo.getOnline_yna());
+			pstmt.setString(3, tVo.getT_tcnt());
+			pstmt.setString(4, tVo.getT_tprice());
+			pstmt.setString(5, tVo.getT_wantstud());
+			pstmt.setString(6, tVo.getT_career());
+			pstmt.setString(7, tVo.getT_language());
+			pstmt.setString(8, tVo.getT_special());
+			pstmt.setString(9, tVo.getT_intro());
+			pstmt.setString(10, tVo.getT_no());
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		
+		
+		return result;
 	}
 
 	// 선생님 통화허용 여부 변경
@@ -472,6 +496,27 @@ public class TeacherDao {
 			pstmt.setString(1, tVo.getT_picture());
 			pstmt.setString(2, tVo.getT_no());
 			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+
+		return result;
+	}
+	
+	// 선생님 승인여부 체크
+	public String checkApproval(Connection conn, String tNo) {
+		String result = null;
+		String sql = "select T_APPROVAL from t_profile where t_no=?";
+
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, tNo);
+			rs = pstmt.executeQuery();
+			if (rs.next()) {
+				result = rs.getString("T_APPROVAL");
+			}
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
@@ -538,6 +583,7 @@ public class TeacherDao {
 			for (int i = 0; i < activeArea.length; i++) {
 				pstmt.setString(2, activeArea[i]);
 				result = pstmt.executeUpdate();
+				System.out.println("dao result"+i + ":" + result);
 				if (result == 0) {
 					break;
 				} else {

@@ -168,11 +168,11 @@ public class TeacherService {
 	}
 
 	// 선생님 교습정보 수정
-	public int updateTeacher(TeacherVo vo) {
+	public int updateTeacher(TeacherVo tVo) {
 		int retsult = 0;
 		Connection conn = getConnection();
 
-		retsult = dao.updateTeacher(conn, vo);
+		retsult = dao.updateTeacher(conn, tVo);
 
 		close(conn);
 
@@ -204,6 +204,17 @@ public class TeacherService {
 		}
 		close(conn);
 
+		return result;
+	}
+	
+	// 선생님 승인여부 체크
+	public String checkApproval(String tNo) {
+		String result = null;
+		Connection conn = getConnection();
+
+		result = dao.checkApproval(conn, tNo);
+		close(conn);
+		
 		return result;
 	}
 
@@ -238,8 +249,9 @@ public class TeacherService {
 	public int insertactiveArea(String[] activeArea, String tNo) {
 		int result = 0;
 		Connection conn = getConnection();
-
+		System.out.println("활동지역 서비스 activeArea: " + activeArea);
 		result = dao.insertactiveArea(conn, activeArea, tNo);
+		System.out.println("활동지역 서비스 result: " + result);
 		if (result == 1) {
 			commit(conn);
 		} else {
