@@ -1,11 +1,13 @@
 package kh.semi.thduo.board.service;
 
+import static kh.semi.thduo.common.jdbc.JdbcTemplate.close;
+import static kh.semi.thduo.common.jdbc.JdbcTemplate.getConnection;
+
 import java.sql.Connection;
 import java.util.ArrayList;
 
-import static kh.semi.thduo.common.jdbc.JdbcTemplate.close;
-import static kh.semi.thduo.common.jdbc.JdbcTemplate.getConnection;
 import kh.semi.thduo.board.dao.BoardDao;
+import kh.semi.thduo.board.vo.BoardReCommentVo;
 import kh.semi.thduo.board.vo.BoardVo;
 
 public class BoardService {
@@ -20,4 +22,77 @@ public class BoardService {
 		close(conn);
 		return boardList;
 	}
+	public ArrayList<BoardReCommentVo> boardReCommentRead(String bNo){
+		Connection conn=null;
+		conn = getConnection();
+		ArrayList<BoardReCommentVo> result = dao.boardReCommentRead(conn, bNo);
+		close(conn);
+		return result;
+	}
+	public int boardReport(int bNo, String bRWriter, String bRCategory) {
+		Connection conn = null;
+		conn = getConnection();
+		int result = dao.boardReport(conn, bNo, bRWriter, bRCategory);
+		close(conn);
+		return result;
+	}
+	public int boardReCommentWrite(String bNo, String rContent, String rWriter) {
+		Connection conn = null;
+		conn = getConnection();
+		int result = dao.boardReCommentWrite(conn,bNo, rContent, rWriter);
+		close(conn);
+		return result;
+	}
+	public int boardWriteDo(BoardVo vo) {
+		Connection conn=null;
+		// DB연결
+		conn = getConnection();
+		
+		// DAO 호출
+		int result = dao.boardWriteDo(conn, vo);
+		
+		// commit/rollback
+		// DB해제
+		close(conn);
+		
+		return result;
+	}
+	public BoardVo boardRead(String bNo) {
+		Connection conn=null;
+		conn = getConnection();
+		BoardVo result = dao.boardRead(conn, bNo);
+		close(conn);
+		return result;
+	}
+	public int boardDelete(int bNo) {
+		Connection conn = null;
+		conn = getConnection();
+		int result = dao.boardDelete(conn,bNo);
+		close(conn);
+		return result;
+		
+	}
+	public int boardUpdate(String content, String title, String category, int bno) {
+		Connection conn = null;
+		conn = getConnection();
+		int result = dao.boardUpdate(conn, content, title, category, bno);
+		close(conn);
+		return result;
+	}
+	public int boardReCommentDelete(String bNo, String rNo) {
+		Connection conn = null;
+		conn = getConnection();
+		int result = dao.boardReCommentDelete(conn,bNo,rNo);
+		close(conn);
+		return result;
+		
+	}
+	public BoardVo boardModify(int bNo) {
+		Connection conn = null;
+		conn = getConnection();
+		BoardVo result = dao.boardModify(conn,bNo);
+		close(conn);
+		return result;
+	}
 }
+

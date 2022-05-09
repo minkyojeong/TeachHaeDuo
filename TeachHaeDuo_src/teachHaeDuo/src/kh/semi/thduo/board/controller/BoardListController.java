@@ -1,11 +1,16 @@
   package kh.semi.thduo.board.controller;
 
 import java.io.IOException;
+import java.util.ArrayList;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import kh.semi.thduo.board.service.BoardService;
+import kh.semi.thduo.board.vo.BoardVo;
 
 /**
  * Servlet implementation class BoardListController
@@ -27,7 +32,11 @@ public class BoardListController extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		response.getWriter().append("Served at: ").append(request.getContextPath());
+		
+		BoardService boardService = new BoardService();
+		ArrayList<BoardVo> boardList = boardService.boardList();
+		request.setAttribute("boardList",boardList);
+		request.getRequestDispatcher("BoardList.jsp").forward(request, response);
 	}
 
 	/**

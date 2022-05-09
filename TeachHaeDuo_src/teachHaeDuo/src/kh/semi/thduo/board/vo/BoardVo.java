@@ -1,5 +1,10 @@
 package kh.semi.thduo.board.vo;
 
+import java.sql.Timestamp;
+import java.util.ArrayList;
+
+
+
 public class BoardVo {
 	private String bNo;
 	private String bCategory;
@@ -9,6 +14,13 @@ public class BoardVo {
 	private String bWriteDate;
 	private String bCnt;
 	private String mId;
+	private ArrayList<BoardReCommentVo> reCommentList;
+	
+	@Override
+	public String toString() {
+		return "BoardVo [bNo=" + bNo + ", bCategory=" + bCategory + ", bTitle=" + bTitle + ", bContent=" + bContent
+				+ ", bWriter=" + bWriter + ", bWriteDate=" + bWriteDate + ", bCnt=" + bCnt + ", mId=" + mId + "]";
+	}
 	public String getbNo() {
 		return bNo;
 	}
@@ -36,7 +48,6 @@ public class BoardVo {
 	public String getbWriter() {
 		return bWriter;
 	}
-	
 	public void setbWriter(String bWriter) {
 		this.bWriter = bWriter;
 	}
@@ -52,16 +63,17 @@ public class BoardVo {
 	public void setbCnt(String bCnt) {
 		this.bCnt = bCnt;
 	}
-	
 	public String getmId() {
 		return mId;
 	}
 	public void setmId(String mId) {
 		this.mId = mId;
 	}
-	@Override
-	public String toString() {
-		return "BoardVo [bNo=" + bNo + ", bCategory=" + bCategory + ", bTitle=" + bTitle + ", bContent=" + bContent
-				+ ", bWriter=" + bWriter + ", bWriteDate=" + bWriteDate + ", bCnt=" + bCnt + ", mId=" + mId + "]";
+	public ArrayList<BoardReCommentVo> getReCommentList() {
+		return reCommentList;
 	}
+	public void setReCommentList(ArrayList<BoardReCommentVo> reCommentList) {
+		this.reCommentList = reCommentList;
+	}
+	
 }
