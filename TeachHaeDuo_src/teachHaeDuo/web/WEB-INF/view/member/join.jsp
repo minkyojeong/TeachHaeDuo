@@ -23,11 +23,13 @@
 		
 		var idChk = true;
 		var pwdChk = true;
-		var NickNameChk = true;
-		var EmailChk = true;
+		var nickNameChk = true;
+		var emailChk = true;
+		var certChk = true; //인증 
 		var phoneChk = true;
-		var BirthChk = true;
+		var birthChk = true;
 		var chkVal = false;
+		
 
 		// 아이디 형식 확인  -ok
 		$("#mId").on("input", function() {
@@ -103,12 +105,12 @@
 			var NickNameVal = $("#mNickName").val();
 			if (!NickNameRegEx.test(NickNameVal)) { //NickNameVal값이 정규식에 맞는지 체크
 				console.log("닉네임 형식을 바르게 입력해주세요. console");
-				NickNameChk = true;
+				nickNameChk = true;
 				$("#checkNickName").html("닉네임 형식이 맞지 않습니다.");
 				$("#checkNickName").attr('color', 'red');
 
 			} else {
-				NickNameChk = false;
+				nickNameChk = false;
 				$("#checkNickName").html("");
 			}
 		});
@@ -121,7 +123,7 @@
 			if ($('#mNickName').val().length < 2) {  //mNickName 2자 작은면 
 				$("#checkNickName").html('닉네임은 2자리 이상입니다.');
 				$("#checkNickName").attr('color', 'red');
-				NickNameChk = true;
+				nickNameChk = true;
 				
 
 			} else if ($('#mNickName').val().length > 1) { //mNickName 1자 이상이면 
@@ -138,12 +140,12 @@
 						if (data == 'not-usable') {
 							$("#checkNickName").html('사용할 수 없는 닉네임입니다.');
 							$("#checkNickName").attr('color', 'red');
-							NickNameChk = true;
+							nickNameChk = true;
 							
 						} else {
 							$("#checkNickName").html('사용할 수 있는 닉네임입니다.');
 							$("#checkNickName").attr('color', 'green');
-							NickNameChk = false;
+							nickNameChk = false;
 							
 						}
 					},
@@ -163,12 +165,12 @@
 			var EmailVal = $("#mEmail").val();
 			if (!EmailRegEx.test(EmailVal)) { // mEmail 이메일 정규식 맞는지 체크
 				console.log("이메일 형식을 바르게 입력해주세요. console");
-				EmailChk = true;
+				emailChk = true;
 				$("#checkmEmail_info").html("이메일 형식이 맞지 않습니다.");
 				$("#checkmEmail_info").attr('color', 'red');
 
 			} else {
-				EmailChk = false;
+				emailChk = false;
 				$("#checkmEmail_info").html("");
 			}
 		});
@@ -191,11 +193,11 @@
 					if (data == 'not-usable') {
 						$("#checkmEmail_info").html('사용할 수 없는 이메일입니다.');
 						$("#checkmEmail_info").attr('color', 'red');
-						EmailChk = true;
+						emailChk = true;
 					} else {
 						$("#checkmEmail_info").html('사용할 수 있는 이메일입니다.');
 						$("#checkmEmail_info").attr('color', 'green');
-						EmailChk = false;
+						emailChk = false;
 					}
 				},
 				error : function(data, textStatus) {
@@ -203,6 +205,19 @@
 				}
 			}) //ajax
 		});
+		
+		//이메일 인증
+		//인증번호 함수 생성 
+		// 인증번호 이메일 발송 후 인증번호를 jsp 보내기  
+		// input 받은 값이 자바에서 준 인증번호 비교하기성공- / 실패-
+		
+		
+		
+		 
+		
+		
+		
+
 		
 		//핸드폰 형식확인 -ok
 		$("#phone").on("input", function() {
@@ -227,12 +242,12 @@
 			var BirthVal = $("#mBirth").val();
 			if (!BirthRegEx.test(BirthVal)) {
 				console.log("생년월일 형식을 바르게 입력해주세요.");
-				BirthChk = true;
+				birthChk = true;
 				$("#mBirth_info").html("생년월일 형식이 맞지 않습니다.");
 				$("#mBirth_info").attr('color', 'red');
 
 			} else {
-				BirthChk = false;
+				birthChk = false;
 				$("#mBirth_info").html("");
 				console.log("생년월일 형식 OK");
 			}
@@ -240,16 +255,17 @@
 		});
 		
 		//신분 선생님 클릭시 증명서 첨부 활성화  - ok
-		$("#fileupload").hide();
+		$("#fileupload").hide(); // 증명서 첨부 숨기기
 
-		$("#radioT").click(function() {
+		$("#radioT").click(function() { // 신분 선생님 radioT 클릭시  화면 보이기 
 			$("#fileupload").show();
 		});
 
-		$("#radioS").click(function() {
+		$("#radioS").click(function() { // 신분 학생 radioS 클릭시  화면 숨기기
 			$("#fileupload").hide();
 		});
-
+		
+		
 		$('#btn_register').on("click", function() {
 			checkValue();
 			if (chkVal) {
@@ -294,11 +310,11 @@
 				document.getElementById('pw_cf').focus();
 				return;
 			}
-			if (NickNameChk) {
+			if (nickNameChk) {
 				alert("닉네임을 확인하세요.");
 				return;
 			}
-			if (EmailChk) {
+			if (emailChk) {
 				alert("이메일을 확인하세요.");
 				return;
 			}
@@ -312,7 +328,7 @@
 				alert("생년월일을 제대로 입력하세요.");
 				return;
 			}
-			if (BirthChk) {
+			if (birthChk) {
 				alert("생년월일을 확인하세요.");
 				return;
 			}
@@ -333,6 +349,16 @@
 				alert("선택을 바르게 입력해주세요.");
 				return;
 			}
+			
+			if(certChk){
+				alert("이메일인증을 해주세요.");
+				return;
+			}
+			if($("#mEmail").val() != $("#certEmail").val()){
+				alert("인증했던 이메일이 아닙니다. 다시 인증 해주세요.");
+				return;
+			}
+			
 			chkVal = true;
 		}
 		
@@ -366,7 +392,51 @@
 				document.getElementById('pw_check_msg').innerHTML = "";
 			}
 		}
+		
+		/* 인증번호 이메일 전송 */
+		$("#bnt_Cert1").click(function(){
+			var email = $("#mEmail").val(); // 입력한 이메일   
+			$("#certEmail").val(email);
+			
+			$.ajax({
+				type : 'post',
+				async : false, //false가 기본값임 - 비동기
+				url : 'certEmail', //MemberFindStrAjaxController.java 주소  http://localhost:8081/findstr
+				dataType : 'text',
+				data : {
+					mEmail: email
+				},
+				success : function(data, textStatus) {
+					console.log('data: '+data);
+					$("#certChk").val(data);
+					$("#cert_info").html("인증번호가 메일로 전송 되었습니다.");
+					$("#cert_info").attr('color', 'green');
+				},
+				error : function(data, textStatus) { //자바 익셉션 시  ajax 실페시 
+					console.log('ajax error');
+					$("#certChk").val("");
+					$("#cert_info").html("인증번호가 메일로 전송 실패되었습니다. ");
+					$("#cert_info").attr('color', 'red');
+				}
+			})
+		});		
+		
+		$("#bnt_Cert2").click(function(){
+			if( $("#certChk").val() ==  $("#cert").val()){
+				alert("인증 되었습니다");
+			
+				//$("#cert_info2").html("인증 되었습니다.");
+				certChk = false;
+			}else{
+				alert("인증번호를 다시 확인해주세요.");
+				//$("#cert_info2").html("인증번호를 확인해주세요.");
+				certChk = true;
+			}
+		});
+		
 	}); // onload
+	
+   
 </script>
 </head>
 <body>
@@ -375,6 +445,7 @@
 		<div class="wrap content">
 			<section>
 				<div id="join">
+				
 					<form name="frm_register" enctype="multipart/form-data">
 						<div>
 							<h2 id="join_title">회원가입</h2>
@@ -430,10 +501,21 @@
 								<td id="title">이메일주소</td>
 								<td><input type="email" class="in_box" name="mEmail" id="mEmail" tabindex="7" required
 									placeholder="예) id@domain.com" required> 
-									<input type="button" value="인증번호 보내기">
+									<input type="button" id="bnt_Cert1"  value="인증번호 전송">
 									<font id="checkmEmail_info" size="2"></font>
 								</td>
 							</tr>
+							<tr id="email_Cert">
+								<td id="title">인증번호</td>
+								<td><input type="text" id="cert" class="in_box">
+									<input type="hidden" id="certChk" class="in_box">
+									<input type="hidden" id="certEmail" class="in_box">
+									<input type="button" id="bnt_Cert2"  value="인증하기">
+									<font id="cert_info" size="2"></font><br/>
+									
+								</td>
+							</tr>
+				
 							<tr>
 								<td id="title">주소</td>
 								<td><input type="text" class="in_box" name="mAddress1" id="mAddress1" tabindex="8" readonly required /> 

@@ -5,6 +5,7 @@ import java.io.PrintWriter;
 import java.util.Enumeration;
 import java.util.Properties;
 import java.util.Random;
+
 import javax.mail.Message;
 import javax.mail.PasswordAuthentication;
 import javax.mail.Session;
@@ -18,20 +19,23 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
+
 import kh.semi.thduo.member.service.MemberService;
 import kh.semi.thduo.member.vo.MemberVo;
 
 /**
  * Servlet implementation class MemberLoginController
  */
-@WebServlet("/findPw")
-public class MemberFindPwController extends HttpServlet {
+@WebServlet("/certEmail")
+public class MemberJoinEmailAjaxController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	/**
 	 * @see HttpServlet#HttpServlet()
 	 */
-	public MemberFindPwController() {
+	public MemberJoinEmailAjaxController() {
 		super();
 	}
 
@@ -41,41 +45,23 @@ public class MemberFindPwController extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		System.out.println("doGet - findPw 페이지 이동");
-		request.getRequestDispatcher("WEB-INF/view/member/findpw.jsp").forward(request, response);
+		System.out.println("doGet -");
+		request.getRequestDispatcher("").forward(request, response);
 	}
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
 	 *      response)
 	 */
-
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		
-		System.out.println("doPost - findPw 비밀번호 정보 조회 ");
+		System.out.println("doPost - Checkemail 이메일 인증 ");
+
 		// ajax로 들어옴
 		PrintWriter out = response.getWriter();
 		// 비밀번호찾기
-		String mId = request.getParameter("mId");
 		String mEmail = request.getParameter("mEmail");
-
-		// 데이터 확인용
-		Enumeration params = request.getParameterNames();
-		while (params.hasMoreElements()) {
-			String name = (String) params.nextElement();
-			System.out.print(name + " : " + request.getParameter(name) + "     ");
-		}
-
-		// id email 확인
-		int result = new MemberService().readFindPw(mId, mEmail);
-		
-		if (result == 0) {
-			out.print("empty");
-			out.flush();
-			out.close();
-			return;
-		}
 		
 		// 인증 번호 생성기
 		StringBuffer temp = new StringBuffer();
@@ -137,13 +123,13 @@ public class MemberFindPwController extends HttpServlet {
 			msg.setRecipient(Message.RecipientType.TO, to);    
 
 			// 메일 제목
-			msg.setSubject("안녕하세요  새 패스워드 메일입니다.");
+			msg.setSubject("홈페이지 방문해주셔서 감사합니다.  인증번호 발송 메일입니다.");
 			// 메일 내용
-			msg.setText("패스워드는 :" + random);
+			msg.setText("인증번호 :" + random+"입니다."+"<br>"+"해당 인증번호 확인란에 기입하여 주세요");
 
 			
 			Transport.send(msg);
-			System.out.println("새 패스워드 이메일 전송");
+			System.out.println("인증번호 이메일 전송");
 
 		} catch (Exception e) {
 			e.printStackTrace();// TODO: handle exception
@@ -152,14 +138,11 @@ public class MemberFindPwController extends HttpServlet {
 		HttpSession saveKey = request.getSession();
 		saveKey.setAttribute("AuthenticationKey", random); 
 		
-		// 새(임시) 비밀번호 업데이트
-		result = new MemberService().updateRandomPw(random, mId); 
-		
-		System.out.println(result);
-
-		out.print("success");
+		out.print(random);
 		out.flush();
 		out.close();
 
+		
 	}
-}
+}		
+

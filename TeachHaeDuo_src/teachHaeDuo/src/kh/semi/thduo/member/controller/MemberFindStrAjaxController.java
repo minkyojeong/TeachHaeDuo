@@ -49,7 +49,7 @@ public class MemberFindStrAjaxController extends HttpServlet {
 		int result = 0;
 		System.out.println("doPost - findStr");
 
-		Enumeration params = request.getParameterNames(); //??
+		Enumeration params = request.getParameterNames(); 
 		while (params.hasMoreElements()) {
 			String name = (String) params.nextElement();
 			System.out.print(name + " : " + request.getParameter(name) + "     ");
