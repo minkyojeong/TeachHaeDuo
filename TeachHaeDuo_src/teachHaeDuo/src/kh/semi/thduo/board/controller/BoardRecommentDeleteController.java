@@ -15,13 +15,13 @@ import kh.semi.thduo.member.vo.MemberVo;
  * Servlet implementation class BoardReCommentDeleteController
  */
 @WebServlet("/BoardReCommentDelete")
-public class BoardReCommentDeleteController extends HttpServlet {
+public class BoardRecommentDeleteController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public BoardReCommentDeleteController() {
+    public BoardRecommentDeleteController() {
         super();
         // TODO Auto-generated constructor stub
     }

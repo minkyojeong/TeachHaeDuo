@@ -10,7 +10,7 @@ import javax.servlet.http.HttpServletResponse;
 /**
  * Servlet implementation class CsFaqWriteController
  */
-@WebServlet("CsFaqWrite")
+@WebServlet("/CsFaqWrite")
 public class CsFaqWriteController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
