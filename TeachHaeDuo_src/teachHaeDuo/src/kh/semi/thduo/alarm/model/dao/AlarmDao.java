@@ -17,6 +17,7 @@ public class AlarmDao {
 	private ResultSet rs = null;
 	private PreparedStatement pstmt = null;
 	
+	// 쪽지보내기
 	public int sendAlarm(Connection conn, AlarmVo vo) {
 		int result = 0;
 		String sql = "INSERT INTO alarm VALUES((SELECT NVL(MAX(alarm_no), 0) + 1 FROM alarm), ?, DEFAULT, ?, ?, ?)";
@@ -38,6 +39,7 @@ public class AlarmDao {
 		return result;
 	}
 	
+	// 보낸 알람 리스트
 	public ArrayList<AlarmVo> sendListAlarm(Connection conn, String mNickname){
 		ArrayList<AlarmVo> voList = null;
 		// 최근 30일 조회
@@ -72,6 +74,7 @@ public class AlarmDao {
 		return voList;
 	}
 	
+	// 보낸 알람 횟수
 	public int numberOfSendAlarm(Connection conn, String mNickname) {
 		int result = 0;
 		String sql = "select count(*) cnt from alarm where alarm_sendid=? and alarm_date between (sysdate-30) and sysdate order by alarm_date desc";
@@ -96,6 +99,8 @@ public class AlarmDao {
 		
 		return result;
 	}
+	
+	//받은 알람 리스트
 	public ArrayList<AlarmVo> receiveListAlarm(Connection conn, String mNickname){
 		ArrayList<AlarmVo> voList = null;
 		String sql = "select a.alarm_content, a.alarm_date,a.ALARM_sendID, a.ALARM_RECEIVEID,t.t_no from alarm a join member m on a.ALARM_RECEIVEID = m.m_nickname left outer join t_profile t on t.m_id = m.m_id where alarm_receiveid = ? and alarm_date between (sysdate-30) and sysdate order by alarm_date desc";
@@ -127,6 +132,7 @@ public class AlarmDao {
 		return voList;
 	}
 	
+	// 받은 알람 횟수
 	public int numberOfReceiveAlarm(Connection conn, String mNickname) {
 		int result = 0;
 		String sql = "select count(*) cnt from alarm where alarm_receiveid=? and alarm_date between (sysdate-30) and sysdate order by alarm_date desc";
@@ -150,7 +156,7 @@ public class AlarmDao {
 		return result;
 	}
 	
-	
+	// 모든 알람 리스트
 	public ArrayList<AlarmVo> allListAlarm(Connection conn, String mNickname){
 		ArrayList<AlarmVo> voList = null;
 		String sql = "select a.alarm_content, a.alarm_date,a.ALARM_sendID, a.ALARM_RECEIVEID,t.t_no from alarm a join member m on a.ALARM_RECEIVEID = m.m_nickname left outer join t_profile t on t.m_id = m.m_id where alarm_receiveid = ? or alarm_sendid=? order by alarm_date desc";
@@ -184,6 +190,7 @@ public class AlarmDao {
 		return voList;
 	}
 	
+	// 알람 수신거부
 	public int alarmYNChange(Connection conn, MemberVo vo) {
 		int result = 0;
 		String sql = "";
@@ -207,8 +214,6 @@ public class AlarmDao {
 		}
 		return result;
 	}
-	
-	
 }
 
 

@@ -459,11 +459,9 @@ public class TeacherDao {
 	// 선생님 교습정보 수정
 	public int updateTeacher(Connection conn, TeacherVo tVo) {
 		int result = 0;
-		String sql = "update t_profile set t_major=? , online_yna=? , "
-				+ "t_tcnt=? , t_tprice=? , t_wantstud=? , "
-				+ "t_career=? , t_language=? , t_special=? , t_profile_yn='Y' , "
-				+ "t_intro=? where t_no=?";
-		
+		String sql = "update t_profile set t_major=? , online_yna=? , " + "t_tcnt=? , t_tprice=? , t_wantstud=? , "
+				+ "t_career=? , t_language=? , t_special=? , t_profile_yn='Y' , " + "t_intro=? where t_no=?";
+
 		try {
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, tVo.getT_major());
@@ -482,8 +480,7 @@ public class TeacherDao {
 		} finally {
 			close(pstmt);
 		}
-		
-		
+
 		return result;
 	}
 
@@ -511,7 +508,7 @@ public class TeacherDao {
 
 		return result;
 	}
-	
+
 	// 선생님 승인여부 체크
 	public String checkApproval(Connection conn, String tNo) {
 		String result = null;
@@ -580,8 +577,25 @@ public class TeacherDao {
 		return result;
 	}
 
+	// 선생님 담당 과목 삭제
+	public int deleteObject(Connection conn, String tNo) {
+		int result = 0;
+		String sql = "delete from teach_object where t_no=?";
+
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, tNo);
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		return result;
+	}
+
 	// 선생님 활동지역 넣기
-	public int insertactiveArea(Connection conn, String[] activeArea, String tNo) {
+	public int insertActiveArea(Connection conn, String[] activeArea, String tNo) {
 		int result = 0;
 		String sql = "insert into ACTI_AREA (t_no, area_code) values(?, (select area_code from area where area_name=?) )";
 		try {
@@ -590,7 +604,7 @@ public class TeacherDao {
 			for (int i = 0; i < activeArea.length; i++) {
 				pstmt.setString(2, activeArea[i]);
 				result = pstmt.executeUpdate();
-				System.out.println("dao result"+i + ":" + result);
+				System.out.println("dao result" + i + ":" + result);
 				if (result == 0) {
 					break;
 				} else {
@@ -598,6 +612,23 @@ public class TeacherDao {
 				}
 			}
 
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		return result;
+	}
+
+	// 선생님 활동지역 삭제
+	public int deleteActiveArea(Connection conn, String tNo) {
+		int result = 0;
+		String sql = "delete from acti_area where t_no=?";
+
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, tNo);
+			result = pstmt.executeUpdate();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {

@@ -10,10 +10,11 @@ import kh.semi.thduo.pencil.model.vo.PencilVo;
 public class PencilService {
 	private PencilDao dao = new PencilDao();
 
+	// 연필 충전
 	public int plusPencil(PencilVo vo) {
-		System.out.println("충전하기 서비스 vo:"+ vo);
+		System.out.println("충전하기 서비스 vo:" + vo);
 		int result = 0;
-		
+
 		Connection conn = getConnection();
 		result = dao.plusPencil(conn, vo);
 		if (result == 1) {
@@ -22,7 +23,7 @@ public class PencilService {
 			rollback(conn);
 		}
 		close(conn);
-		System.out.println("충전하기 서비스 result:"+ result);
+		System.out.println("충전하기 서비스 result:" + result);
 		return result;
 
 	}
@@ -31,11 +32,11 @@ public class PencilService {
 	public int checkPencil(String mId) {
 		int result = 0;
 		Connection conn = getConnection();
-		
+
 		result = dao.checkPencil(conn, mId);
-		
+
 		close(conn);
-		
+
 		return result;
 	}
 
@@ -43,29 +44,47 @@ public class PencilService {
 	public int minusPencil(PencilVo vo) {
 		int result = 0;
 		Connection conn = getConnection();
-		
+
 		result = dao.minusPencil(conn, vo);
 		if (result == 0) {
 			rollback(conn);
 		} else {
 			commit(conn);
 		}
-		
+
 		close(conn);
 
 		return result;
 
 	}
 
+	// 연필 사용 내역
 	public ArrayList<PencilVo> listPencil(String mId) {
 		ArrayList<PencilVo> result = null;
-		
+
 		Connection conn = getConnection();
 		result = dao.listPencil(conn, mId);
-		
+
 		close(conn);
 
 		return result;
 
+	}
+
+	// 회원가입시 기본 연필 테이블 insert
+	public int insertPencilInit(String mId) {
+		int result = 0;
+		Connection conn = null;
+
+		conn = getConnection();
+		result = dao.insertPencilInit(conn, mId);
+		if (result == 1) {
+			commit(conn);
+		} else {
+			rollback(conn);
+		}
+		close(conn);
+
+		return result;
 	}
 }

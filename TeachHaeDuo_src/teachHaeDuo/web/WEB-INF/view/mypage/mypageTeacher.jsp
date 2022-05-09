@@ -320,13 +320,13 @@ if(msgRecruitVal != "" && msgRecruitVal != null){
 var msgAlarmVal = '${msgAlarm}';
 if(msgAlarmVal != "" && msgAlarmVal != null){
 	alert('${msgAlarm}');
-	location.href="mypage";
+	location.replace("mypage");
 }
 	
 var msgChargeVal = '${msgCharge}';
 if(msgChargeVal != "" && msgChargeVal != null){
 	alert('${msgCharge}');
-	location.href="mypage";
+	location.replace("mypage");
 }
 
 var msgUpdateVal = '${msgUpdate}';
@@ -345,12 +345,12 @@ if(msgTeacherUpdateVal != "" && msgTeacherUpdateVal != null){
 var msgProfileVal = '${msgProfile}';
 if(msgProfileVal != "" && msgProfileVal != null){
 	alert('${msgProfile}');
-	location.href="mypage";
+	location.replace("mypage");
 }
 var msgApprovalVal = '${msgApproval}';
 if(msgApprovalVal != "" && msgApprovalVal != null){
 	alert('${msgApproval}');
-	location.href="mypage";
+	location.replace("mypage");
 }
  $("#uploadProfile").change(function(){
 	console.log("사진선택했어");

@@ -206,7 +206,7 @@ public class TeacherService {
 
 		return result;
 	}
-	
+
 	// 선생님 승인여부 체크
 	public String checkApproval(String tNo) {
 		String result = null;
@@ -214,7 +214,7 @@ public class TeacherService {
 
 		result = dao.checkApproval(conn, tNo);
 		close(conn);
-		
+
 		return result;
 	}
 
@@ -225,7 +225,7 @@ public class TeacherService {
 
 		result = dao.checkProfile(conn, tNo);
 		close(conn);
-		
+
 		return result;
 	}
 
@@ -244,14 +244,45 @@ public class TeacherService {
 
 		return result;
 	}
-	
+
+	// 선생님 담당 과목 삭제
+	public int deleteObject(String tNo) {
+		int result = 0;
+		Connection conn = getConnection();
+
+		result = dao.deleteObject(conn, tNo);
+		if (result == 1) {
+			commit(conn);
+		} else {
+			rollback(conn);
+		}
+		close(conn);
+
+		return result;
+	}
+
 	// 선생님 활동지역 넣기
-	public int insertactiveArea(String[] activeArea, String tNo) {
+	public int insertActiveArea(String[] activeArea, String tNo) {
 		int result = 0;
 		Connection conn = getConnection();
 		System.out.println("활동지역 서비스 activeArea: " + activeArea);
-		result = dao.insertactiveArea(conn, activeArea, tNo);
+		result = dao.insertActiveArea(conn, activeArea, tNo);
 		System.out.println("활동지역 서비스 result: " + result);
+		if (result == 1) {
+			commit(conn);
+		} else {
+			rollback(conn);
+		}
+		close(conn);
+
+		return result;
+	}
+
+	// 선생님 활동지역 삭제
+	public int deleteActiveArea(String tNo) {
+		int result = 0;
+		Connection conn = getConnection();
+		result = dao.deleteActiveArea(conn, tNo);
 		if (result == 1) {
 			commit(conn);
 		} else {

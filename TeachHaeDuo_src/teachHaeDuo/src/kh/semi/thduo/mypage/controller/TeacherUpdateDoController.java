@@ -46,7 +46,8 @@ public class TeacherUpdateDoController extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		System.out.println("교습정보 수정 doPost");
-
+		
+		
 		// 학력
 		String major = request.getParameter("major");
 		System.out.println("major :" + major);
@@ -75,7 +76,7 @@ public class TeacherUpdateDoController extends HttpServlet {
 		String tCnt = request.getParameter("tCnt");
 		System.out.println("tCnt: " + tCnt);
 		if (tCnt == null || tCnt.trim().equals("")) {
-			tCnt = "default";
+			tCnt = "협의";
 		}
 		System.out.println("tCnt: " + tCnt);
 
@@ -83,7 +84,7 @@ public class TeacherUpdateDoController extends HttpServlet {
 		String tPrice = request.getParameter("tprice");
 		System.out.println("tPrice: " + tPrice);
 		if (tPrice == null || tPrice.trim().equals("")) {
-			tPrice = "default";
+			tPrice = "협의";
 		}
 		System.out.println("tPrice: " + tPrice);
 
@@ -97,12 +98,12 @@ public class TeacherUpdateDoController extends HttpServlet {
 		// 어학
 		String[] language = request.getParameterValues("language");
 		String[] score = request.getParameterValues("score");
-		String[] languageScore = null;
+		String[] languageScore = new String[language.length];
+		System.out.println("language.length :" + language.length);
 		if (language != null && score != null) {
 			for (int i = 0; i < language.length; i++) {
 				System.out.println("language :" + language[i]);
 				System.out.println("score :" + score[i]);
-				languageScore = new String[language.length];
 				languageScore[i] = language[i] + " " + score[i];
 				System.out.println("languageScore :" + languageScore[i]);
 			}
@@ -113,7 +114,7 @@ public class TeacherUpdateDoController extends HttpServlet {
 		String tCareer = request.getParameter("tCareer");
 		System.out.println("tCareer: " + tCareer);
 		if (tCareer == null || tCareer.trim().equals("")) {
-			tCareer = "default";
+			tCareer = "없음";
 		}
 		System.out.println("tCareer: " + tCareer);
 
@@ -121,7 +122,7 @@ public class TeacherUpdateDoController extends HttpServlet {
 		String tSpecial = request.getParameter("tSpecial");
 		System.out.println("tSpecial: " + tSpecial);
 		if (tSpecial == null || tSpecial.trim().equals("")) {
-			tSpecial = "default";
+			tSpecial = "없음";
 		}
 		System.out.println("tSpecial: " + tSpecial);
 
@@ -171,7 +172,7 @@ public class TeacherUpdateDoController extends HttpServlet {
 						request.getRequestDispatcher("WEB-INF/view/mypage/mypageTeacher.jsp").forward(request,
 								response);
 					}
-					int resultArea = new TeacherService().insertactiveArea(activeArea, tNo);
+					int resultArea = new TeacherService().insertActiveArea(activeArea, tNo);
 					if (resultArea == 0) {
 						System.out.println("활동지역 넣기 실패");
 						request.setAttribute("msgTeacherUpdate", "교습 정보 등록이 실패했습니다.");
@@ -215,13 +216,25 @@ public class TeacherUpdateDoController extends HttpServlet {
 				tVo.setT_no(tNo);
 				tVo.setT_major(major);
 				tVo.setT_intro(tIntro.replace("\r\n", "<br>"));
+				int resultObjectDelete = new TeacherService().deleteObject(tNo);
+				if(resultObjectDelete == 0) {
+					System.out.println("존재하는 담당과목 삭제 실패");
+					request.setAttribute("msgTeacherUpdate", "교습 정보 등록이 실패했습니다.");
+					request.getRequestDispatcher("WEB-INF/view/mypage/mypageTeacher.jsp").forward(request, response);
+				}
 				int resultObject = new TeacherService().insertObject(object, tNo);
 				if (resultObject == 0) {
 					System.out.println("담당과목 넣기 실패");
 					request.setAttribute("msgTeacherUpdate", "교습 정보 등록이 실패했습니다.");
 					request.getRequestDispatcher("WEB-INF/view/mypage/mypageTeacher.jsp").forward(request, response);
 				}
-				int resultArea = new TeacherService().insertactiveArea(activeArea, tNo);
+				int resultAreaDelete = new TeacherService().deleteActiveArea(tNo);
+				if(resultAreaDelete == 0) {
+					System.out.println("존재하는 활동지역 삭제 실패");
+					request.setAttribute("msgTeacherUpdate", "교습 정보 등록이 실패했습니다.");
+					request.getRequestDispatcher("WEB-INF/view/mypage/mypageTeacher.jsp").forward(request, response);
+				}
+				int resultArea = new TeacherService().insertActiveArea(activeArea, tNo);
 				if (resultArea == 0) {
 					System.out.println("활동지역 넣기 실패");
 					request.setAttribute("msgTeacherUpdate", "교습 정보 등록이 실패했습니다.");

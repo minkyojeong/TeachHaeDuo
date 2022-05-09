@@ -321,13 +321,13 @@ $("#p_like").on("click", function() {
 var msgAlarmVal = '${msgAlarm}';
 if(msgAlarmVal != "" && msgAlarmVal != null){
 	alert('${msgAlarm}');
-	location.href="mypage";
+	location.replace("mypage");
 }
 	
 var msgChargeVal = '${msgCharge}';
 if(msgChargeVal != "" && msgChargeVal != null){
 	alert('${msgCharge}');
-	location.href="mypage";
+	location.replace("mypage");
 }
 var msgUpdateVal = '${msgUpdate}';
 if(msgUpdateVal != "" && msgUpdateVal != null){
