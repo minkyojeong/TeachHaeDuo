@@ -40,7 +40,8 @@ public class TeacherDao {
 				+ "                    JOIN view_teacher_object olist"
 				+ "                    ON olist.m_nickname = m.m_nickname"
 				+ "                    JOIN view_teacher_area alist"
-				+ "                    ON alist.m_nickname = m.m_nickname";
+				+ "                    ON alist.m_nickname = m.m_nickname"
+				+ " ORDER BY TO_NUMBER(SUBSTR(t_no, 2)) desc";
 		try {
 			pstmt = conn.prepareStatement(sql);
 			rs = pstmt.executeQuery();
@@ -71,31 +72,37 @@ public class TeacherDao {
 	public ArrayList<TeacherVo> readTeacher(Connection conn, String object) {
 		ArrayList<TeacherVo> retVolist = null;
 		String sql = "SELECT pro.t_no, pro.t_major, pro.t_picture, m.m_nickname, round(rscore.avg_rscore, 2) avg_rscore, olist.object_list, alist.area_list"
-				+ " FROM t_profile pro JOIN member m" + "                    ON pro.m_id = m.m_id"
+				+ " FROM t_profile pro JOIN member m" 
+				+ "                    ON pro.m_id = m.m_id"
 				+ "                    JOIN view_teacher_rscroe_avg rscore"
 				+ "                    ON rscore.m_nickname = m.m_nickname"
 				+ "                    JOIN view_teacher_object olist"
 				+ "                    ON olist.m_nickname = m.m_nickname"
 				+ "                    JOIN view_teacher_area alist"
-				+ "                    ON alist.m_nickname = m.m_nickname" + " WHERE olist.object_list LIKE ?";
+				+ "                    ON alist.m_nickname = m.m_nickname" 
+				+ " WHERE olist.object_list LIKE ?"
+				+ " ORDER BY TO_NUMBER(SUBSTR(t_no, 2)) desc";
 
 		try {
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, "%" + object + "%");
 			rs = pstmt.executeQuery();
-			retVolist = new ArrayList<TeacherVo>();
+
 			if (rs.next()) {
-				TeacherVo vo = new TeacherVo();
-
-				vo.setT_no(rs.getString("t_no"));
-				vo.setT_major(rs.getString("t_major"));
-				vo.setT_picture(rs.getString("t_picture"));
-				vo.setM_nickname(rs.getString("m_nickname"));
-				vo.setAvg_rscore(rs.getDouble("avg_rscore"));
-				vo.setObject_list(rs.getString("object_list"));
-				vo.setArea_list(rs.getString("area_list"));
-
-				retVolist.add(vo);
+				retVolist = new ArrayList<TeacherVo>();
+				do {
+					TeacherVo vo = new TeacherVo();
+					
+					vo.setT_no(rs.getString("t_no"));
+					vo.setT_major(rs.getString("t_major"));
+					vo.setT_picture(rs.getString("t_picture"));
+					vo.setM_nickname(rs.getString("m_nickname"));
+					vo.setAvg_rscore(rs.getDouble("avg_rscore"));
+					vo.setObject_list(rs.getString("object_list"));
+					vo.setArea_list(rs.getString("area_list"));
+					
+					retVolist.add(vo);
+				} while(rs.next());
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
