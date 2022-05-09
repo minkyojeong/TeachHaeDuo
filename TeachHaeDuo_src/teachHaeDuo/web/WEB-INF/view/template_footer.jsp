@@ -7,7 +7,7 @@
 		</div>
 		<div class="footerTop">
 			<div class="footerTop_section1">
-				<a href="./">
+				<a href="${pageContext.request.contextPath}/">
 					<img src="${pageContext.request.contextPath}/resources/icons/footer_logo.png">
 				</a>
 				<!-- <span>과외해듀오</span> -->
