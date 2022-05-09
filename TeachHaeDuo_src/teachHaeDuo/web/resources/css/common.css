@@ -1,6 +1,7 @@
 body {
 	width: 1600px;
 	box-sizing: border-box;
+	margin: 0 auto;
 }
 
 .wrap.content {

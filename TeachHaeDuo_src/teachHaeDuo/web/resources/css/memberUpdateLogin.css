@@ -1,6 +1,8 @@
 @charset "UTF-8";
-a{
-	text-decoration:none;
+
+
+.wrap.content * {
+	font-family: MinSans-Medium;
 }
 .wrap.content {
 	
@@ -24,4 +26,11 @@ table#memberUpdateLoginTable, table#teacherUpdateLoginTable {
 	border-spacing: 20px 20px;
 	margin: 0 auto;
 	border-collapse: separate;
+	font-family: MinSans-Medium;
+}
+#updateTitle {
+	font-size: 20px; 
+	padding: 20px;
+	text-align: center;
+	color:#FA9D00;
 }

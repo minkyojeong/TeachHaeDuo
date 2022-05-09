@@ -4,6 +4,7 @@
 <link href="<%=request.getContextPath()%>/resources/css/common.css" rel="stylesheet" type="text/css">
 <link href="${pageContext.request.contextPath}/resources/css/button.css" rel="stylesheet" type="text/css">
 <link href="${pageContext.request.contextPath}/resources/css/memberUpdateLogin.css" rel="stylesheet" type="text/css">
+<link href="<%=request.getContextPath()%>/resources/css/font.css" rel="stylesheet" type="text/css">
 <link href="<%=request.getContextPath()%>/resources/css/header.css" rel="stylesheet" type="text/css">
 <link href="<%=request.getContextPath()%>/resources/css/footer.css" rel="stylesheet" type="text/css">
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
@@ -19,16 +20,13 @@
     <div class="wrap content">
         <form action="memberUpdate" method="post">
             <div id="top_div">
-                <p style="font-size:17px"><회원정보수정></p>
+                <p  id="updateTitle">회원 정보 수정</p>
             </div>
             <div id="middle_div">
                 <table id="memberUpdateLoginTable">
                     <tr>
                         <td>
                             아이디
-                        </td>
-                        <td>
-                            :
                         </td>
                         <td>
                             <% MemberVo ssMV = (MemberVo)request.getSession().getAttribute("ssMV"); %>
@@ -40,17 +38,17 @@
                             비밀번호
                         </td>
                         <td>
-                            :
-                        </td>
-                        <td>
                             <input name="pw" type="password">
                         </td>
+                    </tr>
+                    <tr>
+                    	<td colspan="2" style="color:red;">* 회원 정보 수정을 위해 한번 더 로그인 해 주세요.</td>
                     </tr>
                 </table>
             </div>
             <div id="low_div">
-                <button class="btn2_2" type="submit" id="login">로그인</button>
-                <button class="btn2_2" type="button" id="cancel">취소</button>
+                <button class="btn2_3" type="submit" id="login">로그인</button>
+                <button class="btn2_3" type="button" id="cancel">취소</button>
             </div>
         </form>
     </div>

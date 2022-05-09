@@ -32,3 +32,9 @@ table#teacherUpdateLoginTable, table#teacherUpdateLoginTable {
 table#teacherUpdateLoginTable {
 	font-family: MinSans-Medium;
 }
+#updateTitle {
+	font-size: 20px; 
+	padding: 20px;
+	text-align: center;
+	color:#FA9D00;
+}

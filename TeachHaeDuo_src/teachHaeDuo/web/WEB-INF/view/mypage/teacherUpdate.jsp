@@ -24,27 +24,24 @@
 		<jsp:include page="../template_header.jsp"></jsp:include>
 		<div class="wrap content">
 			<div id="top_div">
-				<p style="font-size: 17px">
-					<교습 정보 수정>
+				<p id="updateTitle">
+					교습 정보 등록
 				</p>
 			</div>
 			<form name="teacherUpdatefrm" action="teacherUpdate.do" method="post">
 				<table id="teacherUpdateTable">
 					<tr>
 						<td>학력<sup> *</sup></td>
-						<td>:</td>
 						<td><input type="text" name="major"
 							placeholder="최종학력을 입력해주세요."></td>
 					</tr>
 					<tr>
 						<td>교습 소개<sup> *</sup></td>
-						<td>:</td>
 						<td><textarea class="text_area" name="tIntro"
 								placeholder="내용을 입력해주세요.(최대 한글1000자)"></textarea></td>
 					</tr>
 					<tr>
 						<td>교습 과목<sup> *</sup></td>
-						<td>:</td>
 						<td>
 							<label for="object1"> <input type="checkbox" name="object" id="object1" value="국어">국어</label> 
 							<label for="object2"> <input type="checkbox" name="object" id="object2" value="수학">수학</label> 
@@ -56,7 +53,6 @@
 					</tr>
 					<tr>
 						<td>교습 가능 지역<sup> *</sup></td>
-						<td>:</td>
 						<td>
 							<div style="display: flex">
 								<select class="sel">
@@ -88,14 +84,14 @@
 									<option value="중랑구">중랑구</option>
 								</select> &nbsp;&nbsp;&nbsp;
 								<div>
-									<button id="area_reset" class="btn2_2" type="button">지역 초기화</button>
+									<button id="area_reset" class="btn2_3" type="button">지역 초기화</button>
 								</div>
 							</div>
 						</td>
 					</tr>
 					<tr>
 						<td></td>
-						<td></td>
+						
 						<td>
 							<div id="active">
 								<div class="active_div">-선택 지역 목록-</div>
@@ -104,7 +100,6 @@
 					</tr>
 					<tr>
 						<td>온라인 교습 여부<sup> *</sup></td>
-						<td>:</td>
 						<td><label for="online"> <input type="radio"
 								name="online_yna" id="online" value="Y">온라인
 						</label> <label for="offline"> <input type="radio"
@@ -115,19 +110,16 @@
 					</tr>
 					<tr>
 						<td>교습 횟수</td>
-						<td>:</td>
 						<td><input type="text" name="tcnt"
 							placeholder="예) 주2회, 미입력시 협의"></td>
 					</tr>
 					<tr>
 						<td>비용</td>
-						<td>:</td>
 						<td><input type="text" name="tprice" placeholder="미입력시 협의">
 						</td>
 					</tr>
 					<tr>
 						<td>희망 학생<sup> *</sup></td>
-						<td>:</td>
 						<td><label for="student1"> <input name="student" type="checkbox"
 								id="student1" value="초등학생">초등학생
 						</label> <label for="student2"> <input name="student" type="checkbox"
@@ -142,7 +134,6 @@
 					</tr>
 					<tr id="language_tr1">
 						<td>어학</td>
-						<td>:</td>
 						<td><select name="language">
 								<option value="">선택해주세요.</option>
 								<option value="TOEIC">TOEIC</option>
@@ -151,27 +142,25 @@
 								<option value="JPT">JPT</option>
 								<option value="HSK">HSK</option>
 						</select> <input type="text" name="score">
-							<button type="button" id="language_plus_btn" class="btn2_2">추가</button>
-							<button type="button" id="language_delete_btn" class="btn2_2">삭제</button>
+							<button type="button" id="language_plus_btn" class="btn2_3">추가</button>
+							<button type="button" id="language_delete_btn" class="btn2_3">삭제</button>
 						</td>
 					</tr>
 					<tr>
 						<td>개인 교습 경력</td>
-						<td>:</td>
 						<td><input type="text" name="tCareer" placeholder="예) 경력2년">
 						</td>
 					</tr>
 					<tr>
 						<td>특이 사항</td>
-						<td>:</td>
 						<td><textarea class="text_area" name="tSpecial"
 								placeholder="내용을 입력해주세요. (최대 한글100자)"></textarea></td>
 					</tr>
 				</table>
-				<div id="bottom_div">
-					<button type="submit" id="submit" class="btn2_2 update_btn">교습
+				<div id="bottom_div" style="margin-top:100px;">
+					<button type="submit" id="submit" class="btn2_3 update_btn">교습
 						정보 저장</button>
-					<button type="button" id="cancel" class="btn2_2 update_btn">취소</button>
+					<button type="button" id="cancel" class="btn2_3 update_btn">취소</button>
 				</div>
 			</form>
 		</div>

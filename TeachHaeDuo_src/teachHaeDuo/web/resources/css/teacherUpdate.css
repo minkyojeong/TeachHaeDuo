@@ -14,7 +14,7 @@ div#top_div {
 	
 }
 .wrap.content {
-	height: 80%;
+	height: 100%;
 	overflow:auto;
 }
 
@@ -33,6 +33,12 @@ div.active {
 
 table#teacherUpdateTable {
 	font-family: MinSans-Medium;
+}
+#updateTitle {
+	font-size: 20px; 
+	padding: 20px;
+	text-align: center;
+	color:#FA9D00;
 }
 
 

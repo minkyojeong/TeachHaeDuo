@@ -22,16 +22,13 @@
     <div class="wrap content">
         <form action="teacherUpdate" method="post">
             <div id="top_div">
-                <p style="font-size:17px"><교습 정보 수정></p>
+                <p id="updateTitle">교습 정보 등록</p>
             </div>
             <div id="middle_div">
                 <table id="teacherUpdateLoginTable">
                     <tr>
                         <td>
                            <p> 아이디</p>
-                        </td>
-                        <td>
-                            :
                         </td>
                         <td>
                             <% MemberVo ssMV = (MemberVo)request.getSession().getAttribute("ssMV"); %>
@@ -43,17 +40,17 @@
                             비밀번호
                         </td>
                         <td>
-                            :
-                        </td>
-                        <td>
                             <input name="pw" type="password">
                         </td>
+                    </tr>
+                    <tr>
+                    	<td colspan="2" style="color:red;">* 교습 정보 등록을 위해 한번 더 로그인 해 주세요.</td>
                     </tr>
                 </table>
             </div>
             <div id="low_div">
-                <button class="btn2_2" type="submit" id="login">로그인</button>
-                <button class="btn2_2" type="button" id="cancel">취소</button>
+                <button class="btn2_3" type="submit" id="login">로그인</button>
+                <button class="btn2_3" type="button" id="cancel">취소</button>
             </div>
         </form>
     </div>
