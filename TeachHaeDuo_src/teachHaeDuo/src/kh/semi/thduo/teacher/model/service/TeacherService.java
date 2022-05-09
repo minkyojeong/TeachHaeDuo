@@ -230,15 +230,22 @@ public class TeacherService {
 	}
 
 	// 선생님 담당 과목 넣기
-	public int insertObject(String[] object, String tNo) {
+	public int insertObject(String[] objectArr, String tNo) {
 		int result = 0;
 		Connection conn = getConnection();
+		System.out.println("담당 과목 서비스 objectArr: " + objectArr);
+		String object = null;
 
-		result = dao.insertObject(conn, object, tNo);
-		if (result == 1) {
-			commit(conn);
-		} else {
-			rollback(conn);
+		for (int i = 0; i < objectArr.length; i++) {
+			object = objectArr[i];
+			System.out.println("activeArea" + i + ":" + object);
+			result = dao.insertObject(conn, object, tNo);
+			System.out.println("활동지역 서비스 result: " + i + ":" + result);
+			if (result == 1) {
+				commit(conn);
+			} else {
+				rollback(conn);
+			}
 		}
 		close(conn);
 
@@ -262,16 +269,21 @@ public class TeacherService {
 	}
 
 	// 선생님 활동지역 넣기
-	public int insertActiveArea(String[] activeArea, String tNo) {
+	public int insertActiveArea(String[] activeAreaArr, String tNo) {
 		int result = 0;
 		Connection conn = getConnection();
-		System.out.println("활동지역 서비스 activeArea: " + activeArea);
-		result = dao.insertActiveArea(conn, activeArea, tNo);
+		System.out.println("활동지역 서비스 activeArea: " + activeAreaArr);
+		String activeArea = null;
 		System.out.println("활동지역 서비스 result: " + result);
-		if (result == 1) {
-			commit(conn);
-		} else {
-			rollback(conn);
+		for (int i = 0; i < activeAreaArr.length; i++) {
+			activeArea = activeAreaArr[i];
+			System.out.println("activeArea" + i + ":" + activeArea);
+			result = dao.insertActiveArea(conn, activeArea, tNo);
+			if (result == 1) {
+				commit(conn);
+			} else {
+				rollback(conn);
+			}
 		}
 		close(conn);
 

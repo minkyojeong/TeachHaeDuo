@@ -14,7 +14,7 @@ $(function() {
 	});
 	
 	if($("#recruit_yn").val()=='Y'){
-		console.log("알람 수신ok네?")
+		console.log("모집중 ok네?")
 		$("#checkbox2").prop("checked", true);
 	} else{
 		$("#checkbox2").prop("checked", false);
@@ -22,6 +22,11 @@ $(function() {
 	
 	$("#checkbox2").change(function(){
 		location.href = "recruitYNChange";
+	});
+	
+	$("#teacherUpdateBtn").click(function(){
+		alert("최초 등록시 5000원 차감, 이후 500원 차감됩니다.");
+		location.href = "teacherUpdateLogin";
 	});
 	
 	$("#text_div1").mouseover(function() {
