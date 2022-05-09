@@ -34,7 +34,7 @@ public class BoardWriteController extends HttpServlet {
 		if(ssvo == null)  {  // 로그아웃 상태라면 login 페이지로 진입
 			response.sendRedirect("login");
 		} else {  // 로그인한 상태라면 write page 진입
-			request.getRequestDispatcher("BoardWrite.jsp").forward(request, response);
+			request.getRequestDispatcher("WEB-INF/view/Board/BoardWrite.jsp").forward(request, response);
 		}
 	}
 
@@ -47,7 +47,7 @@ public class BoardWriteController extends HttpServlet {
 		if(ssvo == null)  {  // 로그아웃 상태라면 login 페이지로 진입
 			response.sendRedirect("login");
 		} else {  // 로그인한 상태라면 write page 진입
-			request.getRequestDispatcher("BoardWrite.jsp").forward(request, response);
+			request.getRequestDispatcher("WEB-INF/view/Board/BoardWrite.jsp").forward(request, response);
 		}
 	}
 

@@ -54,7 +54,7 @@ public class BoardReportController extends HttpServlet {
 			if(result < 1) {   // 글등록 실패
 				response.sendRedirect("BoardList");
 			} else { // 글등록 성공
-				response.sendRedirect("BoardReportSuc.jsp");
+				response.sendRedirect("WEB-INF/view/Board/BoardReportSuc.jsp");
 			}
 		}
 	}

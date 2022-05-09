@@ -38,7 +38,7 @@ public class BoardReportReadController extends HttpServlet {
 		result.setbContent(result.getbContent().replaceAll(" ", "&nbsp;"));
 		System.out.println(result);
 		request.setAttribute("bvo", result);
-		request.getRequestDispatcher("BoardReportConfirm.jsp").forward(request, response);
+		request.getRequestDispatcher("WEB-INF/view/Board/BoardReportConfirm.jsp").forward(request, response);
 	}
 
 	/**

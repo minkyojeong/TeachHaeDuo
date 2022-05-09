@@ -44,7 +44,7 @@ public class BoardReadController extends HttpServlet {
 		System.out.println(rvo);
 		request.setAttribute("rvo", rvo);
 		request.setAttribute("bvo", result);
-		request.getRequestDispatcher("BoardRead.jsp").forward(request, response);
+		request.getRequestDispatcher("WEB-INF/view/Board/BoardRead.jsp").forward(request, response);
 	}
 
 	

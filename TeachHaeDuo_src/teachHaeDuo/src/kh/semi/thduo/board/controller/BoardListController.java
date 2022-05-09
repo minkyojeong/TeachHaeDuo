@@ -36,7 +36,7 @@ public class BoardListController extends HttpServlet {
 		BoardService boardService = new BoardService();
 		ArrayList<BoardVo> boardList = boardService.boardList();
 		request.setAttribute("boardList",boardList);
-		request.getRequestDispatcher("BoardList.jsp").forward(request, response);
+		request.getRequestDispatcher("WEB-INF/view/Board/BoardList.jsp").forward(request, response);
 	}
 
 	/**
