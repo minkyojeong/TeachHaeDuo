@@ -40,4 +40,11 @@ section .in_box {
   height:30px;
   font-size:12px;
 }
+section #join_title{
+
+        text-align: center;
+         font-size: 37px;
+         padding: 20px;
+         font-family: "MinSans-Bold"
+}
 

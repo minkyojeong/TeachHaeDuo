@@ -98,6 +98,21 @@
 				$("#pwd_info").html("");
 			}
 		});
+		
+		function check_pw() { //비밀번호 확인 - ok
+			var p = document.getElementById('pw').value;
+			var p_cf = document.getElementById('pw_cf').value;
+
+			if (p != p_cf) {
+				document.getElementById('pw_check_msg').innerHTML = "비밀번호가 다릅니다. 다시 확인해 주세요.";
+				$("#pw_check_msg").attr('color', 'red');
+			} else {
+				document.getElementById('pw_check_msg').innerHTML = "";
+			}
+			if (p_cf == "") {
+				document.getElementById('pw_check_msg').innerHTML = "";
+			}
+		}
 		//닉네임 형식 확인 -ok 
 		$("#mNickName").on("input", function() {
 			
@@ -175,7 +190,7 @@
 			}
 		});
 
-		//중복체크 - 이메일 -x 
+		//중복체크 - 이메일 -ok
 		$('#mEmail').focusout(function() {
 			let findStr = $('#mEmail').val(); // input_id에 입력되는 값
 
@@ -206,18 +221,47 @@
 			}) //ajax
 		});
 		
-		//이메일 인증
-		//인증번호 함수 생성 
-		// 인증번호 이메일 발송 후 인증번호를 jsp 보내기  
-		// input 받은 값이 자바에서 준 인증번호 비교하기성공- / 실패-
+		/* 인증번호 이메일 전송 */
+		$("#bnt_Cert1").click(function(){
+			var email = $("#mEmail").val(); // 입력한 이메일   
+			$("#certEmail").val(email);
+			
+			$.ajax({
+				type : 'post',
+				async : false, //false가 기본값임 - 비동기
+				url : 'certEmail', //MemberFindStrAjaxController.java 주소  http://localhost:8081/findstr
+				dataType : 'text',
+				data : {
+					mEmail: email
+				},
+				success : function(data, textStatus) {
+					console.log('data: '+data);
+					$("#certChk").val(data);
+					$("#cert_info").html("인증번호가 메일로 전송 되었습니다.");
+					$("#cert_info").attr('color', 'green');
+				},
+				error : function(data, textStatus) { //자바 익셉션 시  ajax 실페시 
+					console.log('ajax error');
+					$("#certChk").val("");
+					$("#cert_info").html("인증번호가 메일로 전송 실패되었습니다. ");
+					$("#cert_info").attr('color', 'red');
+				}
+			})
+		});		
 		
+		$("#bnt_Cert2").click(function(){
+			if( $("#certChk").val() != "" && $("#certChk").val() == $("#cert").val()){
+				alert("인증 되었습니다");
+			
+				//$("#cert_info2").html("인증 되었습니다.");
+				certChk = false;
+			}else{
+				alert("인증번호를 다시 확인해주세요.");
+				//$("#cert_info2").html("인증번호를 확인해주세요.");
+				certChk = true;
+			}
+		});
 		
-		
-		 
-		
-		
-		
-
 		
 		//핸드폰 형식확인 -ok
 		$("#phone").on("input", function() {
@@ -362,82 +406,28 @@
 			chkVal = true;
 		}
 		
-		//취소 버튼 클릭시 메인 화면으로 이동 -ok
-		function goLoginForm() {
-			location.href = "/";
-		}
-
-		function open_Postcode() { //다음 카카오 주소찾기 -ok
-			new daum.Postcode({
-				oncomplete : function(data) {
-					console.log(data);
-					// 우편번호와 주소 정보를 해당 필드에 넣는다.  
-					document.getElementById("mAddress1").value = data.roadAddress;
-
-				}
-			}).open();
-		}
-
-		function check_pw() { //비밀번호 확인 - ok
-			var p = document.getElementById('pw').value;
-			var p_cf = document.getElementById('pw_cf').value;
-
-			if (p != p_cf) {
-				document.getElementById('pw_check_msg').innerHTML = "비밀번호가 다릅니다. 다시 확인해 주세요.";
-				$("#pw_check_msg").attr('color', 'red');
-			} else {
-				document.getElementById('pw_check_msg').innerHTML = "";
-			}
-			if (p_cf == "") {
-				document.getElementById('pw_check_msg').innerHTML = "";
-			}
-		}
-		
-		/* 인증번호 이메일 전송 */
-		$("#bnt_Cert1").click(function(){
-			var email = $("#mEmail").val(); // 입력한 이메일   
-			$("#certEmail").val(email);
-			
-			$.ajax({
-				type : 'post',
-				async : false, //false가 기본값임 - 비동기
-				url : 'certEmail', //MemberFindStrAjaxController.java 주소  http://localhost:8081/findstr
-				dataType : 'text',
-				data : {
-					mEmail: email
-				},
-				success : function(data, textStatus) {
-					console.log('data: '+data);
-					$("#certChk").val(data);
-					$("#cert_info").html("인증번호가 메일로 전송 되었습니다.");
-					$("#cert_info").attr('color', 'green');
-				},
-				error : function(data, textStatus) { //자바 익셉션 시  ajax 실페시 
-					console.log('ajax error');
-					$("#certChk").val("");
-					$("#cert_info").html("인증번호가 메일로 전송 실패되었습니다. ");
-					$("#cert_info").attr('color', 'red');
-				}
-			})
-		});		
-		
-		$("#bnt_Cert2").click(function(){
-			if( $("#certChk").val() ==  $("#cert").val()){
-				alert("인증 되었습니다");
-			
-				//$("#cert_info2").html("인증 되었습니다.");
-				certChk = false;
-			}else{
-				alert("인증번호를 다시 확인해주세요.");
-				//$("#cert_info2").html("인증번호를 확인해주세요.");
-				certChk = true;
-			}
-		});
-		
 	}); // onload
-	
-   
 </script>
+
+<script>
+//취소 버튼 클릭시 메인 화면으로 이동 -ok
+function goLoginForm() {
+	location.href = "/";
+}
+
+function open_Postcode() { //다음 카카오 주소찾기 
+	new daum.Postcode({
+		oncomplete : function(data) {
+			console.log(data);
+			// 우편번호와 주소 정보를 해당 필드에 넣는다.  
+			document.getElementById("mAddress1").value = data.roadAddress;
+
+		}
+	}).open();
+}
+</script>
+
+
 </head>
 <body>
 	<div class="main_wrap">
@@ -448,7 +438,7 @@
 				
 					<form name="frm_register" enctype="multipart/form-data">
 						<div>
-							<h2 id="join_title">회원가입</h2>
+							<h2 id="join_title" style="color:#FA9D00;">회원가입</h2>
 						</div>
 						<table id="memberTable">
 							<tr>
@@ -501,7 +491,7 @@
 								<td id="title">이메일주소</td>
 								<td><input type="email" class="in_box" name="mEmail" id="mEmail" tabindex="7" required
 									placeholder="예) id@domain.com" required> 
-									<input type="button" id="bnt_Cert1"  value="인증번호 전송">
+									<input type="button" id="bnt_Cert1" class="btn2_3" value="인증번호 전송">
 									<font id="checkmEmail_info" size="2"></font>
 								</td>
 							</tr>
@@ -510,7 +500,7 @@
 								<td><input type="text" id="cert" class="in_box">
 									<input type="hidden" id="certChk" class="in_box">
 									<input type="hidden" id="certEmail" class="in_box">
-									<input type="button" id="bnt_Cert2"  value="인증하기">
+									<input type="button" id="bnt_Cert2"  class="btn2_3" value="인증하기">
 									<font id="cert_info" size="2"></font><br/>
 									
 								</td>
@@ -519,7 +509,7 @@
 							<tr>
 								<td id="title">주소</td>
 								<td><input type="text" class="in_box" name="mAddress1" id="mAddress1" tabindex="8" readonly required /> 
-									<input type="button" value="주소검색" id="postcode_button" onclick="open_Postcode()"> <br>
+									<input type="button" class="btn2_3" value="주소검색" id="postcode_button" onclick="open_Postcode()"><br> 
 									<input type="text" class="in_box" name="mAddress2" id="mAddress2" placeholder="상세주소 입력해 주세요" required />
 								</td>
 							</tr>
@@ -542,8 +532,8 @@
 							</tr>
 						</table>
 						<div id="joinbnt">
-							<input type="button" id="btn_register" value="회원가입" /> 
-							<input type="button" value="취소" onclick="goLoginForm()">
+							<input type="button" class="btn2_3" id="btn_register" value="회원가입" /> 
+							<input type="button" class="btn2_3"value="취소" onclick="goLoginForm()">
 						</div>
 					</form>
 				</div>
