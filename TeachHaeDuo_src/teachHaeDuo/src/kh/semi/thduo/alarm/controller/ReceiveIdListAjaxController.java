@@ -56,6 +56,7 @@ public class ReceiveIdListAjaxController extends HttpServlet {
 			ArrayList<AlarmVo> result = new AlarmService().receiveIdList(mNickname);
 			System.out.println("리스트 결과:" + result);
 			request.getSession().setAttribute("nicknameList", result);
+			
 		}
 	}
 

@@ -1,14 +1,14 @@
 <%@page import="java.util.ArrayList"%>
 <%@page import="kh.semi.thduo.alarm.model.vo.AlarmVo"%>
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
 <div class="wrap header">
 	<header>
 		<div class="logo">
-			<a href="${pageContext.request.contextPath}/"> 
-				<img src="${pageContext.request.contextPath}/resources/icons/logo.jpg">
+			<a href="${pageContext.request.contextPath}/"> <img
+				src="${pageContext.request.contextPath}/resources/icons/logo.jpg">
 			</a>
 		</div>
 		<nav class="menu">
@@ -26,7 +26,7 @@
 						<li><p id="p_alarm">알람&nbsp;&nbsp;</p></li>
 						<li><a href="${pageContext.request.contextPath}/logout">로그아웃&nbsp;&nbsp;</a></li>
 						<!-- 관리자 로그인 시 처리할 부분 -->
-<%-- 						<c:if test="${ssMV.mId == 'admin'}">
+						<%-- 						<c:if test="${ssMV.mId == 'admin'}">
 							<li><a href="logout">관리자페이지&nbsp;&nbsp;</a></li>
 						</c:if> --%>
 						<li><a href="${pageContext.request.contextPath}/mypage">마이페이지</a></li>
@@ -40,64 +40,77 @@
 	</div>
 </div>
 <div id="alarm_modal" class="alarm_modal_overlay">
-        <div class="alarm_modal_window">
-            <div class="alarm_modal_title">
-               <img src="${pageContext.request.contextPath}/resources/icons/alarm_icon.png" width="30" height="30" style="margin-right:10px">
-                <p style="line-height:30px">알람</p>
-                <div class="alarm_modal_close">X</div>
-            </div>
-            <br>
-            <div style="display:flex">
-	            <div class="header_btn_div">
-		            <input type="radio" id="all_btn" name="header_btn" value="1" checked>
-		            <label for="all_btn" id="all_label" class="header_btn">전체 알람</label>
-		            <input type="radio" id="receive_btn" name="header_btn" value="2">
-		            <label for="receive_btn" id="receive_label" class="header_btn">받은 알람</label>
-		            <input type="radio" id="send_btn" name="header_btn" value="3">
-		            <label for="send_btn" id="send_label" class="header_btn">보낸 알람</label>
-	            </div>
-	            <div id="div_reply">
-            		<button class="btn2_3" type="button" id="btn_reply">답장하기</button>
-           		</div>
-            </div>
-            <div id="notice">
-            	<div style="float:right;">
-            		<p>*최근 30일 내역만 보여집니다.</p>
-            	</div>
-            </div>
-            <div class="alarm_modal_content" style="clear:both;">
-                
-            </div>
-            
-        </div>
-    </div>
-  <div id="send_modal" class="modal message">
-		<div class="message_content">
-			<p class="modal_title">쪽지 보내기</p>
-			 <% ArrayList<AlarmVo> idList = (ArrayList<AlarmVo>)request.getSession().getAttribute("nicknameList"); %>
-			<select id="sel_send_message" onchange="selectBoxChange(this.value);">
-			<option value="">받는 사람을 선택해주세요</option>
-			<%if(idList == null){ %>
-			<option value="">쪽지를 보낸 사람이 없습니다.</option>
-			<%} else { 
-					for(int i = 0 ; i < idList.size() ; i++){
-					AlarmVo id = idList.get(i);%>
-					<option value="<%= idList.get(i).getAlarm_sendid()%>"><%= idList.get(i).getAlarm_sendid()%></option>
-					<%} %>
-			<%} %>
-			</select>
-			<input type="hidden" name="alarm_receiveid" id="alarm_receiveid" value="">
-			<p class="message_notice">* 쪽지를 보낼 시, 연필이 500원 차감됩니다. *</p>
-			<div class="message_input">
-				
-				<textarea cols="35" rows="10" name="alarm_content" id="alarm_content" placeholder="쪽지 내용을 입력해주세요."></textarea>
+	<div class="alarm_modal_window">
+		<div class="alarm_modal_title">
+			<img
+				src="${pageContext.request.contextPath}/resources/icons/alarm_icon.png"
+				width="30" height="30" style="margin-right: 10px">
+			<p style="line-height: 30px">알람</p>
+			<div class="alarm_modal_close">X</div>
+		</div>
+		<br>
+		<div style="display: flex">
+			<div class="header_btn_div">
+				<input type="radio" id="all_btn" name="header_btn" value="1" checked>
+				<label for="all_btn" id="all_label" class="header_btn">전체 알람</label>
+				<input type="radio" id="receive_btn" name="header_btn" value="2">
+				<label for="receive_btn" id="receive_label" class="header_btn">받은
+					알람</label> <input type="radio" id="send_btn" name="header_btn" value="3">
+				<label for="send_btn" id="send_label" class="header_btn">보낸
+					알람</label>
 			</div>
-			<div class="message_send">
-				<button type="button" id="btn_message_cancel">취소</button>
-				<button type="button" id="btn_message_send">보내기</button>
+			<div id="div_reply">
+				<button class="btn2_3" type="button" id="btn_reply">답장하기</button>
 			</div>
 		</div>
+		<div id="notice">
+			<div style="float: right;">
+				<p>*최근 30일 내역만 보여집니다.</p>
+			</div>
+		</div>
+		<div class="alarm_modal_content" style="clear: both;"></div>
+
 	</div>
+</div>
+<div id="send_modal" class="modal message">
+	<div class="message_content">
+		<p class="modal_title">쪽지 보내기</p>
+		<%
+			ArrayList<AlarmVo> idList = (ArrayList<AlarmVo>) request.getSession().getAttribute("nicknameList");
+		%>
+		<select id="sel_send_message" onchange="selectBoxChange(this.value);">
+			<option value="">받는 사람을 선택해주세요</option>
+			<%
+				if (idList == null) {
+			%>
+			<option value="">쪽지를 보낸 사람이 없습니다.</option>
+			<%
+				} else {
+			for (int i = 0; i < idList.size(); i++) {
+				AlarmVo id = idList.get(i);
+			%>
+			<option value="<%=idList.get(i).getAlarm_sendid()%>"><%=idList.get(i).getAlarm_sendid()%></option>
+			<%
+				}
+			%>
+			<%
+				}
+			%>
+		</select> <input type="hidden" name="alarm_receiveid" id="alarm_receiveid"
+			value="">
+		<p class="message_notice">* 쪽지를 보낼 시, 연필이 500원 차감됩니다. *</p>
+		<div class="message_input">
+
+			<textarea cols="35" rows="10" name="alarm_content" id="alarm_content"
+				placeholder="쪽지 내용을 입력해주세요."></textarea>
+		</div>
+		<div class="message_send">
+			<button type="button" id="btn_message_cancel">취소</button>
+			<button type="button" id="btn_message_send">보내기</button>
+		</div>
+	</div>
+</div>
+
 <script>
 
 // 알람 창 클릭
@@ -139,18 +152,7 @@ $("#p_alarm").on("click", function() {
 		}
 	
 	}); 
-	$.ajax({
-		url: "receiveIdList.ax",
-		type: "post",
-		dataType:"json",
-		success: function(result){
-			console.log("아이디 리스트 나오냐");
-			console.log(result);
-		},
-		error: function(){
-			
-		}
-	});
+	
 		
 	
 	
@@ -284,7 +286,9 @@ $("input[name=header_btn]").click(function(){
 
 //답장하기 버튼 클릭 시 모달창 띄우기
 $("#btn_reply").on('click', function() {
+	console.log("답장하기 클릭");
 	$(".message").show();
+	
 });
 //취소 버튼 클릭 시 모달창 닫기
 $("#btn_message_cancel").on('click', function() {
@@ -348,4 +352,15 @@ var selectBoxChange = function(value){
 	$("#alarm_receiveid").val(value);
 	console.log($("#alarm_receiveid").val());
 }
+$.ajax({
+	url: "receiveIdList.ax",
+	type: "post",
+	dataType:"json",
+	success: function(result){
+	},
+	error: function(){
+		
+	}
+});
+
 </script>
