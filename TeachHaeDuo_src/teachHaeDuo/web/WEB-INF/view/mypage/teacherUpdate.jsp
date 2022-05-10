@@ -130,7 +130,7 @@
 						</label> <label for="student4"> <input name="student" type="checkbox"
 								id="student4" value="일반인">일반인
 						</label> <label for="student5"> <input name="student" type="checkbox"
-								id="student4" value="무관">무관
+								id="student5" value="무관">무관
 						</label></td>
 					</tr>
 					<tr id="language_tr1">
@@ -249,8 +249,10 @@
 		      			<label for="acti_area25"> <input type="checkbox" name="acti_area" id="acti_area25" value="중랑구">중랑구</label>   
 		            </div>
 				</div>
-				<button id="acti_area_select_btn" class="btn2_3" type="button">확인</button>
-				<button id="acti_area_select_reset" class="btn2_3" type="button">초기화</button>
+				<div id="div_acti_area_modal_btn">
+					<button id="acti_area_select_btn" class="btn2_3" type="button">확인</button>
+					<button id="acti_area_select_reset" class="btn2_3" type="button">초기화</button>
+				</div>
 			</div>		                                                         
 		</div>
 		<jsp:include page="../template_footer.jsp"></jsp:include>

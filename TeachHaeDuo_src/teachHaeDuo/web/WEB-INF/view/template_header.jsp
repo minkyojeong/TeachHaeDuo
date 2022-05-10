@@ -59,15 +59,16 @@
 				<label for="send_btn" id="send_label" class="header_btn">보낸
 					알람</label>
 			</div>
-			<div id="div_reply">
-				<button class="btn2_3" type="button" id="btn_reply">답장하기</button>
-			</div>
+			
 		</div>
 		<div id="notice">
 			<div style="float: right;">
 				<p>*최근 30일 내역만 보여집니다.</p>
 			</div>
 		</div>
+		<div id="div_reply">
+				<button class="btn2_3" type="button" id="btn_reply">답장하기</button>
+			</div>
 		<div class="alarm_modal_content" style="clear: both;"></div>
 
 	</div>

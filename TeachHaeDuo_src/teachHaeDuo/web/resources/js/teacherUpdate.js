@@ -6,7 +6,7 @@
  */
 $(function() {
 
-	// 교습 가능 지역
+	// 교습 가능 지역 모달창
 	$("#area_select").click(function() {
 		$("#acti_area_modal").show();
 	});
@@ -39,19 +39,10 @@ $(function() {
 					+ "</div>" + "<input type='hidden' name='activeArea' value='" + acti[i] + "'>")
 		}
 	});
+	$("#acti_area_select_reset").click(function(){
+		$("input[name=acti_area]").prop('checked',false);
+	});
 	
-	
-	$(".sel").change(
-		function() {
-			console.log($(".sel").val());
-			var selVal = $(".sel").val();
-			$("#active").append(
-				"<div class='active_div'>" + "<span class='active_span'>"
-				+ selVal + "</span>"
-				+ "</div>" + "<input type='hidden' name='activeArea' value='" + selVal + "'>")
-			var spantt = document.getElementsByClassName("active_span")
-			console.log(spantt);
-		});
 
 	// 활동지역 초기화
 	$("#area_reset").click(function() {
