@@ -104,4 +104,15 @@ public class AlarmService {
 
 		return result;
 	}
+	
+	// 받은 알람 아이디 리스트
+	public ArrayList<AlarmVo> receiveIdList(String mNickname) {
+
+		Connection conn = null;
+		conn = getConnection();
+		ArrayList<AlarmVo> idList = dao.receiveIdList(conn, mNickname);
+		close(conn);
+
+		return idList;
+	}
 }

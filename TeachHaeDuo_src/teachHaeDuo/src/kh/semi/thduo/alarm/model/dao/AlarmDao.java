@@ -214,6 +214,36 @@ public class AlarmDao {
 		}
 		return result;
 	}
+	
+	// 받은 알람 아이디 리스트
+	
+	public ArrayList<AlarmVo> receiveIdList(Connection conn, String mNickname){
+		ArrayList<AlarmVo> voList = null;
+		String sql = "select DISTINCT a.ALARM_sendID, a.alarm_receiveid from alarm a where alarm_receiveid = ? and alarm_date between (sysdate-30) and sysdate";
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, mNickname);
+			rs = pstmt.executeQuery();
+			
+			if(rs != null) {
+				voList = new ArrayList<AlarmVo>();
+				while(rs.next()) {
+					AlarmVo vo = new AlarmVo();
+					vo.setAlarm_sendid(rs.getString("alarm_sendid"));
+					vo.setAlarm_receiveid(rs.getString("alarm_receiveid"));
+					voList.add(vo);
+				}
+				
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		
+		return voList;
+	}
 }
 
 
