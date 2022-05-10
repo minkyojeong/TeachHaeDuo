@@ -148,7 +148,7 @@ label:hover{
 }
 
 /* 답장하기 모달창 */
-.modal {
+.header_modal {
     display: none;
     position: fixed;
     top: 0;
@@ -159,7 +159,7 @@ label:hover{
     background-color: rgba(0, 0, 0, 0.7);
     cursor: pointer;
 }
-.modal > .message_content {
+.header_modal > .header_message_content {
     position: relative;
     top: 100px;
     margin: auto;
@@ -170,39 +170,39 @@ label:hover{
     font-family: MinSans-Medium;
     cursor: default;
 }
-.modal_title {
+.header_modal_title {
     font-family: MinSans-Bold;
     color: #5e5e5e;
     font-size: 20px;
 }
-.message_content .message_notice{
+.header_message_content .header_message_notice{
     color: red;
     font-size: 13px;
     font-family: MinSans-Medium;
     margin-top: 10px;
     text-align: center;
 }
-.message_content .message_input {
+.header_message_content .header_message_input {
     margin-top: 20px;
 }
-.message_content .message_send {
+.header_message_content .header_message_send {
     margin-top: 10px;
 }
-.message_content .message_send button {
+.header_message_content .header_message_send button {
     background-color: transparent;
     font-family: MinSans-Medium;
     font-size: 15px;
 }
-.message_content #btn_message_cancel {
+.header_message_content #header_btn_message_cancel {
     color: #b8b6b6;
     border:none;
 }
-.message_content #btn_message_send {
+.header_message_content #header_btn_message_send {
     float: right;
     color: #82b185;
     border:none;
 }
-textarea#alarm_content {
+textarea#header_alarm_content {
     resize: none;
     font-family: MinSans-Medium;
     border: 1px #cccccc solid;

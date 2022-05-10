@@ -72,9 +72,9 @@
 
 	</div>
 </div>
-<div id="send_modal" class="modal message">
-	<div class="message_content">
-		<p class="modal_title">쪽지 보내기</p>
+<div id="send_modal" class="header_modal header_message">
+	<div class="header_message_content">
+		<p class="header_modal_title">쪽지 보내기</p>
 		<%
 			ArrayList<AlarmVo> idList = (ArrayList<AlarmVo>) request.getSession().getAttribute("nicknameList");
 		%>
@@ -96,17 +96,17 @@
 			<%
 				}
 			%>
-		</select> <input type="hidden" name="alarm_receiveid" id="alarm_receiveid"
+		</select> <input type="hidden" name="alarm_receiveid" id="header_alarm_receiveid"
 			value="">
-		<p class="message_notice">* 쪽지를 보낼 시, 연필이 500원 차감됩니다. *</p>
-		<div class="message_input">
+		<p class="header_message_notice">* 쪽지를 보낼 시, 연필이 500원 차감됩니다. *</p>
+		<div class="header_message_input">
 
-			<textarea cols="35" rows="10" name="alarm_content" id="alarm_content"
+			<textarea cols="35" rows="10" name="alarm_content" id="header_alarm_content"
 				placeholder="쪽지 내용을 입력해주세요."></textarea>
 		</div>
-		<div class="message_send">
-			<button type="button" id="btn_message_cancel">취소</button>
-			<button type="button" id="btn_message_send">보내기</button>
+		<div class="header_message_send">
+			<button type="button" id="header_btn_message_cancel">취소</button>
+			<button type="button" id="header_btn_message_send">보내기</button>
 		</div>
 	</div>
 </div>
@@ -287,27 +287,27 @@ $("input[name=header_btn]").click(function(){
 //답장하기 버튼 클릭 시 모달창 띄우기
 $("#btn_reply").on('click', function() {
 	console.log("답장하기 클릭");
-	$(".message").show();
+	$(".header_message").show();
 	
 });
 //취소 버튼 클릭 시 모달창 닫기
-$("#btn_message_cancel").on('click', function() {
-	$(".message").hide();
+$("#header_btn_message_cancel").on('click', function() {
+	$(".header_message").hide();
 });
 //모달창 띄우고 내용 있는 곳 부분 제외한 곳 누르면 모달창 닫기
-$(".message").on('click', function() {
-	if (event.target == $(".message").get(0)) {
-		$(".message").hide();
+$(".header_message").on('click', function() {
+	if (event.target == $(".header_message").get(0)) {
+		$(".header_message").hide();
 	}
 });
 //쪽지 보내기 버튼 클릭 시 처리 내용
-$("#btn_message_send").on('click', function() {
-	if ($("#alarm_content").val() == "") {
+$("#header_btn_message_send").on('click', function() {
+	if ($("#header_alarm_content").val() == "") {
 		alert("쪽지 내용을 입력해주세요. 내용을 입력해야 쪽지를 보낼 수 있습니다.");
-		$("#alarm_content").focus();
+		$("#header_alarm_content").focus();
 		return;
 	}
-	if($("#alarm_receiveid").val() == ""){
+	if($("#header_alarm_receiveid").val() == ""){
 		alert("받는 사람을 선택해주세요.");
 		return;
 	} 
@@ -315,18 +315,18 @@ $("#btn_message_send").on('click', function() {
 		url: "sendAlarm.ax",
 		type: "post",
 		data: {
-			alarm_receiveid: $("#alarm_receiveid").val(),
-			alarm_content: $("#alarm_content").val()
+			alarm_receiveid: $("#header_alarm_receiveid").val(),
+			alarm_content: $("#header_alarm_content").val()
 		},
 		success: function(result) {
 			console.log(result);
 			if (result == 1) {
 				alert("쪽지를 보냈습니다. 답장을 기다려주세요.");
-				$("#alarm_content").val("");
-				$(".message").hide();
+				$("#header_alarm_content").val("");
+				$(".header_message").hide();
 			} else if (result == -1) {
 				alert("쪽지가 보내지지 않았습니다. 다시 시도해주세요.");
-				$("#alarm_content").focus();
+				$("#header_alarm_content").focus();
 			} else if (result == 0) {
 				alert("로그인을 한 후에 쪽지 보내기가 가능합니다. 로그인 페이지로 이동합니다.");
 				location.href = "login";
@@ -340,17 +340,12 @@ $("#btn_message_send").on('click', function() {
 		}
 	});
 });
-send_modal.addEventListener("click", e => {
-	const evTarget = e.target
-	if (evTarget.classList.contains("message")) {
-		$("#send_modal").hide();
-	}
-});
+
 
 var selectBoxChange = function(value){
 	console.log("값변경돼");
-	$("#alarm_receiveid").val(value);
-	console.log($("#alarm_receiveid").val());
+	$("#header_alarm_receiveid").val(value);
+	console.log($("#header_alarm_receiveid").val());
 }
 $.ajax({
 	url: "receiveIdList.ax",
