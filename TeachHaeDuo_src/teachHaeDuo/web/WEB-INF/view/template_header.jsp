@@ -102,7 +102,7 @@
 		<div class="header_message_input">
 
 			<textarea cols="35" rows="10" name="alarm_content" id="header_alarm_content"
-				placeholder="쪽지 내용을 입력해주세요."></textarea>
+				maxlength="200" placeholder="쪽지 내용을 입력해주세요.(최대 한글 200자)"></textarea>
 		</div>
 		<div class="header_message_send">
 			<button type="button" id="header_btn_message_cancel">취소</button>
