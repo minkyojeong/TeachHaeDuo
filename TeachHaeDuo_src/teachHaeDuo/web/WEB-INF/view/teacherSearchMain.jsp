@@ -178,7 +178,7 @@
 		let online_yna; // Y, N, A, ""null 전체보기
 		let t_permit_yn; // Y, ""null 전체보기
 		let t_recruit_yn; // Y, ""null 전체보기
-		let object_list; // '국어', ""null 전체보기
+		let object_list = "${object}"; // '국어', ""null 전체보기
 		let area_list; // '강남', ""null 전체보기
 		let gender_fm; // 'M','F', ""null 전체보기
 		let liked; // 'Y' ""null전체보기
@@ -192,7 +192,7 @@
 		if (t_recruit_yn == undefined) {
 			t_recruit_yn = "";
 		}
-		if (object_list == undefined) {
+		if (object_list == undefined || object_list == "null") {
 			object_list = "";
 		}
 		if (area_list == undefined) {
@@ -242,12 +242,12 @@
 		});
 		$("#btn_like").on("click", function() {
 			if ($(this).hasClass("enabled")) {
-				$(this).html('<img src="${pageContext.request.contextPath}/resources/icons/like.png"><span class="btn_text">찜</span>');
+				$("#btn_like > img").attr("src", "${pageContext.request.contextPath}/resources/icons/like.png");
 				$(this).css({background : "#F3F4F6", color : "black"});
 				$(this).removeClass("enabled");
 				liked = "";
 			} else {
-				$(this).html('<img src="${pageContext.request.contextPath}/resources/icons/like_color.png"><span class="btn_text">찜</span>');
+				$("#btn_like > img").attr("src", "${pageContext.request.contextPath}/resources/icons/like_color.png");
 				$(this).css({background : "gray", color : "white"});
 				$(this).addClass("enabled");
 				liked = 'Y';
@@ -256,12 +256,12 @@
 						});
 		$("#btn_recruit").on("click", function() {
 			if ($(this).hasClass("enabled")) {
-				$(this).html('<img src="${pageContext.request.contextPath}/resources/icons/recruit.png"><span class="btn_text">모집중</span>');
+				$("#btn_recruit > img").attr("src", "${pageContext.request.contextPath}/resources/icons/recruit.png");
 				$(this).css({background : "#F3F4F6", color : "black"});
 				$(this).removeClass("enabled");
 				t_recruit_yn = "";
 			} else {
-				$(this).html('<img src="${pageContext.request.contextPath}/resources/icons/recruit_color.png"><span class="btn_text">모집중</span>');
+				$("#btn_recruit > img").attr("src", "${pageContext.request.contextPath}/resources/icons/recruit_color.png");
 				$(this).css({background : "gray",color : "white"});
 				$(this).addClass("enabled");
 				t_recruit_yn = 'Y';
@@ -284,12 +284,12 @@
 //		});
 		$("#btn_online").on("click", function() {
 			if ($(this).hasClass("enabled")) {
-				$(this).html('<img src="${pageContext.request.contextPath}/resources/icons/online.png"><span class="btn_text">온라인 교습</span>');
+				$("#btn_online > img").attr("src", "${pageContext.request.contextPath}/resources/icons/online.png");
 				$(this).css({background : "#F3F4F6", color : "black"});
 				$(this).removeClass("enabled");
 				online_yna = "";
 			} else {
-				$(this).html('<img src="${pageContext.request.contextPath}/resources/icons/online_white.png"><span class="btn_text">온라인 교습</span>');
+				$("#btn_online > img").attr("src", "${pageContext.request.contextPath}/resources/icons/online_white.png");
 				$(this).css({background : "gray", color : "white"});
 				$(this).addClass("enabled");
 				online_yna = 'Y';
@@ -298,12 +298,12 @@
 		});
 		$("#btn_offline").on("click", function() {
 			if ($(this).hasClass("enabled")) {
-				$(this).html('<img src="${pageContext.request.contextPath}/resources/icons/offline.png"><span class="btn_text">오프라인 교습</span>');
+				$("#btn_offline > img").attr("src", "${pageContext.request.contextPath}/resources/icons/offline.png");
 				$(this).css({background : "#F3F4F6", color : "black"});
 				$(this).removeClass("enabled");
 				online_yna = "";
 			} else {
-				$(this).html('<img src="${pageContext.request.contextPath}/resources/icons/offline_white.png"><span class="btn_text">오프라인 교습</span>');
+				$("#btn_offline > img").attr("src", "${pageContext.request.contextPath}/resources/icons/offline_white.png");
 				$(this).css({background : "gray", color : "white"});
 				$(this).addClass("enabled");
 				online_yna = 'N';

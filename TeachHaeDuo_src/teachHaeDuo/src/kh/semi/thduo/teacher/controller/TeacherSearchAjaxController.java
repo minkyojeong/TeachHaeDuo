@@ -14,6 +14,7 @@ import javax.servlet.http.HttpServletResponse;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
+import kh.semi.thduo.member.vo.MemberVo;
 import kh.semi.thduo.teacher.model.service.TeacherService;
 import kh.semi.thduo.teacher.model.vo.TeacherSearchSettingVo;
 import kh.semi.thduo.teacher.model.vo.TeacherVo;
@@ -49,7 +50,7 @@ public class TeacherSearchAjaxController extends HttpServlet {
 		System.out.println("teacherSearch.ax 실행");
 		
 		TeacherSearchSettingVo setVo = new TeacherSearchSettingVo();
-		String sNo = null; // 찜 기능을 원했을 경우에만 로그인한 sNo를 넣어줘야함.
+		String sNo = " ";
 		
 		String online_yna = request.getParameter("online_yna");  // Y, N, A, ""null 전체보기
 		String t_permit_yn = request.getParameter("t_permit_yn");   // Y, ""null 전체보기
@@ -58,6 +59,12 @@ public class TeacherSearchAjaxController extends HttpServlet {
 		String area_list = request.getParameter("area_list");   // '활동지역', ""null 전체보기
 		String gender_fm = request.getParameter("gender_fm");   // 'M','F', ""null 전체보기
 		String liked = request.getParameter("liked");    // 'Y' ""null전체보기
+		
+		MemberVo ssvo = (MemberVo) request.getSession().getAttribute("ssMV");
+		// 찜 기능을 원했을 경우, 로그인한 sNo를 넣어줌
+		if(liked.equals("Y") && ssvo != null && ssvo.getsNo() != null) {
+			sNo = ssvo.getsNo();
+		}
 		
 		setVo.setOnline_yna(online_yna);
 		setVo.setT_permit_yn(t_permit_yn);

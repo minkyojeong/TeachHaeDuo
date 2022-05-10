@@ -34,7 +34,8 @@ public class TeacherDao {
 	public ArrayList<TeacherVo> readAllTeacher(Connection conn) {
 		ArrayList<TeacherVo> retVolist = null;
 		String sql = "SELECT pro.t_no, pro.t_major, pro.t_picture, m.m_nickname, round(rscore.avg_rscore, 2) avg_rscore, olist.object_list, alist.area_list"
-				+ " FROM t_profile pro JOIN member m" + "                    ON pro.m_id = m.m_id"
+				+ " FROM t_profile pro JOIN member m" 
+				+ "                    ON pro.m_id = m.m_id"
 				+ "                    JOIN view_teacher_rscroe_avg rscore"
 				+ "                    ON rscore.m_nickname = m.m_nickname"
 				+ "                    JOIN view_teacher_object olist"
@@ -72,13 +73,15 @@ public class TeacherDao {
 	public ArrayList<TeacherVo> readTeacher(Connection conn, String object) {
 		ArrayList<TeacherVo> retVolist = null;
 		String sql = "SELECT pro.t_no, pro.t_major, pro.t_picture, m.m_nickname, round(rscore.avg_rscore, 2) avg_rscore, olist.object_list, alist.area_list"
-				+ " FROM t_profile pro JOIN member m" + "                    ON pro.m_id = m.m_id"
+				+ " FROM t_profile pro JOIN member m" 
+				+ "                    ON pro.m_id = m.m_id"
 				+ "                    JOIN view_teacher_rscroe_avg rscore"
 				+ "                    ON rscore.m_nickname = m.m_nickname"
 				+ "                    JOIN view_teacher_object olist"
 				+ "                    ON olist.m_nickname = m.m_nickname"
 				+ "                    JOIN view_teacher_area alist"
-				+ "                    ON alist.m_nickname = m.m_nickname" + " WHERE olist.object_list LIKE ?"
+				+ "                    ON alist.m_nickname = m.m_nickname" 
+				+ " WHERE olist.object_list LIKE ?"
 				+ " ORDER BY TO_NUMBER(SUBSTR(t_no, 2)) desc";
 
 		try {
@@ -133,12 +136,14 @@ public class TeacherDao {
 
 		String sql = "SELECT pro.t_no, pro.t_major, pro.t_picture, m.m_nickname, round(rscore.avg_rscore, 2) avg_rscore, olist.object_list, alist.area_list"
 				+ " FROM t_profile pro JOIN member m" // 띄어쓰기 꼭하기
-				+ "                    ON pro.m_id = m.m_id" + "                    JOIN view_teacher_rscroe_avg rscore"
+				+ "                    ON pro.m_id = m.m_id" 
+				+ "                    JOIN view_teacher_rscroe_avg rscore"
 				+ "                    ON rscore.m_nickname = m.m_nickname"
 				+ "                    JOIN view_teacher_object olist"
 				+ "                    ON olist.m_nickname = m.m_nickname"
 				+ "                    JOIN view_teacher_area alist"
-				+ "                    ON alist.m_nickname = m.m_nickname" + "                    WHERE  1=1 ";
+				+ "                    ON alist.m_nickname = m.m_nickname" 
+				+ "                    WHERE  1=1 ";
 		if (!area.equals("init") && !area.equals("")) {
 			sql += "					  and alist.area_list like '" + a + "'";
 		}
@@ -180,7 +185,8 @@ public class TeacherDao {
 		ArrayList<TeacherVo> retVolist = null;
 
 		String sql = " SELECT pro.t_no, pro.t_major, pro.t_picture, m.m_nickname, round(rscore.avg_rscore, 2) avg_rscore, olist.object_list, alist.area_list"
-				+ " FROM t_profile pro JOIN member m" + "				                    ON pro.m_id = m.m_id"
+				+ " FROM t_profile pro JOIN member m" 
+				+ "				                    ON pro.m_id = m.m_id"
 				+ "				                   JOIN view_teacher_rscroe_avg rscore"
 				+ "				                   ON rscore.m_nickname = m.m_nickname"
 				+ "				                    JOIN view_teacher_object olist"
@@ -189,7 +195,8 @@ public class TeacherDao {
 				+ "				                   ON alist.m_nickname = m.m_nickname"
 				+ "			                  WHERE  ONLINE_YNA ='Y'";
 		String sql2 = " SELECT pro.t_no, pro.t_major, pro.t_picture, m.m_nickname, round(rscore.avg_rscore, 2) avg_rscore, olist.object_list, alist.area_list"
-				+ " FROM t_profile pro JOIN member m" + "				                    ON pro.m_id = m.m_id"
+				+ " FROM t_profile pro JOIN member m" 
+				+ "				                    ON pro.m_id = m.m_id"
 				+ "				                   JOIN view_teacher_rscroe_avg rscore"
 				+ "				                   ON rscore.m_nickname = m.m_nickname"
 				+ "				                    JOIN view_teacher_object olist"
@@ -321,7 +328,8 @@ public class TeacherDao {
 				+ "    FROM t_profile pro JOIN member m ON  pro.m_id=m.m_id"
 				+ "    JOIN view_teacher_rscroe_avg rscore USING (m_nickname)"
 				+ "    JOIN view_teacher_object olist USING (m_nickname)"
-				+ "    JOIN view_teacher_area alist USING (m_nickname)" + "    WHERE  1=1 ";
+				+ "    JOIN view_teacher_area alist USING (m_nickname)" 
+				+ "    WHERE  1=1 ";
 //		if(setVo.getT_profile_yn() != null && !setVo.getT_permit_yn().equals("")) {
 //			sql+= "    AND pro.t_permit_yn = '"+setVo.getT_permit_yn()+"'";  // 통화허용
 //		}
@@ -346,7 +354,9 @@ public class TeacherDao {
 		if (setVo.getLiked().equals("Y") && setVo.getsNo() != null && !setVo.getsNo().equals("")) {
 			sql += "    AND pro.t_no IN (select t_no from dibs where s_no ='" + setVo.getsNo() + "')"; // 찜
 		}
+		sql += " ORDER BY TO_NUMBER(SUBSTR(t_no, 2)) desc"; // 선생님 최신순으로 정렬
 		System.out.println("sql: " + sql);
+		
 		try {
 			pstmt = conn.prepareStatement(sql);
 			rs = pstmt.executeQuery();
@@ -392,7 +402,6 @@ public class TeacherDao {
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, tNo);
 			rs = pstmt.executeQuery();
-//			private ArrayList<ReviewVo> tReview;
 
 			if (rs.next()) {
 				retVo = new TeacherVo();
@@ -430,8 +439,10 @@ public class TeacherDao {
 				rs = pstmt.executeQuery();
 				if (rs.next()) {
 					ArrayList<ReviewVo> reviewList = new ArrayList<ReviewVo>();
+					
 					do {
 						ReviewVo rvo = new ReviewVo();
+						
 						rvo.setT_r_no(rs.getInt("t_r_no"));
 						rvo.setT_no(rs.getString("t_no"));
 						rvo.setT_r_content(rs.getString("t_r_content"));
@@ -439,8 +450,10 @@ public class TeacherDao {
 						rvo.setT_r_score(rs.getInt("t_r_score"));
 						rvo.setT_r_writer(rs.getString("t_r_writer"));
 						rvo.setM_id(rs.getString("m_id"));
+						
 						reviewList.add(rvo);
 					} while (rs.next());
+					
 					retVo.setT_review(reviewList);
 				}
 			}
@@ -457,8 +470,10 @@ public class TeacherDao {
 	// 선생님 교습정보 수정
 	public int updateTeacher(Connection conn, TeacherVo tVo) {
 		int result = 0;
-		String sql = "update t_profile set t_major=? , online_yna=? , " + "t_tcnt=? , t_tprice=? , t_wantstud=? , "
-				+ "t_career=? , t_language=? , t_special=? , t_profile_yn='Y' , " + "t_intro=? where t_no=?";
+		String sql = "update t_profile set t_major=? , online_yna=? , " 
+				+ "t_tcnt=? , t_tprice=? , t_wantstud=? , "
+				+ "t_career=? , t_language=? , t_special=? , t_profile_yn='Y' , " 
+				+ "t_intro=? where t_no=?";
 
 		try {
 			pstmt = conn.prepareStatement(sql);
