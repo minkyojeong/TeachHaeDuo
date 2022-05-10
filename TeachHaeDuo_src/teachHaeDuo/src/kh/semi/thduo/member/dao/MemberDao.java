@@ -281,42 +281,34 @@ public class MemberDao {
 
 	// 회원 전체 읽기
 	public ArrayList<MemberVo> readAllMember(Connection conn) { 
-		ArrayList<MemberVo> retVolist = null; // 1. 리턴자료형으로 리턴변수 선언 + 초기값
-		// 2. sql문 작성 - 메소드 기능을 기반으로 - 개발초기라면 테이블명 (컬명, 컬명,..) values (값,...)
+		ArrayList<MemberVo> retVolist = null; 
 		String sql = "select * from member";
-		try { // 4. try-catch
-				// 3. pstmt/stmt 생성 - 2sql문 pstmt(?, 없는경우) / stmt(없는경우) 선택
+		try { 
 			pstmt = conn.prepareStatement(sql);
-			// 7. sql문에 채워줄 값들 채우기 - 2,3기반으로 ?확인. 컬럼자료형 pstmt.setXxx(1, 값); 주로 pstmt.setInt
-			// /setString / setDate /...
-			// 8. sql문 실행 - 2기반으로 메소드(executeUpdate / executeQuery)결정, 리턴변수(int / ResultSet)
-			// 결정
 			rs = pstmt.executeQuery();
-			// 9. 리턴변수의 자료형이 참조자료형이면 객체생성 (기본자료형x)
 			retVolist = new ArrayList<MemberVo>();
-			// 10. rs.next() - if / while -2sql문의 결과가 단일행이면 if / 결과가 여러행이면 while
 			while (rs.next()) {
-				// 11. 10-while + 1-<제너릭>-참조자료형 - 객체생성
 				MemberVo vo = new MemberVo();
-				// 12. rs.getXxx("컬럼라벨") -rs의 각컬럼에서 값 읽기 - 읽씹no - 11또는9변수넣어주기
-				vo.setmEmail(rs.getString("m_email"));
 				vo.setmId(rs.getString("m_Id"));
-				vo.setmNickname(rs.getString("m_NickName"));
 				vo.setmPw(rs.getString("m_pw"));
+				vo.setmName(rs.getString("M_NAME"));
+				vo.setmNickname(rs.getString("m_Nickname"));
+				vo.setmBirth(rs.getString("m_Birth"));
+				vo.setmAddress(rs.getString("m_Address"));			
 				vo.setmPhone(rs.getString("m_phone"));
-				// 13. 리턴변수에 값 넣기
-				// 목표 완료 - 리턴변수에 값 채움
+			    vo.setmEmail(rs.getNString("m_Email"));
+				vo.setGenderFm(rs.getNString("gender_Fm"));
+				vo.setRoleSt(rs.getString("role_St"));
+				vo.setmDate(rs.getTimestamp("m_Date"));
+				vo.setmAlarmYn(rs.getString("M_ALARM_YN"));
+				
 				retVolist.add(vo);
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
-		} finally { // 5. finally
-			// 6. 사용한 객체 close - 2sql문기반 rs(select경우), 3 stmt/pstmt - import close 메소드 추가
+		} finally { 
 			close(pstmt);
 		}
-		// result = 값; // 리턴변수에 결과값을 채우는 것이 메소드(함수)의 목표!!!
-		return retVolist; // 1. 리턴변수 값을 리턴함.
+		return retVolist;
 	}
-
-	
 }

@@ -73,7 +73,7 @@ public class MemberService {
 			return result;
 		}	
 		
-		//전체회원 조회 (관리자 회원전체 조회)
+		//회원 전체조회 (관리자 회원전체 조회)
 		public ArrayList<MemberVo> readAllMember() {
 			ArrayList<MemberVo> retVolist = null;
 			Connection conn = getConnection();
@@ -81,6 +81,7 @@ public class MemberService {
 			close(conn);
 			return retVolist;
 		}	
+		
 		//회원삭제 (관리자 강퇴)
 		public int deleteMember(String mId) {
 			System.out.println("회원탈퇴 service, 아이디: " + mId);
