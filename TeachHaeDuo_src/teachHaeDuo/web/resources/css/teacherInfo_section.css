@@ -141,6 +141,7 @@
 
 .review_list_content {
     clear: both;
+    padding-bottom: 15px;
 }
 
 .review_info span {
