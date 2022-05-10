@@ -35,7 +35,7 @@
 				<div class="report_input">
 					<p>신고 내용 입력</p>
 					<input type="hidden" name="m_r_receiveid" id="m_r_receiveid" value="${tvo.m_id}">
-					<textarea cols="35" rows="10" name="m_r_content" id="m_r_content" placeholder="신고 내용을 입력해주세요." required></textarea>
+					<textarea cols="35" rows="10" name="m_r_content" id="m_r_content" maxlength="3000" placeholder="신고 내용을 입력해주세요.(최대 2500자)" required></textarea>
 				</div>
 				<div class="report_send">
 					<button type="button" id="btn_report_cancel">취소</button>
@@ -50,7 +50,7 @@
 			<p class="message_notice">* 쪽지를 보낼 시, 연필이 500원 차감됩니다. *</p>
 			<div class="message_input">
 				<input type="hidden" name="alarm_receiveid" id="alarm_receiveid" value="${tvo.m_nickname}">
-				<textarea cols="35" rows="10" name="alarm_content" id="alarm_content" placeholder="쪽지 내용을 입력해주세요."></textarea>
+				<textarea cols="35" rows="10" name="alarm_content" id="alarm_content" maxlength="600" placeholder="쪽지 내용을 입력해주세요.(최대 500자)"></textarea>
 			</div>
 			<div class="message_send">
 				<button type="button" id="btn_message_cancel">취소</button>
@@ -73,7 +73,7 @@
 				</select>
 				<input type="hidden" name="alarm_receiveid" id="alarm_receiveid" value="${tvo.m_nickname}">
 				<input type="hidden" name="t_no" id="t_no" value="${tvo.t_no}">
-				<textarea cols="35" rows="10" name="t_r_content" id="t_r_content" placeholder="리뷰를 입력해주세요." required></textarea>
+				<textarea cols="35" rows="10" name="t_r_content" id="t_r_content" maxlength="300" placeholder="리뷰를 입력해주세요.(최대 200자)" required></textarea>
 			</div>
 			<div class="review_send">
 				<button type="button" id="btn_review_cancel">취소</button>
