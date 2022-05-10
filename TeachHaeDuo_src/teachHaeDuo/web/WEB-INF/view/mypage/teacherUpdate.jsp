@@ -54,7 +54,12 @@
 					<tr>
 						<td>교습 가능 지역<sup> *</sup></td>
 						<td>
-							<div style="display: flex">
+							<div>
+								<button id="area_select" class="btn2_3" type="button">지역 선택</button>
+								<button id="area_reset" class="btn2_3" type="button">선택 초기화</button>
+							</div>
+									                                                                  
+							<!-- <div style="display: flex">
 								<select class="sel">
 									<option value="">선택해주세요.</option>
 									<option value="강남구">강남구</option>
@@ -82,11 +87,7 @@
 									<option value="종로구">종로구</option>
 									<option value="중구">중구</option>
 									<option value="중랑구">중랑구</option>
-								</select> &nbsp;&nbsp;&nbsp;
-								<div>
-									<button id="area_reset" class="btn2_3" type="button">지역 초기화</button>
-								</div>
-							</div>
+								</select> &nbsp;&nbsp;&nbsp; -->
 						</td>
 					</tr>
 					<tr>
@@ -164,8 +165,97 @@
 				</div>
 			</form>
 		</div>
+		<div id="acti_area_modal" class="acti_area_modal_overlay">
+			<div class="acti_area_modal_window">
+				<div class="acti_area_modal_title">
+	                <img src="${pageContext.request.contextPath}/resources/icons/acti_area_map.png" width="30" height="30" style="margin-right:10px">
+	                <p style="line-height:30px">교습 가능 지역</p>
+	                <div class="acti_area_modal_close">X</div>
+	            </div>
+	            <div class="acti_area_modal_content acti_area_modal_container">
+		            <div class="item">
+		      			<label for="acti_area1"> <input type="checkbox" name="acti_area" id="acti_area1" value="강남구">강남구</label>     
+		            </div>
+		            <div class="item">
+		      			<label for="acti_area2"> <input type="checkbox" name="acti_area" id="acti_area2" value="강동구">강동구</label>   
+		            </div>
+		            <div class="item">
+		      			<label for="acti_area3"> <input type="checkbox" name="acti_area" id="acti_area3" value="강북구">강북구</label>  
+		            </div>
+		            <div class="item">
+		      			<label for="acti_area4"> <input type="checkbox" name="acti_area" id="acti_area4" value="강서구">강서구</label>     
+		            </div>
+		            <div class="item">
+		      			<label for="acti_area5"> <input type="checkbox" name="acti_area" id="acti_area5" value="관악구">관악구</label>   
+		            </div>
+		            <div class="item">
+		      			<label for="acti_area6"> <input type="checkbox" name="acti_area" id="acti_area6" value="광진구">광진구</label>     
+		            </div>
+		            <div class="item">
+		      			<label for="acti_area7"> <input type="checkbox" name="acti_area" id="acti_area7" value="구로구">구로구</label>     
+		            </div>
+		            <div class="item">
+		      			<label for="acti_area8"> <input type="checkbox" name="acti_area" id="acti_area8" value="금천구">금천구</label>     
+		            </div>
+		            <div class="item">
+		      			<label for="acti_area9"> <input type="checkbox" name="acti_area" id="acti_area9" value="노원구">노원구</label>     
+		            </div>
+		            <div class="item">
+		      			<label for="acti_area10"> <input type="checkbox" name="acti_area" id="acti_area10" value="도봉구">도봉구</label>     
+		            </div>
+		            <div class="item">
+		      			<label for="acti_area11"> <input type="checkbox" name="acti_area" id="acti_area11" value="동대문구">동대문구</label>     
+		            </div>
+		            <div class="item">
+		      			<label for="acti_area12"> <input type="checkbox" name="acti_area" id="acti_area12" value="동작구">동작구</label>     
+		            </div>
+		            <div class="item">
+		      			<label for="acti_area13"> <input type="checkbox" name="acti_area" id="acti_area13" value="마포구">마포구</label>    
+		            </div>
+		            <div class="item">
+		      			<label for="acti_area14"> <input type="checkbox" name="acti_area" id="acti_area14" value="서대문구">서대문구</label>    
+		            </div>
+		            <div class="item">
+		      			<label for="acti_area15"> <input type="checkbox" name="acti_area" id="acti_area15" value="서초구">서초구</label>     
+		            </div>
+		            <div class="item">
+		      			<label for="acti_area16"> <input type="checkbox" name="acti_area" id="acti_area16" value="성동구">성동구</label>    
+		            </div>
+		            <div class="item">
+		      			<label for="acti_area17"> <input type="checkbox" name="acti_area" id="acti_area17" value="성북구">성북구</label>     
+		            </div>
+		            <div class="item">
+		      			<label for="acti_area18"> <input type="checkbox" name="acti_area" id="acti_area18" value="송파구">송파구</label>    
+		            </div>
+		            <div class="item">
+		      			<label for="acti_area19"> <input type="checkbox" name="acti_area" id="acti_area19" value="양천구">양천구</label>   
+		            </div>
+		            <div class="item">
+		      			<label for="acti_area20"> <input type="checkbox" name="acti_area" id="acti_area20" value="영등포구">영등포구</label>   
+		            </div>
+		            <div class="item">
+		      			<label for="acti_area21"> <input type="checkbox" name="acti_area" id="acti_area21" value="용산구">용산구</label>     
+		            </div>
+		            <div class="item">
+		      			<label for="acti_area22"> <input type="checkbox" name="acti_area" id="acti_area22" value="은평구">은평구</label>   
+		            </div>
+		            <div class="item">
+		      			<label for="acti_area23"> <input type="checkbox" name="acti_area" id="acti_area23" value="종로구">종로구</label>   
+		            </div>
+		            <div class="item">
+		      			<label for="acti_area24"> <input type="checkbox" name="acti_area" id="acti_area24" value="중구">중구</label>  
+		            </div>
+		            <div class="item">
+		      			<label for="acti_area25"> <input type="checkbox" name="acti_area" id="acti_area25" value="중랑구">중랑구</label>   
+		            </div>
+				</div>
+				<button id="acti_area_select_btn" class="btn2_3" type="button">확인</button>
+				<button id="acti_area_select_reset" class="btn2_3" type="button">초기화</button>
+			</div>		                                                         
+		</div>
 		<jsp:include page="../template_footer.jsp"></jsp:include>
 	</div>
+	
 	<%
 		MemberVo ssMV = (MemberVo) request.getSession().getAttribute("ssMV");
 	%>

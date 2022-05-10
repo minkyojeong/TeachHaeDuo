@@ -5,7 +5,42 @@
  * 
  */
 $(function() {
-	// 활동 지역
+
+	// 교습 가능 지역
+	$("#area_select").click(function() {
+		$("#acti_area_modal").show();
+	});
+
+	$(".acti_area_modal_close").click(function() {
+		$("#acti_area_modal").hide();
+	});
+
+	acti_area_modal.addEventListener("click", e => {
+		const evTarget = e.target
+		if (evTarget.classList.contains("acti_area_modal_overlay")) {
+			$("#acti_area_modal").hide();
+		}
+	})
+	
+	$("#acti_area_select_btn").click(function() {
+		console.log("확인버튼 눌렀어");
+		$("#acti_area_modal").hide();
+		var acti = [];
+		$("input[name=acti_area]:checked").each(function(){
+			var chk = $(this).val();
+			console.log($(this).val());
+			acti.push(chk);
+			console.log("acti :" + acti);
+		});
+		for(i = 0 ; i < acti.length ; i++){
+			$("#active").append(
+					"<div class='active_div'>" + "<span class='active_span'>"
+					+ acti[i] + "</span>"
+					+ "</div>" + "<input type='hidden' name='activeArea' value='" + acti[i] + "'>")
+		}
+	});
+	
+	
 	$(".sel").change(
 		function() {
 			console.log($(".sel").val());
@@ -29,7 +64,7 @@ $(function() {
 		function() {
 			console.log("추가 버튼 눌렀어");
 			$("#language_tr1").after(
-				'<tr id="tr2" class="language_sel">' + '<td></td><td></td><td>'
+				'<tr id="tr2" class="language_sel">' + '<td></td><td>'
 				+ '<select name="language">'
 				+ '<option value="">선택해주세요.</option>'
 				+ '<option value="TOEIC">TOEIC</option>'
@@ -38,12 +73,17 @@ $(function() {
 				+ '<option value="JPT">JPT</option>'
 				+ '<option value="HSK">HSK</option></select>&nbsp;'
 				+ '<input type="text" name="score">'
-				);
+			);
 		});
 
 	$("#language_delete_btn").click(
-		function() { 
+		function() {
 			$(".language_sel").remove();
 		});
+
+
+
+
+
 
 });
