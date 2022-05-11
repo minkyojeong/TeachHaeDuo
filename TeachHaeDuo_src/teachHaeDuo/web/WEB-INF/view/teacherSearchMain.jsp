@@ -154,12 +154,42 @@
 				</section>
 				<!-- 페이징처리 -->
 				<div class="page_wrap">
+					<%-- 
 					<div class="page_nation">
 						<a class="arrow prev" href="#"><img src="${pageContext.request.contextPath}/resources/icons/page_prev.png"></a>
 						<a href="#" class="active">1</a> 
 						<a href="#">2</a> 
 						<a href="#">3</a>
 						<a class="arrow next" href="#"><img src="${pageContext.request.contextPath}/resources/icons/page_next.png"></a>
+					</div>
+					 --%>
+					<div class="page_nation">
+					<c:choose>
+						<c:when test="${startPage > 1}">
+							<input type="button" class="arrow prev btnPage" value="${startPage-1 }">
+							<img src="${pageContext.request.contextPath}/resources/icons/page_prev.png">
+						</c:when>
+						<c:otherwise>
+							<img src="${pageContext.request.contextPath}/resources/icons/page_prev.png">
+						</c:otherwise>
+					</c:choose>
+					<c:forEach var="i" begin="${startPage}" end="${endPage }">
+						<c:if test="${i == currentPage }">
+						<input type="button" class="active btnPage"  value="${i }">
+						</c:if>
+						<c:if test="${i != currentPage }">
+						<input type="button" class="btnPage"  value="${i }">
+						</c:if>
+					</c:forEach>
+					<c:choose>
+						<c:when test="${endPage > totalPageCnt}">
+							<input type="button" class="arrow next btnPage" value="${endPage+1 }">
+							<img src="${pageContext.request.contextPath}/resources/icons/page_next.png">
+						</c:when>
+						<c:otherwise>
+							<img src="${pageContext.request.contextPath}/resources/icons/page_next.png">
+						</c:otherwise>
+					</c:choose>
 					</div>
 				</div>
 			</div>
@@ -182,7 +212,8 @@
 		let area_list; // '강남', ""null 전체보기
 		let gender_fm; // 'M','F', ""null 전체보기
 		let liked; // 'Y' ""null전체보기
-
+		let page = 1; // '1'
+		
 		if (online_yna == undefined) {
 			online_yna = "";
 		}
@@ -215,20 +246,24 @@
 				} else if(object_list == '국어' || object_list == '수학' || object_list == '영어' || object_list == '사회' || object_list == '과학' || object_list == '기타'){
 					$(".object_name").text(object_list);
 				}
+				page = 1;
 				searchTeacher();
 			}
 		});
 		$("#btn_search").on("click", function() {
 			object_list = $("#object").val();
 			$(".object_name").text(object_list);
+			page = 1;
 			searchTeacher();
 		});
 		$("#gender").on("change", function() {
 			gender_fm = $("#gender").val();
+			page = 1;
 			searchTeacher();
 		});
 		$("#area_search").on("change", function() {
 			area_list = $("#area_search").val();
+			page = 1;
 			searchTeacher();
 		});
 		$(".main_teacher [type=radio]").on("change", function() {
@@ -238,34 +273,41 @@
 				$(".object_name").text("과목");
 				object_list = "";
 			}
+			page = 1;
 			searchTeacher();
 		});
 		$("#btn_like").on("click", function() {
 			if ($(this).hasClass("enabled")) {
-				$("#btn_like > img").attr("src", "${pageContext.request.contextPath}/resources/icons/like.png");
+				$(this).html('<img src="${pageContext.request.contextPath}/resources/icons/like.png"><span class="btn_text">찜</span>');
+				//$("#btn_like > img").attr("src", "${pageContext.request.contextPath}/resources/icons/like.png");
 				$(this).css({background : "#F3F4F6", color : "black"});
 				$(this).removeClass("enabled");
 				liked = "";
 			} else {
-				$("#btn_like > img").attr("src", "${pageContext.request.contextPath}/resources/icons/like_color.png");
+				$(this).html('<img src="${pageContext.request.contextPath}/resources/icons/like_color.png"><span class="btn_text">찜</span>');
+			//	$("#btn_like > img").attr("src", "${pageContext.request.contextPath}/resources/icons/like_color.png");
 				$(this).css({background : "gray", color : "white"});
 				$(this).addClass("enabled");
 				liked = 'Y';
 			}
+			page = 1;
 			searchTeacher();
-						});
+		});
 		$("#btn_recruit").on("click", function() {
 			if ($(this).hasClass("enabled")) {
-				$("#btn_recruit > img").attr("src", "${pageContext.request.contextPath}/resources/icons/recruit.png");
+				$(this).html('<img src="${pageContext.request.contextPath}/resources/icons/recruit.png"><span class="btn_text">모집중</span>');
+			//	$("#btn_recruit > img").attr("src", "${pageContext.request.contextPath}/resources/icons/recruit.png");
 				$(this).css({background : "#F3F4F6", color : "black"});
 				$(this).removeClass("enabled");
 				t_recruit_yn = "";
 			} else {
-				$("#btn_recruit > img").attr("src", "${pageContext.request.contextPath}/resources/icons/recruit_color.png");
+				$(this).html('<img src="${pageContext.request.contextPath}/resources/icons/recruit_color.png"><span class="btn_text">모집중</span>');
+			//	$("#btn_recruit > img").attr("src", "${pageContext.request.contextPath}/resources/icons/recruit_color.png");
 				$(this).css({background : "gray",color : "white"});
 				$(this).addClass("enabled");
 				t_recruit_yn = 'Y';
 			}
+			page = 1;
 			searchTeacher();
 		});
 //		$("#btn_call").on("click", function() {
@@ -284,32 +326,44 @@
 //		});
 		$("#btn_online").on("click", function() {
 			if ($(this).hasClass("enabled")) {
-				$("#btn_online > img").attr("src", "${pageContext.request.contextPath}/resources/icons/online.png");
+				$(this).html('<img src="${pageContext.request.contextPath}/resources/icons/online.png"><span class="btn_text">온라인 교습</span>');
+			//	$("#btn_online > img").attr("src", "${pageContext.request.contextPath}/resources/icons/online.png");
 				$(this).css({background : "#F3F4F6", color : "black"});
 				$(this).removeClass("enabled");
 				online_yna = "";
 			} else {
-				$("#btn_online > img").attr("src", "${pageContext.request.contextPath}/resources/icons/online_white.png");
+				$(this).html('<img src="${pageContext.request.contextPath}/resources/icons/online_white.png"><span class="btn_text">온라인 교습</span>');
+		//		$("#btn_online > img").attr("src", "${pageContext.request.contextPath}/resources/icons/online_white.png");
 				$(this).css({background : "gray", color : "white"});
 				$(this).addClass("enabled");
 				online_yna = 'Y';
 			}
+			page = 1;
 			searchTeacher();
 		});
 		$("#btn_offline").on("click", function() {
 			if ($(this).hasClass("enabled")) {
-				$("#btn_offline > img").attr("src", "${pageContext.request.contextPath}/resources/icons/offline.png");
+				$(this).html('<img src="${pageContext.request.contextPath}/resources/icons/offline.png"><span class="btn_text">오프라인 교습</span>');
 				$(this).css({background : "#F3F4F6", color : "black"});
 				$(this).removeClass("enabled");
 				online_yna = "";
 			} else {
-				$("#btn_offline > img").attr("src", "${pageContext.request.contextPath}/resources/icons/offline_white.png");
+				$(this).html('<img src="${pageContext.request.contextPath}/resources/icons/offline_white.png"><span class="btn_text">오프라인 교습</span>');
+			//	$("#btn_offline > img").attr("src", "${pageContext.request.contextPath}/resources/icons/offline_white.png");
 				$(this).css({background : "gray", color : "white"});
 				$(this).addClass("enabled");
 				online_yna = 'N';
 			}
+			page = 1;
 			searchTeacher();
 		});
+		$(".btnPage").click(btnPageClickHandler);
+		function btnPageClickHandler(){
+			console.log($(this));
+			page = $(this).val();
+			console.log("page 값: "+page);
+			searchTeacher();
+		}
 		function searchTeacher() {
 			//console.log(this);
 			var objSearchVal = {
@@ -319,7 +373,8 @@
 				object_list : object_list,
 				area_list : area_list,
 				gender_fm : gender_fm,
-				liked : liked
+				liked : liked,
+				page: page
 			};
 			console.log(objSearchVal);
 			// ajax
@@ -332,6 +387,11 @@
 					console.log(resultMap); // 맵 형태로 가져와서 수정함.
 					var result = resultMap.retVolist;
 					var searchSetVo = resultMap.searchSetVo;
+					var startPage = resultMap.startPage;
+					var endPage = resultMap.endPage;
+					var totalPageCnt = resultMap.totalPageCnt;
+					var currentPage = resultMap.currentPage;
+					
 					setOption(searchSetVo);
 
 					$("#content1").html(""); // 텅비움. 열리고 닫히는 태그 사이 
@@ -360,6 +420,36 @@
 						htmlVal += '     </div>';
 
 						$("#content1").html(htmlVal); // 채움. 열리고 닫히는 태그 사이 
+						
+						var htmlPageVal = "";
+						//htmlPageVal +='<div class="page_nation">';
+					if(startPage > 1){
+						htmlPageVal +='<input type="button" class="arrow prev btnPage" value="'+(startPage-1)+'">';
+						htmlPageVal +='<img src="${pageContext.request.contextPath}/resources/icons/page_prev.png">';
+					}else {
+						htmlPageVal +='<img src="${pageContext.request.contextPath}/resources/icons/page_prev.png">';
+					}
+										
+					for(var i=startPage; i<=endPage; i++){
+						if(i == currentPage){
+							htmlPageVal +='<input type="button" class="active btnPage"  value="'+i+'">';
+						} else {
+							htmlPageVal +='<input type="button" class="btnPage"  value="'+i+'">';
+						}
+					}
+					if(endPage < totalPageCnt){
+						htmlPageVal +='<input type="button" class="arrow next btnPage" value="'+(Number(endPage)+1)+'" >';
+						htmlPageVal +='<img src="${pageContext.request.contextPath}/resources/icons/page_next.png">';
+					} else {
+						htmlPageVal +='<img src="${pageContext.request.contextPath}/resources/icons/page_next.png">';
+					}
+						//htmlPageVal +='</div>';
+						$(".page_nation").html(htmlPageVal); // 
+						
+						// 많이중요!!!
+						$(".btnPage").click(btnPageClickHandler);
+						
+						
 					} else {
 						htmlVal = "<h1 class='nothing'>해당되는 선생님이 없습니다.</h1>";
 						
