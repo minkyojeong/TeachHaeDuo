@@ -45,6 +45,7 @@
 			<div class="write" onclick = "location.href='BoardWrite'">
 				<a href="BoardWriteController" id="question">질문하기</a>
 			</div>
+			<div>
 			<c:forEach items="${boardList }" var="vo">
 				<dl class="board_list" style="cursor:pointer;" onClick = " location.href='BoardRead?bno=${vo.getbNo()}' " onMouseOver = " indow.status = '' " onMouseOut = " window.status = '' ">
 					<dt><a>${vo.getbCategory()}</a></dt>
@@ -64,13 +65,13 @@
 		</div>
 		<p>
 			<c:if test="${    startPage    >    1    }">
-			<a href="boardlist?page=${startPage-1 }">이전</a>&nbsp;&nbsp;&nbsp;&nbsp;
+			<a href="BoardList?page=${startPage-1 }">이전</a>&nbsp;&nbsp;&nbsp;&nbsp;
 			</c:if>
 			<c:forEach begin="${startPage }" end="${endPage }" var="p">
-				<a href="boardlist?page=${p }">${p }</a>&nbsp;&nbsp;&nbsp;&nbsp;
+				<a href="BoardList?page=${p }">${p }</a>&nbsp;&nbsp;&nbsp;&nbsp;
 			</c:forEach>
 			<c:if test="${endPage < totalPageCnt }">
-			<a href="boardlist?page=${endPage+1 }">다음</a>
+			<a href="BoardList?page=${endPage+1 }">다음</a>
 			</c:if>
 		</p>
 	</div>

@@ -2,6 +2,7 @@
     pageEncoding="UTF-8"%>
     <link href="<%=request.getContextPath()%>/resources/css/header.css"
 	rel="stylesheet" type="text/css">
+	<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -276,7 +277,7 @@ margin:10px;
                     </div>
                 </div>
                 </c:forEach>
-                <c:forEach items="${vo }" var="vo">
+                <c:forEach items="${ vo }" var="vo">
                 <div id="cs_box_n">
                     <div class="cs_n_title">
                       <p style="padding:10px;float:right;">${vo.getNoticeContent()}</p>
