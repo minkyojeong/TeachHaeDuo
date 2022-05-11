@@ -23,14 +23,13 @@ public class MemberService {
 		public int insertMember(MemberVo vo) {
 			int result = 0;
 			Connection conn = getConnection();
-			try {
-				conn.setAutoCommit(false);
+			setAutocommit(conn, false);
 				
 		
 				result = dao.insertMember(conn, vo);
 				if (result < 1) {
-					conn.rollback();
-					conn.close();
+					rollback(conn);
+					close(conn);
 					return 0;
 				}
 				
@@ -51,8 +50,8 @@ public class MemberService {
 					result = new StudentService().insertStudent(sVo);
 				
 					if (result < 1) {
-						conn.rollback();	
-						conn.close();
+						rollback(conn);	
+						close(conn);
 						return 0;
 					}
 				}if (vo.getRoleSt().equals("T")) {
@@ -68,14 +67,9 @@ public class MemberService {
 					*/
 				}
 			
-				conn.commit();
-			} catch (SQLException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}finally {
+				commit(conn);
 				close(conn);
-			}
-			
+
 			return result;
 		}
 	
