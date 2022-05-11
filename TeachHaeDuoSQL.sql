@@ -1,4 +1,4 @@
-DROP TABLE "CS_NOTICE" CASCADE CONSTRAINTS;
+ DROP TABLE "CS_NOTICE" CASCADE CONSTRAINTS;
 DROP TABLE "CS_FAQ" CASCADE CONSTRAINTS;
 DROP TABLE "ADMIN" CASCADE CONSTRAINTS;
 DROP TABLE "ACTI_AREA" CASCADE CONSTRAINTS;
@@ -450,6 +450,14 @@ INSERT INTO member(M_ID, M_PW, M_NAME, M_NICKNAME, M_BIRTH, M_ADDRESS, M_PHONE,M
 INSERT INTO member(M_ID, M_PW, M_NAME, M_NICKNAME, M_BIRTH, M_ADDRESS, M_PHONE,M_EMAIL,GENDER_FM,ROLE_ST,M_DATE) VALUES('j12345','j12345678','신사랑','사회1타강사','930102','서울시 중구 충무로3가','010-2449-8899','jjj@gmail.com','F','T',default);
 INSERT INTO member(M_ID, M_PW, M_NAME, M_NICKNAME, M_BIRTH, M_ADDRESS, M_PHONE,M_EMAIL,GENDER_FM,ROLE_ST,M_DATE) VALUES('k12345','k12345678','정인하','방가방가','880105','서울시 종로구 팔판동 33-2','010-5345-7428','kkk@gmail.com','F','T',default);
 INSERT INTO member(M_ID, M_PW, M_NAME, M_NICKNAME, M_BIRTH, M_ADDRESS, M_PHONE,M_EMAIL,GENDER_FM,ROLE_ST,M_DATE) VALUES('m12345','m12345678','장민우','초코송이','950505','서울시 은평구 응암3동','010-2222-3333','mmm@gmail.com','M','T',default);
+INSERT INTO member(M_ID, M_PW, M_NAME, M_NICKNAME, M_BIRTH, M_ADDRESS, M_PHONE,M_EMAIL,GENDER_FM,ROLE_ST,M_DATE) VALUES('n12345','n12345678','김인하','호빵','830407','서울특별시 용산구 한남동','010-1111-1234','nnn@naver.com','F','T',default);
+INSERT INTO member(M_ID, M_PW, M_NAME, M_NICKNAME, M_BIRTH, M_ADDRESS, M_PHONE,M_EMAIL,GENDER_FM,ROLE_ST,M_DATE) VALUES('o12345','o12345678','한동원','자상한선생님','950512','서울특별시 구로구 구로동','010-1111-5678','ooo@naver.com','M','T',default);
+INSERT INTO member(M_ID, M_PW, M_NAME, M_NICKNAME, M_BIRTH, M_ADDRESS, M_PHONE,M_EMAIL,GENDER_FM,ROLE_ST,M_DATE) VALUES('p12345','p12345678','이소안','제니쌤','960324','서울특별시 양천구 목동','010-2222-1234','ppp@naver.com','F','T',default);
+INSERT INTO member(M_ID, M_PW, M_NAME, M_NICKNAME, M_BIRTH, M_ADDRESS, M_PHONE,M_EMAIL,GENDER_FM,ROLE_ST,M_DATE) VALUES('q12345','q12345678','박수안','과학코칭고수','921208','서울특별시 은평구 역촌동','010-2222-5678','qqq@gmail.com','F','T',default);
+INSERT INTO member(M_ID, M_PW, M_NAME, M_NICKNAME, M_BIRTH, M_ADDRESS, M_PHONE,M_EMAIL,GENDER_FM,ROLE_ST,M_DATE) VALUES('r12345','r12345678','김도현','고등문과전문쌤','880928','서울특별시 강서구 가양1동','010-3333-1234','rrr@gmail.com','M','T',default);
+INSERT INTO member(M_ID, M_PW, M_NAME, M_NICKNAME, M_BIRTH, M_ADDRESS, M_PHONE,M_EMAIL,GENDER_FM,ROLE_ST,M_DATE) VALUES('s12345','s12345678','정근희','제이크','871010','서울특별시 성동구 행당2동','010-3333-5678','sss@gmail.com','M','T',default);
+INSERT INTO member(M_ID, M_PW, M_NAME, M_NICKNAME, M_BIRTH, M_ADDRESS, M_PHONE,M_EMAIL,GENDER_FM,ROLE_ST,M_DATE) VALUES('t12345','t12345678','박명구','서울대영어국어','980508','서울특별시 동작구 흑석동','010-4444-1234','ttt@gmail.com','M','T',default);
+INSERT INTO member(M_ID, M_PW, M_NAME, M_NICKNAME, M_BIRTH, M_ADDRESS, M_PHONE,M_EMAIL,GENDER_FM,ROLE_ST,M_DATE) VALUES('u12345','u12345678','오재현','사과','710717','서울특별시 동대문구 장안동','010-4444-5678','uuu@gmail.com','M','T',default);
 
 -- 학생 정보 삽입
 INSERT INTO MEMBER_STUDENT VALUES('S1', 'a12345');
@@ -501,6 +509,14 @@ INSERT INTO t_profile VALUES('T7', '서강대학교 컴퓨터공학전공 졸업
 INSERT INTO t_profile VALUES('T8', '서강대학교 중국문화전공 졸업', 'A','협의가능','협의가능', default, default, '토익 930,HSK6급', default, default, 'N', null, 'j12345', '제대로 된 문해력, 경력 7년의 현실감각 충만한 과외 장담합니다.', 'Y');
 INSERT INTO t_profile VALUES('T9', ' 홍익대학교 국어교육과 졸업', 'A', '협의가능', '협의가능', default, '10년이상', '토익 900', default, default, 'Y', null, 'k12345', '코칭으로 학습과 성적을 책임지겠습니다.', 'N');
 INSERT INTO t_profile VALUES('T10', ' 연세대학교 철학과 졸업', 'N', '주 2회', '월 45만원', default, default, '토익 930', default, default, 'N', null, 'm12345', '중하위권을 중상위권으로!', 'Y');
+INSERT INTO t_profile VALUES('T11', '서울대학교 영어영문학 졸업', 'N', '주 1회', '월 38만원', default, default, 'TOEIC 955, TOEFL 102, TEPS 860', default, default, 'N', null, 'n12345', '영어 시행착오 더이상 겪지 않도록 확실하게 가르칩니다.', 'Y');
+INSERT INTO t_profile VALUES('T12', '성균관대학교 인공지능전공 재학', 'Y', '협의가능', '상담 후 결정', default, default, default, default, default, 'Y', null, 'o12345', '기초부터 심화까지 차근차근', 'N');
+INSERT INTO t_profile VALUES('T13', '토론토대학교 사회학/인사관리(복수전공) 졸업', 'A', '주 1-2회', '월 40만원', default, default, default, default, default, 'Y', null, 'p12345', '해당 과목에 대한 자신감 찾아드립니다.', 'Y');
+INSERT INTO t_profile VALUES('T14', '서울대학교 약학대학 재학', 'N', '주 3회', '월 50만원', default, '1년이상', default, default, default, 'Y', null, 'q12345', '필수과목 수업가능', 'Y');
+INSERT INTO t_profile VALUES('T15', '충남대학교 경영학과 졸업', 'A', '협의가능', '상담 후 결정', default, '15년이상', default, default, default, 'Y', null, 'r12345', '과외 및 학원경력 15년 이상. 확실하게 과외받을 학생만 모십니다.', 'Y');
+INSERT INTO t_profile VALUES('T16', '숭실대학교 영어영문 졸업', 'N', '주 1회', '월 35만원', default, '2년이상', '토익 980, TEPS 850', default, default, 'Y', null, 's12345', '빠르게 성적올리고 싶으신 분들 연락바랍니다', 'Y');
+INSERT INTO t_profile VALUES('T17', '서울대학교 의류학과 졸업', 'Y', '주 2회', '월 55만원', '학생/직장인', '2년이상', default, default, default, 'Y', null, 't12345', '국어/영어/비즈니스 영어회화 확실하게.', 'Y');
+INSERT INTO t_profile VALUES('T18', '이화여자대학교 경영학부 졸업', 'Y','협의가능','협의가능', '중-고등학생', '3년', '토익 930, HSK6급', default, default, 'Y', null, 'u12345', '영어전문선생님입니다. 중학생, 고등학생 성적향상 전문입니다.', 'Y');
 
 -- 선생님 담당 과목 삽입
 INSERT INTO teach_object VALUES('OB2', 'T1');
@@ -523,6 +539,27 @@ INSERT INTO teach_object VALUES('OB3', 'T9');
 INSERT INTO teach_object VALUES('OB1', 'T10');
 INSERT INTO teach_object VALUES('OB3', 'T10');
 INSERT INTO teach_object VALUES('OB4', 'T10');
+INSERT INTO teach_object VALUES('OB1', 'T11');
+INSERT INTO teach_object VALUES('OB3', 'T11');
+INSERT INTO teach_object VALUES('OB2', 'T12');
+INSERT INTO teach_object VALUES('OB5', 'T12');
+INSERT INTO teach_object VALUES('OB6', 'T12');
+INSERT INTO teach_object VALUES('OB2', 'T13');
+INSERT INTO teach_object VALUES('OB3', 'T13');
+INSERT INTO teach_object VALUES('OB4', 'T13');
+INSERT INTO teach_object VALUES('OB2', 'T14');
+INSERT INTO teach_object VALUES('OB5', 'T14');
+INSERT INTO teach_object VALUES('OB1', 'T15');
+INSERT INTO teach_object VALUES('OB3', 'T15');
+INSERT INTO teach_object VALUES('OB3', 'T16');
+INSERT INTO teach_object VALUES('OB4', 'T17');
+INSERT INTO teach_object VALUES('OB6', 'T17');
+INSERT INTO teach_object VALUES('OB1', 'T18');
+INSERT INTO teach_object VALUES('OB3', 'T18');
+INSERT INTO teach_object VALUES('OB1', 'T10');
+INSERT INTO teach_object VALUES('OB3', 'T10');
+INSERT INTO teach_object VALUES('OB6', 'T10');
+
 
 -- 선생님 활동 지역 삽입
 INSERT INTO acti_area VALUES('T1', 'A1');
@@ -552,7 +589,33 @@ INSERT INTO acti_area VALUES('T9', 'A13');
 INSERT INTO acti_area VALUES('T10', 'A22');
 INSERT INTO acti_area VALUES('T10', 'A18');
 INSERT INTO acti_area VALUES('T10', 'A19');
+INSERT INTO acti_area VALUES('T11', 'A21');
+INSERT INTO acti_area VALUES('T11', 'A12');
+INSERT INTO acti_area VALUES('T11', 'A14');
+INSERT INTO acti_area VALUES('T12', 'A10');
+INSERT INTO acti_area VALUES('T12', 'A7');
+INSERT INTO acti_area VALUES('T12', 'A8');
+INSERT INTO acti_area VALUES('T12', 'A5');
+INSERT INTO acti_area VALUES('T12', 'A6');
+INSERT INTO acti_area VALUES('T13', 'A19');
+INSERT INTO acti_area VALUES('T13', 'A20');
+INSERT INTO acti_area VALUES('T13', 'A18');
+INSERT INTO acti_area VALUES('T14', 'A22');
+INSERT INTO acti_area VALUES('T14', 'A21');
+INSERT INTO acti_area VALUES('T15', 'A4');
+INSERT INTO acti_area VALUES('T15', 'A2');
+INSERT INTO acti_area VALUES('T14', 'A21');
+INSERT INTO acti_area VALUES('T16', 'A4');
+INSERT INTO acti_area VALUES('T16', 'A17');
+INSERT INTO acti_area VALUES('T16', 'A14');
+INSERT INTO acti_area VALUES('T17', 'A12');
+INSERT INTO acti_area VALUES('T17', 'A11');
+INSERT INTO acti_area VALUES('T17', 'A10');
+INSERT INTO acti_area VALUES('T18', 'A11');
+INSERT INTO acti_area VALUES('T18', 'A13');
+INSERT INTO acti_area VALUES('T18', 'A10');
 
+SELECT * FROM T_PROFILE;
 -- 선생님 리뷰 삽입
 INSERT INTO t_review VALUES (1, 'T1', '친절하고 자세하게 알려주세요!', DEFAULT, 5, '홍기', 'a12345');
 INSERT INTO t_review VALUES (2, 'T2', '좋습니다.', DEFAULT, 3, '민호', 'b12345');
