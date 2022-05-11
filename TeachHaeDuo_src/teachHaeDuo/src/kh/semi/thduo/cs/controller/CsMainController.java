@@ -32,7 +32,6 @@ public class CsMainController extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		response.getWriter().append("Served at: ").append(request.getContextPath());
 		ArrayList<CsVo> csvo = new CsService().csFaqList();
 		ArrayList<CsVo> vo = new CsService().csNoticeList();
 		request.setAttribute("csvo", csvo);

@@ -14,7 +14,7 @@ import kh.semi.thduo.member.vo.MemberVo;
 /**
  * Servlet implementation class CsFaqWriteDoController
  */
-@WebServlet("/CsFaqWriteDoController")
+@WebServlet("/CsFaqWriteDo")
 public class CsFaqWriteDoController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
@@ -37,9 +37,12 @@ public class CsFaqWriteDoController extends HttpServlet {
 				response.sendRedirect("login");
 			}else {
 				String adminid = null;
-				new CsService().csFaqWrite(question, answer, adminid);
-				response.sendRedirect("CsMain");
-				
+				int result = new CsService().csFaqWrite(question, answer, adminid);
+				if(result<1) {
+					System.out.println("null-error");
+				}else {
+					request.getRequestDispatcher("CsMain").forward(request, response);
+				}
 			}
 			
 		

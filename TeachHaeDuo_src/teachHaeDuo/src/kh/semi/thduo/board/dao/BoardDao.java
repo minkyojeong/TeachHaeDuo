@@ -81,6 +81,7 @@ public class BoardDao {
 			e.printStackTrace();
 		}finally {
 			close(pstmt);
+			close(conn);
 		}
 		return boardList;
 	}
@@ -402,5 +403,83 @@ public class BoardDao {
 		}
 		return boardList;
 		}
+	
+	public ArrayList<BoardReportVo> boardReportList(Connection conn){
+		ArrayList<BoardReportVo> reportList = null;
+		String sql = "select * from board_report";
+		try {
+			pstmt = conn.prepareStatement(sql);
+		rs = pstmt.executeQuery();
+		reportList = new ArrayList<BoardReportVo>();
+		while(rs.next()) {
+			BoardReportVo vo = new BoardReportVo();
+			vo.setbNo(rs.getString("b_no"));
+			vo.setbRCategory(rs.getString("b_r_category"));
+			vo.setbRNo(rs.getString("b_r_no"));
+			vo.setbRWriteDate(rs.getString("b_r_write_date"));
+			vo.setbRWriter(rs.getString("b_r_writer"));
+			reportList.add(vo);
+		}
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+			close(conn);
+			
+		}
+		return reportList;
+	}
+	public ArrayList<BoardReportVo> boardReportList(Connection conn, int startRnum, int entRnum){
+		ArrayList<BoardReportVo> reportList = null;
+		String sql = "select * from" 
+				+"(select rownum r, t1.* from" 
+				+"(select b1.*" 
+				+"from board_report b1 order by b_r_write_date desc, b_no desc) t1)"
+				+"where r between ? and ?";
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, startRnum);
+			pstmt.setInt(2, entRnum);
+			rs = pstmt.executeQuery();
+		if(rs!=null) {
+			reportList = new ArrayList<BoardReportVo>();
+		while(rs.next()) {
+			BoardReportVo vo = new BoardReportVo();
+			vo.setbRNo(rs.getString("b_r_no"));
+			vo.setbNo(rs.getString("b_no"));
+			vo.setbRCategory(rs.getString("b_r_category"));
+			vo.setbRWriter(rs.getString("b_r_writer"));
+			vo.setbRWriteDate(rs.getString("b_r_write_date"));
+			reportList.add(vo);
+				}
+			}
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+			close(conn);
+			
+		}
+		return reportList;
+	}
+	public int reportCount(Connection conn) {
+		int count = 0;
+		String sql = "select count(*) from board_report";
+		try {
+			pstmt = conn.prepareStatement(sql);
+			rs = pstmt.executeQuery();
+			if(rs.next()) {
+				
+				count = rs.getInt(1);
+			}
+		}catch(SQLException e){
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+			close(conn);
+		}
+		
+		return count;
+	}
 	
 }

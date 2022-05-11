@@ -3,12 +3,12 @@ package kh.semi.thduo.board.service;
 import static kh.semi.thduo.common.jdbc.JdbcTemplate.close;
 import static kh.semi.thduo.common.jdbc.JdbcTemplate.getConnection;
 
-
 import java.sql.Connection;
 import java.util.ArrayList;
 
 import kh.semi.thduo.board.dao.BoardDao;
 import kh.semi.thduo.board.vo.BoardReCommentVo;
+import kh.semi.thduo.board.vo.BoardReportVo;
 import kh.semi.thduo.board.vo.BoardVo;
 
 public class BoardService {
@@ -28,6 +28,20 @@ public class BoardService {
 		Connection conn = null;
 		conn = getConnection();
 		boardList = dao.boardSearchTt(conn, bContent);
+		close(conn);
+		return boardList;
+	}
+	public ArrayList<BoardReportVo> boardReportList(){
+		ArrayList<BoardReportVo> boardList = null;
+		Connection conn = getConnection();
+		boardList = dao.boardReportList(conn);
+		close(conn);
+		return boardList;
+	}
+	public ArrayList<BoardReportVo> boardReportList(int startRnum, int entRnum){
+		ArrayList<BoardReportVo> boardList = null;
+		Connection conn = getConnection();
+		boardList = dao.boardReportList(conn,startRnum, entRnum);
 		close(conn);
 		return boardList;
 	}
@@ -130,6 +144,13 @@ public class BoardService {
 		Connection conn=null;
 		conn = getConnection();
 		int result = dao.boardCount(conn);
+		close(conn);
+		return result;
+	}
+	public int reportCount() {
+		Connection conn=null;
+		conn = getConnection();
+		int result = dao.reportCount(conn);
 		close(conn);
 		return result;
 	}

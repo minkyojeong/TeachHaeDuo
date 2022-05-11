@@ -33,7 +33,7 @@ public class CsNoticeWriteController extends HttpServlet {
 		if(ssvo == null)  {  
 			response.sendRedirect("login");
 		}else {
-			response.sendRedirect("WEB-INF/view/Cs/CsNoticeWrite.jsp");
+			request.getRequestDispatcher("WEB-INF/view/Cs/CsFaqWrite.jsp").forward(request, response);
 		}
 	}
 

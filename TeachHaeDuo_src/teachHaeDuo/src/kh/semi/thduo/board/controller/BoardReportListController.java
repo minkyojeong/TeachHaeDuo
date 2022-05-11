@@ -1,4 +1,4 @@
-  package kh.semi.thduo.board.controller;
+package kh.semi.thduo.board.controller;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -10,19 +10,20 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import kh.semi.thduo.board.service.BoardService;
+import kh.semi.thduo.board.vo.BoardReportVo;
 import kh.semi.thduo.board.vo.BoardVo;
 
 /**
- * Servlet implementation class BoardListController
+ * Servlet implementation class BoardReportListController
  */
-@WebServlet("/BoardList")
-public class BoardListController extends HttpServlet {
+@WebServlet("/BoardReportList")
+public class BoardReportListController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public BoardListController() {
+    public BoardReportListController() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -32,7 +33,7 @@ public class BoardListController extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		int currentPage = 1;
+int currentPage = 1;
 		
 		String currentPageStr = request.getParameter("page");
 		System.out.println(currentPageStr);
@@ -50,7 +51,7 @@ public class BoardListController extends HttpServlet {
 		int entRnum=0;
 		
 		int totalCnt = 0; // 총 글 수
-		totalCnt = new BoardService().boardCount();
+		totalCnt = new BoardService().reportCount();
 		
 		System.out.println("총"+totalCnt);
 		// select count(*) from board
@@ -77,15 +78,13 @@ public class BoardListController extends HttpServlet {
 		}
 		System.out.println("rnum:"+ startRnum +"~"+entRnum);
 		
-		ArrayList<BoardVo> boardList = new BoardService().boardList(startRnum, entRnum);
-		System.out.println(boardList);
-		
-		request.setAttribute("boardList", boardList);
+		ArrayList<BoardReportVo> reportList = new BoardService().boardReportList(startRnum, entRnum);
+		request.setAttribute("reportList", reportList);
 		request.setAttribute("startPage", startPage);
 		request.setAttribute("endPage", endPage);
 		request.setAttribute("currentPage", currentPage);
 		request.setAttribute("totalPageCnt", totalPageCnt);
-		request.getRequestDispatcher("WEB-INF/view/Board/BoardList.jsp").forward(request, response);
+		request.getRequestDispatcher("WEB-INF/view/Board/BoardReportList.jsp").forward(request, response);
 	}
 
 	/**
@@ -93,27 +92,7 @@ public class BoardListController extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		
-		String bContent = request.getParameter("boardSearch");
-		String select = request.getParameter("boardOption");
-		String option1 = request.getParameter("select1");
-		String option2 = request.getParameter("select2");
-		String option3 = request.getParameter("select3");
-		if(select == option1) {
-			ArrayList<BoardVo> boardList = new BoardService().boardSearchTt(bContent);
-			request.setAttribute("boardList", boardList);
-			request.getRequestDispatcher("WEB-INF/view/Board/BoardList.jsp").forward(request, response);;
-		}
-		else if(select == option2) {
-			ArrayList<BoardVo> boardList = new BoardService().boardSearchCt(bContent);
-			request.setAttribute("boardList", boardList);
-			request.getRequestDispatcher("WEB-INF/view/Board/BoardList.jsp").forward(request, response);;
-		}else if(select == option3){
-			ArrayList<BoardVo> boardList = new BoardService().boardSearchWt(bContent);
-			request.setAttribute("boardList", boardList);
-			request.getRequestDispatcher("WEB-INF/view/Board/BoardList.jsp").forward(request, response);;
-		}
-
+		doGet(request, response);
 	}
 
 }

@@ -37,11 +37,13 @@ public class CsNoticeWriteDoController extends HttpServlet {
 			response.sendRedirect("login");
 		}else {
 			String adminid = null;
-			new CsService().csNoticeWrite(title, content, adminid);
-			response.sendRedirect("CsMain");
-			
+			int result = new CsService().csNoticeWrite(title, content, adminid);
+			if(result<1) {
+				System.out.println("null-error");
+			}else {
+				request.getRequestDispatcher("CsMain").forward(request, response);
+			}
 		}
-		
 	
 	}
 
