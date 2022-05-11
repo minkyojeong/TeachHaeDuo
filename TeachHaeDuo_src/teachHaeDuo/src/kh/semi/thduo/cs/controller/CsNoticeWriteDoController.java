@@ -7,10 +7,13 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import kh.semi.thduo.cs.service.CsService;
+import kh.semi.thduo.member.vo.MemberVo;
+
 /**
  * Servlet implementation class CsNoticeWriteDoController
  */
-@WebServlet("/CsNoticeWriteDoController")
+@WebServlet("/CsNoticeWriteDo")
 public class CsNoticeWriteDoController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
@@ -27,7 +30,19 @@ public class CsNoticeWriteDoController extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		response.getWriter().append("Served at: ").append(request.getContextPath());
+		String title = request.getParameter("cs_q_q");
+		String content = request.getParameter("cs_q_a");
+	/*	관리자 아이디가 되야됌 */	MemberVo ssvo = (MemberVo)request.getSession().getAttribute("ssMV");
+		if(ssvo == null)  {  
+			response.sendRedirect("login");
+		}else {
+			String adminid = null;
+			new CsService().csNoticeWrite(title, content, adminid);
+			response.sendRedirect("CsMain");
+			
+		}
+		
+	
 	}
 
 	/**

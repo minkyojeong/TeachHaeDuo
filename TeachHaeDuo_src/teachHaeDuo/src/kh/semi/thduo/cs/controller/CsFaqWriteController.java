@@ -7,6 +7,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import kh.semi.thduo.member.vo.MemberVo;
+
 /**
  * Servlet implementation class CsFaqWriteController
  */
@@ -27,7 +29,12 @@ public class CsFaqWriteController extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		response.getWriter().append("Served at: ").append(request.getContextPath());
+		MemberVo ssvo = (MemberVo)request.getSession().getAttribute("ssMV");
+		if(ssvo == null)  {  
+			response.sendRedirect("login");
+		}else {
+			response.sendRedirect("WEB-INF/view/Cs/CsFaqWrite.jsp");
+		}
 	}
 
 	/**

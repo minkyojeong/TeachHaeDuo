@@ -215,7 +215,7 @@ height:30px;
             </div>
             
             <div class="cs_body">
-            <form action="CsFaqWrite" method="get">
+            <form action="CsFaqWriteDo" method="get">
                 <div id="cs_box_q">
                     <div class="cs_q">
                         <textarea name="cs_q_q"class="cs_q_q" placeholder="질문 작성"></textarea>
@@ -224,7 +224,7 @@ height:30px;
                         <textarea name="cs_q_a" class="cs_q_a"placeholder="답변 작성"></textarea>
                     </div>
                 </div>
-                <button id="bt1"type="submit" onclick="location.href='CsFaqWrite'">글 등록</button>
+                <button id="bt1"type="submit" onclick="location.href='CsFaqWriteDo'">글 등록</button>
                 <button id="bt2"type="submit" onclick="location.href='CsMain'">취소</button>
                 </form>
             </div>

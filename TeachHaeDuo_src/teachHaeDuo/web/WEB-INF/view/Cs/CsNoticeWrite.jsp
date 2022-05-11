@@ -1,56 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-    <link href="<%=request.getContextPath()%>/resources/css/header.css"
-	rel="stylesheet" type="text/css">
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
-    <script>
-        $(function(){
-         $('#cs_box_n').hide();
-         $('#cs_box_q').hide();
-         $('#cs_box_email').hide();
-         $('#questionBoard').hide();
-         $('#questionBoard1').hide();
-        })
-        $(document).ready(function() {
-     $('#cs_select_option').change(function() {
-       var result = $('#cs_select_option option:selected').val();
-       if (result == 'option1') {
-         $('#cs_box_q').show();
-         $('#questionBoard').show();
-       } else {
-         $('#cs_box_q').hide();
-         $('#questionBoard').hide();
-       }
-     }); 
-   }); 
-      $(document).ready(function() {
-        $('#cs_select_option').change(function() {
-       var result = $('#cs_select_option option:selected').val();
-       if (result == 'option2') {
-         $('#cs_box_n').show();
-         $('#questionBoard1').show();
-       } else {
-         $('#cs_box_n').hide();
-         $('#questionBoard1').hide();
-       }
-     }); 
-   }); 
-   $(document).ready(function() {
-        $('#cs_select_option').change(function() {
-       var result = $('#cs_select_option option:selected').val();
-       if (result == 'option3') {
-         $('#cs_box_email').show();
-       } else {
-         $('#cs_box_email').hide();
-       }
-     }); 
-   }); 
-       </script>
+ 
     <style>
         html, body, div, span, applet, object, iframe,
 h1, h2, h3, h4, h5, h6, p, blockquote, pre,
@@ -206,16 +162,6 @@ font-size: 20px;
 #question:hover{
 	text-decoration-line:underline;
 }
-#question1{
-float:left;
-text-decoration-line: none;
-color: black;
-padding: 20px;
-font-size: 20px;
-}
-#question1:hover{
-	text-decoration-line:underline;
-}
 .write>a{
 
 }
@@ -239,64 +185,48 @@ margin:10px;
 .bt:hover{
 	background:rgb(220,220,220);
 }
+textarea{
+margin-top:35px;
+	width:950px;
+	height:100px;
+}
+#bt1{
+margin-top:20px;
+margin-left:480px;
+width:60px;
+height:30px;
+}
+#bt2{
+margin-top:20px;
+margin-left:10px;
+width:60px;
+height:30px;
+}
     </style>
 </head>
 <body>
 	 <div class="cs_container">
-	 <jsp:include page="../template_header.jsp"></jsp:include>
         <div class="cs_section">
             <div class="cs_body_all">
             <div class="cs_title">
                 <h1>고객센터</h1>
             </div>
             <div class="cs_select">
-                <select id="cs_select_option">
-                    <option value="option4">카테고리 선택</option>
-                    <option value="option1">자주 묻는 질문</option>
-                    <option value="option2">공지사항</option>
-                    <option value="option3">1대1 문의</option>
-                </select>
             </div>
-            <div class="write" id="questionBoard" onclick = "location.href='CsFaqWrite'">
-				<a href="CsFaqWrite" id="question">자주묻는 질문 글 쓰기</a>
-			</div>
-			<div class="write" id="questionBoard1" onclick = "location.href='CsNoticeWrite'">
-				<a href="CsNoticeWrite" id="question1">공지사항 글 쓰기</a>
-			</div>
+            
             <div class="cs_body">
-            <button type="button" class="bt" onclick="location.href='CsFaqDelete'">삭제</button>
-            	<c:forEach items="${csvo }" var="vo">
+            <form action="CsFaqWrite" method="get">
                 <div id="cs_box_q">
                     <div class="cs_q">
-                        <p class="cs_q_q">${vo.getFaqQuestion()}</p>
-                      
+                        <textarea name="cs_q_q"class="cs_q_q" placeholder="제목 작성"></textarea>
                     </div>
-                    <div class="cs_a">
-                        <p class="cs_q_a">${vo.getFaqAnswer()}</p>
-                    </div>
-                </div>
-                </c:forEach>
-                <c:forEach items="${vo }" var="vo">
-                <div id="cs_box_n">
-                    <div class="cs_n_title">
-                      <p style="padding:10px;float:right;">${vo.getNoticeContent()}</p>
-                    </div>
-                    <div class="cs_n">
-                        <p class="cs_n_n"></p>
+                     <div class="cs_a">
+                        <textarea name="cs_q_a" class="cs_q_a"placeholder="공지사항 작성"></textarea>
                     </div>
                 </div>
-                </c:forEach>
-                <div id="cs_box_email">
-                    <div id="cs_e">
-                    <br><br><br><br>
-                        <p>1 대 1 문의사항은 아래의 이메일로 보내주시면</p><br><br>
-                        <p>성실하게 답변 드리겠습니다</p><br><br>
-                        <a href="mailto:ig476363@gmail.com">ig476363@gmail.com</a>
-                      
-                    </div>
-                </div>
-                
-
+                <button id="bt1"type="submit" onclick="location.href='CsNoticeWriteDo'">글 등록</button>
+                <button id="bt2"type="submit" onclick="location.href='CsMain'">취소</button>
+                </form>
             </div>
         </div>
         </div>

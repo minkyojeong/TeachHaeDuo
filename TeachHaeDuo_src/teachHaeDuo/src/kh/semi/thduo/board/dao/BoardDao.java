@@ -49,6 +49,60 @@ public class BoardDao {
 		}
 		return boardList;
 	}
+	public ArrayList<BoardVo> boardList(Connection conn, int startRnum, int endRnum) {
+		ArrayList<BoardVo> boardList = null;
+		String sql = "select * from" 
+				+"(select rownum r, t1.* from" 
+				+"(select b1.*" 
+				+"from q_board b1 order by b_write_date desc, b_no desc) t1)"
+				+"where r between ? and ?";
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, startRnum);
+			pstmt.setInt(2, endRnum);
+			rs = pstmt.executeQuery();
+			
+			if(rs!=null) {
+			boardList = new ArrayList<BoardVo>();
+			while(rs.next()) {
+				BoardVo vo = new BoardVo();
+				vo.setbNo(rs.getString("b_no"));
+				vo.setbCategory(rs.getString("b_category"));
+				vo.setbTitle(rs.getString("b_title"));
+				vo.setbContent(rs.getString("b_content"));
+				vo.setbWriter(rs.getString("b_writer"));
+				vo.setbWriteDate(rs.getString("b_write_date"));
+				vo.setbCnt(rs.getString("b_cnt"));
+				vo.setmId(rs.getString("m_id"));
+				boardList.add(vo);
+			}
+			}
+		}catch(SQLException e){
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}
+		return boardList;
+	}
+	public int boardCount(Connection conn) {
+		int count = 0;
+		String sql = "select count(*) from q_board";
+		try {
+			pstmt = conn.prepareStatement(sql);
+			rs = pstmt.executeQuery();
+			if(rs.next()) {
+				
+				count = rs.getInt(1);
+			}
+		}catch(SQLException e){
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+			close(conn);
+		}
+		
+		return count;
+	}
 	
 	public int boardReCommentWrite(Connection conn, String bNo, String rContent, String rWriter) {
 		int result = 0;
@@ -267,5 +321,86 @@ public class BoardDao {
 		}
 		return vo; // 1 : 리턴함
 	}
+	public ArrayList<BoardVo> boardSearchCt(Connection conn, String bContent) {
+		ArrayList<BoardVo> boardList = null;
+		String sql = "select * from q_board where b_content like %?%";
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, bContent);
+			rs = pstmt.executeQuery();
+			boardList = new ArrayList<BoardVo>();
+			while(rs.next()) {
+				BoardVo vo = new BoardVo();
+				vo.setbNo(rs.getString("b_no"));
+				vo.setbCategory(rs.getString("b_category"));
+				vo.setbTitle(rs.getString("b_title"));
+				vo.setbContent(rs.getString("b_content"));
+				vo.setbWriter(rs.getString("b_writer"));
+				vo.setbWriteDate(rs.getString("b_write_date"));
+				vo.setbCnt(rs.getString("b_cnt"));
+				vo.setmId(rs.getString("m_id"));
+				boardList.add(vo);
+			}
+		}catch(SQLException e){
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}
+		return boardList;
+		}
+	public ArrayList<BoardVo> boardSearchTt(Connection conn, String bContent) {
+		ArrayList<BoardVo> boardList = null;
+		String sql = "select * from q_board where b_title like %?%";
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, bContent);
+			rs = pstmt.executeQuery();
+			boardList = new ArrayList<BoardVo>();
+			while(rs.next()) {
+				BoardVo vo = new BoardVo();
+				vo.setbNo(rs.getString("b_no"));
+				vo.setbCategory(rs.getString("b_category"));
+				vo.setbTitle(rs.getString("b_title"));
+				vo.setbContent(rs.getString("b_content"));
+				vo.setbWriter(rs.getString("b_writer"));
+				vo.setbWriteDate(rs.getString("b_write_date"));
+				vo.setbCnt(rs.getString("b_cnt"));
+				vo.setmId(rs.getString("m_id"));
+				boardList.add(vo);
+			}
+		}catch(SQLException e){
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}
+		return boardList;
+		}
+	public ArrayList<BoardVo> boardSearchWt(Connection conn, String bContent) {
+		ArrayList<BoardVo> boardList = null;
+		String sql = "select * from q_board where b_writer like %?%";
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, bContent);
+			rs = pstmt.executeQuery();
+			boardList = new ArrayList<BoardVo>();
+			while(rs.next()) {
+				BoardVo vo = new BoardVo();
+				vo.setbNo(rs.getString("b_no"));
+				vo.setbCategory(rs.getString("b_category"));
+				vo.setbTitle(rs.getString("b_title"));
+				vo.setbContent(rs.getString("b_content"));
+				vo.setbWriter(rs.getString("b_writer"));
+				vo.setbWriteDate(rs.getString("b_write_date"));
+				vo.setbCnt(rs.getString("b_cnt"));
+				vo.setmId(rs.getString("m_id"));
+				boardList.add(vo);
+			}
+		}catch(SQLException e){
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}
+		return boardList;
+		}
 	
 }

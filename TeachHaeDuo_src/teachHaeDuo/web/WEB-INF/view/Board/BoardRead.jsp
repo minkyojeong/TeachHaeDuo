@@ -4,6 +4,12 @@
 <%@ page import="java.util.ArrayList" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<link href="<%=request.getContextPath()%>/resources/css/header.css"
+rel="stylesheet" type="text/css">
+<link href="<%=request.getContextPath()%>/resources/css/footer.css" rel="stylesheet" type="text/css">
+<link href="<%=request.getContextPath()%>/resources/css/font.css" rel="stylesheet" type="text/css">
+<link href="<%=request.getContextPath()%>/resources/css/reset.css" rel="stylesheet" type="text/css">
+<link href="<%=request.getContextPath()%>/resources/css/boardread.css" rel="stylesheet" type="text/css">
 <!DOCTYPE html>
 <html>
 <head>
@@ -30,218 +36,6 @@ $(function btn2(){
 	})
 });
 </script>
-<style>
-html, body, div, span, applet, object, iframe,
-h1, h2, h3, h4, h5, h6, p, blockquote, pre,
-a, abbr, acronym, address, big, cite, code,
-del, dfn, em, img, ins, kbd, q, s, samp,
-small, strike, strong, sub, sup, tt, var,
-b, u, i, center,
-dl, dt, dd, ol, ul, li,
-fieldset, form, label, legend,
-table, caption, tbody, tfoot, thead, tr, th, td,
-article, aside, canvas, details, embed, 
-figure, figcaption, footer, header, hgroup, 
-menu, nav, output, ruby, section, summary,
-time, mark, audio, video {
-	margin: 0;
-	padding: 0;
-	border: 0;
-	font-size: 100%;
-	font: inherit;
-	vertical-align: baseline;
-}
-/* HTML5 display-role reset for older browsers */
-article, aside, details, figcaption, figure, 
-footer, header, hgroup, menu, nav, section {
-	display: block;
-}
-body {
-	line-height: 1;
-}
-ol, ul {
-	list-style: none;
-}
-blockquote, q {
-	quotes: none;
-}
-blockquote:before, blockquote:after,
-q:before, q:after {
-	content: '';
-	content: none;
-}
-table {
-	border-collapse: collapse;
-	border-spacing: 0;
-}
-.container{
-width:100%;
-height:100%;
-text-align:center;
-}
-.wrap{
-display:inline-block;
-width:800px;
-height:700px;
-border: 1px solid rgb(174,174,174);
-border-radius:5px;
-margin-top:50px;
-margin-bottom:30px;
-}
-.profile{
-width:700px;
-height:100px;
-}
-#profile_img>img{
-width:50px;
-height:50px;
-}
-#profile_img{
-margin-right:30px;
-float:left;
-}
-.content{
-width:700px;
-height:500px;
-}
-.recomment{
-width:700px;
-height:200px;
-text-align:center;
-display:inline-block;
-border-bottom: 1px solid rgb(174,174,174);
-
-}
-#modal>button{
-width:50px;
-height:25px;
-}
-.recomment>form>input{
-border: 1px solid rgb(174,174,174);
-border-radius:5px;
-width:700px;
-height:100px;
-display:inline-block;
-
-}
-.recomment>form{
-margin-top:30px;
-margin-bottom:30px;
-}
-.recomment>form>button{
-float:right;
-margin:10px;
-}
-dt{
- 	font-size:20px;
-	width:800px;
-	height:50px;
-	border-bottom: 1px solid rgb(174,174,174);
-	border-radius: 5px;
-	margin-bottom:10px;
-	text-align:left;
-	position:relative;
-}
-dt>a{
-position: absolute;
-top:15px;
-left:10px;
-}
-.wrap_wrap{
-display:inline-block;
-width:700px;
-height:100%;
-text-align:left;
-margin-top:30px;
-
-}
-.wrap_recomment{
-display:inline-block;
-text-align:center;
-width:800px;
-height:700px;
-border: 1px solid rgb(174,174,174);
-border-radius:5px;
-margin-bottom:30px;
-
-}
-#title{
-margin-bottom:10px;
-}
-#writed{
-float:left;
-}
-#title{
-font-size:23px;
-font-weight:600;
-}
-#cnt{
-float:right;
-font-size:20px;
-font-weight:400;
-
-}
-#bno{
-float:right;
-font-size:20px;
-font-weight:400;
-margin-right:10px;
-}
-.wrap_container{
-display:inline-block;
-width:800px;
-position:relative;
-}
-#report{
-float:right;
-}
-#modal{	
-display:none;
-border: 1px solid rgb(174,174,174);
-border-radius:5px;
-width:200px;
-top:35%;
-height:100px;
-left:45%;
-text-align:center;
-position:fixed;
-background:rgb(220,220,220);
-
-
-}
-.modalwindow{
-margin-top:25px;
-width:200px;
-height:50px;
-display:inline-block;
-text-align:center;
-}
-.modalwindow>a{
-margin-bottom:10px;
-}
-#btn1{
-
-}
-#btn2{
-
-}
-.rread{
-	width:700px;
-height:100px;
-text-align:center;
-display:inline-block;
-border-bottom: 1px solid rgb(174,174,174);
-
-}
-.rread>table{
-margin-top:40px;
-	width:700px;
-	text-align:center;
-}
-.rread>table>tr{
-margin-top:10px;
-}
-</style>
 </head>
 <body>
 
@@ -257,6 +51,7 @@ ArrayList<BoardReCommentVo> rvolist = (ArrayList<BoardReCommentVo>)request.getAt
 			if(vo!=null){
 		%>
 <div class="container">
+<jsp:include page="../template_header.jsp"></jsp:include>
 <div class="wrap_container">
 	<div id="modal">
 		<div class="modalwindow">
@@ -265,7 +60,7 @@ ArrayList<BoardReCommentVo> rvolist = (ArrayList<BoardReCommentVo>)request.getAt
 			<button type="button" id="btn2" onclick="javascript:btn2()">취소</button>
 		</div>
 	</div>
-	<div class="wrap">
+	<div class="wrap_read">
 	<dt><a><%= vo.getbCategory() %></a></dt>
 	<div class="wrap_wrap">
 		<div class="profile">
@@ -319,6 +114,7 @@ ArrayList<BoardReCommentVo> rvolist = (ArrayList<BoardReCommentVo>)request.getAt
 			%>
 	</div>
 	</div>
+	<jsp:include page="../template_footer.jsp"></jsp:include>
 </div>
 <%
 			}

@@ -3,6 +3,7 @@ package kh.semi.thduo.board.service;
 import static kh.semi.thduo.common.jdbc.JdbcTemplate.close;
 import static kh.semi.thduo.common.jdbc.JdbcTemplate.getConnection;
 
+
 import java.sql.Connection;
 import java.util.ArrayList;
 
@@ -21,6 +22,37 @@ public class BoardService {
 		boardList = dao.boardList(conn);
 		close(conn);
 		return boardList;
+	}
+	public ArrayList<BoardVo> boardSearchTt(String bContent){
+		ArrayList<BoardVo> boardList = null;
+		Connection conn = null;
+		conn = getConnection();
+		boardList = dao.boardSearchTt(conn, bContent);
+		close(conn);
+		return boardList;
+	}
+	public ArrayList<BoardVo> boardSearchCt(String bContent){
+		ArrayList<BoardVo> boardList = null;
+		Connection conn = null;
+		conn = getConnection();
+		boardList = dao.boardSearchCt(conn, bContent);
+		close(conn);
+		return boardList;
+	}
+	public ArrayList<BoardVo> boardSearchWt(String bContent){
+		ArrayList<BoardVo> boardList = null;
+		Connection conn = null;
+		conn = getConnection();
+		boardList = dao.boardSearchWt(conn, bContent);
+		close(conn);
+		return boardList;
+	}
+	public ArrayList<BoardVo> boardList(int startRnum, int endRnum){
+		Connection conn=null;
+		conn = getConnection();
+		ArrayList<BoardVo> result = dao.boardList(conn, startRnum, endRnum);
+		close(conn);
+		return result;
 	}
 	public ArrayList<BoardReCommentVo> boardReCommentRead(String bNo){
 		Connection conn=null;
@@ -91,6 +123,13 @@ public class BoardService {
 		Connection conn = null;
 		conn = getConnection();
 		BoardVo result = dao.boardModify(conn,bNo);
+		close(conn);
+		return result;
+	}
+	public int boardCount() {
+		Connection conn=null;
+		conn = getConnection();
+		int result = dao.boardCount(conn);
 		close(conn);
 		return result;
 	}
