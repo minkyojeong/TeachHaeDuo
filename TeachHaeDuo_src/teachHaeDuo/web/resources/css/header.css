@@ -20,6 +20,20 @@ header .menu li{
 header .menu li > a {
     color: black;
 }
+header .menu li > a:hover {
+    color: #c0c0c0;
+}
+header .sub_menu {
+	display: none;
+}
+header .sub_menu li {
+	float: none;
+	position: relative;
+	right: 8px;
+	margin-top: 10px;
+	font-size: 15px;
+	text-align: center;
+}
 .clear {
     clear: both;
 }

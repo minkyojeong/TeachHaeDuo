@@ -7,24 +7,31 @@
 <div class="wrap header">
 	<header>
 		<div class="logo">
-			<a href="${pageContext.request.contextPath}/"> <img
-				src="${pageContext.request.contextPath}/resources/icons/logo.jpg">
+			<a href="${pageContext.request.contextPath}/"> 
+				<img src="${pageContext.request.contextPath}/resources/icons/logo.jpg">
 			</a>
 		</div>
 		<nav class="menu">
 			<ul>
-				<li><a href="${pageContext.request.contextPath}/teacherSearch">선생님찾기&nbsp;&nbsp;</a></li>
-				<li><a>질문하기&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;</a></li>
-				<li><a>고객센터&nbsp;&nbsp;</a></li>
-				<li><a>이용방법&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;</a></li>
+				<li><a href="${pageContext.request.contextPath}/teacherSearch">선생님찾기</a><span>&nbsp;&nbsp;</span></li>
+				<li><a href="#">질문하기</a><span>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;</span></li>
+				<li>
+					<a style="cursor: pointer">고객센터</a><span>&nbsp;&nbsp;</span>
+					<ul class="sub_menu">
+						<li><a href="#">공지사항</a></li>
+						<li><a href="#">1대1 문의</a></li>
+						<li><a href="#">자주묻는 질문</a></li>
+					</ul>
+				</li>
+				<li><a href="#">이용방법</a><span>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;</span></li>
 				<c:choose>
 					<c:when test="${empty ssMV}">
-						<li><a href="${pageContext.request.contextPath}/login">로그인&nbsp;&nbsp;</a></li>
+						<li><a href="${pageContext.request.contextPath}/login">로그인</a><span>&nbsp;&nbsp;</span></li>
 						<li><a href="${pageContext.request.contextPath}/join">회원가입</a></li>
 					</c:when>
 					<c:when test="${not empty ssMV}">
-						<li><p id="p_alarm">알람&nbsp;&nbsp;</p></li>
-						<li><a href="${pageContext.request.contextPath}/logout">로그아웃&nbsp;&nbsp;</a></li>
+						<li><p id="p_alarm">알람</p><span>&nbsp;&nbsp;</span></li>
+						<li><a href="${pageContext.request.contextPath}/logout">로그아웃</a><span>&nbsp;&nbsp;</span></li>
 						<!-- 관리자 로그인 시 처리할 부분 -->
 						<%-- 						<c:if test="${ssMV.mId == 'admin'}">
 							<li><a href="logout">관리자페이지&nbsp;&nbsp;</a></li>
@@ -113,7 +120,10 @@
 </div>
 
 <script>
-
+//고객센터메뉴에 마우스 호버 시, 드롭다운 메뉴 나옴
+$(".menu > ul li:eq(2)").hover(function() {
+	$(this).children("ul").stop().slideToggle(500);
+});
 // 알람 창 클릭
 $("#p_alarm").on("click", function() {
 	console.log("알람클릭");
