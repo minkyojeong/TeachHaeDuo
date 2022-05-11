@@ -4,6 +4,9 @@ import java.sql.Connection;
 import java.util.ArrayList;
 
 import static kh.semi.thduo.common.jdbc.JdbcTemplate.*;
+
+import kh.semi.thduo.alarm.model.dao.AlarmDao;
+import kh.semi.thduo.alarm.model.vo.AlarmVo;
 import kh.semi.thduo.pencil.model.dao.PencilDao;
 import kh.semi.thduo.pencil.model.vo.PencilVo;
 
@@ -41,21 +44,22 @@ public class PencilService {
 	}
 
 	// 연필 차감 내역 삽입
-	public int minusPencil(PencilVo vo) {
+	public int minusPencil(PencilVo vo, AlarmVo avo) {
 		int result = 0;
 		Connection conn = getConnection();
-
+		setAutocommit(conn, false);
+		
 		result = dao.minusPencil(conn, vo);
-		if (result == 0) {
+		if(result < 1) {
 			rollback(conn);
 		} else {
+			result = new AlarmDao().sendAlarm(conn, avo);
 			commit(conn);
 		}
-
+		
 		close(conn);
 
 		return result;
-
 	}
 
 	// 연필 사용 내역

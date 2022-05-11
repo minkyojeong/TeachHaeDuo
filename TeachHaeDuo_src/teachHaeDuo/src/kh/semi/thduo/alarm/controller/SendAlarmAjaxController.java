@@ -74,25 +74,16 @@ public class SendAlarmAjaxController extends HttpServlet {
 				pvo.setCpContent("쪽지보내기");
 				pvo.setCpCash(-500);
 				pvo.setmId(ssvo.getmId());
+				vo.setAlarm_sendid(ssvo.getmNickname());
+				vo.setM_id(ssvo.getmId());
 				
-				int result = new PencilService().minusPencil(pvo);
-				if (result < 1) { // 연필 사용 내역 저장 실패
+				int result = new PencilService().minusPencil(pvo, vo);
+				if (result < 1) { // 연필 사용 내역 저장 실패 및 쪽지 전송 실패
 					out.print(-1);
-					out.flush();
-					out.close();
-				} else { // 연필 사용 내역 저장 성공
-					vo.setAlarm_sendid(ssvo.getmNickname());
-					vo.setM_id(ssvo.getmId());
+				} else { // 연필 사용 내역 저장 성공 및 쪽지 전송 성공
+					out.print(1);
 				}
 			}
-		}
-		
-		// DB에 저장
-		int result = new AlarmService().sendAlarm(vo);
-		if (result < 1) { // 쪽지전송 실패
-			out.print(-1);
-		} else { // 쪽지전송 성공
-			out.print(1);
 		}
 		
 		out.flush();
