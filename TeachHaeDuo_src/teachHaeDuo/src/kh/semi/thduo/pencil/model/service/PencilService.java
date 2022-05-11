@@ -44,6 +44,18 @@ public class PencilService {
 	}
 
 	// 연필 차감 내역 삽입
+		public int minusPencil(PencilVo vo) {
+			int result = 0;
+			Connection conn = getConnection();
+			
+			result = dao.minusPencil(conn, vo);
+			
+			close(conn);
+
+			return result;
+		}
+		
+	// 연필 차감 내역 삽입(쪽지 보내기 할 때)
 	public int minusPencil(PencilVo vo, AlarmVo avo) {
 		int result = 0;
 		Connection conn = getConnection();
