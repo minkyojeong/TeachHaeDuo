@@ -33,7 +33,7 @@ section{
     padding: 10px;
   }
   th {
-    background-color:#c8c8c8;
+      background-color: #fed08b;
   }
   .member-title{
   font-size: 20px;
@@ -63,7 +63,6 @@ section{
 		           
 								  <tr id=title>
 								     <th>아이디</th> 
-								     <th>비밀번호</th>
 								     <th>성명</th>
 								     <th>닉네임</th> 
 								     <th>생년월일</th>
@@ -79,8 +78,7 @@ section{
 								 	   <c:forEach items="${retVolist }" var="vo">
 									<tr>
 								     <td>${vo.getmId()}</td> 
-								     <td>${vo.getmPw()}</td>
-								     <td>${vo.getmName()} </td>
+								   	 <td>${vo.getmName()} </td>
 								     <td>${vo.getmNickname()}</td> 
 								     <td>${vo.getmBirth()}</td>
 								     <td>${vo.getmAddress()}</td>

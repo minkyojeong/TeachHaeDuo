@@ -1,10 +1,12 @@
 @charset "UTF-8";
 .adminList{
-           height: 400;
+           height: 600px;
            background-color: #fed08b;
+            border-radius: 10px;
            float: left;
            width: 10%;
            font-family: MinSans-Medium;
+           
        }
 .adminList p {
 	font-size: 20px;
