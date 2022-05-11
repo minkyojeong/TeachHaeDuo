@@ -31,7 +31,6 @@ public class TeacherDao {
 	}
 
 
-	
 	// 모든 선생님 정보 읽기
 		public ArrayList<TeacherVo> readAllTeacher(Connection conn, int startRnum, int endRnum) {
 			ArrayList<TeacherVo> retVolist = null;
@@ -79,7 +78,8 @@ public class TeacherDao {
 	public int countReadAllTeacher(Connection conn) {
 		int result = 0;
 		String sql = "SELECT COUNT(*)"
-				+ " FROM t_profile pro JOIN member m" + "                    ON pro.m_id = m.m_id"
+				+ " FROM t_profile pro JOIN member m" 
+				+ "                    ON pro.m_id = m.m_id"
 				+ "                    JOIN view_teacher_rscroe_avg rscore"
 				+ "                    ON rscore.m_nickname = m.m_nickname"
 				+ "                    JOIN view_teacher_object olist"
@@ -154,7 +154,8 @@ public class TeacherDao {
 		public int countReadTeacher(Connection conn, String object) {
 			int result  = 0;
 			String sql = "SELECT count(*) "
-					+ " FROM t_profile pro JOIN member m" + "                    ON pro.m_id = m.m_id"
+					+ " FROM t_profile pro JOIN member m" 
+					+ "                    ON pro.m_id = m.m_id"
 					+ "                    JOIN view_teacher_rscroe_avg rscore"
 					+ "                    ON rscore.m_nickname = m.m_nickname"
 					+ "                    JOIN view_teacher_object olist"
@@ -180,19 +181,6 @@ public class TeacherDao {
 
 			return result;
 		}
-	// 성별에 맞는 선생님 정보 읽기
-//	public ArrayList<TeacherVo> readGenderTeacher(Connection conn, String genderFm) {
-//		ArrayList<TeacherVo> retVolist = null;
-//
-//		return retVolist;
-//	}
-
-	// 활동지역에 맞는 선생님 정보 읽기
-//	public ArrayList<TeacherVo> readAreaTeacher(Connection conn, String area) {
-//		ArrayList<TeacherVo> retVolist = null;
-//
-//		return retVolist;
-//	}
 
 	// 성별과 활동지역 맞는 선생님 정보 읽기
 	public ArrayList<TeacherVo> readAreaGenderTeacher(Connection conn, String genderFm, String area) {
@@ -228,7 +216,7 @@ public class TeacherDao {
 				TeacherVo vo = new TeacherVo();
 				vo.setT_no(rs.getString("t_no"));
 				vo.setT_major(rs.getString("t_major"));
-//				vo.setT_picture(rs.getString("t_picture"));
+				vo.setT_picture(rs.getString("t_picture"));
 				vo.setM_nickname(rs.getString("m_nickname"));
 				vo.setAvg_rscore(rs.getDouble("avg_rscore"));
 				vo.setObject_list(rs.getString("object_list"));
@@ -245,70 +233,6 @@ public class TeacherDao {
 		return retVolist;
 	}
 
-	// 온-오프 여부에 맞는 선생님 정보 읽기 (온라인)
-//	public ArrayList<TeacherVo> readOnlineTeacher(Connection conn, String onlineYna) {
-//		ArrayList<TeacherVo> retVolist = null;
-//
-//		String sql = " SELECT pro.t_no, pro.t_major, pro.t_picture, m.m_nickname, round(rscore.avg_rscore, 2) avg_rscore, olist.object_list, alist.area_list"
-//				+ " FROM t_profile pro JOIN member m" + "				                    ON pro.m_id = m.m_id"
-//				+ "				                   JOIN view_teacher_rscroe_avg rscore"
-//				+ "				                   ON rscore.m_nickname = m.m_nickname"
-//				+ "				                    JOIN view_teacher_object olist"
-//				+ "			                    ON olist.m_nickname = m.m_nickname"
-//				+ "		                    JOIN view_teacher_area alist"
-//				+ "				                   ON alist.m_nickname = m.m_nickname"
-//				+ "			                  WHERE  ONLINE_YNA ='Y'";
-//		String sql2 = " SELECT pro.t_no, pro.t_major, pro.t_picture, m.m_nickname, round(rscore.avg_rscore, 2) avg_rscore, olist.object_list, alist.area_list"
-//				+ " FROM t_profile pro JOIN member m" + "				                    ON pro.m_id = m.m_id"
-//				+ "				                   JOIN view_teacher_rscroe_avg rscore"
-//				+ "				                   ON rscore.m_nickname = m.m_nickname"
-//				+ "				                    JOIN view_teacher_object olist"
-//				+ "			                    ON olist.m_nickname = m.m_nickname"
-//				+ "		                    JOIN view_teacher_area alist"
-//				+ "				                   ON alist.m_nickname = m.m_nickname"
-//				+ "			                  WHERE  ONLINE_YNA ='N'";
-//		try {
-//			pstmt = conn.prepareStatement(sql);
-//
-//			rs = pstmt.executeQuery();
-//			retVolist = new ArrayList<TeacherVo>();
-//
-//			while (rs.next()) {
-//				TeacherVo vo = new TeacherVo();
-//				vo.setT_no(rs.getString("t_no"));
-//				vo.setT_major(rs.getString("t_major"));
-//				vo.setT_picture(rs.getString("t_picture"));
-//				vo.setM_nickname(rs.getString("m_nickname"));
-//				vo.setAvg_rscore(rs.getDouble("avg_rscore"));
-//				vo.setObject_list(rs.getString("object_list"));
-//				vo.setArea_list(rs.getString("area_list"));
-//				retVolist.add(vo);
-//			}
-//		} catch (SQLException e) {
-//			e.printStackTrace();
-//		} finally {
-//			close(rs);
-//			close(pstmt);
-//		}
-//		System.out.println("dao retVolist 1:" + retVolist);
-//		return retVolist;
-//	}
-
-
-
-//	 모집 여부에 맞는 선생님 정보 읽기
-//	public ArrayList<TeacherVo> readRecruitTeacher(Connection conn, String tRecruitYn) {
-//		ArrayList<TeacherVo> retVolist = null;
-//
-//		return retVolist;
-//	}
-//
-//	// 찜 여부에 맞는 선생님 정보 읽기
-//	public ArrayList<TeacherVo> readLikeTeacher(Connection conn, String sNo) {
-//		ArrayList<TeacherVo> retVolist = null;
-//
-//		return retVolist;
-//	}
 
 	// 찜 여부 체크
 	public LikeVo checkLike(Connection conn, String m_id, String t_no) {
@@ -509,10 +433,8 @@ public class TeacherDao {
 				rs = pstmt.executeQuery();
 				if (rs.next()) {
 					ArrayList<ReviewVo> reviewList = new ArrayList<ReviewVo>();
-					
 					do {
 						ReviewVo rvo = new ReviewVo();
-						
 						rvo.setT_r_no(rs.getInt("t_r_no"));
 						rvo.setT_no(rs.getString("t_no"));
 						rvo.setT_r_content(rs.getString("t_r_content"));
@@ -523,7 +445,6 @@ public class TeacherDao {
 						
 						reviewList.add(rvo);
 					} while (rs.next());
-					
 					retVo.setT_review(reviewList);
 				}
 			}
@@ -567,30 +488,7 @@ public class TeacherDao {
 		return result;
 	}
 
-	// 선생님 통화허용 여부 변경
-//	public int updateTeacherPermit(Connection conn, String tNo) {
-//		int retsult = 0;
-//
-//		return retsult;
-//	}
-//
-//	public int updateProfilePicture(Connection conn, TeacherVo tVo) {
-//		int result = 0;
-//		String sql = "update t_profile set  T_PICTURE = ? where t_no = ?";
-//
-//		try {
-//			pstmt = conn.prepareStatement(sql);
-//			pstmt.setString(1, tVo.getT_picture());
-//			pstmt.setString(2, tVo.getT_no());
-//			result = pstmt.executeUpdate();
-//		} catch (SQLException e) {
-//			e.printStackTrace();
-//		} finally {
-//			close(pstmt);
-//		}
-//
-//		return result;
-//	}
+
 
 	// 선생님 승인여부 체크
 	public String checkApproval(Connection conn, String tNo) {
@@ -702,4 +600,107 @@ public class TeacherDao {
 		}
 		return result;
 	}
+	// 성별에 맞는 선생님 정보 읽기
+//	public ArrayList<TeacherVo> readGenderTeacher(Connection conn, String genderFm) {
+//		ArrayList<TeacherVo> retVolist = null;
+//
+//		return retVolist;
+//	}
+
+	// 활동지역에 맞는 선생님 정보 읽기
+//	public ArrayList<TeacherVo> readAreaTeacher(Connection conn, String area) {
+//		ArrayList<TeacherVo> retVolist = null;
+//
+//		return retVolist;
+//	}
+
+	// 온-오프 여부에 맞는 선생님 정보 읽기 (온라인)
+//	public ArrayList<TeacherVo> readOnlineTeacher(Connection conn, String onlineYna) {
+//		ArrayList<TeacherVo> retVolist = null;
+//
+//		String sql = " SELECT pro.t_no, pro.t_major, pro.t_picture, m.m_nickname, round(rscore.avg_rscore, 2) avg_rscore, olist.object_list, alist.area_list"
+//				+ " FROM t_profile pro JOIN member m" + "				                    ON pro.m_id = m.m_id"
+//				+ "				                   JOIN view_teacher_rscroe_avg rscore"
+//				+ "				                   ON rscore.m_nickname = m.m_nickname"
+//				+ "				                    JOIN view_teacher_object olist"
+//				+ "			                    ON olist.m_nickname = m.m_nickname"
+//				+ "		                    JOIN view_teacher_area alist"
+//				+ "				                   ON alist.m_nickname = m.m_nickname"
+//				+ "			                  WHERE  ONLINE_YNA ='Y'";
+//		String sql2 = " SELECT pro.t_no, pro.t_major, pro.t_picture, m.m_nickname, round(rscore.avg_rscore, 2) avg_rscore, olist.object_list, alist.area_list"
+//				+ " FROM t_profile pro JOIN member m" + "				                    ON pro.m_id = m.m_id"
+//				+ "				                   JOIN view_teacher_rscroe_avg rscore"
+//				+ "				                   ON rscore.m_nickname = m.m_nickname"
+//				+ "				                    JOIN view_teacher_object olist"
+//				+ "			                    ON olist.m_nickname = m.m_nickname"
+//				+ "		                    JOIN view_teacher_area alist"
+//				+ "				                   ON alist.m_nickname = m.m_nickname"
+//				+ "			                  WHERE  ONLINE_YNA ='N'";
+//		try {
+//			pstmt = conn.prepareStatement(sql);
+//
+//			rs = pstmt.executeQuery();
+//			retVolist = new ArrayList<TeacherVo>();
+//
+//			while (rs.next()) {
+//				TeacherVo vo = new TeacherVo();
+//				vo.setT_no(rs.getString("t_no"));
+//				vo.setT_major(rs.getString("t_major"));
+//				vo.setT_picture(rs.getString("t_picture"));
+//				vo.setM_nickname(rs.getString("m_nickname"));
+//				vo.setAvg_rscore(rs.getDouble("avg_rscore"));
+//				vo.setObject_list(rs.getString("object_list"));
+//				vo.setArea_list(rs.getString("area_list"));
+//				retVolist.add(vo);
+//			}
+//		} catch (SQLException e) {
+//			e.printStackTrace();
+//		} finally {
+//			close(rs);
+//			close(pstmt);
+//		}
+//		System.out.println("dao retVolist 1:" + retVolist);
+//		return retVolist;
+//	}
+
+
+
+//	 모집 여부에 맞는 선생님 정보 읽기
+//	public ArrayList<TeacherVo> readRecruitTeacher(Connection conn, String tRecruitYn) {
+//		ArrayList<TeacherVo> retVolist = null;
+//
+//		return retVolist;
+//	}
+//
+//	// 찜 여부에 맞는 선생님 정보 읽기
+//	public ArrayList<TeacherVo> readLikeTeacher(Connection conn, String sNo) {
+//		ArrayList<TeacherVo> retVolist = null;
+//
+//		return retVolist;
+//	}
+	// 선생님 통화허용 여부 변경
+//	public int updateTeacherPermit(Connection conn, String tNo) {
+//		int retsult = 0;
+//
+//		return retsult;
+//	}
+//
+//	public int updateProfilePicture(Connection conn, TeacherVo tVo) {
+//		int result = 0;
+//		String sql = "update t_profile set  T_PICTURE = ? where t_no = ?";
+//
+//		try {
+//			pstmt = conn.prepareStatement(sql);
+//			pstmt.setString(1, tVo.getT_picture());
+//			pstmt.setString(2, tVo.getT_no());
+//			result = pstmt.executeUpdate();
+//		} catch (SQLException e) {
+//			e.printStackTrace();
+//		} finally {
+//			close(pstmt);
+//		}
+//
+//		return result;
+//	}
+
 }

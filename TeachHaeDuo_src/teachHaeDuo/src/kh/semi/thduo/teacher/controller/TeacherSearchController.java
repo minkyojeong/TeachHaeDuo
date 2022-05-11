@@ -41,20 +41,20 @@ public class TeacherSearchController extends HttpServlet {
 			e.printStackTrace();
 		}
 		
-		final int pageSize = 5;  // ÇÑÆäÀÌÁö¿¡ º¸¿©ÁÙ Çà
-		final int pageBlock = 3;  // ÆäÀÌÂ¡¿¡ ³ªÅ¸³¯ ÆäÀÌÁö¼ö
+		final int pageSize = 5;  // í•œíŽ˜ì´ì§€ì— ë³´ì—¬ì¤„ í–‰
+		final int pageBlock = 3;  // íŽ˜ì´ì§•ì— ë‚˜íƒ€ë‚  íŽ˜ì´ì§€ìˆ˜
 		int startPage=0;
 		int endPage=0;
 		int startRnum=0;
 		int endRnum=0;
 		
-		int totalCnt = 0; // ÃÑ ±Û ¼ö
+		int totalCnt = 0; // ì´ ê¸€ ìˆ˜
 		totalCnt = new TeacherService().countReadAllTeacher();
 		
-		System.out.println("ÃÑ"+totalCnt);
+		System.out.println("ì´"+totalCnt);
 		// select count(*) from board
 		
-		/* Paging Ã³¸® */
+		/* Paging ì²˜ë¦¬ */
 //		int totalPageCnt = (int)Math.ceil(totalCnt/pageSize); 
 		int totalPageCnt = (totalCnt/pageSize) + (totalCnt%pageSize==0 ? 0 : 1);
 		if(currentPage%pageBlock == 0) {
@@ -68,7 +68,7 @@ public class TeacherSearchController extends HttpServlet {
 		}
 		System.out.println("page:"+ startPage +"~"+endPage);
 		
-		/* rownum Ã³¸® */
+		/* rownum ì²˜ë¦¬ */
 		startRnum = (currentPage-1)*pageSize + 1;
 		endRnum = startRnum + pageSize -1;
 		if(endRnum>totalCnt) {
@@ -104,20 +104,20 @@ public class TeacherSearchController extends HttpServlet {
 			e.printStackTrace();
 		}
 		
-		final int pageSize = 2;  // ÇÑÆäÀÌÁö¿¡ º¸¿©ÁÙ Çà
-		final int pageBlock = 3;  // ÆäÀÌÂ¡¿¡ ³ªÅ¸³¯ ÆäÀÌÁö¼ö
+		final int pageSize = 5;  // í•œíŽ˜ì´ì§€ì— ë³´ì—¬ì¤„ í–‰
+		final int pageBlock = 3;  // íŽ˜ì´ì§•ì— ë‚˜íƒ€ë‚  íŽ˜ì´ì§€ìˆ˜
 		int startPage=0;
 		int endPage=0;
 		int startRnum=0;
 		int endRnum=0;
 		
-		int totalCnt = 0; // ÃÑ ±Û ¼ö
+		int totalCnt = 0; // ì´ ê¸€ ìˆ˜
 		totalCnt = new TeacherService().countReadTeacher(object);
 		
-		System.out.println("ÃÑ"+totalCnt);
+		System.out.println("ì´"+totalCnt);
 		// select count(*) from board
 		
-		/* Paging Ã³¸® */
+		/* Paging ÃƒÂ³Â¸Â® */
 //		int totalPageCnt = (int)Math.ceil(totalCnt/pageSize); 
 		int totalPageCnt = (totalCnt/pageSize) + (totalCnt%pageSize==0 ? 0 : 1);
 		if(currentPage%pageBlock == 0) {
@@ -131,7 +131,7 @@ public class TeacherSearchController extends HttpServlet {
 		}
 		System.out.println("page:"+ startPage +"~"+endPage);
 		
-		/* rownum Ã³¸® */
+		/* rownum ì²˜ë¦¬ */
 		startRnum = (currentPage-1)*pageSize + 1;
 		endRnum = startRnum + pageSize -1;
 		if(endRnum>totalCnt) {
