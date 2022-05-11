@@ -173,11 +173,16 @@ public class TeacherService {
 			System.out.println("activeArea" + i + ":" + object);
 			result = dao.insertObject(conn, object, tNo);
 			System.out.println("활동지역 서비스 result: " + i + ":" + result);
-			if (result == 1) {
-				commit(conn);
-			} else {
-				rollback(conn);
+			if (result == 0) {
+				// insert에 실패했다면 더 이상 지역 서비스를 insert할 필요 없으므로
+				break;
 			}
+		}
+		// 하나라도 insert 실패했다면
+		if (result == 0) {
+			rollback(conn);
+		} else { // 전부 성공했다면
+			commit(conn);
 		}
 		close(conn);
 
@@ -204,6 +209,7 @@ public class TeacherService {
 	public int insertActiveArea(String[] activeAreaArr, String tNo) {
 		int result = 0;
 		Connection conn = getConnection();
+		setAutocommit(conn, false);
 		System.out.println("활동지역 서비스 activeArea: " + activeAreaArr);
 		String activeArea = null;
 		System.out.println("활동지역 서비스 result: " + result);
@@ -211,11 +217,16 @@ public class TeacherService {
 			activeArea = activeAreaArr[i];
 			System.out.println("activeArea" + i + ":" + activeArea);
 			result = dao.insertActiveArea(conn, activeArea, tNo);
-			if (result == 1) {
-				commit(conn);
-			} else {
-				rollback(conn);
+			if (result == 0) {
+				// insert에 실패했다면 더 이상 지역 서비스를 insert할 필요 없으므로
+				break;
 			}
+		}
+		// 하나라도 insert 실패했다면
+		if (result == 0) {
+			rollback(conn);
+		} else { // 전부 성공했다면
+			commit(conn);
 		}
 		close(conn);
 

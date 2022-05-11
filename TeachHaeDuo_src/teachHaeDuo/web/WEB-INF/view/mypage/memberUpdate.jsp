@@ -48,20 +48,39 @@
 							</td>
 						</tr>
 						<tr>
+							<td>이름</td>
+							<td colspan="2">
+								<%=ssMV.getmName()%>
+							</td>
+						</tr>
+						<tr>
+							<td>닉네임</td>
+							<td colspan="2">
+								<%=ssMV.getmNickname()%>
+							</td>
+						</tr>
+						<tr>
+							<td>비밀번호 변경</td>
+							<td><input type="password" class="in_box" name="mPw" id="pw" tabindex="2" maxlength="20"
+								placeholder="8자이상 영문대소문자, 숫자, 특수문자가 각각 1개이상">
+								<font id="pwd_info" size="2"></font>
+							</td>
+							</tr>
+						<tr>
+							<td>비밀번호 확인</td>
+							<td><input type="password" class="in_box" size="30" name="passwordcheck" id="pw_cf" tabindex="3" maxlength="60"
+								onkeyup="check_pw()" placeholder="비밀번호 확인"> 
+								<font id="pw_check_msg" size="2"> </font>
+							</td>
+							<input type="hidden" name="initPw" id="initPw" value="<%=ssMV.getmPw()%>">
+						</tr>
+						<tr>
 							<td>주소변경</td>
 							<td colspan="2">
 							<input type="text" class="in_box" name="mAddress1" id="mAddress1"  tabindex="8" value="<%=ssMV.getmAddress()%>" readonly /> 
 							<input type="button" class="btn2_3" value="주소검색" id="postcode_button" onclick="open_Postcode()"><br> 
 							<input type="text"  class="in_box" name="mAddress2" id="mAddress2" placeholder="변경을 원하시면 주소 검색 후 입력해주세요" />
 							</td>
-						</tr>
-						<tr>
-							<td>닉네임 변경</td>
-							<td><input name="mNickName" id="mNickName" type="text" class="in_box" tabindex="4"
-								placeholder="한글, 영문, 특수문자를 포함한 2 ~ 12글자"
-								value="<%=ssMV.getmNickname()%>" maxlength="60"><font
-								id="checkNickName" size="2"></font></td>
-							<td></td>
 						</tr>
 						<tr>
 							<td>휴대폰 번호 변경</td>
@@ -102,7 +121,7 @@
 	</div>
 	<script>
 		$(function() {
-			var nickNameChk = true;
+			var pwdChk = true;
 			var emailChk = true;
 			var phoneChk = true;
 			var chkVal = false;
@@ -121,9 +140,9 @@
 				if (chkVal) {
 					var frm = document.frm_update;
 					frm.action = "memberUpdate.do";
-					frm_update.method = "post";
+					frm.method = "post";
 					frm.submit();
-				}
+				} 
 			});
 			
 
@@ -154,69 +173,27 @@
 				}
 			});
 
-			
-
-			
-			
-			
-			//닉네임 형식 확인 -ok 
-			$("#mNickName").on("input", function() {
+			//패스워드 형식 확인	 -ok
+			$("#pw").on("input",function() {
 				
-				var NickNameRegEx = /^[a-zA-Zㄱ-힣0-9-_.]{2,12}$/;//한글, 영문, 특수문자 (- _ .) 포함한 2 ~ 12글자 닉네임
-				var NickNameVal = $("#mNickName").val();
-				if (!NickNameRegEx.test(NickNameVal)) { //NickNameVal값이 정규식에 맞는지 체크
-					console.log("닉네임 형식을 바르게 입력해주세요. console");
-					nickNameChk = true;
-					$("#checkNickName").html("닉네임 형식이 맞지 않습니다.");
-					$("#checkNickName").attr('color', 'red');
+				var passwordRegEx = /^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[!@#$%^&*-]).{8,}$/;// 8자리이상  대소문자, 숫자, 특수문자가 각각 1개 이상 (패스워드 체크시 활용)
+				var passwordVal = null;
+				if ($("#pw").val().trim() == null || $("#pw").val().trim() == ""){
+					passwordVal = $("#initPw").val();
+				} else {
+					passwordVal = $("#pw").val();
+				}
+				
+				if (!passwordRegEx.test(passwordVal)) { //passwordVal값이 정규식에 맞는지 체크
+					console.log("패스워드 형식을 바르게 입력해주세요.");
+					pwdChk = true;
+					$("#pwd_info").html("패스워드 형식이 맞지 않습니다.");
+					$("#pwd_info").attr('color', 'red');
 
 				} else {
-					nickNameChk = false;
-					$("#checkNickName").html("");
+					pwdChk = false;
+					$("#pwd_info").html("");
 				}
-			});
-			
-			//중복체크 닉네임 ajax -ok
-			$('#mNickName').focusout(function() {
-
-				let findStr = $('#mNickName').val(); // input_id에 입력되는 값
-
-				if ($('#mNickName').val().length < 2) {  //mNickName 2자 작은면 
-					$("#checkNickName").html('닉네임은 2자리 이상입니다.');
-					$("#checkNickName").attr('color', 'red');
-					nickNameChk = true;
-					
-
-				} else if ($('#mNickName').val().length > 1) { //mNickName 1자 이상이면 
-					$.ajax({
-						type : 'post',
-						async : false, //false가 기본값임 - 비동기
-						url : 'findStr',  //MemberFindStrAjaxController.java 주소 
-						dataType : 'text',
-						data : {
-							str : findStr,
-							type : 'mNickName'
-						},
-						success : function(data, textStatus) {
-							if (data == 'not-usable') {
-								$("#checkNickName").html('사용할 수 없는 닉네임입니다.');
-								$("#checkNickName").attr('color', 'red');
-								nickNameChk = true;
-								
-							} else {
-								$("#checkNickName").html('사용할 수 있는 닉네임입니다.');
-								$("#checkNickName").attr('color', 'green');
-								nickNameChk = false;
-								
-							}
-						},
-						error : function(data, textStatus) { 
-							console.log('error');
-						}
-					}) //ajax
-
-				}
-
 			});
 			
 			//이메일 형식 확인-ok 
@@ -290,8 +267,8 @@
 
 			//필수 입력정보 입력되었는지 확인하는 함수
 			function checkValue() {
-				if (nickNameChk) {
-					alert("닉네임을 확인하세요.");
+				if (pwdChk) {
+					alert("비밀번호를 확인하세요.");
 					return;
 				}
 				if (phoneChk) {
@@ -302,7 +279,13 @@
 					alert("이메일을 확인하세요.");
 					return;
 				}
-				
+				//비밀번호== 비밀번호확인 일치 한지 확인 
+				if (document.getElementById('pw').value != document
+						.getElementById('pw_cf').value) {
+					alert("비밀번호가 일치하지 않습니다. 확인해 주세요");
+					document.getElementById('pw_cf').focus();
+					return;
+				}
 				chkVal = true;
 			}
 			
@@ -317,6 +300,21 @@
 
 				}
 			}).open();
+		}
+		
+		function check_pw() { //비밀번호 확인 - ok
+			var p = document.getElementById('pw').value;
+			var p_cf = document.getElementById('pw_cf').value;
+
+			if (p != p_cf) {
+				document.getElementById('pw_check_msg').innerHTML = "비밀번호가 다릅니다. 다시 확인해 주세요.";
+				$("#pw_check_msg").attr('color', 'red');
+			} else {
+				document.getElementById('pw_check_msg').innerHTML = "";
+			}
+			if (p_cf == "") {
+				document.getElementById('pw_check_msg').innerHTML = "";
+			}
 		}
 	</script>
 </body>
