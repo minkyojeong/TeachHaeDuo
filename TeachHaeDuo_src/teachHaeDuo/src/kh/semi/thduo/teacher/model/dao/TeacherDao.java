@@ -600,6 +600,25 @@ public class TeacherDao {
 		}
 		return result;
 	}
+	
+	// 선생님 프로필 사진 등록/변경
+	public int updateProfilePicture(Connection conn, TeacherVo tVo) {
+		int result = 0;
+		String sql = "update t_profile set  T_PICTURE = ? where t_no = ?";
+
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, tVo.getT_picture());
+			pstmt.setString(2, tVo.getT_no());
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+
+		return result;
+	}
 	// 성별에 맞는 선생님 정보 읽기
 //	public ArrayList<TeacherVo> readGenderTeacher(Connection conn, String genderFm) {
 //		ArrayList<TeacherVo> retVolist = null;
@@ -685,22 +704,6 @@ public class TeacherDao {
 //		return retsult;
 //	}
 //
-//	public int updateProfilePicture(Connection conn, TeacherVo tVo) {
-//		int result = 0;
-//		String sql = "update t_profile set  T_PICTURE = ? where t_no = ?";
-//
-//		try {
-//			pstmt = conn.prepareStatement(sql);
-//			pstmt.setString(1, tVo.getT_picture());
-//			pstmt.setString(2, tVo.getT_no());
-//			result = pstmt.executeUpdate();
-//		} catch (SQLException e) {
-//			e.printStackTrace();
-//		} finally {
-//			close(pstmt);
-//		}
-//
-//		return result;
-//	}
+
 
 }

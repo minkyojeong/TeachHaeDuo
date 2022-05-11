@@ -236,6 +236,23 @@ public class TeacherService {
 
 		return result;
 	}
+	
+	// 선생님 프로필 사진 등록/변경
+	public int updateProfilePicture(TeacherVo tVo) {
+		int result = 0;
+		Connection conn = getConnection();
+
+		result = dao.updateProfilePicture(conn, tVo);
+		if (result == 1) {
+			commit(conn);
+		} else {
+			rollback(conn);
+		}
+		close(conn);
+
+		return result;
+	}
+	
 	// 성별에 맞는 선생님 정보 읽기
 //		public ArrayList<TeacherVo> readGenderTeacher(String genderFm) {
 //			ArrayList<TeacherVo> retVolist = null;
@@ -319,19 +336,5 @@ public class TeacherService {
 //		return retsult;
 //	}
 //
-//	// 선생님 프로필 사진 등록/변경
-//	public int updateProfilePicture(TeacherVo tVo) {
-//		int result = 0;
-//		Connection conn = getConnection();
-//
-//		result = dao.updateProfilePicture(conn, tVo);
-//		if (result == 1) {
-//			commit(conn);
-//		} else {
-//			rollback(conn);
-//		}
-//		close(conn);
-//
-//		return result;
-//	}
+
 }
