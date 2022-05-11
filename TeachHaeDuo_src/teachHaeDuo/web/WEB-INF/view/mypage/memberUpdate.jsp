@@ -22,6 +22,7 @@
 <meta charset="UTF-8">
 <title>mypage_modifymember</title>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
 <script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
 
 </head>
@@ -48,26 +49,26 @@
 						</tr>
 						<tr>
 							<td>주소변경</td>
-							<td colspan="2"><input type="text" size="50" class="in_box"
-								name="mAddress1" id="mAddress1" readonly
-								value="<%=ssMV.getmAddress()%>" /> <input type="button" class="btn2_3"
-								value="주소검색" id="postcode_button" onclick="open_Postcode()">
-								<br> <input type="text" size="50" name="mAddress2" class="in_box"
-								id="mAddress2" placeholder="변경을 원하시면 주소 검색 후 입력해주세요" /></td>
+							<td colspan="2">
+							<input type="text" class="in_box" name="mAddress1" id="mAddress1"  tabindex="8" value="<%=ssMV.getmAddress()%>" readonly /> 
+							<input type="button" class="btn2_3" value="주소검색" id="postcode_button" onclick="open_Postcode()"><br> 
+							<input type="text"  class="in_box" name="mAddress2" id="mAddress2" placeholder="변경을 원하시면 주소 검색 후 입력해주세요" />
+							</td>
 						</tr>
 						<tr>
 							<td>닉네임 변경</td>
-							<td><input name="mNickName" id="mNickName" type="text" class="in_box"
-								placeholder="<%=ssMV.getmNickname()%>"
-								value="<%=ssMV.getmNickname()%>" maxlength="50"><font
+							<td><input name="mNickName" id="mNickName" type="text" class="in_box" tabindex="4"
+								placeholder="한글, 영문, 특수문자를 포함한 2 ~ 12글자"
+								value="<%=ssMV.getmNickname()%>" maxlength="60"><font
 								id="checkNickName" size="2"></font></td>
 							<td></td>
 						</tr>
 						<tr>
 							<td>휴대폰 번호 변경</td>
-							<td colspan="2"><input name="mPhone" id="mphone" type="text" class="in_box"
-								placeholder="<%=ssMV.getmPhone()%>"
-								value="<%=ssMV.getmPhone()%>"></td>
+							<td colspan="2"><input name="mPhone" id="phone" type="text"  tabindex="6" class="in_box" maxlength="13"
+								placeholder="예) 010-2222-3333"
+								value="<%=ssMV.getmPhone()%>"><font
+									id="phone_info" size="2"></font></td>
 						</tr>
 						<tr>
 							<td id="title">이메일 변경</td>
@@ -101,6 +102,13 @@
 	</div>
 	<script>
 		$(function() {
+			var nickNameChk = true;
+			var emailChk = true;
+			var phoneChk = true;
+			var chkVal = false;
+			
+			
+			
 			console.log($("#mId").val());
 
 			$("#cancel").click(function() {
@@ -109,11 +117,15 @@
 			});
 			$("#update_btn").click(function() {
 				console.log("수정완료 클릭");
-				var frm = document.frm_update;
-				frm.action = "memberUpdate.do";
-				frm_update.method = "post";
-				frm.submit();
+				checkValue();
+				if (chkVal) {
+					var frm = document.frm_update;
+					frm.action = "memberUpdate.do";
+					frm_update.method = "post";
+					frm.submit();
+				}
 			});
+			
 
 			$("#member_delete_btn").click(function() {
 				var confm = confirm("정말로 회원 탈퇴를 진행하시겠습니까? 삭제된 정보는 복구 불가능합니다.");
@@ -142,20 +154,7 @@
 				}
 			});
 
-			function open_Postcode() { //다음 카카오 주소찾기
-				console.log("주소검색")
-				new daum.Postcode(
-						{
-							oncomplete : function(data) {
-								console.log(data);
-								// 우편번호와 주소 정보를 해당 필드에 넣는다.  
-								document.getElementById("mAddress1").value = data.roadAddress;
-
-							}
-						}).open();
-				$("input#mAddress2").attr("placeholder", "상세 주소를 입력해주세요.");
-
-			}
+			
 
 			
 			
@@ -268,47 +267,6 @@
 				}) //ajax
 			});
 			
-			/* 인증번호 이메일 전송 */
-			/* $("#bnt_Cert1").click(function(){
-				var email = $("#mEmail").val(); // 입력한 이메일   
-				$("#certEmail").val(email);
-				
-				$.ajax({
-					type : 'post',
-					async : false, //false가 기본값임 - 비동기
-					url : 'certEmail', //MemberFindStrAjaxController.java 주소  http://localhost:8081/findstr
-					dataType : 'text',
-					data : {
-						mEmail: email
-					},
-					success : function(data, textStatus) {
-						console.log('data: '+data);
-						$("#certChk").val(data);
-						$("#cert_info").html("인증번호가 메일로 전송 되었습니다.");
-						$("#cert_info").attr('color', 'green');
-					},
-					error : function(data, textStatus) { //자바 익셉션 시  ajax 실페시 
-						console.log('ajax error');
-						$("#certChk").val("");
-						$("#cert_info").html("인증번호가 메일로 전송 실패되었습니다. ");
-						$("#cert_info").attr('color', 'red');
-					}
-				})
-			});		
-			
-			$("#bnt_Cert2").click(function(){
-				if( $("#certChk").val() != "" && $("#certChk").val() == $("#cert").val()){
-					alert("인증 되었습니다");
-				
-					//$("#cert_info2").html("인증 되었습니다.");
-					certChk = false;
-				}else{
-					alert("인증번호를 다시 확인해주세요.");
-					//$("#cert_info2").html("인증번호를 확인해주세요.");
-					certChk = true;
-				}
-			}); */
-			
 			
 			//핸드폰 형식확인 -ok
 			$("#phone").on("input", function() {
@@ -327,41 +285,39 @@
 				}
 			});
 			
-			if (nickNameChk) {
-				alert("닉네임을 확인하세요.");
-				return;
-			}
-			if (emailChk) {
-				alert("이메일을 확인하세요.");
-				return;
-			}
-			if (phoneChk) {
-				alert("핸드폰번호을 확인하세요.");
-				return;
-			}
-			//주소 미입력시 확인 
-			if (document.getElementById('mAddress1').value == "") {
-				alert("주소를 입력해주세요");
-				document.getElementById('postcode_button').focus();
-				return;
-			}
-			
-			if(certChk){
-				alert("이메일인증을 해주세요.");
-				return;
-			}
-			if($("#mEmail").val() != $("#certEmail").val()){
-				alert("인증했던 이메일이 아닙니다. 다시 인증 해주세요.");
-				return;
-			}
-			
-			chkVal = true;
 			
 			
-			
-			
+
+			//필수 입력정보 입력되었는지 확인하는 함수
+			function checkValue() {
+				if (nickNameChk) {
+					alert("닉네임을 확인하세요.");
+					return;
+				}
+				if (phoneChk) {
+					alert("핸드폰번호을 확인하세요.");
+					return;
+				}
+				if (emailChk) {
+					alert("이메일을 확인하세요.");
+					return;
+				}
+				
+				chkVal = true;
+			}
 			
 		});
+		
+		function open_Postcode() { //다음 카카오 주소찾기 
+			new daum.Postcode({
+				oncomplete : function(data) {
+					console.log(data);
+					// 우편번호와 주소 정보를 해당 필드에 넣는다.  
+					document.getElementById("mAddress1").value = data.roadAddress;
+
+				}
+			}).open();
+		}
 	</script>
 </body>
 </html>

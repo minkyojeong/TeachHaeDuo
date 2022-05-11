@@ -37,16 +37,21 @@ public class TeacherUpdateController extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODOTODO 로그인 갔다오기
-				String pw = request.getParameter("pw");
-				
+				// 세션에 담긴 정보 가져오기
 				MemberVo ssMV = (MemberVo)request.getSession().getAttribute("ssMV");
 				String mId = ssMV.getmId();
 				
+				// 입력 받은 데이터 가져오기
+				String pw = request.getParameter("pw");
+				
+				// 아이디 비밀번호 확인
 				MemberVo vo = new MemberService().login(mId, pw);
+				
+				// 입력된 정보 다르다면
 				if(vo == null) {
+					request.getSession().setAttribute("msgPw", "비밀번호가 틀렸습니다. 다시 로그인해주세요");
 					response.sendRedirect("teacherUpdateLogin");
-				} else {
+				} else { // 입력된 정보가 맞으면
 					request.getRequestDispatcher("WEB-INF/view/mypage/teacherUpdate.jsp").forward(request, response);
 				}
 	}

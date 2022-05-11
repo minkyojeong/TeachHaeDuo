@@ -62,6 +62,12 @@
 	    	location.href="mypage";
 			
 		});
+	    var msgPwVal = '${msgPw}';
+	    if(msgPwVal != null && msgPwVal != ""){
+	    	alert(msgPwVal);
+	    	location.replace("memberUpdateLogin");
+	    }
    </script>
+   <% request.getSession().removeAttribute("msgPw"); %>
 </body>
 </html>

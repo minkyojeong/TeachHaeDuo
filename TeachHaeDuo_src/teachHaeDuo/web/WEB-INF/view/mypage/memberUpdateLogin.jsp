@@ -57,13 +57,15 @@
     <script>
 	    $("#cancel").click(function(){
 	    	console.log("취소 버튼 클릭");
-			var roleSt = "<%= ssMV.getRoleSt() %>";
-			if(roleSt == "S"){
-	    		location.href="mypageStudent";
-			} else if(roleSt == "T"){
-	    		location.href="mypageTeacher";
-			}
+	    	location.href="mypageTeacher";
+			
 		});
+	    var msgPwVal = '${msgPw}';
+	    if(msgPwVal != null && msgPwVal != ""){
+	    	alert(msgPwVal);
+	    	location.replace("memberUpdateLogin");
+	    }
    </script>
+   <% request.getSession().removeAttribute("msgPw"); %>
 </body>
 </html>

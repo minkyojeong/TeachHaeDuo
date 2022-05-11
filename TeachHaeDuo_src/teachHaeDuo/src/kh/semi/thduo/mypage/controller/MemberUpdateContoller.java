@@ -37,16 +37,22 @@ public class MemberUpdateContoller extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODOTODO 로그인 갔다오기
-		String pw = request.getParameter("pw");
 		
+		// 세션에 담긴 정보 가져오기
 		MemberVo ssMV = (MemberVo)request.getSession().getAttribute("ssMV");
 		String mId = ssMV.getmId();
 		
+		// 입력받은 데이터 가져오기
+		String pw = request.getParameter("pw");
+		
+		// 아이디 비밀번호 확인
 		MemberVo vo = new MemberService().login(mId, pw);
+		
+		// 입력한 정보가 다르다면
 		if(vo == null) {
-			response.sendRedirect("memberUpdateLogin");
-		} else {
+			request.getSession().setAttribute("msgPw", "비밀번호가 틀렸습니다. 다시 로그인해주세요");
+			response.sendRedirect("memberUpdateLogin"); // memberUpdateLogin.jsp 이동하게 하는 컨트롤러 url매핑
+		} else { // 입력한 정보가 맞다면
 			request.getRequestDispatcher("WEB-INF/view/mypage/memberUpdate.jsp").forward(request, response);
 		}
 	}
