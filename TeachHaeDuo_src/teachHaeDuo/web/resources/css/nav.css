@@ -1,0 +1,22 @@
+@charset "UTF-8";
+.adminList{
+           height: 400;
+           background-color: #fed08b;
+           float: left;
+           width: 10%;
+           font-family: MinSans-Medium;
+       }
+.adminList p {
+	font-size: 20px;
+	 padding: 20px;
+}
+.adminList li{
+	font-family: MinSans-Medium;
+    font-size: 15px;
+    float: left;
+    padding: 20px;
+}
+.adminList li > a {
+    color: black;
+}
+       

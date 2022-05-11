@@ -156,7 +156,7 @@ public class MemberJoinController extends HttpServlet {
 				out.print("<script>alert('가입 실패 다시 시도해주세요.');</script>");
 				out.flush();
 				out.close();
-				request.getRequestDispatcher("WEB-INF/view/member/join.jsp").forward(request, response);
+				request.getRequestDispatcher("WEB-INF/view/member/join.jsp").forward(request, response); // 수정예정 
 				
 				return;
 
