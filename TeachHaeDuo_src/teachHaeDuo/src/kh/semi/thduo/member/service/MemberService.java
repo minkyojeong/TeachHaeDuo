@@ -4,12 +4,15 @@ import static kh.semi.thduo.common.jdbc.JdbcTemplate.close;
 import static kh.semi.thduo.common.jdbc.JdbcTemplate.commit;
 import static kh.semi.thduo.common.jdbc.JdbcTemplate.getConnection;
 import static kh.semi.thduo.common.jdbc.JdbcTemplate.rollback;
-
+import static kh.semi.thduo.common.jdbc.JdbcTemplate.setAutocommit;
 import java.sql.Connection;
+import java.sql.SQLException;
 import java.util.ArrayList;
 
 import kh.semi.thduo.member.dao.MemberDao;
 import kh.semi.thduo.member.vo.MemberVo;
+import kh.semi.thduo.student.service.StudentService;
+import kh.semi.thduo.student.vo.StudentVo;
 
 
 public class MemberService {
@@ -20,8 +23,59 @@ public class MemberService {
 		public int insertMember(MemberVo vo) {
 			int result = 0;
 			Connection conn = getConnection();
-			result = dao.insertMember(conn, vo);
-			close(conn);
+			try {
+				conn.setAutoCommit(false);
+				
+		
+				result = dao.insertMember(conn, vo);
+				if (result < 1) {
+					conn.rollback();
+					conn.close();
+					return 0;
+				}
+				
+				
+				if (vo.getRoleSt().equals("S")) { //받은 값이 S이면  
+					
+					String sNo = new StudentService().readStudentCheck();//readStudentCheck  DB가서 번호 체크 
+					if(sNo.length() == 0) { // 길이가 0 같은면 S1
+						sNo="S1";   
+					}else {
+						int no = Integer.parseInt(sNo.substring(1, sNo.length())) + 1;
+						sNo = "S".concat(no+""); 
+					}
+					StudentVo sVo = new StudentVo(); //
+					sVo.setmId(vo.getmId());
+					sVo.setsNo(sNo);
+					
+					result = new StudentService().insertStudent(sVo);
+				
+					if (result < 1) {
+						conn.rollback();	
+						conn.close();
+						return 0;
+					}
+				}if (vo.getRoleSt().equals("T")) {
+					
+					//TO-Do 선생님 테이블 T_PROFILE  insert
+					/*
+					result = dao.insert선생(conn, vo);
+					if (result < 1) {
+						conn.rollback();	
+						conn.close();
+						return 0;
+					}
+					*/
+				}
+			
+				conn.commit();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}finally {
+				close(conn);
+			}
+			
 			return result;
 		}
 	

@@ -124,28 +124,6 @@ public class MemberJoinController extends HttpServlet {
 				
 				return;
 			}
-			
-			if (memberVo.getRoleSt().equals("S")) { //받은 값이 S이면  
-				
-				String sNo = new StudentService().readStudentCheck();//readStudentCheck  DB가서 번호 체크 
-				if(sNo.length() == 0) { // 길이가 0 같은면 S1
-					sNo="S1";   
-				}else {
-					int no = Integer.parseInt(sNo.substring(1, sNo.length())) + 1;
-					sNo = "S".concat(no+""); 
-				}
-				StudentVo sVo = new StudentVo(); //
-				sVo.setmId(memberVo.getmId());
-				sVo.setsNo(sNo);
-				
-				i = new StudentService().insertStudent(sVo);
-				
-			}if (multi.getParameter("roleSt").equals("T")) {
-				
-				//TO-Do 선생님 테이블 T_PROFILE  insert
-			}
-			
-			
 			if (i > 0) {
 				// 연필 테이블에 기본 insert
 //				String mId = multi.getParameter("mId");
