@@ -552,13 +552,12 @@ INSERT INTO teach_object VALUES('OB5', 'T14');
 INSERT INTO teach_object VALUES('OB1', 'T15');
 INSERT INTO teach_object VALUES('OB3', 'T15');
 INSERT INTO teach_object VALUES('OB3', 'T16');
-INSERT INTO teach_object VALUES('OB4', 'T17');
+INSERT INTO teach_object VALUES('OB1', 'T17');
+INSERT INTO teach_object VALUES('OB3', 'T17');
 INSERT INTO teach_object VALUES('OB6', 'T17');
 INSERT INTO teach_object VALUES('OB1', 'T18');
 INSERT INTO teach_object VALUES('OB3', 'T18');
-INSERT INTO teach_object VALUES('OB1', 'T10');
-INSERT INTO teach_object VALUES('OB3', 'T10');
-INSERT INTO teach_object VALUES('OB6', 'T10');
+
 
 
 -- 선생님 활동 지역 삽입
@@ -615,7 +614,7 @@ INSERT INTO acti_area VALUES('T18', 'A11');
 INSERT INTO acti_area VALUES('T18', 'A13');
 INSERT INTO acti_area VALUES('T18', 'A10');
 
-SELECT * FROM T_PROFILE;
+
 -- 선생님 리뷰 삽입
 INSERT INTO t_review VALUES (1, 'T1', '친절하고 자세하게 알려주세요!', DEFAULT, 5, '홍기', 'a12345');
 INSERT INTO t_review VALUES (2, 'T2', '좋습니다.', DEFAULT, 3, '민호', 'b12345');
