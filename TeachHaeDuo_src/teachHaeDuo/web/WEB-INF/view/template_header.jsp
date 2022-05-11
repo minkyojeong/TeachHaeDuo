@@ -23,7 +23,7 @@
 						<li><a href="#">자주묻는 질문</a></li>
 					</ul>
 				</li>
-				<li><a href="#">이용방법</a><span>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;</span></li>
+				<li><a href="${pageContext.request.contextPath}/guide">이용방법</a><span>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;</span></li>
 				<c:choose>
 					<c:when test="${empty ssMV}">
 						<li><a href="${pageContext.request.contextPath}/login">로그인</a><span>&nbsp;&nbsp;</span></li>

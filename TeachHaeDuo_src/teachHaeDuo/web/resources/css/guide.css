@@ -1,0 +1,43 @@
+@charset "UTF-8";
+
+h2 {
+	margin-top: 40px;
+	margin-left: 140px;
+	font-family: MinSans-Bold;
+	font-size: 25px;
+	color: #FAB550;
+}
+
+dl {
+	width: 1000px;
+	margin: 40px auto;
+}
+
+dt {
+	font-family: MinSans-Bold;
+	font-size: 18px;
+}
+
+dt:not(:first-child) {
+	padding-top: 15px;
+}
+
+.number {
+	display: inline-block;
+	width: 20px;
+	height: 20px;
+	border-radius: 50%;
+	color: white;
+	background-color: #FA9D00;
+	text-align: center;
+	line-height: 20px;
+	margin-right: 10px;
+}
+
+dd {
+	font-family: MinSans-Medium;
+	font-size: 16px;
+	margin: 10px 30px;
+	line-height: 1.3em;
+	color: rgb(108, 104, 104);
+}
