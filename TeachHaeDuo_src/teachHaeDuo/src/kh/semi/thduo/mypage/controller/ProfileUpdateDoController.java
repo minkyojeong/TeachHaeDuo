@@ -2,6 +2,8 @@ package kh.semi.thduo.mypage.controller;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.Map;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -10,6 +12,8 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.apache.tomcat.util.http.fileupload.servlet.ServletFileUpload;
 
+import com.cloudinary.Cloudinary;
+import com.cloudinary.utils.ObjectUtils;
 import com.oreilly.servlet.MultipartRequest;
 import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
 
@@ -48,6 +52,13 @@ public class ProfileUpdateDoController extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		System.out.println("프로필 사진 등록 doPost");
+		// cloudinary 사용을 위해 등록
+		Cloudinary cloudinary = new Cloudinary(ObjectUtils.asMap(
+				"cloud_name", "digbnfogm",
+				"api_key", "722949753961794",
+				"api_secret", "ABLvztU8OQBbyionGwED-nJieYE",
+				"secure", true));
+		
 		String tNo = "";
 		TeacherVo tVo = null;
 		MemberVo ssMV = (MemberVo) request.getSession().getAttribute("ssMV");
@@ -87,20 +98,44 @@ public class ProfileUpdateDoController extends HttpServlet {
 			return;
 		}
 		String pFilePath = "";
-		if (upload != null && pFilePathParam != null) {
-			// 기존사진 있음 + 새사진이 있는경우
+		if (upload != null && pFilePathParam != null) { // 기존사진 있음 + 새사진이 있는경우
 			// 기존사진 서버에서 파일 삭제
-			File file = new File(rootPath + pFilePathParam);
+			String[] existFile = pFilePathParam.split("/");
+			for(int i = 0; i < existFile.length; i++) {
+				pFilePathParam = existFile[i];
+			}
+			System.out.println("pFilePathParam : " + pFilePathParam);
+			
+			File file = new File(uploadPath + "/" + pFilePathParam);
 			if (file.exists()) { // 파일명까지 적었기 때문에, 파일 존재여부 확인
 				file.delete();
+				cloudinary.uploader().destroy("profile/" + pFilePathParam.replace(".png", ""), ObjectUtils.emptyMap());
 				System.out.println("파일삭제");
 			} // 파일 없다면.. 아무 행동하지 않고 db 저장하러 감
-				// 새 파일을 db에 저장
-			pFilePath = fileSavePath + "/" + upload; // 새파일을 db에 저장
-
-		} else if (upload != null) {
+			// 새 파일을 db에 저장
+			File newFile = new File(uploadPath + "/" + upload);
+			// 이미지 업로드 시, 파일 이름을 업로드 이름으로 하고 저장 폴더를 profile로 함
+			Map uploadResult = cloudinary.uploader().upload(newFile, ObjectUtils.asMap(
+					"public_id", upload.replace(".png", ""),
+					"folder", "profile"));
+			System.out.println("업로드 된 주소 : " + uploadResult.get("url"));
+			pFilePath = (String) uploadResult.get("url"); // 새파일을 DB에 저장
+			
+//			pFilePath = fileSavePath + "/" + upload; // 새파일을 db에 저장
+		} else if (upload != null) { // 사진 처음 업로드하는 경우
 			System.out.println("프로필 등록");
-			pFilePath = fileSavePath + "/" + upload;
+			
+			File uploadFile = new File(uploadPath + '/' + upload);
+			// 이미지 업로드 시, 파일 이름을 업로드 이름으로 하고 저장 폴더를 profile로 함
+			Map uploadResult = cloudinary.uploader().upload(uploadFile, ObjectUtils.asMap(
+					"public_id", upload.replace(".png", "") , 
+					"folder", "profile"));
+			
+			System.out.println("업로드 된 주소 : " + uploadResult.get("url"));
+			System.out.println("이미지 이름 : " + uploadResult.get("public_id"));
+			pFilePath = (String) uploadResult.get("url"); // 새파일을 DB에 저장
+			
+//			pFilePath = fileSavePath + "/" + upload;
 		}
 //		System.out.println(bTitle);
 //		System.out.println(bContent);

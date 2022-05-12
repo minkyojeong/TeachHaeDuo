@@ -31,7 +31,7 @@
 						<li><a href="${pageContext.request.contextPath}/join">회원가입</a></li>
 					</c:when>
 					<c:when test="${not empty ssMV}">
-						<li><p id="p_alarm">알람</p><span>&nbsp;&nbsp;</span></li>
+						<li><p id="p_alarm">알람&nbsp;&nbsp;</p></li>
 						<li><a href="${pageContext.request.contextPath}/logout">로그아웃</a><span>&nbsp;&nbsp;</span></li>
 						<!-- 관리자 로그인 시 처리할 부분 -->
 						<%-- 						<c:if test="${ssMV.mId == 'admin'}">
