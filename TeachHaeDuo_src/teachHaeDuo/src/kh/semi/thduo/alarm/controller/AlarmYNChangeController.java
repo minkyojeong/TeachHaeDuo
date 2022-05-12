@@ -30,44 +30,42 @@ public class AlarmYNChangeController extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		System.out.println("알람 수신거부 doget");
+		// 세션에 담긴 정보 가져오기
 		MemberVo ssMV = (MemberVo)request.getSession().getAttribute("ssMV");
 		System.out.println(ssMV);
-		String roleSt = "";
+		// 사용할 변수, 객체 선언
 		MemberVo vo = new MemberVo();
 		int result = 0;
+		
+		// 로그인이 안되어있을때
 		if(ssMV == null) {
 			response.sendRedirect("login");
-		} else {
-			roleSt = ssMV.getRoleSt();
+		} else { // 되어있을때
+			
+			// 세션에서 가져온 정보 변수, 객체에 담기
 			vo.setmAlarmYn(ssMV.getmAlarmYn());
 			vo.setmId(ssMV.getmId());
+			
+			// 담은 정보 가지고 서비스 호출
 			result = new AlarmService().alarmYNChange(vo);
 		}
 		
+		// 알람 수신거부 여부 변경 성공
 		if(result == 1) {
+			// 알람 수신이 원래 Y 였다면 vo N으로 변경
 			if(vo.getmAlarmYn().equals("Y")) {
 				vo.setmAlarmYn("N");
-			} else {
+			} else { // 알람 수신이 원래 N이 였다면 vo Y로 변경
 				vo.setmAlarmYn("Y");
 			}
-			request.setAttribute("msgAlarm", "알람 수신 여부가 변경되었습니다.");
+			// 알럿으로 띄울 메세지 담기
+			request.getSession().setAttribute("msgAlarm", "알람 수신 여부가 변경되었습니다.");
+			// 새로 변경된 정보 세션에 다시 담기
 			ssMV.setmAlarmYn(vo.getmAlarmYn());
-			if(roleSt.equals("T")) {
-				System.out.println("선생 마이페이지 진입");
-				request.getRequestDispatcher("WEB-INF/view/mypage/mypageTeacher.jsp").forward(request, response);
-			} else if(roleSt.equals("S")) {
-				System.out.println("학생 마이페이지 진입");
-				request.getRequestDispatcher("WEB-INF/view/mypage/mypageStudent.jsp").forward(request, response);
-			}
-		} else {
-			request.setAttribute("msgAlarm", "알람 수신 여부 변경이 실패했습니다.");
-			if(roleSt.equals("T")) {
-				System.out.println("선생 마이페이지 진입");
-				request.getRequestDispatcher("WEB-INF/view/mypage/mypageTeacher.jsp").forward(request, response);
-			} else if(roleSt.equals("S")) {
-				System.out.println("학생 마이페이지 진입");
-				request.getRequestDispatcher("WEB-INF/view/mypage/mypageStudent.jsp").forward(request, response);
-			}
+			response.sendRedirect("mypage");
+		} else { // 알람 수신거부 여부 변경 실패
+			request.getSession().setAttribute("msgAlarm", "알람 수신 여부 변경이 실패했습니다.");
+			response.sendRedirect("mypage");
 		}
 		
 	}

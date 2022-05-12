@@ -368,9 +368,9 @@ if(msgApprovalVal != "" && msgApprovalVal != null){
 </script>
 
 <% request.removeAttribute("msgRecruit"); %>
-<% request.removeAttribute("msgAlarm"); %>
 <% request.removeAttribute("msgTeacherUpdate"); %>
 <% request.getSession().removeAttribute("msgCharge"); %>
+<% request.getSession().removeAttribute("msgAlarm"); %>
 <% request.getSession().removeAttribute("msgUpdate"); %>
 <% request.getSession().removeAttribute("msgProfile"); %>
 <% request.getSession().removeAttribute("msgApproval"); %>

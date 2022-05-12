@@ -323,7 +323,6 @@ if(msgAlarmVal != "" && msgAlarmVal != null){
 	alert('${msgAlarm}');
 	location.replace("mypage");
 }
-	
 var msgChargeVal = '${msgCharge}';
 if(msgChargeVal != "" && msgChargeVal != null){
 	alert('${msgCharge}');
@@ -335,7 +334,7 @@ if(msgUpdateVal != "" && msgUpdateVal != null){
 	location.href="mypage";
 }
 </script>
-<% request.removeAttribute("msgAlarm"); %>
+<% request.getSession().removeAttribute("msgAlarm"); %>
 <% request.getSession().removeAttribute("msgCharge"); %>
 <% request.getSession().removeAttribute("msgUpdate"); %>
 </body>

@@ -19,13 +19,8 @@ public class AlarmService {
 		Connection conn = null;
 
 		conn = getConnection();
-		
+
 		result = dao.sendAlarm(conn, vo);
-		if (result == 0) {
-			rollback(conn);
-		} else {
-			commit(conn);
-		}
 
 		close(conn);
 
@@ -42,7 +37,7 @@ public class AlarmService {
 
 		return voList;
 	}
-	
+
 	// 보낸 알람 횟수
 	public int numberOfSendAlarm(String mNickname) {
 		System.out.println("보낸 건수 서비스 mNickname:" + mNickname);
@@ -66,7 +61,7 @@ public class AlarmService {
 
 		return voList;
 	}
-	
+
 	// 받은 알람 횟수
 	public int numberOfReceiveAlarm(String mNickname) {
 		int result = 0;
@@ -96,16 +91,11 @@ public class AlarmService {
 
 		conn = getConnection();
 		result = dao.alarmYNChange(conn, vo);
-		if (result == 1) {
-			commit(conn);
-		} else {
-			rollback(conn);
-		}
 		close(conn);
 
 		return result;
 	}
-	
+
 	// 받은 알람 아이디 리스트
 	public ArrayList<AlarmVo> receiveIdList(String mNickname) {
 
@@ -116,22 +106,24 @@ public class AlarmService {
 
 		return idList;
 	}
-	
+
 	// 관리자 승인비승인 알람 보내기
-		public int sendApprovalAlarm(AlarmVo vo, String yD, String tNo) {
-			int result=0;
-			System.out.println("sendApprovalAlarm service 진입:"+vo+yD+tNo);
-			Connection conn = null;
-			conn = getConnection();
-			setAutocommit(conn, false);
-			result = dao.sendApprovalAlarm(conn, vo,yD,tNo);
-			System.out.println("sendApprovalAlarm service result:" + result);
-			if(result == 0) {
-				rollback(conn);
-			} else {
-				commit(conn);
-			}
-			
-			return result;
+	public int sendApprovalAlarm(AlarmVo vo, String yD, String tNo) {
+		int result = 0;
+		System.out.println("sendApprovalAlarm service 진입:" + vo + yD + tNo);
+		Connection conn = null;
+		conn = getConnection();
+		setAutocommit(conn, false);
+		result = dao.sendApprovalAlarm(conn, vo, yD, tNo);
+		System.out.println("sendApprovalAlarm service result:" + result);
+
+		// 2개 테이블 조작 할건데, 하나라도 실패해서 리턴값 0이 온다면 롤백
+		if (result == 0) {
+			rollback(conn);
+		} else { // 2개 다 성공하면 커밋
+			commit(conn);
 		}
+
+		return result;
+	}
 }

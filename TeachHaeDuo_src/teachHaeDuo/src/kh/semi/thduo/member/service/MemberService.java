@@ -141,11 +141,6 @@ public class MemberService {
 			int result = 0;
 			Connection conn = getConnection();
 			result = dao.updateMember(conn, vo);
-			if (result == 1) {
-				commit(conn);
-			} else {
-				rollback(conn);
-			}
 			close(conn);
 			return result;
 			}

@@ -45,17 +45,27 @@ public class AllAlarmListAjaxContoller extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		System.out.println("전체알람 컨트롤러 dopost");
+		// ajax에 보내기 위한 객체 생성
 		PrintWriter out = response.getWriter();
+		// 세션에 담긴 정보 가져오기
 		MemberVo vo = (MemberVo)request.getSession().getAttribute("ssMV");
+		// 사용할 변수 선언
 		String mNickname ="";
+		
+		// 로그인이 안되어있다면
 		if(vo == null) {
 			response.sendRedirect("login");
-		} else {
+		} else { // 로그인이 되어있다면
 			
+			// 세션에서 담아온 정보 변수에 담기
 			mNickname = vo.getmNickname();
 			System.out.println("전체알람 서비스 호출 mNickname:" + mNickname);
+			
+			// 변수 가지고 서비스 호출
 			ArrayList<AlarmVo> result = new AlarmService().allListAlarm(mNickname);
 			System.out.println("리스트 결과:" + result);
+			
+			// 리턴 값을 gson에 담아 ajax에 넘기기
 			Gson gobj = new GsonBuilder().setPrettyPrinting().create();
 			String resStr = gobj.toJson(result);
 			out.println(resStr);
