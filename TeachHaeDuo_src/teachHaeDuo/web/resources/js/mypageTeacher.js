@@ -149,4 +149,44 @@ $(function() {
 		}
 	})
 
+	/* 프로필 사진 변경 */
+	
+    UPLOADCARE_LOCALE = "ko"
+    UPLOADCARE_LOCALE_TRANSLATIONS = {
+        buttons: {
+            choose: {
+                files: {
+                    one: '사진 변경'
+                }
+            }
+        }
+    }
+
+    
+    var singleWidget = uploadcare.SingleWidget('[role=uploadcare-uploader]');
+	singleWidget.onUploadComplete(function(info){
+		console.log(info.cdnUrl);
+		var fileUrl = info.cdnUrl;
+		$.ajax({
+			url: "profileUpdate.do",
+			data:{
+				fileUrl: fileUrl
+				},
+			type:"post",
+			success:function(result){
+				location.replace("mypage");
+				},
+			error: function(){
+			
+			}
+		}); //ajax 끝
+	});
+	singleWidget.onUploadFail(function(){
+		console.log("실패");
+	});
+
+
+
+
+
 });

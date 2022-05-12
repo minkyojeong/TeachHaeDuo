@@ -255,11 +255,6 @@ public class TeacherService {
 		Connection conn = getConnection();
 
 		result = dao.updateProfilePicture(conn, tVo);
-		if (result == 1) {
-			commit(conn);
-		} else {
-			rollback(conn);
-		}
 		close(conn);
 
 		return result;

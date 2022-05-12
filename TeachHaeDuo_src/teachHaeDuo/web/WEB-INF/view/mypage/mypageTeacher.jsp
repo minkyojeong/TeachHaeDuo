@@ -16,6 +16,7 @@
     <title>mypage_Teacher</title>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src="${pageContext.request.contextPath}/resources/js/mypageTeacher.js"></script>
+<script src="https://ucarecdn.com/libs/widget/3.x/uploadcare.full.min.js"></script>
 </head>
 <body>
 <% MemberVo ssMV = (MemberVo)request.getSession().getAttribute("ssMV"); %>
@@ -42,10 +43,7 @@
                             </p>
                         </div>
                         <div class="nickname_div">
-                        	<form name="frm_profile" enctype="multipart/form-data">
-	                            <input type="file" name="uploadProfile" id="uploadProfile" style="display:none">
-	                            <label for="uploadProfile" class="uploadProfile">사진 변경</label>
-                            </form>
+                            <input type="hidden" role="uploadcare-uploader" data-public-key="43cc829c5d2fae8676a5" data-tabs="file gdrive gphotos"/>
                             <br>
                             <p style="color:red; font-size:13px;">*파일은 jpg,png파일만 가능합니다.</p>
                         </div>
@@ -352,19 +350,7 @@ if(msgApprovalVal != "" && msgApprovalVal != null){
 	alert('${msgApproval}');
 	location.replace("mypage");
 }
- $("#uploadProfile").change(function(){
-	console.log("사진선택했어");
-	var uploadProfileVal = $("#uploadProfile").val();
-	console.log(uploadProfileVal);
-	var frm = document.frm_profile;
-	if(!(uploadProfileVal.substr(uploadProfileVal.length-3) == 'jpg' || uploadProfileVal.substr(uploadProfileVal.length-3) == 'png' || uploadProfileVal.substr(uploadProfileVal.length-3) == 'JPG' || uploadProfileVal.substr(uploadProfileVal.length-3) == 'PNG')){
-		alert("jsp파일 또는 png 파일만 업로드 가능합니다.");
-		return;
-	}
-	frm.action="profileUpdate.do";
-	frm.method="post";
-	frm.submit();
-}); 
+
 </script>
 
 <% request.removeAttribute("msgRecruit"); %>

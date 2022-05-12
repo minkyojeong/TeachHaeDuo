@@ -425,3 +425,7 @@ table#receive_alarm_table{
 	border-collapse: separate;
 	
 }
+
+.uploadcare--widget__button.uploadcare--widget__button_type_open {
+	background-color: #FA9D00;
+}
