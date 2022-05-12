@@ -6,7 +6,7 @@
 <link href="<%=request.getContextPath()%>/resources/css/header.css" rel="stylesheet" type="text/css">
 <link href="<%=request.getContextPath()%>/resources/icons/sun.ico" rel="shortcut icon" type="image/x-icon">
 <link href="<%=request.getContextPath()%>/resources/css/footer.css" rel="stylesheet" type="text/css">
-
+<link href="<%=request.getContextPath()%>/resources/css/memberList.css" rel="stylesheet" type="text/css">
 
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
@@ -16,38 +16,7 @@
 <head>
 <meta charset="UTF-8">
 <title>회원 리스트 - 관리자 화면</title>
-<style>
-section{
- padding: 10px;
-}
-  table.member-tableAll {
-    width: 100%;
-    border-top: 1px solid #444444;
-    border-collapse: collapse;
-    text-align: center;
-   // font-family: "MinSans-Medium"
-   
-  }
-  th, td{
-    border-bottom: 1px solid #444444;
-    padding: 10px;
-  }
-  th {
-      background-color: #fed08b;
-  }
-  .member-title{
-  font-size: 20px;
-  padding: 20px 30px;
-  font-family: "MinSans-Bold"
-  }
-  .member-tableAll{
-     padding: 10px;
-  }
-  #memberList{
-   //background-color: antiquewhite;
-  }
- 
-</style>
+
 </head>
 <body>
  <div class="main_wrap">

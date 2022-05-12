@@ -1,0 +1,29 @@
+@charset "UTF-8";
+
+section{
+ padding: 10px;
+}
+ #memberList table.member-tableAll {
+    width: 100%;
+    border-top: 1px solid #444444;
+    border-collapse: collapse;
+    text-align: center;
+  
+   
+  }
+  #memberList th, td{
+    border-bottom: 1px solid #444444;
+    padding: 10px;
+  }
+  th {
+      background-color: #fed08b;
+  }
+   #memberList .member-title{
+  font-size: 20px;
+  padding: 20px 30px;
+  font-family: "MinSans-Bold"
+  }
+   #memberList .member-tableAll{
+     padding: 10px;
+  }
+ 
