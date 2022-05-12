@@ -51,7 +51,7 @@ section .card {
     border-radius: 0.25rem;
 }
     
-section #btn-Yes{
+section #btn_Yes{
         background-color: #FA9D00;
         color: white;
         border: none;

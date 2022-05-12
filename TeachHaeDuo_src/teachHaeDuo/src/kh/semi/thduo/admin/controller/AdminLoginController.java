@@ -15,7 +15,7 @@ import kh.semi.thduo.member.vo.MemberVo;
 /**
  * Servlet implementation class AdminLoginController
  */
-@WebServlet("/AdminLogin")
+@WebServlet("/adminLogin")
 public class AdminLoginController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
@@ -33,7 +33,7 @@ public class AdminLoginController extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		response.getWriter().append("Served at: ").append(request.getContextPath());
-		System.out.println("doGet - Adminlogin");
+		System.out.println("doGet - adminlogin");
 	}
 
 	/**
@@ -42,10 +42,10 @@ public class AdminLoginController extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		doGet(request, response);
-		String adminId = request.getParameter("");
-		String adminPw = request.getParameter("");
+		String adminId = request.getParameter("id");
+		String adminPw = request.getParameter("pwd");
 
-		System.out.println("doPost - Adminlogin");
+		System.out.println("doPost - adminlogin");
 	// id admin, pw amdin1234
 		
 		AdminVo vo = new AdminService().login(adminId,adminPw);

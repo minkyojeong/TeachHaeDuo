@@ -16,7 +16,26 @@
 <meta charset="UTF-8">
 <title>로그인</title>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script type="text/javascript">
 
+$(function() {
+	$('#btn_Yes').on("click", function() {
+		var frm = document.frm_login;
+		
+		if ($(':radio[name="mode"]:checked').val() == "member") {
+			frm.action = "login";
+			frm.method = 'post';
+			frm.submit();
+		}else{
+			frm.action = "adminLogin";
+			frm.method = 'post';
+			frm.submit();
+		}
+		
+	});
+});
+
+</script>
 </head>
 
 <body>
@@ -29,7 +48,7 @@
                     <div>
                         <p class="card-title" style="color:#FA9D00;" >로그인</p> 
                     </div>
-                    <form action="login"  class="login" method="post">
+                    <form class="login" method="post" name="frm_login">
                         <div class="checkbox">
                             <label>
                                 <input type="radio"  name="mode" value="admin"> 관리자
@@ -42,7 +61,7 @@
                             <input type="password" name="pwd" class="form-control" placeholder="비밀번호"  required="required"><br>
                             <p id="check" class="check"><%request.getAttribute("login_msg"); %>${login_msg}</p><br/>
             
-                            <button type="submit" id="btn-Yes" class="form-control">로그인</button>  
+                            <button type="button" id="btn_Yes" class="form-control">로그인</button>  
                         </div>
                     </form>
                     <div class="links">

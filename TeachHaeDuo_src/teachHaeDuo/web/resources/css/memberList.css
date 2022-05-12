@@ -1,29 +1,33 @@
 @charset "UTF-8";
 
+
 section{
  padding: 10px;
 }
  #memberList table.member-tableAll {
     width: 100%;
-    border-top: 1px solid #444444;
-    border-collapse: collapse;
-    text-align: center;
+	border-top: 1px solid #444444;
+	border-collapse: collapse;
+	text-align: center;
+	font-family: "MinSans-Medium"
   
    
   }
-  #memberList th, td{
+ .member-tableAll th,.member-tableAll td{
     border-bottom: 1px solid #444444;
     padding: 10px;
   }
-  th {
+  
+ .member-tableAll th {
       background-color: #fed08b;
   }
-   #memberList .member-title{
+  .member-title{
   font-size: 20px;
   padding: 20px 30px;
   font-family: "MinSans-Bold"
   }
-   #memberList .member-tableAll{
+  
+  .member-tableAll{
      padding: 10px;
   }
  
