@@ -128,7 +128,18 @@
 							%>
 							<div class="box-init box" onclick="location.href='teacherInfo?tNo=<%=vo.getT_no()%>'">
 								<div class="list1">
-									<div class="profile"></div>
+									<%
+										if(vo.getT_picture() == null){
+									%>
+										<div class="profile" style="background-image: url('<%=request.getContextPath()%>/resources/icons/profile.png')"></div>
+									<%
+										} else {
+									%>
+										<div class="profile" style="background-image: url('<%=vo.getT_picture()%>')"></div>
+									<% 
+										}
+									%>
+									<!-- <div class="profile"></div> -->
 									<p class="nickname"><%=vo.getM_nickname()%></p>
 								</div>
 							</div>
@@ -385,7 +396,12 @@
 							vo = result[i];
 							htmlVal += '    <div class="box-init box" onclick="location.href=' + "'" + "teacherInfo?tNo=" + vo.t_no + "'" + '">';
 							htmlVal += '        <div class="list1">';
-							htmlVal += '            <div class="profile"></div>';
+							if(vo.t_picture != null){
+								htmlVal += '		<div class="profile" style = "background-image: url('+ vo.t_picture +')"></div>';
+							} else {
+								htmlVal += '		<div class="profile"></div>';
+							}
+							/* htmlVal += '            <div class="profile"></div>'; */
 							htmlVal += '            <p class="nickname">' + vo.m_nickname + '</p>';
 							htmlVal += '        </div>';
 							htmlVal += '    </div>';
