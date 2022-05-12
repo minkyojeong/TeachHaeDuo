@@ -29,7 +29,7 @@
                     <div id="profile" style="width:40%">
                     	<c:choose>
 							<c:when test="${tVo.t_picture == null}"><img src="${pageContext.request.contextPath}/resources/icons/profile.png" width="150" height="150"></c:when>
-							<c:when test="${tVo.t_picture != null}"><img src="${pageContext.request.contextPath}/<%= tVo.getT_picture() %>" width="150" height="150"></c:when>
+							<c:when test="${tVo.t_picture != null}"><img src="<%= tVo.getT_picture() %>" width="150" height="150"></c:when>
 						</c:choose>
                     </div>
                     <div style="width:60%">
