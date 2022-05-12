@@ -69,7 +69,7 @@ public class MemberLoginController extends HttpServlet {
 			request.getRequestDispatcher("WEB-INF/view/member/login.jsp").forward(request, response);
 			return;
 		} else {
-            // 로그인  id와 pw 맞으면 메인 이동 
+            // 로그인  id와 pw 맞으면 메인이동 
 			request.getSession().setAttribute("ssMV", vo2);
 			String mNickname = vo2.getmNickname();
 			System.out.println("받은 알람 서비스 호출 mNickname:" + mNickname);

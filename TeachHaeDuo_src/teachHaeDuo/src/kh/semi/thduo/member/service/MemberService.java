@@ -18,21 +18,19 @@ import kh.semi.thduo.student.vo.StudentVo;
 public class MemberService {
 	
 		private MemberDao dao = new MemberDao(); 
-		
+
 		// 회원가입 ok
 		public int insertMember(MemberVo vo) {
 			int result = 0;
 			Connection conn = getConnection();
 			setAutocommit(conn, false);
 				
-		
 				result = dao.insertMember(conn, vo);
 				if (result < 1) {
 					rollback(conn);
 					close(conn);
 					return 0;
 				}
-				
 				
 				if (vo.getRoleSt().equals("S")) { //받은 값이 S이면  
 					
@@ -91,8 +89,6 @@ public class MemberService {
 			return i;
 			
 		}
-		
-		
 		// pw찾기 - id, email 확인
 		public int readFindPw(String mId, String mEmail) {
 
@@ -111,7 +107,6 @@ public class MemberService {
 			close(conn);
 			return retVo;
 		}
-		
 		// 새(임시) 비밀번호
 		public int updateRandomPw(String mPw, String mId) {
 			int result = 0;
