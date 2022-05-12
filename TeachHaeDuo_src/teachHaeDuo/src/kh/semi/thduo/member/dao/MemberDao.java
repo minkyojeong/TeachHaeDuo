@@ -230,15 +230,14 @@ public class MemberDao {
  //회원 수정
 	public int updateMember(Connection conn, MemberVo vo) {
 		int result = 0;
-		String sql = "update member set M_NICKNAME=?, m_pw=?, m_PHONE=?, m_address=?  where m_id=?";
+		String sql = "update member set m_pw=?, m_PHONE=?, m_address=?  where m_id=?";
 		System.out.println("회원정보수정 dao vo:" + vo);
 		try {
 			pstmt = conn.prepareStatement(sql);
-			pstmt.setString(1, vo.getmNickname());
-			pstmt.setString(2, vo.getmPw());
-			pstmt.setString(3, vo.getmPhone());
-			pstmt.setString(4, vo.getmAddress());
-			pstmt.setString(5, vo.getmId());
+			pstmt.setString(1, vo.getmPw());
+			pstmt.setString(2, vo.getmPhone());
+			pstmt.setString(3, vo.getmAddress());
+			pstmt.setString(4, vo.getmId());
 			result = pstmt.executeUpdate();
 		} catch (SQLException e) {
 			e.printStackTrace();

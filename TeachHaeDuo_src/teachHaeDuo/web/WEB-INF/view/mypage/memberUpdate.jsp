@@ -129,6 +129,10 @@
 			
 			
 			console.log($("#mId").val());
+			console.log($('#mEmail').val());
+			console.log("<%=ssMV.getmEmail() %>");
+			console.log($("#phone").val());
+			
 
 			$("#cancel").click(function() {
 				console.log("취소 버튼 클릭");
@@ -180,6 +184,9 @@
 				var passwordVal = null;
 				if ($("#pw").val().trim() == null || $("#pw").val().trim() == ""){
 					passwordVal = $("#initPw").val();
+					pwdChk = false;
+					$("#pwd_info").html("");
+					return;
 				} else {
 					passwordVal = $("#pw").val();
 				}
@@ -198,7 +205,10 @@
 			
 			//이메일 형식 확인-ok 
 			$("#mEmail").on("input",function() {
-								//
+				if($("#mEmail").val() == '<%=ssMV.getmEmail() %>'){
+					emailChk = false;
+					return;
+				}
 				var EmailRegEx = /^[A-Za-z0-9_]+[A-Za-z0-9]*[@]{1}[A-Za-z0-9]+[A-Za-z0-9]*[.]{1}[A-Za-z]{1,3}$/;// 이메일 정규식 
 				var EmailVal = $("#mEmail").val();
 				if (!EmailRegEx.test(EmailVal)) { // mEmail 이메일 정규식 맞는지 체크
@@ -215,38 +225,49 @@
 
 			//중복체크 - 이메일 -ok
 			$('#mEmail').focusout(function() {
-				let findStr = $('#mEmail').val(); // input_id에 입력되는 값
+				let findStr = $('#mEmail').val();
+				if(findStr  ==  '<%=ssMV.getmEmail() %>'){
+					emailChk = false;
+					return;
+				} else {
+					findStr = $('#mEmail').val(); // input_id에 입력되는 값
+					$.ajax({
+						type : 'post',
+						async : false, //false가 기본값임 - 비동기
+						url : 'findStr',  //MemberFindStrAjaxController.java 주소 이동 
+						dataType : 'text', //리턴값 형식  
+						data : {
+							str : findStr,
+							type : 'mEmail'
+						},
+						success : function(data, textStatus) {
 
-				$.ajax({
-					type : 'post',
-					async : false, //false가 기본값임 - 비동기
-					url : 'findStr',  //MemberFindStrAjaxController.java 주소 이동 
-					dataType : 'text', //리턴값 형식  
-					data : {
-						str : findStr,
-						type : 'mEmail'
-					},
-					success : function(data, textStatus) {
-
-						if (data == 'not-usable') {
-							$("#checkmEmail_info").html('사용할 수 없는 이메일입니다.');
-							$("#checkmEmail_info").attr('color', 'red');
-							emailChk = true;
-						} else {
-							$("#checkmEmail_info").html('사용할 수 있는 이메일입니다.');
-							$("#checkmEmail_info").attr('color', 'green');
-							emailChk = false;
+							if (data == 'not-usable') {
+								$("#checkmEmail_info").html('사용할 수 없는 이메일입니다.');
+								$("#checkmEmail_info").attr('color', 'red');
+								emailChk = true;
+							} else {
+								$("#checkmEmail_info").html('사용할 수 있는 이메일입니다.');
+								$("#checkmEmail_info").attr('color', 'green');
+								emailChk = false;
+							}
+						},
+						error : function(data, textStatus) {
+							console.log('error');
 						}
-					},
-					error : function(data, textStatus) {
-						console.log('error');
-					}
-				}) //ajax
+					}) //ajax
+				}
+				
 			});
 			
 			
 			//핸드폰 형식확인 -ok
 			$("#phone").on("input", function() {
+				if($("#phone").val() == '<%=ssMV.getmPhone() %>'){
+					$("#phone_info").html("");
+					phoneChk = false;
+					return;
+				}
 				var phoneRegEx = /^[0][0-9]{2}-[0-9]{3,4}-[0-9]{4}$/;
 				var phoneVal = $("#phone").val();
 
@@ -287,7 +308,7 @@
 					return;
 				}
 				chkVal = true;
-			}
+			} 
 			
 		});
 		

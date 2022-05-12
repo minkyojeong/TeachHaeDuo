@@ -76,7 +76,6 @@ public class MemberUpdateDoController extends HttpServlet {
 			vo.setmPw(mPw);
 		}
 		
-		
 		// 회원 정보 업데이트
 		System.out.println("회원정보수정 컨트롤러 vo:" + vo);
 		int result = new MemberService().updateMember(vo);
