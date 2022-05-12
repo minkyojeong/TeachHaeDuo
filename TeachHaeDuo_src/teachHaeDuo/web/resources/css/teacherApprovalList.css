@@ -1,0 +1,36 @@
+@charset "UTF-8";
+
+section {
+	padding: 10px;
+}
+
+table.teacher-tableAll {
+	width: 100%;
+	border-top: 1px solid #444444;
+	border-collapse: collapse;
+	text-align: center;
+	font-family: "MinSans-Medium"
+}
+
+table.teacher-tableAll th, table.teacher-tableAll td {
+	border-bottom: 1px solid #444444;
+	padding: 10px;
+}
+
+table.teacher-tableAll th {
+	background-color: #fed08b;
+}
+
+.teacher-title {
+	font-size: 20px;
+	padding: 20px 30px;
+	font-family: "MinSans-Bold"
+}
+
+.teacher-tableAll {
+	padding: 10px;
+}
+
+#teacherList {
+	background-color: antiquewhite;
+}

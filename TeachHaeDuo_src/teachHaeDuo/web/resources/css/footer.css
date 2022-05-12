@@ -2,6 +2,7 @@ footer {
     font-family: MinSans-Medium;
     font-size: 13px;
     color: #504A4D;
+    clear:both;
 }
 footer .footerTop {
     overflow: hidden;

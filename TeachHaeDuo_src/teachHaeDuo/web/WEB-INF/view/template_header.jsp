@@ -4,6 +4,7 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <div class="wrap header">
 	<header>
 		<div class="logo">

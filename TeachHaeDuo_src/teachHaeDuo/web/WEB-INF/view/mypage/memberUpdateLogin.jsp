@@ -57,7 +57,7 @@
     <script>
 	    $("#cancel").click(function(){
 	    	console.log("취소 버튼 클릭");
-	    	location.href="mypageTeacher";
+	    	location.href="mypage";
 			
 		});
 	    var msgPwVal = '${msgPw}';
