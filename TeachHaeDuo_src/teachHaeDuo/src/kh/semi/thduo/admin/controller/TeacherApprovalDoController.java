@@ -34,21 +34,47 @@ public class TeacherApprovalDoController extends HttpServlet {
 		// 전달받은 데이터 가져오기
 		String tNoOk = request.getParameter("tNoOk");
 		String tNoNo = request.getParameter("tNoNo");
+		String tNo = null;
 		String nickname = request.getParameter("nickname");
 		String mId = request.getParameter("mId");
+		String yD = null;
 		System.out.println("nickname:" + nickname);
 		if(tNoOk == null || tNoOk.equals("")) {
 			System.out.println("비승인버튼이야");
+			tNo = tNoNo;
 			AlarmVo vo = new AlarmVo();
 			vo.setAlarm_content("승인이 거부되었습니다. 자세한 사항은 1:1문의 메일을 통해 문의해주세요.");
 			vo.setAlarm_receiveid(nickname);
 			vo.setAlarm_sendid("관리자");
 			vo.setM_id(mId);
-			int result = new AlarmService().sendAlarm(vo);
-			request.getSession().setAttribute("msgNo", "비승인 처리 되었습니다.");
-			response.sendRedirect(request.getHeader("referer"));
+			yD = "D";
+			int result = new AlarmService().sendApprovalAlarm(vo,yD,tNo);
+			if(result == 0) {
+				request.getSession().setAttribute("msgApproval", "처리 도중 오류가 발생했습니다. 다시 시도해주세요.");
+				response.sendRedirect(request.getHeader("referer"));
+			} else {
+				request.getSession().setAttribute("msgApproval", "비승인 처리 되었습니다.");
+				response.sendRedirect(request.getHeader("referer"));
+			}
+			
 		} else {
 			System.out.println("승인버튼이야");
+			tNo = tNoOk;
+			AlarmVo vo = new AlarmVo();
+			vo.setAlarm_content("선생님 승인이 되었습니다. 교습 정보를 등록해주세요.");
+			vo.setAlarm_receiveid(nickname);
+			vo.setAlarm_sendid("관리자");
+			vo.setM_id(mId);
+			yD = "Y";
+			int result = new AlarmService().sendApprovalAlarm(vo,yD,tNo);
+			if(result == 0) {
+				request.getSession().setAttribute("msgApproval", "처리 도중 오류가 발생했습니다. 다시 시도해주세요.");
+				response.sendRedirect(request.getHeader("referer"));
+			} else {
+				request.getSession().setAttribute("msgApproval", "승인 처리 되었습니다.");
+				response.sendRedirect(request.getHeader("referer"));
+			}
+			
 		}
 		
 		

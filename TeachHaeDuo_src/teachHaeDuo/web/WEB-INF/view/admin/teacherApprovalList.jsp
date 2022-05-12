@@ -71,16 +71,16 @@
 		</div>
 	<jsp:include page="../template_footer.jsp"></jsp:include>
 </div>
-</body>
 <script>
 $(function(){
-	/* $("#ok_btn").click(function(){
-		console.log("승인 클릭");
-		var frm = document.approval_frm;
-		frm.method="post";
-		frm.action="teacherApproval.do";
-		frm.submit();
-	}); */
+	var msgApprovalVal = '${msgApproval}';
+	if(msgApprovalVal != null && msgApprovalVal != ""){
+		alert('${msgApproval}');
+		location.replace("teacherApprovalList");
+	}
 });
 </script>
+<% request.getSession().removeAttribute("msgApproval"); %>
+</body>
+
 </html>
