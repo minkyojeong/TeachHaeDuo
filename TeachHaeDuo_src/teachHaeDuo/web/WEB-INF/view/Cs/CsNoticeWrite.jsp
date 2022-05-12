@@ -111,15 +111,16 @@ padding:3px;
 }
 .cs_q{
     width:1000px;
-    height:200px;;
+    height:50px;;
     margin: 0 auto;
     display:block;
-    border-bottom: 1px solid rgb(174,174,174);
+    
 }
 .cs_q_q{
     float:left;
     padding:10px;
     font-size: 20px;
+    height:25px;
 }
 .cs_a{
    width:1000px;
@@ -130,6 +131,7 @@ padding:3px;
     float:left;
     padding:10px;
     font-size: 20px;
+    height:220px;
 }
 #cs_box_email{
     width:1100px;

@@ -12,7 +12,7 @@ import kh.semi.thduo.member.vo.MemberVo;
 /**
  * Servlet implementation class CsNoticeWriteController
  */
-@WebServlet("/CsNoticeWriteController")
+@WebServlet("/CsNoticeWrite")
 public class CsNoticeWriteController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
@@ -33,7 +33,7 @@ public class CsNoticeWriteController extends HttpServlet {
 		if(ssvo == null)  {  
 			response.sendRedirect("login");
 		}else {
-			request.getRequestDispatcher("WEB-INF/view/Cs/CsFaqWrite.jsp").forward(request, response);
+			request.getRequestDispatcher("WEB-INF/view/Cs/CsNoticeWrite.jsp").forward(request, response);
 		}
 	}
 
