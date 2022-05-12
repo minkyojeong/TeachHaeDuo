@@ -1,5 +1,7 @@
 package kh.semi.thduo.teacher.model.vo;
 
+
+import java.sql.Timestamp;
 import java.util.ArrayList;
 
 import kh.semi.thduo.like.model.vo.LikeVo;
@@ -29,6 +31,8 @@ public class TeacherVo {
 	private String m_nickname;
 	private String gender_fm;
 	private String m_address;
+	private Timestamp m_date;
+	private String m_certificate;
 	private ArrayList<ReviewVo> t_review;
 	private LikeVo like;
 	

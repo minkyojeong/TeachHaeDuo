@@ -6,6 +6,7 @@ import java.sql.Connection;
 import java.util.ArrayList;
 
 import kh.semi.thduo.like.model.vo.LikeVo;
+import kh.semi.thduo.member.vo.MemberVo;
 import kh.semi.thduo.teacher.model.dao.TeacherDao;
 import kh.semi.thduo.teacher.model.vo.TeacherSearchSettingVo;
 import kh.semi.thduo.teacher.model.vo.TeacherVo;
@@ -262,6 +263,17 @@ public class TeacherService {
 		close(conn);
 
 		return result;
+	}
+	
+	// 비승인 선생님 정보 읽기
+	public ArrayList<MemberVo> readTeacherApprovalList(){
+		ArrayList<MemberVo> voList = null;
+		Connection conn = getConnection();
+
+		voList = dao.readTeacherApprovalList(conn);
+		close(conn);
+		
+		return voList;
 	}
 	
 	// 성별에 맞는 선생님 정보 읽기

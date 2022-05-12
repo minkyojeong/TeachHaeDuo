@@ -13,6 +13,7 @@ import java.sql.Statement;
 import java.util.ArrayList;
 
 import kh.semi.thduo.like.model.vo.LikeVo;
+import kh.semi.thduo.member.vo.MemberVo;
 import kh.semi.thduo.review.model.vo.ReviewVo;
 import kh.semi.thduo.teacher.model.vo.TeacherSearchSettingVo;
 import kh.semi.thduo.teacher.model.vo.TeacherVo;
@@ -619,6 +620,41 @@ public class TeacherDao {
 
 		return result;
 	}
+	
+	// 비승인 선생님 정보 읽기
+	public ArrayList<MemberVo> readTeacherApprovalList(Connection conn){
+		ArrayList<MemberVo> voList = null;
+		String sql = "select m_id, m_name, m_nickname, m_birth, m_phone, m_email, gender_fm, m_date, m_certificate, t_no from member m join t_profile t USING(M_ID) where T_APPROVAL='N'";
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			rs = pstmt.executeQuery();
+			if(rs != null) {
+				voList = new ArrayList<MemberVo>();
+				while(rs.next()) {
+					MemberVo vo = new MemberVo();
+					vo.setmId(rs.getString("m_id"));
+					vo.setmName(rs.getString("m_name"));
+					vo.setmNickname(rs.getString("m_nickname"));
+					vo.setmBirth(rs.getString("m_birth"));
+					vo.setmPhone(rs.getString("m_phone"));
+					vo.setmEmail(rs.getString("m_email"));
+					vo.setGenderFm(rs.getString("gender_fm"));
+					vo.setmDate(rs.getTimestamp("m_date"));
+					vo.setmCertificate(rs.getString("m_certificate"));
+					vo.settNo(rs.getString("t_no"));
+					voList.add(vo);
+				}
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rs);
+			close(pstmt);
+		}
+		return voList;
+	}
+	
 	// 성별에 맞는 선생님 정보 읽기
 //	public ArrayList<TeacherVo> readGenderTeacher(Connection conn, String genderFm) {
 //		ArrayList<TeacherVo> retVolist = null;

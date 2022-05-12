@@ -17,14 +17,14 @@ import kh.semi.thduo.teacher.model.vo.TeacherVo;
 /**
  * Servlet implementation class TeacherListController
  */
-@WebServlet("/teacherApprovalList")
-public class TeacherApprovalListController extends HttpServlet {
+@WebServlet("/teacherCertificate")
+public class TeacherCertificateViewController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public TeacherApprovalListController() {
+    public TeacherCertificateViewController() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -35,10 +35,12 @@ public class TeacherApprovalListController extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		System.out.println("doGet - teacherList 페이지 이동");
 		
-		ArrayList<MemberVo> voList = new TeacherService().readTeacherApprovalList();
-		
-		request.setAttribute("voList", voList);
-		request.getRequestDispatcher("WEB-INF/view/admin/teacherApprovalList.jsp").forward(request, response);
+		// 선생님 증명서 데이터 가져오기
+		String filePath = request.getParameter("file");
+		// 선생님 증명서 경로 담기
+		request.setAttribute("filePath", filePath);
+		// 선생님 증명서 보는 페이지로 이동
+		request.getRequestDispatcher("WEB-INF/view/admin/teacherCertificate.jsp").forward(request, response);
 	}
 
 	/**
