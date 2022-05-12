@@ -100,7 +100,8 @@
 					<section>
 						<div class="t_profile">
 							<div class="t_profile_left">
-								<div class="t_img"></div>
+								<c:if test="${empty tvo.t_picture}"><div class="t_img" style="background-image: url('<%=request.getContextPath()%>/resources/icons/profile.png')"></div></c:if>
+								<c:if test="${not empty tvo.t_picture}"><div class="t_img" style="background-image: url('${tvo.t_picture}')"></div></c:if>
 								<p class="t_name">${tvo.m_nickname}</p>
 								<p class="t_age">
 									<c:choose>
