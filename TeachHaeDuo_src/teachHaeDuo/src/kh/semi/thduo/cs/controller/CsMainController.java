@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import kh.semi.thduo.admin.vo.AdminVo;
 import kh.semi.thduo.cs.service.CsService;
 import kh.semi.thduo.cs.vo.CsVo;
 
@@ -34,9 +35,15 @@ public class CsMainController extends HttpServlet {
 		// TODO Auto-generated method stub
 		ArrayList<CsVo> csvo = new CsService().csFaqList();
 		ArrayList<CsVo> vo = new CsService().csNoticeList();
+		AdminVo advo = (AdminVo)request.getSession().getAttribute("ssMV");
+		if(advo == null) {
+			response.sendRedirect("login");
+			return;
+		}else {
 		request.setAttribute("csvo", csvo);
 		request.setAttribute("vo", vo);
 		request.getRequestDispatcher("WEB-INF/view/Cs/CsMain.jsp").forward(request, response);
+	}
 	}
 
 	/**

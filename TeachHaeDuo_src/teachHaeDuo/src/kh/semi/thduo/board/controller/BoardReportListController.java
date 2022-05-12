@@ -9,9 +9,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import kh.semi.thduo.admin.vo.AdminVo;
 import kh.semi.thduo.board.service.BoardService;
 import kh.semi.thduo.board.vo.BoardReportVo;
-import kh.semi.thduo.board.vo.BoardVo;
 
 /**
  * Servlet implementation class BoardReportListController
@@ -33,8 +33,8 @@ public class BoardReportListController extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-int currentPage = 1;
 		
+		int currentPage = 1;
 		String currentPageStr = request.getParameter("page");
 		System.out.println(currentPageStr);
 		try {
@@ -77,7 +77,11 @@ int currentPage = 1;
 			entRnum = totalCnt;
 		}
 		System.out.println("rnum:"+ startRnum +"~"+entRnum);
-		
+		AdminVo advo = (AdminVo)request.getSession().getAttribute("ssMV");
+		if(advo == null) {
+			response.sendRedirect("login");
+			return;
+		}else {
 		ArrayList<BoardReportVo> reportList = new BoardService().boardReportList(startRnum, entRnum);
 		request.setAttribute("reportList", reportList);
 		request.setAttribute("startPage", startPage);
@@ -85,6 +89,7 @@ int currentPage = 1;
 		request.setAttribute("currentPage", currentPage);
 		request.setAttribute("totalPageCnt", totalPageCnt);
 		request.getRequestDispatcher("WEB-INF/view/Board/BoardReportList.jsp").forward(request, response);
+		}
 	}
 
 	/**

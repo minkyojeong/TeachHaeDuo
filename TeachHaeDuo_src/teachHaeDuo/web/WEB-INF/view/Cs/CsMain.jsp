@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    <%@page import="kh.semi.thduo.admin.vo.AdminVo"%>
     <link href="<%=request.getContextPath()%>/resources/css/header.css"
 	rel="stylesheet" type="text/css">
 	<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
@@ -16,6 +17,8 @@
          $('#cs_box_email').hide();
          $('#questionBoard').hide();
          $('#questionBoard1').hide();
+         $('#FaqDel').hide();
+         $('#NoticeDel').hide();
         })
         $(document).ready(function() {
      $('#cs_select_option').change(function() {
@@ -23,9 +26,11 @@
        if (result == 'option1') {
          $('#cs_box_q').show();
          $('#questionBoard').show();
+         $('#FaqDel').show();
        } else {
          $('#cs_box_q').hide();
          $('#questionBoard').hide();
+         $('#FaqDel').hide();
        }
      }); 
    }); 
@@ -35,9 +40,11 @@
        if (result == 'option2') {
          $('#cs_box_n').show();
          $('#questionBoard1').show();
+         $('#NoticeDel').show();
        } else {
          $('#cs_box_n').hide();
          $('#questionBoard1').hide();
+         $('#NoticeDel').hide();
        }
      }); 
    }); 
@@ -243,6 +250,7 @@ margin:10px;
     </style>
 </head>
 <body>
+
 	 <div class="cs_container">
 	 <jsp:include page="../template_header.jsp"></jsp:include>
         <div class="cs_section">
@@ -265,9 +273,9 @@ margin:10px;
 				<a href="CsNoticeWrite" id="question1">공지사항 글 쓰기</a>
 			</div>
             <div class="cs_body">
-            <button type="button" class="bt" onclick="location.href='CsFaqDelete'">삭제</button>
             	<c:forEach items="${csvo }" var="vo">
                 <div id="cs_box_q">
+                <button type="button" class="bt" id="FaqDel" onclick="location.href='CsFaqDelete'">삭제</button>
                     <div class="cs_q">
                         <p class="cs_q_q">${vo.getFaqQuestion()}</p>
                       
@@ -279,6 +287,7 @@ margin:10px;
                 </c:forEach>
                 <c:forEach items="${ vo }" var="vo">
                 <div id="cs_box_n">
+                <button type="button" class="bt" id="NoticeDel" onclick="location.href='CsNoticeDelete'">삭제</button>
                     <div class="cs_n_title">
                       <p style="padding:10px;float:right;">${vo.getNoticeContent()}</p>
                     </div>
