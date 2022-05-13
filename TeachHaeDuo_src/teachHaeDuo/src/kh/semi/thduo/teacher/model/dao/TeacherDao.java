@@ -33,47 +33,49 @@ public class TeacherDao {
 
 
 	// 모든 선생님 정보 읽기
-		public ArrayList<TeacherVo> readAllTeacher(Connection conn, int startRnum, int endRnum) {
-			ArrayList<TeacherVo> retVolist = null;
-			String sql = "SELECT pro.t_no, pro.t_major, pro.t_picture, m.m_nickname, round(rscore.avg_rscore, 2) avg_rscore, olist.object_list, alist.area_list"
-					+ " FROM t_profile pro JOIN member m" + "                    ON pro.m_id = m.m_id"
-					+ "                    JOIN view_teacher_rscroe_avg rscore"
-					+ "                    ON rscore.m_nickname = m.m_nickname"
-					+ "                    JOIN view_teacher_object olist"
-					+ "                    ON olist.m_nickname = m.m_nickname"
-					+ "                    JOIN view_teacher_area alist"
-					+ "                    ON alist.m_nickname = m.m_nickname"
-					+ " ORDER BY TO_NUMBER(SUBSTR(t_no, 2)) desc";
-			System.out.println("sql: " + sql);
-			sql = "select * from (select ROWNUM rnum, tall.* from ("+sql+") tall) tall2  where rnum>=? and rnum<=?";
-			System.out.println("sql: " + sql);
-			try {
-				pstmt = conn.prepareStatement(sql);
-				pstmt.setInt(1, startRnum);
-				pstmt.setInt(2, endRnum);
-				rs = pstmt.executeQuery();
-				retVolist = new ArrayList<TeacherVo>();
-				while (rs.next()) {
-					TeacherVo vo = new TeacherVo();
-					vo.setT_no(rs.getString("t_no"));
-					vo.setT_major(rs.getString("t_major"));
-					vo.setT_picture(rs.getString("t_picture"));
-					vo.setM_nickname(rs.getString("m_nickname"));
-					vo.setAvg_rscore(rs.getDouble("avg_rscore"));
-					vo.setObject_list(rs.getString("object_list"));
-					vo.setArea_list(rs.getString("area_list"));
+	public ArrayList<TeacherVo> readAllTeacher(Connection conn, int startRnum, int endRnum) {
+		ArrayList<TeacherVo> retVolist = null;
+		String sql = "SELECT pro.t_no, pro.t_major, pro.t_picture, m.m_nickname, round(rscore.avg_rscore, 2) avg_rscore, olist.object_list, alist.area_list"
+				+ " FROM t_profile pro JOIN member m" 
+				+ "                    ON pro.m_id = m.m_id"
+				+ "                    JOIN view_teacher_rscroe_avg rscore"
+				+ "                    ON rscore.m_nickname = m.m_nickname"
+				+ "                    JOIN view_teacher_object olist"
+				+ "                    ON olist.m_nickname = m.m_nickname"
+				+ "                    JOIN view_teacher_area alist"
+				+ "                    ON alist.m_nickname = m.m_nickname"
+				+ " ORDER BY TO_NUMBER(SUBSTR(t_no, 2)) desc";
+		System.out.println("sql: " + sql);
+		sql = "select * from (select ROWNUM rnum, tall.* from ("+sql+") tall) tall2  where rnum>=? and rnum<=?";
+		System.out.println("sql: " + sql);
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, startRnum);
+			pstmt.setInt(2, endRnum);
+			rs = pstmt.executeQuery();
+			retVolist = new ArrayList<TeacherVo>();
+			while (rs.next()) {
+				TeacherVo vo = new TeacherVo();
+				vo.setT_no(rs.getString("t_no"));
+				vo.setT_major(rs.getString("t_major"));
+				vo.setT_picture(rs.getString("t_picture"));
+				vo.setM_nickname(rs.getString("m_nickname"));
+				vo.setAvg_rscore(rs.getDouble("avg_rscore"));
+				vo.setObject_list(rs.getString("object_list"));
+				vo.setArea_list(rs.getString("area_list"));
 
-					retVolist.add(vo);
-				}
-			} catch (SQLException e) {
-				e.printStackTrace();
-			} finally {
-				close(rs);
-				close(pstmt);
+				retVolist.add(vo);
 			}
-			System.out.println("dao retVolist 1:" + retVolist);
-			return retVolist;
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rs);
+			close(pstmt);
 		}
+		System.out.println("dao retVolist 1:" + retVolist);
+		
+		return retVolist;
+	}
 		
 	// 모든선생님 세기
 	public int countReadAllTeacher(Connection conn) {
@@ -86,9 +88,7 @@ public class TeacherDao {
 				+ "                    JOIN view_teacher_object olist"
 				+ "                    ON olist.m_nickname = m.m_nickname"
 				+ "                    JOIN view_teacher_area alist"
-				+ "                    ON alist.m_nickname = m.m_nickname" 
-		//		+ " WHERE olist.object_list LIKE ?"
-				+ " ORDER BY TO_NUMBER(SUBSTR(t_no, 2)) desc";
+				+ "                    ON alist.m_nickname = m.m_nickname";
 		try {
 			pstmt = conn.prepareStatement(sql);
 			rs = pstmt.executeQuery();
@@ -102,19 +102,23 @@ public class TeacherDao {
 			close(pstmt);
 		}
 		System.out.println("dao count result :" + result);
+		
 		return result;
 	}
+	
 	// 검색한 과목에 맞는 선생님 정보 읽기
-	public ArrayList<TeacherVo> readTeacher(Connection conn, String object,int startRnum,int endRnum) {
+	public ArrayList<TeacherVo> readTeacher(Connection conn, String object, int startRnum, int endRnum) {
 		ArrayList<TeacherVo> retVolist = null;
 		String sql = "SELECT pro.t_no, pro.t_major, pro.t_picture, m.m_nickname, round(rscore.avg_rscore, 2) avg_rscore, olist.object_list, alist.area_list"
-				+ " FROM t_profile pro JOIN member m" + "                    ON pro.m_id = m.m_id"
+				+ " FROM t_profile pro JOIN member m" 
+				+ "                    ON pro.m_id = m.m_id"
 				+ "                    JOIN view_teacher_rscroe_avg rscore"
 				+ "                    ON rscore.m_nickname = m.m_nickname"
 				+ "                    JOIN view_teacher_object olist"
 				+ "                    ON olist.m_nickname = m.m_nickname"
 				+ "                    JOIN view_teacher_area alist"
-				+ "                    ON alist.m_nickname = m.m_nickname" + " WHERE olist.object_list LIKE ?"
+				+ "                    ON alist.m_nickname = m.m_nickname" 
+				+ " WHERE olist.object_list LIKE ?"
 				+ " ORDER BY TO_NUMBER(SUBSTR(t_no, 2)) desc";
 		System.out.println("sql: " + sql);
 		sql = "select * from (select ROWNUM rnum, tall.* from ("+sql+") tall) tall2  where rnum>=? and rnum<=?";
@@ -151,37 +155,39 @@ public class TeacherDao {
 
 		return retVolist;
 	}
+	
 	// 검색한 과목에 맞는 선생님 정보 개수 읽기
-		public int countReadTeacher(Connection conn, String object) {
-			int result  = 0;
-			String sql = "SELECT count(*) "
-					+ " FROM t_profile pro JOIN member m" 
-					+ "                    ON pro.m_id = m.m_id"
-					+ "                    JOIN view_teacher_rscroe_avg rscore"
-					+ "                    ON rscore.m_nickname = m.m_nickname"
-					+ "                    JOIN view_teacher_object olist"
-					+ "                    ON olist.m_nickname = m.m_nickname"
-					+ "                    JOIN view_teacher_area alist"
-					+ "                    ON alist.m_nickname = m.m_nickname" + " WHERE olist.object_list LIKE ?"
-					+ " ORDER BY TO_NUMBER(SUBSTR(t_no, 2)) desc";
+	public int countReadTeacher(Connection conn, String object) {
+		int result  = 0;
+		String sql = "SELECT count(*) "
+				+ " FROM t_profile pro JOIN member m" 
+				+ "                    ON pro.m_id = m.m_id"
+				+ "                    JOIN view_teacher_rscroe_avg rscore"
+				+ "                    ON rscore.m_nickname = m.m_nickname"
+				+ "                    JOIN view_teacher_object olist"
+				+ "                    ON olist.m_nickname = m.m_nickname"
+				+ "                    JOIN view_teacher_area alist"
+				+ "                    ON alist.m_nickname = m.m_nickname" 
+				+ " WHERE olist.object_list LIKE ?"
+				+ " ORDER BY TO_NUMBER(SUBSTR(t_no, 2)) desc";
 
-			try {
-				pstmt = conn.prepareStatement(sql);
-				pstmt.setString(1, "%" + object + "%");
-				rs = pstmt.executeQuery();
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, "%" + object + "%");
+			rs = pstmt.executeQuery();
 
-				if (rs.next()) {
-					result = rs.getInt(1);
-				}
-			} catch (SQLException e) {
-				e.printStackTrace();
-			} finally {
-				close(rs);
-				close(pstmt);
+			if (rs.next()) {
+				result = rs.getInt(1);
 			}
-
-			return result;
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rs);
+			close(pstmt);
 		}
+
+		return result;
+	}
 
 	// 성별과 활동지역 맞는 선생님 정보 읽기
 	public ArrayList<TeacherVo> readAreaGenderTeacher(Connection conn, String genderFm, String area) {
@@ -231,9 +237,9 @@ public class TeacherDao {
 			close(pstmt);
 		}
 		System.out.println("dao retVolist 1:" + retVolist);
+		
 		return retVolist;
 	}
-
 
 	// 찜 여부 체크
 	public LikeVo checkLike(Connection conn, String m_id, String t_no) {
@@ -295,9 +301,9 @@ public class TeacherDao {
 		if (setVo.getLiked().equals("Y") && setVo.getsNo() != null && !setVo.getsNo().equals("")) {
 			sql += "    AND pro.t_no IN (select t_no from dibs where s_no ='" + setVo.getsNo() + "')"; // 찜
 		}
+		sql += " ORDER BY TO_NUMBER(SUBSTR(t_no, 2)) desc"; // 선생님 최신순으로 정렬
 		System.out.println("sql: " + sql);
 		sql = "select * from (select ROWNUM rnum, tall.* from ("+sql+") tall) tall2  where rnum>=? and rnum<=?";
-	//	sql += " ORDER BY TO_NUMBER(SUBSTR(t_no, 2)) desc"; // 선생님 최신순으로 정렬
 		System.out.println("sql: " + sql);
 		
 		try {
@@ -310,6 +316,7 @@ public class TeacherDao {
 				retVolist = new ArrayList<TeacherVo>();
 				do {
 					TeacherVo vo = new TeacherVo();
+					
 					vo.setT_no(rs.getString("t_no"));
 					vo.setT_major(rs.getString("t_major"));
 					vo.setT_picture(rs.getString("t_picture"));
@@ -317,6 +324,7 @@ public class TeacherDao {
 					vo.setAvg_rscore(rs.getDouble("avg_rscore"));
 					vo.setObject_list(rs.getString("object_list"));
 					vo.setArea_list(rs.getString("area_list"));
+					
 					System.out.println("5" + vo);
 					retVolist.add(vo);
 				} while (rs.next());
@@ -339,7 +347,8 @@ public class TeacherDao {
 				+ "    FROM t_profile pro JOIN member m ON  pro.m_id=m.m_id"
 				+ "    JOIN view_teacher_rscroe_avg rscore USING (m_nickname)"
 				+ "    JOIN view_teacher_object olist USING (m_nickname)"
-				+ "    JOIN view_teacher_area alist USING (m_nickname)" + "    WHERE  1=1 ";
+				+ "    JOIN view_teacher_area alist USING (m_nickname)" 
+				+ "    WHERE  1=1 ";
 //		if(setVo.getT_profile_yn() != null && !setVo.getT_permit_yn().equals("")) {
 //			sql+= "    AND pro.t_permit_yn = '"+setVo.getT_permit_yn()+"'";  // 통화허용
 //		}
@@ -382,6 +391,7 @@ public class TeacherDao {
 
 		return result;
 	}
+	
 	// 선생님 상세정보 읽기
 	public TeacherVo readTeacherInfo(Connection conn, String tNo) {
 		TeacherVo retVo = null;
@@ -389,7 +399,8 @@ public class TeacherDao {
 				+ "FROM t_profile pro JOIN member m ON pro.m_id = m.m_id "
 				+ "JOIN view_teacher_rscroe_avg rscore ON rscore.m_nickname = m.m_nickname "
 				+ "JOIN view_teacher_object olist ON olist.m_nickname = m.m_nickname "
-				+ "JOIN view_teacher_area alist ON alist.m_nickname = m.m_nickname " + "WHERE t_no = ?";
+				+ "JOIN view_teacher_area alist ON alist.m_nickname = m.m_nickname " 
+				+ "WHERE t_no = ?";
 		String sql2 = "SELECT t_r_no, t_r_writer, m_id, t_no, t_r_content, TO_CHAR(t_r_date, 'YYYY-MM-DD HH24:MI:SS') t_r_date, t_r_score "
 				+ "FROM t_review WHERE t_no = ? ORDER BY t_r_date DESC";
 
@@ -489,8 +500,6 @@ public class TeacherDao {
 		return result;
 	}
 
-
-
 	// 선생님 승인여부 체크
 	public String checkApproval(Connection conn, String tNo) {
 		String result = null;
@@ -582,6 +591,7 @@ public class TeacherDao {
 		} finally {
 			close(pstmt);
 		}
+		
 		return result;
 	}
 
@@ -599,6 +609,7 @@ public class TeacherDao {
 		} finally {
 			close(pstmt);
 		}
+		
 		return result;
 	}
 	
@@ -652,6 +663,7 @@ public class TeacherDao {
 			close(rs);
 			close(pstmt);
 		}
+		
 		return voList;
 	}
 	
