@@ -10,7 +10,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import kh.semi.thduo.admin.vo.AdminVo;
 import kh.semi.thduo.cs.service.CsService;
-import kh.semi.thduo.member.vo.MemberVo;
+import kh.semi.thduo.cs.vo.CsVo;
 
 /**
  * Servlet implementation class CsFaqWriteDoController
@@ -33,6 +33,9 @@ public class CsFaqWriteDoController extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 			String question = request.getParameter("cs_q_q");
 			String answer = request.getParameter("cs_q_a");
+			CsVo vo = new CsVo();
+			vo.setFaqAnswer(answer);
+			vo.setFaqQuestion(question);
 			String adminid = null;
 			AdminVo advo = (AdminVo)request.getSession().getAttribute("ssMV");
 			if(advo == null) {

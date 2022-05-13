@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import kh.semi.thduo.admin.vo.AdminVo;
 import kh.semi.thduo.cs.service.CsService;
+import kh.semi.thduo.cs.vo.CsVo;
 import kh.semi.thduo.member.vo.MemberVo;
 
 /**
@@ -33,6 +34,9 @@ public class CsNoticeWriteDoController extends HttpServlet {
 		// TODO Auto-generated method stub
 		String title = request.getParameter("cs_q_q");
 		String content = request.getParameter("cs_q_a");
+		CsVo vo = new CsVo();
+		vo.setNoticeContent(content);
+		vo.setNoticeTitle(title);
 		String adminid = null;
 		AdminVo advo = (AdminVo)request.getSession().getAttribute("ssMV");
 		if(advo == null) {

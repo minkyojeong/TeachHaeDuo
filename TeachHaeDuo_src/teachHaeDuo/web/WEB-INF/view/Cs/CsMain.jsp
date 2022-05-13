@@ -273,15 +273,15 @@ margin:10px;
 				<a href="CsNoticeWrite" id="question1">공지사항 글 쓰기</a>
 			</div>
             <div class="cs_body">
-            	<c:forEach items="${csvo }" var="vo">
+            	<c:forEach items="${csvo }" var="cvo">
                 <div id="cs_box_q">
                 <button type="button" class="bt" id="FaqDel" onclick="location.href='CsFaqDelete'">삭제</button>
                     <div class="cs_q">
-                        <p class="cs_q_q">${vo.getFaqQuestion()}</p>
+                        <p class="cs_q_q">${cvo.getFaqQuestion()}</p>
                       
                     </div>
                     <div class="cs_a">
-                        <p class="cs_q_a">${vo.getFaqAnswer()}</p>
+                        <p class="cs_q_a">${cvo.getFaqAnswer()}</p>
                     </div>
                 </div>
                 </c:forEach>
