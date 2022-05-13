@@ -11,7 +11,9 @@ import java.util.ArrayList;
 
 import kh.semi.thduo.member.dao.MemberDao;
 import kh.semi.thduo.member.vo.MemberVo;
+import kh.semi.thduo.pencil.model.dao.PencilDao;
 import kh.semi.thduo.pencil.model.service.PencilService;
+import kh.semi.thduo.student.dao.StudentDao;
 import kh.semi.thduo.student.service.StudentService;
 import kh.semi.thduo.student.vo.StudentVo;
 import kh.semi.thduo.teacher.model.dao.TeacherDao;
@@ -19,6 +21,8 @@ import kh.semi.thduo.teacher.model.dao.TeacherDao;
 public class MemberService {
 
 	private MemberDao dao = new MemberDao();
+	private StudentDao stuDao = new StudentDao();
+	private PencilDao penDao = new PencilDao();
 
 	// 회원가입 ok
 	public int insertMember(MemberVo vo) {
@@ -27,6 +31,7 @@ public class MemberService {
 		setAutocommit(conn, false);
 
 		result = dao.insertMember(conn, vo);
+		
 		if (result < 1) {
 			rollback(conn);
 			close(conn);
@@ -39,38 +44,39 @@ public class MemberService {
 			if (sNo.length() == 0) { // 길이가 0 같은면 S1
 				sNo = "S1";
 			} else {
-				int no = Integer.parseInt(sNo.substring(1, sNo.length())) + 1;
+				int no = Integer.parseInt(sNo) + 1;
 				sNo = "S".concat(no + "");
 			}
 			StudentVo sVo = new StudentVo(); //
 			sVo.setmId(vo.getmId());
 			sVo.setsNo(sNo);
-
-			result = new StudentService().insertStudent(sVo);
-
+			result = stuDao.insertStudent(conn, sVo);  
+			
 			if (result < 1) {
 				rollback(conn);
 				close(conn);
 				return 0;
 			}
-		} else if (vo.getRoleSt().equals("T")) { // 받은 값이 T이면
-			// 선생님 정보 테이블에 기본 insert
-			String mId = vo.getmId();
-			int tProfileResult = new TeacherDao().insertTeacherInit(conn, mId);
+		}
+		if (vo.getRoleSt().equals("T")) {
 
-			if (tProfileResult < 1) {
+			result = new TeacherDao().insertTeacherInit(conn, vo.getmId());
+
+			if (result < 1) {
 				rollback(conn);
 				close(conn);
-
-				return 0;
 			}
 		}
+			
+			
 		if (result == 1) {
 			// 연필 테이블에 기본 insert
-			String mId = vo.getmId();
-			int pencilResult = new PencilService().insertPencilInit(mId);
-			if (pencilResult == 0) {
+			result = penDao.insertPencilInit(conn, vo.getmId());
+			
+			if (result < 1) {
 				rollback(conn);
+				close(conn);
+				return 0;
 			} 
 		}
 
