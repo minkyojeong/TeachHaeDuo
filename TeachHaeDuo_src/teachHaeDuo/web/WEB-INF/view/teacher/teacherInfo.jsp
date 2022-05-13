@@ -143,7 +143,7 @@
 						<div class="t_content">
 							<article id="t_train_intro">
 								<h1>교습소개</h1>
-								<pre>${tvo.t_intro}</pre>
+								<pre style="line-height: 1.3em;">${tvo.t_intro}</pre>
 							</article>
 							<div class="t_info_line">
 								<hr>
