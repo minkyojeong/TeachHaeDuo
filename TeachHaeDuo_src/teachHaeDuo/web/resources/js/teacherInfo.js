@@ -152,14 +152,15 @@ $("#btn_review_send").on('click', function() {
 	});
 });
 //리뷰삭제 버튼 클릭 시 처리 내용
-$("#btn_review_delete").on('click', function() {
+function deleteReview(t_r_no) {
 	var confm = confirm("작성한 리뷰를 삭제하시겠습니까? 삭제된 리뷰는 복구 불가능합니다.");
 	if(confm == true){
 		$.ajax({
 			url: "reviewDelete.ax",
 			type: "post",
 			data: {
-				t_r_no: $("#t_r_no").val()
+				/*t_r_no: $("#t_r_no").val()*/
+				t_r_no: t_r_no
 			},
 			success: function(result) {
 				console.log(result);
@@ -180,7 +181,7 @@ $("#btn_review_delete").on('click', function() {
 	} else {
 		alert("리뷰삭제를 취소했습니다.");
 	}
-});
+};
 
 // 찜 했다는 모달창 띄우고 내용 있는 곳 부분 제외한 곳 누르면 페이지 새로고침
 $(".like").on('click', function() {
