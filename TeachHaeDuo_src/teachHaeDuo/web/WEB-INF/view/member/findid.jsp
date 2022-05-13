@@ -44,7 +44,7 @@
                             <button id="btn-Yes" class="form-control type="button">아이디찾기</button>
                         </div>
                         <div class="links">
-                            <a href="findPw">&nbsp;비밀번호 찾기 &nbsp;|</a>  <a href="login">&nbsp;로그인 &nbsp;</a>  <a href="join">| &nbsp; 회원가입</a>
+                            <a href="findPw" id="findPw">&nbsp;비밀번호 찾기 &nbsp;|</a>  <a href="login" id="login">&nbsp;로그인 &nbsp;</a>  <a href="join" id="join" >| &nbsp; 회원가입</a>
                         </div>
                     </div>
                     
@@ -79,8 +79,24 @@
                             $(".modal").hide();
                             }
                         });
+                        
+                        $("#join").on("mousedown",function(){
+                        	console.log("mId mousedown");
+                        	event.preventDefault();
+                        });
+                        
+                        $("#findPw").on("mousedown",function(){
+                        	console.log("mId mousedown");
+                        	event.preventDefault();
+                        });
+                        $("#login").on("mousedown",function(){
+                        	console.log("mId mousedown");
+                        	event.preventDefault();
+                        });
+                        
                                         
-                        $("#mName").focusout(function(){	
+                        $("#mName").on("blur",function(){
+                        	console.log("mName blur"); 
                         if($('#mName').val() == ""){
                                 $('#check').text('이름을 입력해주세요.');
                                 $('#check').css('color', 'red');
@@ -90,7 +106,8 @@
                             }
                             });
                             
-                            $("#mEmail").focusout(function(){
+                            $("#mEmail").on("blur",function(){
+                            	console.log("mEmail blur"); 
                             if($('#mEmail').val() == ""){
                                 $('#check').text('이메일을 입력해주세요');
                                     $('#check').css('color', 'red');

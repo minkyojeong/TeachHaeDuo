@@ -44,7 +44,7 @@
                         <button id="btn-Yes"  class="form-control"   type="button">비밀번호 재설정</button><br>
                     </div>
                     <div class="links">
-                        <a href="findId">&nbsp;아이디 찾기 &nbsp;|</a>  <a href="login">&nbsp;로그인 &nbsp;</a>  <a href="join">| &nbsp; 회원가입</a>
+                        <a href="findId"  id="findId">&nbsp;아이디 찾기 &nbsp;|</a>  <a href="login"  id="login">&nbsp;로그인 &nbsp;</a>  <a href="join" id="join">| &nbsp; 회원가입</a>
                     </div>
                  </div>
 
@@ -53,7 +53,7 @@
                     	 console.log("버튼 클릭");
                       $.ajax({
                           url:"findPw",
-                          type:"post",
+                          type:"post", 
                           data:{mId: $("#mId").val(),
                               mEmail: $("#mEmail").val(), },
                           success:function(result){
@@ -89,17 +89,32 @@
                           }
                     });
                 
-                    $("#mId").focusout(function(){
-                                
+                    $("#join").on("mousedown",function(){ // 마우스 버튼 누르면 
+                    	console.log("mId mousedown");  
+                    	event.preventDefault();  // 다른 이벤트가 발생하지 않게 함 
+                    });
+                    $("#findId").on("mousedown",function(){
+                    	console.log("mId mousedown");
+                    	event.preventDefault();
+                    });
+                    $("#login").on("mousedown",function(){
+                    	console.log("mId mousedown");
+                    	event.preventDefault();
+                    });
+                    
+                    
+                    $("#mId").on("blur",function(){
+                    	console.log("mId blur");    
                         if($('#mId').val() == ""){
                                 $('#check').text('아이디을 입력해주세요.');
-                                  $('#check').css('color', 'red');
+                                $('#check').css('color', 'red');
                         }else{
                              $('#check').hide();
                         }
                     });
                         
-                    $("#mEmail").focusout(function(){
+                    $("#mEmail").on("blur",function(){
+                    	console.log("mEmail blur");   
                         if($('#mEmail').val() == ""){
                                 $('#check').text('이메일을 입력해주세요');
                                   $('#check').css('color', 'red');
