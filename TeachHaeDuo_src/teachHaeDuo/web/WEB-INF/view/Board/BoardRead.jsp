@@ -43,11 +43,7 @@ $(function btn2(){
 						<%
 					    MemberVo ssvo = (MemberVo)session.getAttribute("ssMV");
 						String ssId = ssvo.getmNickname();%>
-						<%
-						AdminVo advo = (AdminVo)request.getSession().getAttribute("ssMV");
-						String adId = advo.getAdminId();
-						%>
-
+					
 <%
 ArrayList<BoardReCommentVo> rvolist = (ArrayList<BoardReCommentVo>)request.getAttribute("rvo");
 %>
@@ -75,7 +71,7 @@ ArrayList<BoardReCommentVo> rvolist = (ArrayList<BoardReCommentVo>)request.getAt
 							<dd id="writer"><%= vo.getbWriter() %></dd>
 							<dd id="writedate"><%= vo.getbWriteDate().substring(0,10) %></dd>
 						</dl>
-						<%if( ssId.equals(vo.getbWriter()) || adId.equals("admin"))  { %>
+						<%if( ssId.equals(vo.getbWriter()))  { %>
 						<dd id="cnt"><button type="button" onclick="location.href='BoardModify?bno=<%= vo.getbNo() %>&mid=<%= vo.getmId() %>'">글 수정</button></dd>
 						<dd id="bno"><button type="button" onclick="location.href='BoardDelete?bno=<%= vo.getbNo() %>&mid=<%= vo.getmId() %>'">글 삭제</button></dd>
 		                <%} %> 
