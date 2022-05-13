@@ -226,6 +226,7 @@
     <jsp:include page="../template_footer.jsp"></jsp:include>
     </div>
 <script>
+/* 연필 사용 내역 */
 $("#p_won").click(function() {
 	$("#won_modal").show();
 	console.log("잔액 클릭");
@@ -242,16 +243,6 @@ $("#p_won").click(function() {
 			console.log(result.length);
 			var html = "";
 			for (var i = 0; i < result.length; i++) {
-				/* <table id="won_table">
-	            	<tr id="won_table_tr1">
-	            		<th>
-	            			<img src="${pageContext.request.contextPath}/resources/icons/charge_updown.png" width="20" height="20">
-	            		</th>
-	            		<th>연필</th>
-	            		<th>상세 내용</th>
-	            		<th>날짜</th>
-	            	</tr>
-           		 </table> */
 				var vo = result[i];
 				html += '<tr>';
 				if(vo.cpCash < 0){

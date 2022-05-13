@@ -121,9 +121,10 @@
 	</div>
 	<script>
 		$(function() {
-			var pwdChk = true;
-			var emailChk = true;
-			var phoneChk = true;
+			/* 회원정보 수정*/
+			var pwdChk = false;
+			var emailChk = false;
+			var phoneChk = false;
 			var chkVal = false;
 			
 			
@@ -149,7 +150,7 @@
 				} 
 			});
 			
-
+			/* 회원 탈퇴 */
 			$("#member_delete_btn").click(function() {
 				var confm = confirm("정말로 회원 탈퇴를 진행하시겠습니까? 삭제된 정보는 복구 불가능합니다.");
 				if (confm == true) {
@@ -158,7 +159,6 @@
 						url : "memberDelete.ax",
 						type : "post",
 						date : {
-						// mId: $("#mId").val()
 						},
 						success : function(result) {
 							if (result == "로그인 먼저 해주세요.") {
@@ -179,6 +179,7 @@
 
 			//패스워드 형식 확인	 -ok
 			$("#pw").on("input",function() {
+				pwdChk = true;
 				
 				var passwordRegEx = /^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[!@#$%^&*-]).{8,}$/;// 8자리이상  대소문자, 숫자, 특수문자가 각각 1개 이상 (패스워드 체크시 활용)
 				var passwordVal = null;
@@ -205,6 +206,7 @@
 			
 			//이메일 형식 확인-ok 
 			$("#mEmail").on("input",function() {
+				emailChk = true;
 				if($("#mEmail").val() == '<%=ssMV.getmEmail() %>'){
 					emailChk = false;
 					return;
@@ -263,6 +265,7 @@
 			
 			//핸드폰 형식확인 -ok
 			$("#phone").on("input", function() {
+				phoneChk = true;
 				if($("#phone").val() == '<%=ssMV.getmPhone() %>'){
 					$("#phone_info").html("");
 					phoneChk = false;

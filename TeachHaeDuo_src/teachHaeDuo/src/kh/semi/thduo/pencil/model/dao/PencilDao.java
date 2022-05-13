@@ -1,6 +1,7 @@
 package kh.semi.thduo.pencil.model.dao;
 
 import static kh.semi.thduo.common.jdbc.JdbcTemplate.close;
+import static kh.semi.thduo.common.jdbc.JdbcTemplate.getConnection;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -9,6 +10,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 
+import kh.semi.thduo.member.vo.MemberVo;
 import kh.semi.thduo.pencil.model.vo.PencilVo;
 
 public class PencilDao {
@@ -131,5 +133,38 @@ public class PencilDao {
 			close(pstmt);
 		}
 		return result;
+	}
+
+	// 관리자 매출 조회
+	public ArrayList<MemberVo> pencilChart(Connection conn) {
+		ArrayList<MemberVo> voList = null;
+
+		String sql="select cp_date, cp_cash, p.m_id, m.m_name, m.role_st, m.m_phone, m.m_email, m.gender_fm from check_pencil p join member m on p.m_id = m.m_id where cp_cash>0 order by cp_date desc";
+		try {
+			pstmt = conn.prepareStatement(sql);
+			rs = pstmt.executeQuery();
+			
+			if(rs != null) {
+				voList = new ArrayList<MemberVo>();
+				while(rs.next()) {
+					MemberVo vo = new MemberVo();
+					vo.setCpCash(rs.getString("cp_Cash"));
+					vo.setCpDate(rs.getTimestamp("cp_Date"));
+					vo.setGenderFm(rs.getString("gender_Fm"));
+					vo.setmEmail(rs.getString("m_Email"));
+					vo.setmId(rs.getString("m_Id"));
+					vo.setmName(rs.getString("m_Name"));
+					vo.setmPhone(rs.getString("m_Phone"));
+					vo.setRoleSt(rs.getString("role_St"));
+					voList.add(vo);
+				}
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+
+		return voList;
 	}
 }

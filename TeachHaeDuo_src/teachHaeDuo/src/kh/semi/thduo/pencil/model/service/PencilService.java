@@ -7,6 +7,7 @@ import static kh.semi.thduo.common.jdbc.JdbcTemplate.*;
 
 import kh.semi.thduo.alarm.model.dao.AlarmDao;
 import kh.semi.thduo.alarm.model.vo.AlarmVo;
+import kh.semi.thduo.member.vo.MemberVo;
 import kh.semi.thduo.pencil.model.dao.PencilDao;
 import kh.semi.thduo.pencil.model.vo.PencilVo;
 
@@ -101,6 +102,18 @@ public class PencilService {
 		}
 		close(conn);
 
+		return result;
+	}
+	
+	// 관리자 매출 조회
+	public ArrayList<MemberVo> pencilChart(){
+		ArrayList<MemberVo> result = null;
+		
+		Connection conn = getConnection();
+		result = dao.pencilChart(conn);
+
+		close(conn);
+		
 		return result;
 	}
 }

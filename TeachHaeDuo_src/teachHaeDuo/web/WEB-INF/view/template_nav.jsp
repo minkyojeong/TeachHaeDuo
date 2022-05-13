@@ -10,7 +10,7 @@
 		    <li><a href="${pageContext.request.contextPath}/teacherApprovalList">선생님 승인여부</a></li>
 		    <li><a href="#">선생님 신고관리</a></li>
 		    <li><a href="#">게시판관리</a></li>
-		    <li><a href="#">충전금액 조회</a></li>
+		    <li><a href="${pageContext.request.contextPath}/pencilChart">충전금액 조회</a></li>
 		    <li><a href="#">자주 묻는 질문관리</a></li>
 		  </ul>
  </nav>

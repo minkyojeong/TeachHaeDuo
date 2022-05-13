@@ -1,0 +1,32 @@
+@charset "UTF-8";
+
+section {
+	padding: 10px;
+}
+
+table.pencilchart-tableAll {
+	width: 100%;
+	border-top: 1px solid #444444;
+	border-collapse: collapse;
+	text-align: center;
+	font-family: "MinSans-Medium"
+}
+
+table.pencilchart-tableAll th, table.pencilchart-tableAll td {
+	border-bottom: 1px solid #444444;
+	padding: 10px;
+}
+
+table.pencilchart-tableAll th {
+	background-color: #fed08b;
+}
+
+.pencilchart-title {
+	font-size: 20px;
+	padding: 20px 30px;
+	font-family: "MinSans-Bold"
+}
+
+.pencilchart-tableAll {
+	padding: 10px;
+}

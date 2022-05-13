@@ -164,17 +164,12 @@ $("#p_alarm").on("click", function() {
 		}
 	
 	}); 
-	
-		
-	
-	
-	
 });
-
+// 알람 모달창 x 누르면 닫히기
 $(".alarm_modal_close").click(function() {
 	$("#alarm_modal").hide();
 });
-
+// 알람 모달창 다른곳 누르면 닫히기
 alarm_modal.addEventListener("click", e => {
 	const evTarget = e.target
 	if (evTarget.classList.contains("alarm_modal_overlay")) {
@@ -182,6 +177,7 @@ alarm_modal.addEventListener("click", e => {
 	}
 });
 
+// 전체 알람 클릭
 $("input[name=header_btn]").click(function(){
 	if($("input[name=header_btn]:checked").val() == "1"){
 		console.log("전체 알람");
@@ -221,6 +217,7 @@ $("input[name=header_btn]").click(function(){
 			}
 		
 		}); 
+		 // 받은 알람 클릭
 	} else if ($("input[name=header_btn]:checked").val() == "2"){
 		console.log("받은 알람");
 		
@@ -256,7 +253,7 @@ $("input[name=header_btn]").click(function(){
 			}
 		
 		}); 
-		
+		//보낸 알람 클릭
 	} else if ($("input[name=header_btn]:checked").val() == "3"){
 		console.log("보낸 알람");
 		
@@ -353,21 +350,26 @@ $("#header_btn_message_send").on('click', function() {
 	});
 });
 
-
+// 받은 알람 아이디 목록에서 아이디 선택
 var selectBoxChange = function(value){
 	console.log("값변경돼");
 	$("#header_alarm_receiveid").val(value);
 	console.log($("#header_alarm_receiveid").val());
 }
-$.ajax({
-	url: "receiveIdList.ax",
-	type: "post",
-	dataType:"json",
-	success: function(result){
-	},
-	error: function(){
-		
-	}
-});
+
+
+	$.ajax({
+		url: "receiveIdList.ax",
+		type: "post",
+		dataType:"json",
+		success: function(result){
+		},
+		error: function(){
+			
+		}
+	});
+
+
+
 
 </script>

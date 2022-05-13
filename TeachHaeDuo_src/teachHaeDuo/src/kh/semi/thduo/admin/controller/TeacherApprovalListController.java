@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import kh.semi.thduo.admin.vo.AdminVo;
 import kh.semi.thduo.member.service.MemberService;
 import kh.semi.thduo.member.vo.MemberVo;
 import kh.semi.thduo.teacher.model.service.TeacherService;
@@ -20,32 +21,43 @@ import kh.semi.thduo.teacher.model.vo.TeacherVo;
 @WebServlet("/teacherApprovalList")
 public class TeacherApprovalListController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
-    public TeacherApprovalListController() {
-        super();
-        // TODO Auto-generated constructor stub
-    }
 
 	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
+	 * @see HttpServlet#HttpServlet()
 	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		System.out.println("doGet - teacherList 페이지 이동");
-		
-		// 화면에 뿌려줄 선생님 데이터 가져오기
-		ArrayList<MemberVo> voList = new TeacherService().readTeacherApprovalList();
-		
-		// 가져온 데이터 request에 담기
-		request.setAttribute("voList", voList);
-		// 정보 들고 리스트 페이지 이동
-		request.getRequestDispatcher("WEB-INF/view/admin/teacherApprovalList.jsp").forward(request, response);
+	public TeacherApprovalListController() {
+		super();
+		// TODO Auto-generated constructor stub
 	}
 
 	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
+	 *      response)
+	 */
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		System.out.println("doGet - teacherList 페이지 이동");
+
+		AdminVo vo = (AdminVo) request.getSession().getAttribute("ssMV");
+
+		// 관리자 로그인이 안되어있다면
+		if (vo == null) {
+
+			response.sendRedirect(request.getContextPath());
+		} else {
+			// 화면에 뿌려줄 선생님 데이터 가져오기
+			ArrayList<MemberVo> voList = new TeacherService().readTeacherApprovalList();
+
+			// 가져온 데이터 request에 담기
+			request.setAttribute("voList", voList);
+			// 정보 들고 리스트 페이지 이동
+			request.getRequestDispatcher("WEB-INF/view/admin/teacherApprovalList.jsp").forward(request, response);
+		}
+	}
+
+	/**
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
+	 *      response)
 	 */
 //	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 //
