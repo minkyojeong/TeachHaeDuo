@@ -20,14 +20,13 @@ public class MemberDao {
 	//회원가입 
 	public int insertMember(Connection conn, MemberVo vo) {
 		int result = 0;  
-		                 
+		
 		String sql = 
 		"INSERT INTO THDUO.MEMBER"
 		+"(M_ID, M_PW, M_NAME, M_NICKNAME, M_BIRTH, M_ADDRESS, M_PHONE, M_EMAIL, GENDER_FM, ROLE_ST, M_DATE)"
 		+"VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, SYSTIMESTAMP)";	
 		
 		try { 
-			
 			pstmt = conn.prepareStatement(sql);
 
 			pstmt.setString(1, vo.getmId());  
@@ -40,14 +39,11 @@ public class MemberDao {
 			pstmt.setString(8, vo.getmEmail());
 			pstmt.setString(9, vo.getGenderFm());
 			pstmt.setString(10, vo.getRoleSt());
-	
-			
+
 			result = pstmt.executeUpdate();
-					
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {  
-			
 			close(pstmt);
 		}
 		

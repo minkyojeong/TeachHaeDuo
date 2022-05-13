@@ -22,6 +22,7 @@ public class MemberService {
 
 	private MemberDao dao = new MemberDao();
 	private StudentDao stuDao = new StudentDao();
+	private TeacherDao teacherDao = new TeacherDao();
 	private PencilDao penDao = new PencilDao();
 
 	// 회원가입 ok
@@ -30,7 +31,10 @@ public class MemberService {
 		Connection conn = getConnection();
 		setAutocommit(conn, false);
 
+		System.out.println("회원가입 시작");
+		
 		result = dao.insertMember(conn, vo);
+		System.out.println("member 테이블 insert 결과 : " + result);
 		
 		if (result < 1) {
 			rollback(conn);
@@ -38,8 +42,10 @@ public class MemberService {
 			return 0;
 		}
 
+		System.out.println("member 테이블 insert 결과 : " + result);
 		if (vo.getRoleSt().equals("S")) { // 받은 값이 S이면
-
+			System.out.println("학생입니다.");
+			
 			String sNo = new StudentService().readStudentCheck();// readStudentCheck DB가서 번호 체크
 			if (sNo.length() == 0) { // 길이가 0 같은면 S1
 				sNo = "S1";
@@ -59,12 +65,14 @@ public class MemberService {
 			}
 		}
 		if (vo.getRoleSt().equals("T")) {
+			System.out.println("선생님 입니다.");
 
-			result = new TeacherDao().insertTeacherInit(conn, vo.getmId());
+			result = teacherDao.insertTeacherInit(conn, vo.getmId());
 
 			if (result < 1) {
 				rollback(conn);
 				close(conn);
+				return 0;
 			}
 		}
 			
