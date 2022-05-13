@@ -20,6 +20,19 @@
 <meta charset="UTF-8">
 <title>선생님찾기 메인</title>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<style>
+.arrow.next{
+	background-color: white;
+	background-image: url('resources/icons/next_arrow.jpg' );
+	/* linear-gradient(to bottom, rgba(255,255,0,0.5), rgba(0,0,255,0.5)), */
+	background-size: 26px 36px; 
+}
+.arrow .prev{
+	background-color: white;
+	background-image: url('resources/icons/prev_arrow.jpg');
+	background-size: 26px 36px;
+}
+</style>
 </head>
 <body>
 	<%
@@ -177,7 +190,8 @@
 							<img src="${pageContext.request.contextPath}/resources/icons/page_prev.png">
 						</c:when>
 						<c:otherwise>
-							<img src="${pageContext.request.contextPath}/resources/icons/page_prev.png">
+							<input type="button" class="arrow prev btnPage disabled" value="${startPage-1 }">
+							<%--<img src="${pageContext.request.contextPath}/resources/icons/page_prev.png"> --%> 
 						</c:otherwise>
 					</c:choose>
 					<c:forEach var="i" begin="${startPage}" end="${endPage }">
@@ -191,10 +205,11 @@
 					<c:choose>
 						<c:when test="${endPage > totalPageCnt}">
 							<input type="button" class="arrow next btnPage" value="${endPage+1 }">
-							<img src="${pageContext.request.contextPath}/resources/icons/page_next.png">
+							<%-- <img src="${pageContext.request.contextPath}/resources/icons/page_next.png"> --%>
 						</c:when>
 						<c:otherwise>
-							<img src="${pageContext.request.contextPath}/resources/icons/page_next.png">
+							<input type="button" class="arrow next btnPage disabled" value="${endPage+1 }">
+							<%-- <img src="${pageContext.request.contextPath}/resources/icons/page_next.png"> --%>
 						</c:otherwise>
 					</c:choose>
 					</div>
