@@ -44,11 +44,11 @@ public class BoardRecommentWriteController extends HttpServlet {
 			response.sendRedirect("login");
 			return;
 		} else {  // 로그인한 상태라면 write page 진입
-			int result = new BoardService().boardReCommentWrite(bNo, rWriter,rContent);
+			int result = new BoardService().boardReCommentWrite(bNo, rContent,rWriter);
 			if(result < 1) {   // 글등록 실패
 				response.sendRedirect("BoardFail");
 			} else { // 글등록 성공
-				response.sendRedirect("BoardRead");
+				request.getRequestDispatcher("BoardRead?bno="+ bNo).forward(request, response);
 			}
 				
 		}

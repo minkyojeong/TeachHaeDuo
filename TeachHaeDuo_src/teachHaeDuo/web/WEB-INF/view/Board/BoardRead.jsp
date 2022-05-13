@@ -91,7 +91,7 @@ ArrayList<BoardReCommentVo> rvolist = (ArrayList<BoardReCommentVo>)request.getAt
 				<input style="display:none;"type="text" name="rWriter" value="<%= ssvo.getmName() %>">
 				<% System.out.println(ssvo.getmName()); %>
 				<input style="display:none;"type="text" id="bno" name="bno" value="<%= vo.getbNo() %>">
-				<input type="text" name="reComment" placeholder="댓글을 입력하세요."><br>
+				<input type="text" name="reComment" placeholder="댓글을 입력하세요." maxlength="100"><br>
 				<button type="submit">댓글등록</button>
 			</form>
 		</div>
@@ -103,7 +103,7 @@ ArrayList<BoardReCommentVo> rvolist = (ArrayList<BoardReCommentVo>)request.getAt
 			<table>
 				<tr>
 					<td><%= rvo.getrWriter() %></td>
-					<td><%= rvo.getrWriteDate().substring(0,16) %></td>
+					<td><%= rvo.getrWriteDate().substring(0,10) %></td>
 					<td colspan="9"><%= rvo.getrContent() %></td>
 					<td><button type="button" onclick="location.href='BoardReCommentDelete?bno=<%= vo.getbNo() %>&rno=<%= rvo.getrNo() %>'">삭제</button>
 				</tr>

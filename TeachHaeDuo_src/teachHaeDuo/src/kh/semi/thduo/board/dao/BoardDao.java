@@ -232,6 +232,7 @@ public class BoardDao {
 			while(rs.next()) { // 10 : 위 2번의 조건식 fk- 결과는 0행이상.  while 사용
 				BoardReCommentVo rvo = new BoardReCommentVo();
 				rvo.setrContent(rs.getString("r_Content"));
+				rvo.setrWriter(rs.getString("r_writer"));
 				rvo.setrNo(rs.getString("r_No"));
 				rvo.setrWriteDate(rs.getString("r_Write_Date"));
 				volist.add(rvo);
