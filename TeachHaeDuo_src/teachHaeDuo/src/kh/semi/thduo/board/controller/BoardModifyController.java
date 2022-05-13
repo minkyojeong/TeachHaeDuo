@@ -43,7 +43,7 @@ public class BoardModifyController extends HttpServlet {
 		result.setbContent(result.getbContent().replaceAll(" ", "&nbsp;"));
 		System.out.println(result);
 		request.setAttribute("bvo", result);
-		request.getRequestDispatcher("WEB-INF/vew/Board/BoardModify.jsp").forward(request, response);
+		request.getRequestDispatcher("WEB-INF/view/Board/BoardModify.jsp").forward(request, response);
 		
 	}
 

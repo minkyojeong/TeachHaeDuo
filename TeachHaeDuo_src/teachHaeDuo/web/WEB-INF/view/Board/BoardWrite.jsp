@@ -1,4 +1,11 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
+    <link href="<%=request.getContextPath()%>/resources/css/reset.css" rel="stylesheet" type="text/css">
+<link href="${pageContext.request.contextPath}/resources/css/button.css" rel="stylesheet" type="text/css">
+<link href="<%=request.getContextPath()%>/resources/css/font.css" rel="stylesheet" type="text/css">
+<link href="<%=request.getContextPath()%>/resources/css/common.css" rel="stylesheet" type="text/css">
+<link href="<%=request.getContextPath()%>/resources/css/header.css" rel="stylesheet" type="text/css">
+<link href="<%=request.getContextPath()%>/resources/css/footer.css" rel="stylesheet" type="text/css">
+<link href="<%=request.getContextPath()%>/resources/icons/sun.ico" rel="shortcut icon" type="image/x-icon">
+         <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -14,8 +21,10 @@
 
 </script>
 <style>
+
 .container{
 width:100%;
+height:100%;
 text-align:center;
 }
 .wrap_container{
@@ -29,6 +38,7 @@ margin-top:50px;
 width:1100px;
 }
 .board_title>h1{
+float:left;
 font-weight:600;
 	font-size:25px;
 	}
@@ -37,18 +47,16 @@ font-weight:600;
 </head>
 <body>
 	<div class="container">
-		<div class="board_title">
-				<h1>질문하기 게시판</h1>
-		</div>
+	<jsp:include page="../template_header.jsp"></jsp:include>
 		<div class="wrap_container">
       		<form action="BoardWriteDo" method="post" >
       			<input type="text" name="bTitle" maxlength="100" required placeholder="제목" style="width:900px; height:25px;float:left;margin-right:10px;">
        			<select name="bCategory" style="width:100px; height:30px;margin-bottom:10px;">
-       				<option>게시판 선택</option>
+       				<option value="">게시판 선택</option>
         			<option>학습 질문하기</option>
         			<option>자유게시판</option>
         		</select>
-            	<textarea name="editor1" id="editor1" rows="10" cols="80" placeholder="여기에 작성하세요." maxlength="2048">               
+            	<textarea name="editor1" id="editor1" rows="10" cols="80" style="width:1100px;height:400px;resize:none;" placeholder="여기에 작성하세요." maxlength="2048">               
             	</textarea>
             	<script>
             	CKEDITOR.replace('editor1');
@@ -59,6 +67,7 @@ font-weight:600;
             	</div>
         	</form>
        </div>
+       <jsp:include page="../template_footer.jsp"></jsp:include>
 	</div>
 </body>
 </html>

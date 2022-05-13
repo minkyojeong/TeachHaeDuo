@@ -43,7 +43,7 @@
 				</form>
 			</div>
 			<div class="write" onclick = "location.href='BoardWrite'">
-				<a href="BoardWriteController" id="question">질문하기</a>
+				<a href="BoardWrite" id="question">글쓰기</a>
 			</div>
 			<div>
 			<c:forEach items="${boardList }" var="vo">

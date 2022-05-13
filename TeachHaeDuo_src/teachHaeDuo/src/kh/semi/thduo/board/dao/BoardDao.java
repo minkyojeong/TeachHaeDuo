@@ -153,7 +153,7 @@ public class BoardDao {
 		int result = 0;
 		String sql = "insert into q_board values ( b_no_sequence.nextval, '"+vo.getbCategory() +"','"+vo.getbTitle() +"','"+vo.getbContent()
 		+"',(select m_nickname from"
-		+ " member where m_id='"+vo.getmId()+"') ,default, default, default, '"+vo.getmId()+"')";
+		+ " member where m_id='"+vo.getmId()+"') ,default, default,'"+vo.getmId()+"')";
 		
 		// java String
 //		String temp = "안녕하세요."+mId+"aa여기 "
