@@ -45,31 +45,31 @@ public class PencilService {
 	}
 
 	// 연필 차감 내역 삽입
-		public int minusPencil(PencilVo vo) {
-			int result = 0;
-			Connection conn = getConnection();
-			
-			result = dao.minusPencil(conn, vo);
-			
-			close(conn);
+	public int minusPencil(PencilVo vo) {
+		int result = 0;
+		Connection conn = getConnection();
 
-			return result;
-		}
-		
+		result = dao.minusPencil(conn, vo);
+
+		close(conn);
+
+		return result;
+	}
+
 	// 연필 차감 내역 삽입(쪽지 보내기 할 때)
 	public int minusPencil(PencilVo vo, AlarmVo avo) {
 		int result = 0;
 		Connection conn = getConnection();
 		setAutocommit(conn, false);
-		
+
 		result = dao.minusPencil(conn, vo);
-		if(result < 1) {
+		if (result < 1) {
 			rollback(conn);
 		} else {
 			result = new AlarmDao().sendAlarm(conn, avo);
 			commit(conn);
 		}
-		
+
 		close(conn);
 
 		return result;
@@ -104,16 +104,40 @@ public class PencilService {
 
 		return result;
 	}
-	
-	// 관리자 매출 조회
-	public ArrayList<MemberVo> pencilChart(){
+
+	// 관리자 전체 매출 조회
+	public ArrayList<MemberVo> allPencilChart() {
 		ArrayList<MemberVo> result = null;
-		
+
 		Connection conn = getConnection();
-		result = dao.pencilChart(conn);
+		result = dao.allPencilChart(conn);
 
 		close(conn);
-		
+
+		return result;
+	}
+
+	// 관리자 이번달 매출 조회
+	public ArrayList<MemberVo> monthPencilChart() {
+		ArrayList<MemberVo> result = null;
+
+		Connection conn = getConnection();
+		result = dao.monthPencilChart(conn);
+
+		close(conn);
+
+		return result;
+	}
+
+	// 관리자 이번년도 매출 조회
+	public ArrayList<MemberVo> yearPencilChart() {
+		ArrayList<MemberVo> result = null;
+
+		Connection conn = getConnection();
+		result = dao.yearPencilChart(conn);
+
+		close(conn);
+
 		return result;
 	}
 }

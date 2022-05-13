@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import kh.semi.thduo.admin.vo.AdminVo;
 import kh.semi.thduo.member.service.MemberService;
 import kh.semi.thduo.member.vo.MemberVo;
 
@@ -33,13 +34,18 @@ public class MemberListController extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		System.out.println("doGet - memberList 페이지 이동");
+		AdminVo vo = (AdminVo)request.getSession().getAttribute("ssMV");
 		
-		ArrayList<MemberVo> retVolist = new MemberService().readAllMember();
-		System.out.println(retVolist );
-		
-		request.setAttribute("retVolist", retVolist);
-		
-		request.getRequestDispatcher("WEB-INF/view/member/memberList.jsp").forward(request, response);
+		if(vo==null) {
+			response.sendRedirect(request.getContextPath());
+			
+		} else {
+			ArrayList<MemberVo> retVolist = new MemberService().readAllMember();
+			System.out.println(retVolist );
+			
+			request.setAttribute("retVolist", retVolist);
+			request.getRequestDispatcher("WEB-INF/view/member/memberList.jsp").forward(request, response);
+		}
 	}
 
 	
