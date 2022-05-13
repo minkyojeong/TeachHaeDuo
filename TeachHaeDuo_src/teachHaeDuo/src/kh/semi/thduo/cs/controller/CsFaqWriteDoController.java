@@ -32,10 +32,7 @@ public class CsFaqWriteDoController extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 			String question = request.getParameter("cs_q_q");
 			String answer = request.getParameter("cs_q_a");
-		/*	관리자 아이디가 되야됌 */	MemberVo ssvo = (MemberVo)request.getSession().getAttribute("ssMV");
-			if(ssvo == null)  {  
-				response.sendRedirect("login");
-			}else {
+		
 				String adminid = null;
 				int result = new CsService().csFaqWrite(question, answer, adminid);
 				if(result<1) {
@@ -43,7 +40,7 @@ public class CsFaqWriteDoController extends HttpServlet {
 				}else {
 					request.getRequestDispatcher("CsMain").forward(request, response);
 				}
-			}
+			
 			
 		
 	}

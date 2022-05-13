@@ -15,9 +15,9 @@
 		<nav class="menu">
 			<ul>
 				<li><a href="${pageContext.request.contextPath}/teacherSearch">선생님찾기</a><span>&nbsp;&nbsp;</span></li>
-				<li><a href="#">질문하기</a><span>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;</span></li>
+				<li><a href="${pageContext.request.contextPath}/BoardList">질문하기</a><span>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;</span></li>
 				<li>
-					<a style="cursor: pointer">고객센터</a><span>&nbsp;&nbsp;</span>
+					<a href="${pageContext.request.contextPath}/CsMain" style="cursor: pointer">고객센터</a><span>&nbsp;&nbsp;</span>
 					<ul class="sub_menu">
 						<li><a href="#">공지사항</a></li>
 						<li><a href="#">1대1 문의</a></li>

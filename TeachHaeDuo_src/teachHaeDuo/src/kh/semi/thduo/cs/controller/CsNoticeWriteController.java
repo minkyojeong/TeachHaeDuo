@@ -29,12 +29,9 @@ public class CsNoticeWriteController extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		MemberVo ssvo = (MemberVo)request.getSession().getAttribute("ssMV");
-		if(ssvo == null)  {  
-			response.sendRedirect("login");
-		}else {
+		
 			request.getRequestDispatcher("WEB-INF/view/Cs/CsNoticeWrite.jsp").forward(request, response);
-		}
+		
 	}
 
 	/**

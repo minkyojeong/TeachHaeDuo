@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 import kh.semi.thduo.admin.vo.AdminVo;
 import kh.semi.thduo.cs.service.CsService;
 import kh.semi.thduo.cs.vo.CsVo;
+import kh.semi.thduo.member.vo.MemberVo;
 
 /**
  * Servlet implementation class CsMainController
@@ -35,11 +36,11 @@ public class CsMainController extends HttpServlet {
 		// TODO Auto-generated method stub
 		ArrayList<CsVo> csvo = new CsService().csFaqList();
 		ArrayList<CsVo> vo = new CsService().csNoticeList();
-		AdminVo advo = (AdminVo)request.getSession().getAttribute("ssMV");
-		if(advo == null) {
+		MemberVo ssvo = (MemberVo)request.getSession().getAttribute("ssMV");
+		if(ssvo == null)  {  // 로그아웃 상태라면 login 페이지로 진입
 			response.sendRedirect("login");
 			return;
-		}else {
+		} else {  // 로그인한 상태라면 write page 진입
 		request.setAttribute("csvo", csvo);
 		request.setAttribute("vo", vo);
 		request.getRequestDispatcher("WEB-INF/view/Cs/CsMain.jsp").forward(request, response);
