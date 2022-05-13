@@ -24,8 +24,7 @@
 .arrow.next{
 	background-color: white;
 	background-image: url('resources/icons/next_arrow.jpg' );
-	/* linear-gradient(to bottom, rgba(255,255,0,0.5), rgba(0,0,255,0.5)), */
-	background-size: 26px 36px; 
+	background-size: 38px 38px; 
 }
 .arrow .prev{
 	background-color: white;
@@ -187,11 +186,9 @@
 					<c:choose>
 						<c:when test="${startPage > 1}">
 							<input type="button" class="arrow prev btnPage" value="${startPage-1 }">
-							<img src="${pageContext.request.contextPath}/resources/icons/page_prev.png">
 						</c:when>
 						<c:otherwise>
 							<input type="button" class="arrow prev btnPage disabled" value="${startPage-1 }">
-							<%--<img src="${pageContext.request.contextPath}/resources/icons/page_prev.png"> --%> 
 						</c:otherwise>
 					</c:choose>
 					<c:forEach var="i" begin="${startPage}" end="${endPage }">
@@ -205,11 +202,9 @@
 					<c:choose>
 						<c:when test="${endPage > totalPageCnt}">
 							<input type="button" class="arrow next btnPage" value="${endPage+1 }">
-							<%-- <img src="${pageContext.request.contextPath}/resources/icons/page_next.png"> --%>
 						</c:when>
 						<c:otherwise>
 							<input type="button" class="arrow next btnPage disabled" value="${endPage+1 }">
-							<%-- <img src="${pageContext.request.contextPath}/resources/icons/page_next.png"> --%>
 						</c:otherwise>
 					</c:choose>
 					</div>
