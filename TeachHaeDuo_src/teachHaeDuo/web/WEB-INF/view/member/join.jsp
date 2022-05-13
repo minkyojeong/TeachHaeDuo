@@ -99,20 +99,7 @@
 			}
 		});
 		
-		function check_pw() { //비밀번호 확인 - ok
-			var p = document.getElementById('pw').value;
-			var p_cf = document.getElementById('pw_cf').value;
-
-			if (p != p_cf) {
-				document.getElementById('pw_check_msg').innerHTML = "비밀번호가 다릅니다. 다시 확인해 주세요.";
-				$("#pw_check_msg").attr('color', 'red');
-			} else {
-				document.getElementById('pw_check_msg').innerHTML = "";
-			}
-			if (p_cf == "") {
-				document.getElementById('pw_check_msg').innerHTML = "";
-			}
-		}
+		
 		//닉네임 형식 확인 -ok 
 		$("#mNickName").on("input", function() {
 			
@@ -414,7 +401,20 @@
 function goLoginForm() {
 	location.href = "${pageContext.request.contextPath}/";
 }
+function check_pw() { //비밀번호 확인 - ok
+	var p = document.getElementById('pw').value;
+	var p_cf = document.getElementById('pw_cf').value;
 
+	if (p != p_cf) {
+		document.getElementById('pw_check_msg').innerHTML = "비밀번호가 다릅니다. 다시 확인해 주세요.";
+		$("#pw_check_msg").attr('color', 'red');
+	} else {
+		document.getElementById('pw_check_msg').innerHTML = "";
+	}
+	if (p_cf == "") {
+		document.getElementById('pw_check_msg').innerHTML = "";
+	}
+}
 function open_Postcode() { //다음 카카오 주소찾기 
 	new daum.Postcode({
 		oncomplete : function(data) {
@@ -457,7 +457,7 @@ function open_Postcode() { //다음 카카오 주소찾기
 							<tr>
 								<td id="title">비밀번호 확인</td>
 								<td><input type="password" class="in_box" size="30" name="passwordcheck" id="pw_cf" tabindex="3" maxlength="60"
-									onkeyup="check_pw()" placeholder="비밀번호 확인" required> 
+									onkeyup="check_pw();" placeholder="비밀번호 확인" required/> 
 									<font id="pw_check_msg" size="2"> </font>
 								</td>
 							</tr>
