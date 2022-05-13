@@ -27,8 +27,9 @@
                     <div class="modal">
                         <div class="modal_content">
                             <div class="btn_close"><button>닫기</button></div>
+                    
                                <div id="id_content">
-                               
+                                 
                                </div>
                         </div>
                     </div>

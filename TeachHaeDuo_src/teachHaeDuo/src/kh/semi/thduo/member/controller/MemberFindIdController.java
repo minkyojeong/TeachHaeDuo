@@ -16,7 +16,7 @@ import kh.semi.thduo.member.vo.MemberVo;
 /**
  * Servlet implementation class MemberLoginController
  */
-@WebServlet("/findid")
+@WebServlet("/findId")
 public class MemberFindIdController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        

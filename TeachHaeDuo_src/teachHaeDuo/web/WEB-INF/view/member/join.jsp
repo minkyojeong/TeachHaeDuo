@@ -443,8 +443,8 @@ function open_Postcode() { //다음 카카오 주소찾기
 						<table id="memberTable">
 							<tr>
 								<td id="title">아이디</td>
-								<td><input type="text" class="in_box" name="mId" id="mId" tabindex="1" placeholder="아이디(6자리 이상, 최대 15자)"
-									title="6자 이상의 영문 대소문자와 숫자로만 입력." required> 
+								<td><input type="text" class="in_box" name="mId" id="mId" tabindex="1" placeholder=" 숫자 ,영문대소문자 6~15자리"
+									title="6자 이상의 영문대소문자와 숫자로만 입력." required> 
 									<font id="checkId" size="2"></font>
 							</tr>
 							<tr>
