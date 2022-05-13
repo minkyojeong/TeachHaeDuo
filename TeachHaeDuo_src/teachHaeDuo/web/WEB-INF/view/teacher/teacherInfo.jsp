@@ -193,8 +193,8 @@
 													</c:forEach>
 													</span>
 													<span>${rvo.t_r_date}</span>
-													<input type="hidden" name="t_r_no" id="t_r_no" value="${rvo.t_r_no}">
 													<c:if test="${ssMV.mNickname == rvo.t_r_writer}">
+														<input type="hidden" name="t_r_no" id="t_r_no" value="${rvo.t_r_no}">
 														<button type="button" id="btn_review_delete" class="btn3_1">리뷰삭제</button>
 													</c:if>
 												</div>
