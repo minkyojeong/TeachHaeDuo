@@ -34,12 +34,12 @@ public class TeacherUpdateLoginController extends HttpServlet {
 		String approvalYn = new TeacherService().checkApproval(tNo);
 		System.out.println("승인여부: " +approvalYn);
 		
-		if(approvalYn.equals("N")) {
+		if(approvalYn.equals("Y")) {
+			request.getRequestDispatcher("WEB-INF/view/mypage/teacherUpdateLogin.jsp").forward(request, response);
+		} else {
 			request.getSession().setAttribute("msgApproval", "관리자의 승인 후 교습 정보 등록이 가능합니다.");
 			response.sendRedirect("mypage");
 			return;
-		} else if(approvalYn.equals("Y")){
-			request.getRequestDispatcher("WEB-INF/view/mypage/teacherUpdateLogin.jsp").forward(request, response);
 		}
 		
 	}

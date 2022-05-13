@@ -28,7 +28,7 @@ public class MemberListController extends HttpServlet {
     public MemberListController() {
         super();
     }
-
+    
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */

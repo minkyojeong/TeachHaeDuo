@@ -18,8 +18,8 @@ public class JdbcTemplate {
 		try {
 			Context initContext = new InitialContext();
 			Context evnContext = (Context)initContext.lookup("java:/comp/env");
-			DataSource ds = (DataSource)evnContext.lookup("jdbc/THDUOLocal");
-//			DataSource ds = (DataSource) evnContext.lookup("jdbc/THDUOPclass");
+//			DataSource ds = (DataSource)evnContext.lookup("jdbc/THDUOLocal");
+			DataSource ds = (DataSource) evnContext.lookup("jdbc/THDUOPclass");
 			conn = ds.getConnection();
 		} catch (SQLException e) {
 			e.printStackTrace();

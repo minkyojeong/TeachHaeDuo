@@ -94,7 +94,9 @@ public class TeacherUpdateDoController extends HttpServlet {
 		for (int i = 0; i < studentArr.length; i++) {
 			System.out.println("student :" + studentArr[i]);
 		}
+		// TODOTODO 배열 바꾸기 []
 		System.out.println("student toString :" + Arrays.toString(studentArr));
+		
 
 		// 어학
 		String[] language = request.getParameterValues("language");

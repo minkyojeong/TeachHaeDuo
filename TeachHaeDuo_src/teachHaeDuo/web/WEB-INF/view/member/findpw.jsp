@@ -41,7 +41,7 @@
                         <input type="text" name="mId" id="mId" class="form-control" placeholder="아이디" required autofocus><br>
                         <input type="email" name="mEmail" id="mEmail" class="form-control"placeholder="이메일" required><br>
                             <p class="check" id="check">${check}</p><br />
-                        <button id="btn-Yes"  class="form-control   type="button">비밀번호 재설정</button><br>
+                        <button id="btn-Yes"  class="form-control"   type="button">비밀번호 재설정</button><br>
                     </div>
                     <div class="links">
                         <a href="findId">&nbsp;아이디 찾기 &nbsp;|</a>  <a href="login">&nbsp;로그인 &nbsp;</a>  <a href="join">| &nbsp; 회원가입</a>
@@ -50,8 +50,9 @@
 
                     <script type="text/javascript">
                      $("#btn-Yes").click(function(){
+                    	 console.log("버튼 클릭");
                       $.ajax({
-                          url:"/findPw",
+                          url:"findPw",
                           type:"post",
                           data:{mId: $("#mId").val(),
                               mEmail: $("#mEmail").val(), },

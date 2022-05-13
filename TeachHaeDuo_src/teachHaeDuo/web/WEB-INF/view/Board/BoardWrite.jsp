@@ -50,7 +50,6 @@ font-weight:600;
         		</select>
             	<textarea name="editor1" id="editor1" rows="10" cols="80" placeholder="여기에 작성하세요." maxlength="2048">               
             	</textarea>
-            	<p style="float:left; margin-top:10px;margin-bottom:10px">file: <input type="file" name="file"></p><br>
             	<script>
             	CKEDITOR.replace('editor1');
             	</script>
