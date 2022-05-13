@@ -125,21 +125,7 @@ public class MemberJoinController extends HttpServlet {
 				return;
 			}
 			if (i > 0) {
-				// 연필 테이블에 기본 insert
-//				String mId = multi.getParameter("mId");
-//				int pencilResult = new PencilService().insertPencilInit(mId);
-//				if(pencilResult == 0) {
-//					out.print("<script>alert('가입 실패 다시 시도해주세요.');</script>");
-//					out.flush();
-//					out.close();
-//					request.getRequestDispatcher("WEB-INF/view/member/join.jsp").forward(request, response);
-//				} else {
-//					//회원가입 성공시 로그인페이지 
-//					response.sendRedirect("login");
-//					out.print("<script>alert('가입 성공');</script>");
-//					out.flush();
-//					out.close();
-//				}
+				
 				//회원가입 성공시 로그인페이지 
 				response.sendRedirect("login");
 				out.print("<script>alert('가입 성공');</script>");
