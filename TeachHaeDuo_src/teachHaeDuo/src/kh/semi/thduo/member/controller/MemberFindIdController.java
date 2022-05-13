@@ -31,7 +31,7 @@ public class MemberFindIdController extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		System.out.println("doGet - findId 페이지 이동");
+		System.out.println("doGet - findId 아이디찾기 이동");
 		request.getRequestDispatcher("WEB-INF/view/member/findid.jsp").forward(request, response);
 	}
 
@@ -41,6 +41,7 @@ public class MemberFindIdController extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// ajax로 들어옴
+		      System.out.println("doPost - findId ajax로 들어옴");
 				PrintWriter out = response.getWriter();
 				// 아이디 찾기
 				String mEmail = request.getParameter("mEmail");

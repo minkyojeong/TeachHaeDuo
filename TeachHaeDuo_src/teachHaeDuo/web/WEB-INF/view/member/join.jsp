@@ -412,7 +412,7 @@
 <script>
 //취소 버튼 클릭시 메인 화면으로 이동 -ok
 function goLoginForm() {
-	location.href = "/";
+	location.href = "${pageContext.request.contextPath}/";
 }
 
 function open_Postcode() { //다음 카카오 주소찾기 

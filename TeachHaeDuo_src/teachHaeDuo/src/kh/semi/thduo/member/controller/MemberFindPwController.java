@@ -108,9 +108,9 @@ public class MemberFindPwController extends HttpServlet {
 		String password = "wjdalsry1212";// 자신의 구글 패스워드
 
 		// 메일 받을 주소
-		/* String to_email = m.getEmail(); */
-		//String to_email = mEmail;
-		String to_email = "sunea24@naver.com";
+		 //String to_email = m.getEmail(); 
+		String to_email = mEmail;
+		//String to_email = "sunea24@naver.com";
 
 		// SMTP 서버 정보를 설정한다.
 		Properties props = new Properties();
