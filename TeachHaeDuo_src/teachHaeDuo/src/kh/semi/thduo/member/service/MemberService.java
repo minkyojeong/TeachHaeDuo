@@ -14,6 +14,7 @@ import kh.semi.thduo.member.vo.MemberVo;
 import kh.semi.thduo.pencil.model.service.PencilService;
 import kh.semi.thduo.student.service.StudentService;
 import kh.semi.thduo.student.vo.StudentVo;
+import kh.semi.thduo.teacher.model.dao.TeacherDao;
 
 public class MemberService {
 
@@ -52,14 +53,17 @@ public class MemberService {
 				close(conn);
 				return 0;
 			}
-		}
-		if (vo.getRoleSt().equals("T")) {
+		} else if (vo.getRoleSt().equals("T")) { // 받은 값이 T이면
+			// 선생님 정보 테이블에 기본 insert
+			String mId = vo.getmId();
+			int tProfileResult = new TeacherDao().insertTeacherInit(conn, mId);
 
-			// TO-Do 선생님 테이블 T_PROFILE insert
-			/*
-			 * result = dao.insert선생(conn, vo); if (result < 1) { conn.rollback();
-			 * conn.close(); return 0; }
-			 */
+			if (tProfileResult < 1) {
+				rollback(conn);
+				close(conn);
+
+				return 0;
+			}
 		}
 		if (result == 1) {
 			// 연필 테이블에 기본 insert

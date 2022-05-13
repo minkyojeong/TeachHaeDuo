@@ -23,14 +23,24 @@ public class TeacherDao {
 	private PreparedStatement pstmt = null;
 	private ResultSet rs = null;
 
-	// 선생님 교습정보 삽입
-	public int insertTeacher(Connection conn, TeacherVo vo) {
+	// 회원가입 시, 선생님 정보 초기 삽입
+	public int insertTeacherInit(Connection conn, String mId) {
 		int result = 0;
-		String sql = "";
-
+		String sql = "INSERT INTO"
+				+ " t_profile(t_no, t_major, online_yna, T_TCNT, T_TPRICE, T_WANTSTUD, T_CAREER, T_LANGUAGE, T_SPECIAL, T_APPROVAL, T_PROFILE_YN, T_PICTURE, M_ID, T_INTRO, T_RECRUIT_YN)"
+				+ " VALUES((SELECT 'T' || (SELECT MAX(TO_NUMBER(SUBSTR(t_no, 2))) + 1 FROM t_profile) FROM dual), default, default, default, default, default, default, default, default, default, default, default, ?, default, default)";
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, mId);
+			
+			result = pstmt.executeUpdate();
+		} catch(SQLException e) {
+			e.printStackTrace();
+		}
+		
 		return result;
 	}
-
 
 	// 모든 선생님 정보 읽기
 	public ArrayList<TeacherVo> readAllTeacher(Connection conn, int startRnum, int endRnum) {

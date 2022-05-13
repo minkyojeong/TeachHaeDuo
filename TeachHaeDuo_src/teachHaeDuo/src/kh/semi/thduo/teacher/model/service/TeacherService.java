@@ -16,11 +16,11 @@ public class TeacherService {
 	private TeacherDao dao = new TeacherDao();
 
 	// 선생님 교습정보 삽입
-	public int insertTeacher(TeacherVo vo) {
+	public int insertTeacherInit(String mId) {
 		int result = 0;
 		Connection conn = getConnection();
 
-		result = dao.insertTeacher(conn, vo);
+		result = dao.insertTeacherInit(conn, mId);
 
 		close(conn);
 
