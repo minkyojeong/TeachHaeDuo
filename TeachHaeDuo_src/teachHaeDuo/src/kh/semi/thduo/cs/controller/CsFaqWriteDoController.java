@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import kh.semi.thduo.admin.vo.AdminVo;
 import kh.semi.thduo.cs.service.CsService;
 import kh.semi.thduo.member.vo.MemberVo;
 
@@ -32,8 +33,13 @@ public class CsFaqWriteDoController extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 			String question = request.getParameter("cs_q_q");
 			String answer = request.getParameter("cs_q_a");
-		
-				String adminid = null;
+			String adminid = null;
+			AdminVo advo = (AdminVo)request.getSession().getAttribute("ssMV");
+			if(advo == null) {
+				response.sendRedirect("login");
+				return;
+			}else {
+				adminid = advo.getAdminId();
 				int result = new CsService().csFaqWrite(question, answer, adminid);
 				if(result<1) {
 					System.out.println("null-error");
@@ -41,7 +47,7 @@ public class CsFaqWriteDoController extends HttpServlet {
 					request.getRequestDispatcher("CsMain").forward(request, response);
 				}
 			
-			
+			}
 		
 	}
 
