@@ -67,7 +67,11 @@ public class PencilService {
 			rollback(conn);
 		} else {
 			result = new AlarmDao().sendAlarm(conn, avo);
-			commit(conn);
+			if(result < 1) {
+				rollback(conn);
+			} else {
+				commit(conn);
+			}
 		}
 
 		close(conn);
