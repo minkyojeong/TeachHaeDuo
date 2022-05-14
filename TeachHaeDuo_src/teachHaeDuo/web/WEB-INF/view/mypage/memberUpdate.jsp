@@ -222,47 +222,48 @@
 				} else {
 					emailChk = false;
 					$("#checkmEmail_info").html("");
-				}
-			});
-
-			//중복체크 - 이메일 -ok
-			$('#mEmail').focusout(function() {
-				let findStr = $('#mEmail').val();
-				if(findStr  ==  '<%=ssMV.getmEmail() %>'){
-					emailChk = false;
-					return;
-				} else {
-					findStr = $('#mEmail').val(); // input_id에 입력되는 값
-					$.ajax({
-						type : 'post',
-						async : false, //false가 기본값임 - 비동기
-						url : 'findStr',  //MemberFindStrAjaxController.java 주소 이동 
-						dataType : 'text', //리턴값 형식  
-						data : {
-							str : findStr,
-							type : 'mEmail'
-						},
-						success : function(data, textStatus) {
-
-							if (data == 'not-usable') {
-								$("#checkmEmail_info").html('사용할 수 없는 이메일입니다.');
-								$("#checkmEmail_info").attr('color', 'red');
-								emailChk = true;
-							} else {
-								$("#checkmEmail_info").html('사용할 수 있는 이메일입니다.');
-								$("#checkmEmail_info").attr('color', 'green');
-								emailChk = false;
-							}
-						},
-						error : function(data, textStatus) {
-							console.log('error');
+					
+					//중복체크 - 이메일 -ok
+					$('#mEmail').focusout(function() {
+						emailChk = true;
+						console.log("이메일 중복체크 실행");
+						let findStr = $('#mEmail').val();
+						if(findStr  ==  '<%=ssMV.getmEmail() %>'){
+							console.log("이메일 같니?");
+							emailChk = false;
+							return;
+						} else {
+							console.log("이메일 중복체크 ajax 실행");
+							findStr = $('#mEmail').val(); // input_id에 입력되는 값
+							$.ajax({
+								type : 'post',
+								async : false, //false가 기본값임 - 비동기
+								url : 'findStr',  //MemberFindStrAjaxController.java 주소 이동 
+								dataType : 'text', //리턴값 형식  
+								data : {
+									str : findStr,
+									type : 'mEmail'
+								},
+								success : function(data, textStatus) {
+		
+									if (data == 'not-usable') {
+										$("#checkmEmail_info").html('사용할 수 없는 이메일입니다.');
+										$("#checkmEmail_info").attr('color', 'red');
+										emailChk = true;
+									} else {
+										$("#checkmEmail_info").html('사용할 수 있는 이메일입니다.');
+										$("#checkmEmail_info").attr('color', 'green');
+										emailChk = false;
+									}
+								},
+								error : function(data, textStatus) {
+									console.log('error');
+								}
+							}) //ajax
 						}
-					}) //ajax
+					});
 				}
-				
 			});
-			
-			
 			//핸드폰 형식확인 -ok
 			$("#phone").on("input", function() {
 				phoneChk = true;
@@ -285,10 +286,6 @@
 					phoneChk = false;
 				}
 			});
-			
-			
-			
-
 			//필수 입력정보 입력되었는지 확인하는 함수
 			function checkValue() {
 				if (pwdChk) {

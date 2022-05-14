@@ -48,7 +48,24 @@ public class TeacherVo {
 				+ t_profile_yn + ", t_picture=" + t_picture + ", t_intro=" + t_intro + ", t_recruit_yn=" + t_recruit_yn
 				+ ", object_list=" + object_list + ", area_list=" + area_list + ", avg_rscore=" + avg_rscore + ", m_id="
 				+ m_id + ", t_age=" + t_age + ", m_name=" + m_name + ", m_nickname=" + m_nickname + ", gender_fm="
-				+ gender_fm + ", m_address=" + m_address + ", t_review=" + t_review + ", like=" + like + "]";
+				+ gender_fm + ", m_address=" + m_address + ", m_date=" + m_date + ", m_certificate=" + m_certificate
+				+ ", t_review=" + t_review + ", like=" + like + "]";
+	}
+
+	public Timestamp getM_date() {
+		return m_date;
+	}
+
+	public void setM_date(Timestamp m_date) {
+		this.m_date = m_date;
+	}
+
+	public String getM_certificate() {
+		return m_certificate;
+	}
+
+	public void setM_certificate(String m_certificate) {
+		this.m_certificate = m_certificate;
 	}
 
 	public String getT_profile_yn() {

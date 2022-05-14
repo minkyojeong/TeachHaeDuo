@@ -91,26 +91,26 @@ public class TeacherUpdateDoController extends HttpServlet {
 
 		// 희망 학생
 		String[] studentArr = request.getParameterValues("student");
+		String totalStudent = "";
 		for (int i = 0; i < studentArr.length; i++) {
 			System.out.println("student :" + studentArr[i]);
+			totalStudent += studentArr[i] + " ";
 		}
-		// TODOTODO 배열 바꾸기 []
-		System.out.println("student toString :" + Arrays.toString(studentArr));
+		System.out.println("totalStudent :" + totalStudent);
 
 		// 어학
 		String[] language = request.getParameterValues("language");
 		String[] score = request.getParameterValues("score");
-		String[] languageScore = new String[language.length];
+		String languageScore = "";
 		System.out.println("language.length :" + language.length);
 		if (language != null && score != null) {
 			for (int i = 0; i < language.length; i++) {
 				System.out.println("language :" + language[i]);
 				System.out.println("score :" + score[i]);
-				languageScore[i] = language[i] + " " + score[i];
-				System.out.println("languageScore :" + languageScore[i]);
+				languageScore += language[i] + " " + score[i] + " ";
 			}
 		}
-		System.out.println("languageScore toString :" + Arrays.toString(languageScore));
+		System.out.println("languageScore :" + languageScore);
 
 		// 개인 교습 경력
 		String tCareer = request.getParameter("tCareer");
@@ -128,181 +128,121 @@ public class TeacherUpdateDoController extends HttpServlet {
 		}
 		System.out.println("tSpecial: " + tSpecial);
 
-		MemberVo ssMV = (MemberVo) request.getSession().getAttribute("ssMV");
+		// 사용할 변수 선언, 객체 선언
 		String tNo = null;
 		String mId = null;
 		int result = 0;
 		int balance = 0;
 		String profileYn = null;
+		PencilVo pVo = new PencilVo();
+		TeacherVo tVo = new TeacherVo();
+		// 로그인 여부 확인
+		MemberVo ssMV = (MemberVo) request.getSession().getAttribute("ssMV");
 		if (ssMV == null) {
+			request.getSession().setAttribute("msgLogin", "로그인 먼저 해주세요");
 			response.sendRedirect("login");
 			return;
 		}
+		// 변수 세팅
 		tNo = ssMV.gettNo();
 		mId = ssMV.getmId();
-		String approvalYn = new TeacherService().checkApproval(tNo);
-		System.out.println("승인여부: " + approvalYn);
 
+		// 기존에 프로필 등록 여부 확인
 		profileYn = new TeacherService().checkProfile(tNo);
 		System.out.println("프로필 등록 여부: " + profileYn);
 
+		// 기존에 등록된 프로필이 없다면
 		if (profileYn.equals("N")) {
 			System.out.println("최초등록이야~");
+			// 잔액 확인
 			balance = new PencilService().checkPencil(mId);
 			System.out.println("잔액 확인:" + balance);
+			// 잔액이 모자라면
 			if (balance < 5000) {
 				request.setAttribute("msgTeacherUpdate", "잔액이 부족합니다. 충전 후 이용해주세요.");
 				request.getRequestDispatcher("WEB-INF/view/mypage/mypageTeacher.jsp").forward(request, response);
-			} else {
-				PencilVo vo = new PencilVo();
-				vo.setCpCash(-5000);
-				vo.setCpContent("교습 정보 최초 등록");
-				vo.setmId(mId);
-				int resultPencil = new PencilService().minusPencil(vo);
-				if (resultPencil == 0) {
+			} else { // 잔액이 충분하면
+				
+				// 변수 세팅
+				tVo.setOnline_yna(onlineYn);
+				tVo.setT_tcnt(tCnt);
+				tVo.setT_tprice(tPrice);
+				tVo.setT_wantstud(totalStudent);
+				tVo.setT_language(languageScore);
+				tVo.setT_career(tCareer);
+				tVo.setT_special(tSpecial.replace("\r\n", "<br>"));
+
+				pVo = new PencilVo();
+				pVo.setCpCash(-5000);
+				pVo.setCpContent("교습 정보 최초 등록");
+				pVo.setmId(mId);
+				
+				tVo.setT_no(tNo);
+				tVo.setT_major(major);
+				tVo.setT_intro(tIntro.replace("\r\n", "<br>"));
+
+				// 변수 가지고 서비스 호출
+				System.out.println("컨트롤러 tVo :" + tVo);
+				System.out.println("컨트롤러 onlineYn :" + tVo.getOnline_yna());
+				result = new TeacherService().updateTeacher(tVo, pVo, objectArr, activeAreaArr);
+				// 실패
+				if (result == 0) {
+					System.out.println("t_profile 넣기 실패");
 					request.setAttribute("msgTeacherUpdate", "교습 정보 등록이 실패했습니다.");
 					request.getRequestDispatcher("WEB-INF/view/mypage/mypageTeacher.jsp").forward(request, response);
-				} else {
-					TeacherVo tVo = new TeacherVo();
-					tVo.setT_no(tNo);
-					tVo.setT_major(major);
-					tVo.setT_intro(tIntro.replace("\r\n", "<br>"));
-					int resultObject = new TeacherService().insertObject(objectArr, tNo);
-					if (resultObject == 0) {
-						System.out.println("담당과목 넣기 실패");
-						request.setAttribute("msgTeacherUpdate", "교습 정보 등록이 실패했습니다.");
-						request.getRequestDispatcher("WEB-INF/view/mypage/mypageTeacher.jsp").forward(request,
-								response);
-					}
-					int resultArea = new TeacherService().insertActiveArea(activeAreaArr, tNo);
-					if (resultArea == 0) {
-						System.out.println("활동지역 넣기 실패");
-						request.setAttribute("msgTeacherUpdate", "교습 정보 등록이 실패했습니다.");
-						request.getRequestDispatcher("WEB-INF/view/mypage/mypageTeacher.jsp").forward(request,
-								response);
-					}
-					tVo.setOnline_yna(onlineYn);
-					tVo.setT_tcnt(tCnt);
-					tVo.setT_tprice(tPrice);
-					tVo.setT_wantstud(Arrays.toString(studentArr));
-					tVo.setT_language(Arrays.toString(languageScore));
-					tVo.setT_career(tCareer);
-					tVo.setT_special(tSpecial.replace("\r\n", "<br>"));
-
-					result = new TeacherService().updateTeacher(tVo);
-					if (result == 0) {
-						System.out.println("t_profile 넣기 실패");
-						request.setAttribute("msgTeacherUpdate", "교습 정보 등록이 실패했습니다.");
-						request.getRequestDispatcher("WEB-INF/view/mypage/mypageTeacher.jsp").forward(request,
-								response);
-					} else {
-						System.out.println("t_profile update 성공");
-						request.setAttribute("msgTeacherUpdate", "교습 정보가 변경되었습니다.");
-						request.getRequestDispatcher("WEB-INF/view/mypage/mypageTeacher.jsp").forward(request,
-								response);
-					}
+				} else { // 성공
+					System.out.println("t_profile update 성공");
+					request.setAttribute("msgTeacherUpdate", "교습 정보가 변경되었습니다.");
+					request.getRequestDispatcher("WEB-INF/view/mypage/mypageTeacher.jsp").forward(request, response);
 				}
 			}
+
+			// 기존에 등록된 프로필이 있다면
 		} else if (profileYn.equals("Y")) {
 			System.out.println("등록된 교습정보있어~");
+			// 잔액 확인
+			balance = new PencilService().checkPencil(mId);
+			System.out.println("잔액 확인:" + balance);
+			// 잔액이 모자라면
 			if (balance < 500) {
 				request.setAttribute("msgTeacherUpdate", "잔액이 부족합니다. 충전 후 이용해주세요.");
 				request.getRequestDispatcher("WEB-INF/view/mypage/mypageTeacher.jsp").forward(request, response);
+				// 잔액이 충분하면
 			} else {
-				PencilVo vo = new PencilVo();
-				vo.setCpCash(-500);
-				vo.setCpContent("교습 정보 변경");
-				vo.setmId(mId);
-				int resultPencil = new PencilService().minusPencil(vo);
-				if (resultPencil == 0) {
+				
+				// 변수 세팅
+				tVo.setOnline_yna(onlineYn);
+				tVo.setT_tcnt(tCnt);
+				tVo.setT_tprice(tPrice);
+				tVo.setT_wantstud(totalStudent);
+				tVo.setT_language(languageScore);
+				tVo.setT_career(tCareer);
+				tVo.setT_special(tSpecial.replace("\r\n", "<br>"));
+				
+				pVo = new PencilVo();
+				pVo.setCpCash(-500);
+				pVo.setCpContent("교습 정보 변경");
+				pVo.setmId(mId);
+				
+				tVo.setT_no(tNo);
+				tVo.setT_major(major);
+				tVo.setT_intro(tIntro.replace("\r\n", "<br>"));
+
+				// 변수 가지고 서비스 호출
+				result = new TeacherService().updateTeacher(tVo, pVo, objectArr, activeAreaArr);
+				// 실패
+				if (result == 0) {
+					System.out.println("t_profile 넣기 실패");
 					request.setAttribute("msgTeacherUpdate", "교습 정보 등록이 실패했습니다.");
 					request.getRequestDispatcher("WEB-INF/view/mypage/mypageTeacher.jsp").forward(request, response);
-				} else {
-					TeacherVo tVo = new TeacherVo();
-					tVo.setT_no(tNo);
-					tVo.setT_major(major);
-					tVo.setT_intro(tIntro.replace("\r\n", "<br>"));
-					int resultObjectDelete = new TeacherService().deleteObject(tNo);
-					if (resultObjectDelete == 0) {
-						System.out.println("존재하는 담당과목 삭제 실패");
-						request.setAttribute("msgTeacherUpdate", "교습 정보 등록이 실패했습니다.");
-						request.getRequestDispatcher("WEB-INF/view/mypage/mypageTeacher.jsp").forward(request,
-								response);
-					}
-					int resultObject = new TeacherService().insertObject(objectArr, tNo);
-					if (resultObject == 0) {
-						System.out.println("담당과목 넣기 실패");
-						request.setAttribute("msgTeacherUpdate", "교습 정보 등록이 실패했습니다.");
-						request.getRequestDispatcher("WEB-INF/view/mypage/mypageTeacher.jsp").forward(request,
-								response);
-					}
-					int resultAreaDelete = new TeacherService().deleteActiveArea(tNo);
-					if (resultAreaDelete == 0) {
-						System.out.println("존재하는 활동지역 삭제 실패");
-						request.setAttribute("msgTeacherUpdate", "교습 정보 등록이 실패했습니다.");
-						request.getRequestDispatcher("WEB-INF/view/mypage/mypageTeacher.jsp").forward(request,
-								response);
-					}
-					int resultArea = new TeacherService().insertActiveArea(activeAreaArr, tNo);
-					if (resultArea == 0) {
-						System.out.println("활동지역 넣기 실패");
-						request.setAttribute("msgTeacherUpdate", "교습 정보 등록이 실패했습니다.");
-						request.getRequestDispatcher("WEB-INF/view/mypage/mypageTeacher.jsp").forward(request,
-								response);
-					}
-					tVo.setOnline_yna(onlineYn);
-					tVo.setT_tcnt(tCnt);
-					tVo.setT_tprice(tPrice);
-					tVo.setT_wantstud(Arrays.toString(studentArr));
-					tVo.setT_language(Arrays.toString(languageScore));
-					tVo.setT_career(tCareer);
-					tVo.setT_special(tSpecial.replace("\r\n", "<br>"));
-
-					result = new TeacherService().updateTeacher(tVo);
-					if (result == 0) {
-						System.out.println("t_profile 넣기 실패");
-						request.setAttribute("msgTeacherUpdate", "교습 정보 등록이 실패했습니다.");
-						request.getRequestDispatcher("WEB-INF/view/mypage/mypageTeacher.jsp").forward(request,
-								response);
-					} else {
-						System.out.println("t_profile update 성공");
-						request.setAttribute("msgTeacherUpdate", "교습 정보가 변경되었습니다.");
-						request.getRequestDispatcher("WEB-INF/view/mypage/mypageTeacher.jsp").forward(request,
-								response);
-					}
+				} else { // 성공
+					System.out.println("t_profile update 성공");
+					request.setAttribute("msgTeacherUpdate", "교습 정보가 변경되었습니다.");
+					request.getRequestDispatcher("WEB-INF/view/mypage/mypageTeacher.jsp").forward(request, response);
 				}
 			}
+
 		}
-
-		// 회원가입시 선생님 번호 생성 후 해야될거같음..
-//		if(ssMV == null) {
-//			response.sendRedirect("login");
-//			return;
-//		} else if(ssMV.gettNo() == null){ // 최초등록
-//			mId = ssMV.getmId();
-//			balance = new PencilService().checkPencil(mId);
-//			if(balance > 5000) {
-//				PencilVo vo = new PencilVo();
-//				vo.setCpCash(-5000);
-//				vo.setCpContent("교습 정보 최초 등록");
-//				vo.setmId(mId);
-//				result = new PencilService().minusPencil(vo);
-//				if(result == 1) {
-		// 이거 여따 쓰는거 아니야 나중에 옮겨야돼
-//					request.setAttribute("msgTeacherUpdate", "교습 정보가 등록되었습니다.");
-//					request.getRequestDispatcher("WEB-INF/view/mypage/mypageTeacher.jsp").forward(request, response);
-//				} else {
-//					request.setAttribute("msgTeacherUpdate", "교습 정보가 등록에 실패하였습니다.");
-//					request.getRequestDispatcher("WEB-INF/view/mypage/mypageTeacher.jsp").forward(request, response);
-//				}
-//			} else {
-//				request.setAttribute("msgTeacherUpdate", "잔액이 부족합니다. 충전 후 이용해주세요.");
-//				request.getRequestDispatcher("WEB-INF/view/mypage/mypageTeacher.jsp").forward(request, response);
-//			}
-//		} else if (ssMV.gettNo() != null) { // 교습 정보 수정
-//			
-//		}
-
 	}
 
 }

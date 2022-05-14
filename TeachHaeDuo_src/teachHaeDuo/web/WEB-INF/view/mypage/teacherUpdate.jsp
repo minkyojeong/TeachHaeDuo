@@ -28,7 +28,7 @@
 					교습 정보 등록
 				</p>
 			</div>
-			<form name="teacherUpdatefrm" action = "teacherUpdate.do" method = "post">
+			<form name="teacherUpdatefrm">
 				<table id="teacherUpdateTable">
 					<tr>
 						<td>학력<sup> *</sup></td>
@@ -313,6 +313,8 @@
 		};
 		
 		var frm = document.teacherUpdatefrm;
+		frm.method="post";
+		frm.action="teacherUpdate.do";
 		frm.submit();
 	}
 	

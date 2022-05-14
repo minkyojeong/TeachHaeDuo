@@ -7,6 +7,7 @@ import java.util.ArrayList;
 
 import kh.semi.thduo.like.model.vo.LikeVo;
 import kh.semi.thduo.member.vo.MemberVo;
+import kh.semi.thduo.pencil.model.vo.PencilVo;
 import kh.semi.thduo.teacher.model.dao.TeacherDao;
 import kh.semi.thduo.teacher.model.vo.TeacherSearchSettingVo;
 import kh.semi.thduo.teacher.model.vo.TeacherVo;
@@ -127,17 +128,23 @@ public class TeacherService {
 
 		return retVo;
 	}
-
+	
 	// 선생님 교습정보 수정
-	public int updateTeacher(TeacherVo tVo) {
-		int retsult = 0;
+	public int updateTeacher(TeacherVo tVo, PencilVo pVo, String[] objectArr,String[] activeAreaArr) {
+		int result = 0;
 		Connection conn = getConnection();
-
-		retsult = dao.updateTeacher(conn, tVo);
-
+		setAutocommit(conn, false);
+		System.out.println("서비스 tVo:" + tVo);
+		result = dao.updateTeacher(conn, tVo, pVo, objectArr, activeAreaArr);
+		
+		if(result < 1) { // 쿼리문 여러개 중에 하나라도 실패하면
+			rollback(conn);
+		} else { // 모두 다 성공한다면
+			commit(conn);
+		}
 		close(conn);
 
-		return retsult;
+		return result;
 	}
 
 	// 선생님 승인여부 체크
