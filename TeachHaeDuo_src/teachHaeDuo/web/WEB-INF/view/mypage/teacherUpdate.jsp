@@ -267,6 +267,7 @@
 		location.href = "mypage";
 		});
 	
+	
 	</script>
 </body>
 </html>

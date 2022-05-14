@@ -48,14 +48,15 @@ public class MemberDeleteAjaxController extends HttpServlet {
 		String mId= "";
 		
 		// 로그인 상태 확인
-		MemberVo ssvo = (MemberVo)request.getSession().getAttribute("ssMV");
-		if(ssvo == null) {  
+		MemberVo ssMV = (MemberVo)request.getSession().getAttribute("ssMV");
+		System.out.println("회원탈퇴컨트롤러 ssMV:" + ssMV);
+		if(ssMV == null) {  
 			out.print("로그인 먼저 해주세요.");
 			out.flush();
 			out.close();
 			return;
 		} else {
-			mId = ssvo.getmId();
+			mId = ssMV.getmId();
 			System.out.println(mId);
 		}
 		
@@ -63,6 +64,7 @@ public class MemberDeleteAjaxController extends HttpServlet {
 		if(result < 1 ) { // 회원탈퇴 실패
 			out.print("회원탈퇴가 실패했습니다.");
 		} else { // 회원 탈퇴 성공
+			request.getSession().removeAttribute("ssMV");
 			out.print("회원탈퇴 성공. 이용해주셔서 감사합니다.");
 		}
 		out.flush();

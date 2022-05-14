@@ -207,7 +207,7 @@
                 		<th>
                 			<img src="${pageContext.request.contextPath}/resources/icons/message.png" width="20" height="20">
                 		</th>
-                		<th>연락 받은 학생</th>
+                		<th>연락 한 회원</th>
                 		<th>날짜</th>
                 	</tr>
                 	<tr>

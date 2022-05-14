@@ -259,6 +259,7 @@ public class MemberDao {
 		} finally {
 			close(pstmt);
 		}
+		System.out.println("회원탈퇴 Dao, result: " + result);
 		return result;
 	}
 	

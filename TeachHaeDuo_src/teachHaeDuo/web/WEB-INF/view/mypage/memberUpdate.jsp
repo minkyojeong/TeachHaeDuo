@@ -166,7 +166,7 @@
 								location.href = "login";
 							}
 							alert(result);
-							location.href = "<%= request.getContextPath()%>";
+							location.replace("<%= request.getContextPath()%>");
 						},
 						error : function() {
 
