@@ -169,92 +169,7 @@ public class TeacherService {
 		return result;
 	}
 
-	// 선생님 담당 과목 넣기
-	public int insertObject(String[] objectArr, String tNo) {
-		int result = 0;
-		Connection conn = getConnection();
-		System.out.println("담당 과목 서비스 objectArr: " + objectArr);
-		String object = null;
-
-		for (int i = 0; i < objectArr.length; i++) {
-			object = objectArr[i];
-			System.out.println("activeArea" + i + ":" + object);
-			result = dao.insertObject(conn, object, tNo);
-			System.out.println("활동지역 서비스 result: " + i + ":" + result);
-			if (result == 0) {
-				// insert에 실패했다면 더 이상 지역 서비스를 insert할 필요 없으므로
-				break;
-			}
-		}
-		// 하나라도 insert 실패했다면
-		if (result == 0) {
-			rollback(conn);
-		} else { // 전부 성공했다면
-			commit(conn);
-		}
-		close(conn);
-
-		return result;
-	}
-
-	// 선생님 담당 과목 삭제
-	public int deleteObject(String tNo) {
-		int result = 0;
-		Connection conn = getConnection();
-
-		result = dao.deleteObject(conn, tNo);
-		if (result == 1) {
-			commit(conn);
-		} else {
-			rollback(conn);
-		}
-		close(conn);
-
-		return result;
-	}
-
-	// 선생님 활동지역 넣기
-	public int insertActiveArea(String[] activeAreaArr, String tNo) {
-		int result = 0;
-		Connection conn = getConnection();
-		setAutocommit(conn, false);
-		System.out.println("활동지역 서비스 activeArea: " + activeAreaArr);
-		String activeArea = null;
-		System.out.println("활동지역 서비스 result: " + result);
-		for (int i = 0; i < activeAreaArr.length; i++) {
-			activeArea = activeAreaArr[i];
-			System.out.println("activeArea" + i + ":" + activeArea);
-			result = dao.insertActiveArea(conn, activeArea, tNo);
-			if (result == 0) {
-				// insert에 실패했다면 더 이상 지역 서비스를 insert할 필요 없으므로
-				break;
-			}
-		}
-		// 하나라도 insert 실패했다면
-		if (result == 0) {
-			rollback(conn);
-		} else { // 전부 성공했다면
-			commit(conn);
-		}
-		close(conn);
-
-		return result;
-	}
-
-	// 선생님 활동지역 삭제
-	public int deleteActiveArea(String tNo) {
-		int result = 0;
-		Connection conn = getConnection();
-		result = dao.deleteActiveArea(conn, tNo);
-		if (result == 1) {
-			commit(conn);
-		} else {
-			rollback(conn);
-		}
-		close(conn);
-
-		return result;
-	}
+	
 	
 	// 선생님 프로필 사진 등록/변경
 	public int updateProfilePicture(TeacherVo tVo) {
@@ -362,4 +277,90 @@ public class TeacherService {
 //	}
 //
 
+//	// 선생님 담당 과목 넣기
+//		public int insertObject(String[] objectArr, String tNo) {
+//			int result = 0;
+//			Connection conn = getConnection();
+//			System.out.println("담당 과목 서비스 objectArr: " + objectArr);
+//			String object = null;
+//
+//			for (int i = 0; i < objectArr.length; i++) {
+//				object = objectArr[i];
+//				System.out.println("activeArea" + i + ":" + object);
+//				result = dao.insertObject(conn, object, tNo);
+//				System.out.println("활동지역 서비스 result: " + i + ":" + result);
+//				if (result == 0) {
+//					// insert에 실패했다면 더 이상 지역 서비스를 insert할 필요 없으므로
+//					break;
+//				}
+//			}
+//			// 하나라도 insert 실패했다면
+//			if (result == 0) {
+//				rollback(conn);
+//			} else { // 전부 성공했다면
+//				commit(conn);
+//			}
+//			close(conn);
+//
+//			return result;
+//		}
+//
+//		// 선생님 담당 과목 삭제
+//		public int deleteObject(String tNo) {
+//			int result = 0;
+//			Connection conn = getConnection();
+//
+//			result = dao.deleteObject(conn, tNo);
+//			if (result == 1) {
+//				commit(conn);
+//			} else {
+//				rollback(conn);
+//			}
+//			close(conn);
+//
+//			return result;
+//		}
+//
+//		// 선생님 활동지역 넣기
+//		public int insertActiveArea(String[] activeAreaArr, String tNo) {
+//			int result = 0;
+//			Connection conn = getConnection();
+//			setAutocommit(conn, false);
+//			System.out.println("활동지역 서비스 activeArea: " + activeAreaArr);
+//			String activeArea = null;
+//			System.out.println("활동지역 서비스 result: " + result);
+//			for (int i = 0; i < activeAreaArr.length; i++) {
+//				activeArea = activeAreaArr[i];
+//				System.out.println("activeArea" + i + ":" + activeArea);
+//				result = dao.insertActiveArea(conn, activeArea, tNo);
+//				if (result == 0) {
+//					// insert에 실패했다면 더 이상 지역 서비스를 insert할 필요 없으므로
+//					break;
+//				}
+//			}
+//			// 하나라도 insert 실패했다면
+//			if (result == 0) {
+//				rollback(conn);
+//			} else { // 전부 성공했다면
+//				commit(conn);
+//			}
+//			close(conn);
+//
+//			return result;
+//		}
+//
+//		// 선생님 활동지역 삭제
+//		public int deleteActiveArea(String tNo) {
+//			int result = 0;
+//			Connection conn = getConnection();
+//			result = dao.deleteActiveArea(conn, tNo);
+//			if (result == 1) {
+//				commit(conn);
+//			} else {
+//				rollback(conn);
+//			}
+//			close(conn);
+//
+//			return result;
+//		}
 }

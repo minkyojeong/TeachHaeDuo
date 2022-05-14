@@ -46,7 +46,7 @@ public class TeacherUpdateDoController extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		System.out.println("교습정보 수정 doPost");
-
+		
 		// client가 입력한 데이터 가져올때 한글깨짐 방지
 		request.setCharacterEncoding("UTF-8");
 		// 학력

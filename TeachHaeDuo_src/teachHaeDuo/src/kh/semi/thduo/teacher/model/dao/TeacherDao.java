@@ -604,76 +604,7 @@ public class TeacherDao {
 		return result;
 	}
 
-	// 선생님 담당 과목 넣기
-	public int insertObject(Connection conn, String object, String tNo) {
-		int result = 0;
-		String sql = "insert into TEACH_OBJECT (ob_code, t_no) values( (select ob_code from object where ob_name=?) , ?)";
-		try {
-			pstmt = conn.prepareStatement(sql);
-			pstmt.setString(2, tNo);
-			pstmt.setString(1, object);
-			result = pstmt.executeUpdate();
-		} catch (SQLException e) {
-			e.printStackTrace();
-		} finally {
-			close(pstmt);
-		}
-
-		return result;
-	}
-
-	// 선생님 담당 과목 삭제
-	public int deleteObject(Connection conn, String tNo) {
-		int result = 0;
-		String sql = "delete from teach_object where t_no=?";
-
-		try {
-			pstmt = conn.prepareStatement(sql);
-			pstmt.setString(1, tNo);
-			result = pstmt.executeUpdate();
-		} catch (SQLException e) {
-			e.printStackTrace();
-		} finally {
-			close(pstmt);
-		}
-		return result;
-	}
-
-	// 선생님 활동지역 넣기
-	public int insertActiveArea(Connection conn, String activeArea, String tNo) {
-		int result = 0;
-		String sql = "insert into ACTI_AREA (t_no, area_code) values(?, (select area_code from area where area_name=?) )";
-		try {
-			pstmt = conn.prepareStatement(sql);
-			pstmt.setString(1, tNo);
-			pstmt.setString(2, activeArea);
-			result = pstmt.executeUpdate();
-		} catch (SQLException e) {
-			e.printStackTrace();
-		} finally {
-			close(pstmt);
-		}
-
-		return result;
-	}
-
-	// 선생님 활동지역 삭제
-	public int deleteActiveArea(Connection conn, String tNo) {
-		int result = 0;
-		String sql = "delete from acti_area where t_no=?";
-
-		try {
-			pstmt = conn.prepareStatement(sql);
-			pstmt.setString(1, tNo);
-			result = pstmt.executeUpdate();
-		} catch (SQLException e) {
-			e.printStackTrace();
-		} finally {
-			close(pstmt);
-		}
-
-		return result;
-	}
+	
 
 	// 선생님 프로필 사진 등록/변경
 	public int updateProfilePicture(Connection conn, TeacherVo tVo) {
@@ -813,4 +744,75 @@ public class TeacherDao {
 //	}
 //
 
+	
+//	// 선생님 담당 과목 넣기
+//		public int insertObject(Connection conn, String object, String tNo) {
+//			int result = 0;
+//			String sql = "insert into TEACH_OBJECT (ob_code, t_no) values( (select ob_code from object where ob_name=?) , ?)";
+//			try {
+//				pstmt = conn.prepareStatement(sql);
+//				pstmt.setString(2, tNo);
+//				pstmt.setString(1, object);
+//				result = pstmt.executeUpdate();
+//			} catch (SQLException e) {
+//				e.printStackTrace();
+//			} finally {
+//				close(pstmt);
+//			}
+//
+//			return result;
+//		}
+//
+//		// 선생님 담당 과목 삭제
+//		public int deleteObject(Connection conn, String tNo) {
+//			int result = 0;
+//			String sql = "delete from teach_object where t_no=?";
+//
+//			try {
+//				pstmt = conn.prepareStatement(sql);
+//				pstmt.setString(1, tNo);
+//				result = pstmt.executeUpdate();
+//			} catch (SQLException e) {
+//				e.printStackTrace();
+//			} finally {
+//				close(pstmt);
+//			}
+//			return result;
+//		}
+//
+//		// 선생님 활동지역 넣기
+//		public int insertActiveArea(Connection conn, String activeArea, String tNo) {
+//			int result = 0;
+//			String sql = "insert into ACTI_AREA (t_no, area_code) values(?, (select area_code from area where area_name=?) )";
+//			try {
+//				pstmt = conn.prepareStatement(sql);
+//				pstmt.setString(1, tNo);
+//				pstmt.setString(2, activeArea);
+//				result = pstmt.executeUpdate();
+//			} catch (SQLException e) {
+//				e.printStackTrace();
+//			} finally {
+//				close(pstmt);
+//			}
+//
+//			return result;
+//		}
+//
+//		// 선생님 활동지역 삭제
+//		public int deleteActiveArea(Connection conn, String tNo) {
+//			int result = 0;
+//			String sql = "delete from acti_area where t_no=?";
+//
+//			try {
+//				pstmt = conn.prepareStatement(sql);
+//				pstmt.setString(1, tNo);
+//				result = pstmt.executeUpdate();
+//			} catch (SQLException e) {
+//				e.printStackTrace();
+//			} finally {
+//				close(pstmt);
+//			}
+//
+//			return result;
+//		}
 }

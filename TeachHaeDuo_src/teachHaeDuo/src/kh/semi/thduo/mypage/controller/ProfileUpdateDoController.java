@@ -178,21 +178,24 @@ public class ProfileUpdateDoController extends HttpServlet {
 		} else { // 되어있다면
 			tNo = ssMV.gettNo();
 		}
-
+		
+		// 변수에 잘 담겼나 확인
 		if (tNo != null) {
 			// tVo에 데이터 담아서 db 다녀오기
 			tVo.setT_no(tNo);
 			tVo.setT_picture(fileUrl);
+			// 서비스 호출
 			result = new TeacherService().updateProfilePicture(tVo);
+			// 성공
 			if (result == 1) {
 				request.setAttribute("tVo", tVo);
 				request.getSession().setAttribute("msgProfile", "프로필 변경이 완료되었습니다.");
 				response.sendRedirect("mypage");
-			} else {
+			} else { // 실패
 				request.getSession().setAttribute("msgProfile", "프로필 변경에 실패했습니다.");
 				response.sendRedirect("mypage");
 			}
-		} else {
+		} else { // 변수에 안담김
 			request.getSession().setAttribute("msgProfile", "프로필 변경에 실패했습니다.");
 			response.sendRedirect("mypage");
 		}

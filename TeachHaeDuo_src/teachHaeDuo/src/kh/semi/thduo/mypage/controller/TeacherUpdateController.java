@@ -45,12 +45,14 @@ public class TeacherUpdateController extends HttpServlet {
 
 		// 로그인 상태 확인
 		MemberVo ssMV = (MemberVo) request.getSession().getAttribute("ssMV");
-		String mId = ssMV.getmId();
-		if (mId == null) {
+		
+		// 로그인 안되어있다면
+		if (ssMV == null) {
 			request.getSession().setAttribute("msgLogin", "로그인 먼저 해주세요");
 			response.sendRedirect("login");
 			return;
 		}
+		String mId = ssMV.getmId();
 		// 아이디 비밀번호 확인
 		MemberVo vo = new MemberService().login(mId, pw);
 
