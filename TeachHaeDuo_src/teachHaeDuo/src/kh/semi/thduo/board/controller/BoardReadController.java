@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import kh.semi.thduo.admin.vo.AdminVo;
 import kh.semi.thduo.board.service.BoardService;
 import kh.semi.thduo.board.vo.BoardReCommentVo;
 import kh.semi.thduo.board.vo.BoardVo;
@@ -36,7 +37,8 @@ public class BoardReadController extends HttpServlet {
 		// TODO Auto-generated method stub
 		String bNo = request.getParameter("bno");
 		MemberVo ssvo = (MemberVo)request.getSession().getAttribute("ssMV");
-		if(ssvo == null)  {  // 로그아웃 상태라면 login 페이지로 진입
+		AdminVo advo = (AdminVo)request.getSession().getAttribute("ssMV");
+		if(ssvo == null && advo == null)  {  // 로그아웃 상태라면 login 페이지로 진입
 			response.sendRedirect("login");
 			return;
 		} else {  // 로그인한 상태라면 write page 진입

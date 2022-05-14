@@ -142,6 +142,21 @@ public class BoardDao {
 		return result;
 		
 	}
+	public void boardUpdateCnt(Connection conn, String bNo) {
+		String sql = "update q_board set b_cnt=b_cnt+1 where b_no=?"; 
+				try {
+					pstmt = conn.prepareStatement(sql);
+					pstmt.setString(1, bNo);
+					pstmt.executeUpdate();
+				}catch(Exception e) {
+					e.printStackTrace();
+				}finally {
+					close(pstmt);
+					close(conn);
+				}
+		
+		
+	}
 	public int boardWriteDo(Connection conn, BoardVo vo) {
 		// TODO: member 로그인 완료 후 수정
 		
@@ -177,7 +192,7 @@ public class BoardDao {
 	public BoardVo boardRead(Connection conn, String bNo) {
 		BoardVo vo = null;  // 1 : 리턴 자료형으로 변수 선언
 		String sql ="select * from q_board where b_no=?";  // 2: sql문
-		String sql2 ="select * from q_recomment where b_no=?"; 
+		String sql2 ="update q_board set b_cnt=b_cnt+1 where b_no=?";  
 		try {   // 4
 			pstmt = conn.prepareStatement(sql);  // 3
 			pstmt.setString(1, bNo);  // 7 : 위 2 ?
@@ -196,21 +211,13 @@ public class BoardDao {
 				
 				close(rs);
 				close(pstmt);
+				try {
 				pstmt = conn.prepareStatement(sql2); 
 				pstmt.setString(1, bNo);
 				rs = pstmt.executeQuery();
-				if(rs.next()) {
-					ArrayList<BoardReCommentVo> reCommentList = new ArrayList<BoardReCommentVo>();
-					do {
-						BoardReCommentVo rvo = new BoardReCommentVo();
-						rvo.setrContent(rs.getString("r_Content"));
-						rvo.setrNo(rs.getString("r_No"));
-						rvo.setrWriteDate(rs.getString("r_Write_Date"));
-						reCommentList.add(rvo);
-					}while(rs.next());
-					vo.setReCommentList(reCommentList);
+				}catch(Exception e) {
+					e.printStackTrace();
 				}
-				
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();

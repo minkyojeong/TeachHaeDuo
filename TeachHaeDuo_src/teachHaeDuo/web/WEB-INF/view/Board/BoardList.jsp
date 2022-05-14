@@ -12,6 +12,7 @@
 <link href="<%=request.getContextPath()%>/resources/css/font.css" rel="stylesheet" type="text/css">
 <link href="<%=request.getContextPath()%>/resources/css/reset.css" rel="stylesheet" type="text/css">
 <link href="<%=request.getContextPath()%>/resources/css/boardList.css" rel="stylesheet" type="text/css">
+
 <!DOCTYPE html>
 <html>
 <head>
