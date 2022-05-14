@@ -26,7 +26,7 @@ public class TeacherDao {
 	// 회원가입 시, 선생님 정보 초기 삽입
 	public int insertTeacherInit(Connection conn, String mId) {
 		int result = 0;
-		String sql = "INSERT INTO t_profile VALUES((SELECT 'T' || (SELECT MAX(TO_NUMBER(SUBSTR(t_no, 2))) + 1 FROM t_profile) FROM dual), default, default, default, default, default, default, default, default, default, default, default, ?, default, default)";
+		String sql = "INSERT INTO t_profile VALUES((SELECT 'T' || (SELECT NVL(MAX(TO_NUMBER(SUBSTR(t_no, 2))), 0) + 1 FROM t_profile) FROM dual), default, default, default, default, default, default, default, default, default, default, default, ?, default, default)";
 		
 		try {
 			pstmt = conn.prepareStatement(sql);
