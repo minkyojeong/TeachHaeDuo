@@ -94,26 +94,34 @@ ArrayList<BoardReCommentVo> rvolist = (ArrayList<BoardReCommentVo>)request.getAt
 				<button type="submit">댓글등록</button>
 			</form>
 		</div>
+		<div style="width:800px;height:400px;overflow:auto">
 		<%
 			if(rvolist != null) {
 				for(BoardReCommentVo rvo: rvolist){
 		%>
+		
 		<div class="rread">
 			<table>
 				<tr>
-					<td><%= rvo.getrWriter() %></td>
-					<td><%= rvo.getrWriteDate().substring(0,10) %></td>
-					<td colspan="9"><%= rvo.getrContent() %></td>
+					<td width=50px style="word-break:break-all"><%= rvo.getrWriter() %></td>
+					<td width=40 style="word-break:break-all"><%= rvo.getrWriteDate().substring(0,10) %></td>
+					<td width=200 style="word-break:break-all"><%= rvo.getrContent() %></td>
 						<%if( ssId.equals(vo.getbWriter()))  { %>
 					<td><button type="button" onclick="location.href='BoardReCommentDelete?bno=<%= vo.getbNo() %>&rno=<%= rvo.getrNo() %>'">삭제</button>
 					<%} %>
 				</tr>
+				<tr>
+				</tr>
+				<tr>
+				</tr>
 			</table>
 		</div>
+		
 		<%
 				}
 			}
 			%>
+			</div>
 	</div>
 	</div>
 	<jsp:include page="../template_footer.jsp"></jsp:include>

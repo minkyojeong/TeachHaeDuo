@@ -13,11 +13,10 @@
 <meta charset="UTF-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-<script src="//cdn.ckeditor.com/4.18.0/standard/ckeditor.js"></script>
+<script type="text/javascript" src="<%=request.getContextPath()%>/ckeditor/ckeditor.js"></script>
 <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 <title>Insert title here</title>
 <script>
-
 
 </script>
 <style>
@@ -42,7 +41,11 @@ float:left;
 font-weight:600;
 	font-size:25px;
 	}
+textarea{width:500px; height:100px; 
+ resize:none;
+/*   resize: horizontal; */
 
+}
 </style>
 </head>
 <body>
@@ -50,12 +53,14 @@ font-weight:600;
 	<jsp:include page="../template_header.jsp"></jsp:include>
 		<div class="wrap_container">
       		<form action="BoardWriteDo" method="post" >
-      			<input type="text" name="bTitle" maxlength="100" required placeholder="제목" style="width:900px; height:25px;float:left;margin-right:10px;">
-       			<select name="bCategory" style="width:100px; height:30px;margin-bottom:10px;">
+      		<div>
+      			<input type="text" name="bTitle" maxlength="100" required placeholder="제목" style="width:900px; height:30px;float:left;margin-right:10px;">
+       			<select name="bCategory" style="width:190px; height:30px;margin-bottom:10px; float:right;">
         			<option>학습 질문하기</option>
         			<option>자유게시판</option>
         		</select>
-            	<textarea name="editor1" id="editor1" rows="10" cols="80" style="width:1100px;height:400px;resize:none;" placeholder="여기에 작성하세요." maxlength="2048">               
+        	</div>
+            	<textarea name="editor1" id="editor1" rows="10" cols="80" style="width:1100px;height:300px;resize:none;" placeholder="여기에 작성하세요." maxlength="2048">               
             	</textarea>
             	<script>
             	CKEDITOR.replace('editor1');
@@ -65,6 +70,7 @@ font-weight:600;
             		<button type="button" onclick="location.href='BoardList'" style="width:50px;height:25px; text-align:center; margin-top:10px;">취소</button>
             	</div>
         	</form>
+        	
        </div>
 	</div>
 </body>
