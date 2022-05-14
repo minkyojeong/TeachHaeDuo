@@ -157,44 +157,46 @@ public class ProfileUpdateDoController extends HttpServlet {
 //			response.sendRedirect("mypage");
 //		}
 //
-		
+
 		// 업로드한 사진 파일 url 가져오기
 		String fileUrl = request.getParameter("fileUrl");
 		System.out.println(fileUrl);
-		
+
 		// 사용할 변수, 객체 선언
-		String tNo = "";
+		String tNo = null;
 		TeacherVo tVo = new TeacherVo();
 		int result = 0;
-		
+
 		// 세션에 담긴 정보 가져오기
 		MemberVo ssMV = (MemberVo) request.getSession().getAttribute("ssMV");
-		
+
 		// 로그인이 안되어있다면
 		if (ssMV == null) {
+			request.getSession().setAttribute("msgLogin", "로그인 먼저 해주세요");
 			response.sendRedirect("login");
 			return;
 		} else { // 되어있다면
 			tNo = ssMV.gettNo();
 		}
-		
-		// tVo에 데이터 담아서 db 다녀오기
-		tVo.setT_no(tNo);
-		tVo.setT_picture(fileUrl);
-		result = new TeacherService().updateProfilePicture(tVo);
-		if (result == 1) {
-			request.setAttribute("tVo", tVo);
-			request.getSession().setAttribute("msgProfile", "프로필 변경이 완료되었습니다.");
-			response.sendRedirect("mypage");
+
+		if (tNo != null) {
+			// tVo에 데이터 담아서 db 다녀오기
+			tVo.setT_no(tNo);
+			tVo.setT_picture(fileUrl);
+			result = new TeacherService().updateProfilePicture(tVo);
+			if (result == 1) {
+				request.setAttribute("tVo", tVo);
+				request.getSession().setAttribute("msgProfile", "프로필 변경이 완료되었습니다.");
+				response.sendRedirect("mypage");
+			} else {
+				request.getSession().setAttribute("msgProfile", "프로필 변경에 실패했습니다.");
+				response.sendRedirect("mypage");
+			}
 		} else {
 			request.getSession().setAttribute("msgProfile", "프로필 변경에 실패했습니다.");
 			response.sendRedirect("mypage");
 		}
-		
-		
-		
-		
-		
+
 	}
-		
+
 }

@@ -16,36 +16,42 @@ import kh.semi.thduo.teacher.model.service.TeacherService;
 @WebServlet("/teacherUpdateLogin")
 public class TeacherUpdateLoginController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
-    public TeacherUpdateLoginController() {
-        super();
-        // TODO Auto-generated constructor stub
-    }
 
 	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
+	 * @see HttpServlet#HttpServlet()
 	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		MemberVo ssMV = (MemberVo)request.getSession().getAttribute("ssMV");
-		String tNo = ssMV.gettNo();
-		String approvalYn = new TeacherService().checkApproval(tNo);
-		System.out.println("승인여부: " +approvalYn);
-		
-		if(approvalYn.equals("Y")) {
-			request.getRequestDispatcher("WEB-INF/view/mypage/teacherUpdateLogin.jsp").forward(request, response);
-		} else {
-			request.getSession().setAttribute("msgApproval", "관리자의 승인 후 교습 정보 등록이 가능합니다.");
-			response.sendRedirect("mypage");
-			return;
-		}
-		
+	public TeacherUpdateLoginController() {
+		super();
+		// TODO Auto-generated constructor stub
 	}
 
 	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
+	 *      response)
+	 */
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		MemberVo ssMV = (MemberVo) request.getSession().getAttribute("ssMV");
+		String tNo = ssMV.gettNo();
+		if (tNo != null) {
+			String approvalYn = new TeacherService().checkApproval(tNo);
+			System.out.println("승인여부: " + approvalYn);
+
+			if (approvalYn.equals("Y")) {
+				request.getRequestDispatcher("WEB-INF/view/mypage/teacherUpdateLogin.jsp").forward(request, response);
+			} else {
+				request.getSession().setAttribute("msgApproval", "관리자의 승인 후 교습 정보 등록이 가능합니다.");
+				response.sendRedirect("mypage");
+			}
+		} else {
+			request.getSession().setAttribute("msgApproval", "정보를 찾을 수 없습니다. 다시 시도해주세요.");
+			response.sendRedirect("mypage");
+		}
+	}
+
+	/**
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
+	 *      response)
 	 */
 //	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 //		// TODO Auto-generated method stub

@@ -48,7 +48,9 @@ public class MypageController extends HttpServlet {
 		
 		// 로그인이 안됐을 경우
 		if(ssMV == null) {
+			request.getSession().setAttribute("msgLogin", "로그인 먼저 해주세요");
 			response.sendRedirect("login");
+			return;
 		} else {
 			mId = ssMV.getmId();
 			roleSt = ssMV.getRoleSt();
@@ -58,12 +60,16 @@ public class MypageController extends HttpServlet {
 			System.out.println(roleSt);
 			
 			// 로그인한 회원이 학생, 선생님에 따라서 다른 페이지 진입
-			if(roleSt == null) {
-				response.sendRedirect("login");
-			} else if(roleSt.equals("T")) {
+			if(roleSt.equals("T")) {
 				System.out.println("선생 마이페이지 진입");
 				// 마이페이지에서 보여줄 정보들 가져오기
 				TeacherVo tVo = new TeacherService().readTeacherInfo(tNo);
+				if(tVo == null) {
+					System.out.println("선생님 정보 못읽어와");
+					request.setAttribute("msgMypage", "마이페이지에 진입 할 수 없습니다. 관리자에게 문의하세요.");
+					request.getRequestDispatcher("WEB-INF/view/main.jsp").forward(request, response);
+					return;
+				}
 				int numberOfSendAlarm = new AlarmService().numberOfSendAlarm(mNickname);
 				int numberOfReceiveAlarm = new AlarmService().numberOfReceiveAlarm(mNickname);
 				int balance = new PencilService().checkPencil(mId);

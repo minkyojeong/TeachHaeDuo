@@ -57,6 +57,16 @@
 
 	</div>
 
+<script>
+$(function(){
+	var msgReportDetailVal = '${msgReportDetail}';
+	if(msgReportDetailVal != null && msgReportDetailVal != ""){
+		alert('${msgReportDetail}');
+		location.replace("teacherReportList");
+	}
+});
+</script>
+<% request.removeAttribute("msgReportDetail"); %>
 </body>
 
 </html>

@@ -49,9 +49,12 @@ public class MemberUpdateDoController extends HttpServlet {
 		String mPhone = null;
 		String mAddress = null;
 		MemberVo vo = null;
+		int result = 0;
 		// 로그인이 안되있으면
 		if(ssMV == null) {
+			request.getSession().setAttribute("msgLogin", "로그인 먼저 해주세요");
 			response.sendRedirect("login");
+			return;
 		} else {
 			mId = ssMV.getmId();
 		// client가 입력한 정보 받아오기
@@ -78,7 +81,7 @@ public class MemberUpdateDoController extends HttpServlet {
 		
 		// 회원 정보 업데이트
 		System.out.println("회원정보수정 컨트롤러 vo:" + vo);
-		int result = new MemberService().updateMember(vo);
+		result = new MemberService().updateMember(vo);
 		System.out.println("회원정보수정 컨트롤러 result:" + result);
 		// 업데이트 실패
 		if(result == 0) {

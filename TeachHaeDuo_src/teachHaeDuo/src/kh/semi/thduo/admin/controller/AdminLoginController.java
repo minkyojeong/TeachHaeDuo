@@ -56,7 +56,7 @@ public class AdminLoginController extends HttpServlet {
         
         	System.out.println("로그인 성공");
 			request.getSession().setAttribute("ssMV", vo);
-			response.sendRedirect(request.getContextPath()+"/memberList"); 
+			response.sendRedirect(request.getContextPath()+"/adminMain"); 
         }
 		
 	}

@@ -72,6 +72,16 @@ $(function() {
            </section>
 		</div>
 	     <jsp:include page="../template_footer.jsp"></jsp:include>
-	</div>    
+	</div>
+	<script>
+$(function(){
+	var msgLoginVal = '${msgLogin}';
+	if(msgLoginVal != null && msgLoginVal != ""){
+		alert('${msgLogin}');
+		location.replace("login");
+	}
+});
+</script>
+<% request.getSession().removeAttribute("msgLogin"); %>  
 </body>	
 </html>

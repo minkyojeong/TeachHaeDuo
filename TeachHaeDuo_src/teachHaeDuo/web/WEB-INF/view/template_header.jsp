@@ -135,29 +135,32 @@ $("#p_alarm").on("click", function() {
 		type:"post",
 		dataType:"json",
 		success: function(result){
-			 
-          $(".alarm_modal_content").find("*").remove();
-			var html = "";
-			html += '<table id="header_allalarm_table">'
-			html += '<tr id="header_allalarm_table_tr1">';
-			html += '<th><img src="${pageContext.request.contextPath}/resources/icons/message.png" width="20" height="20"></th>';
-			html += '<th>알림 내용</th>';
-			html += '<th>보낸 사람</th>';
-			html += '<th>받는 사람</th>';
-			html += '<th>날짜</th>';
-			html += '</tr>';
-			for(var i = 0; i < result.length; i++){
-				var vo = result[i];
-				html += '<tr>';
-				html += '<td><img src="${pageContext.request.contextPath}/resources/icons/message.png" width="20" height="20"></td>';
-				html += '<td>'+ vo.alarm_content + '</td>';
-				html += '<td>'+ vo.alarm_sendid + '</td>';
-				html += '<td>'+ vo.alarm_receiveid + '</td>';
-				html += '<td>' + vo.alarm_date + '</td>';
-				html += '</tr>';
-			}
-			$("#header_alarm_table_tr1").nextAll().remove();
-			$(".alarm_modal_content").append(html);
+			if(result == "F"){
+				alert("정보 조회에 실패했습니다.");
+			} else {
+		          $(".alarm_modal_content").find("*").remove();
+					var html = "";
+					html += '<table id="header_allalarm_table">'
+					html += '<tr id="header_allalarm_table_tr1">';
+					html += '<th><img src="${pageContext.request.contextPath}/resources/icons/message.png" width="20" height="20"></th>';
+					html += '<th>알림 내용</th>';
+					html += '<th>보낸 사람</th>';
+					html += '<th>받는 사람</th>';
+					html += '<th>날짜</th>';
+					html += '</tr>';
+					for(var i = 0; i < result.length; i++){
+						var vo = result[i];
+						html += '<tr>';
+						html += '<td><img src="${pageContext.request.contextPath}/resources/icons/message.png" width="20" height="20"></td>';
+						html += '<td>'+ vo.alarm_content + '</td>';
+						html += '<td>'+ vo.alarm_sendid + '</td>';
+						html += '<td>'+ vo.alarm_receiveid + '</td>';
+						html += '<td>' + vo.alarm_date + '</td>';
+						html += '</tr>';
+					}
+					$("#header_alarm_table_tr1").nextAll().remove();
+					$(".alarm_modal_content").append(html);
+				}
 		},
 		error: function(){
 		
@@ -188,30 +191,34 @@ $("input[name=header_btn]").click(function(){
 			type:"post",
 			dataType:"json",
 			success: function(result){
-				 
-              $(".alarm_modal_content").find("*").remove();
-				var html = "";
-				html += '<table id="header_allalarm_table">'
-				html += '<tr id="header_allalarm_table_tr1">';
-				html += '<th><img src="${pageContext.request.contextPath}/resources/icons/message.png" width="20" height="20"></th>';
-				html += '<th>알림 내용</th>';
-				html += '<th>보낸 사람</th>';
-				html += '<th>받는 사람</th>';
-				html += '<th>날짜</th>';
-				html += '</tr>';
-				for(var i = 0; i < result.length; i++){
-					var vo = result[i];
-					html += '<tr>';
-					html += '<td><img src="${pageContext.request.contextPath}/resources/icons/message.png" width="20" height="20"></td>';
-					html += '<td>'+ vo.alarm_content + '</td>';
-					html += '<td>'+ vo.alarm_sendid + '</td>';
-					html += '<td>'+ vo.alarm_receiveid  + '</td>';
-					html += '<td>' + vo.alarm_date + '</td>';
-					html += '</tr>';
-				}
-				$("#header_alarm_table_tr1").nextAll().remove();
-				$(".alarm_modal_content").append(html);
-			},
+				console.log(result);
+				if(result == "F"){
+					alert("정보 조회에 실패했습니다.");
+				} else {
+		              $(".alarm_modal_content").find("*").remove();
+						var html = "";
+						html += '<table id="header_allalarm_table">'
+						html += '<tr id="header_allalarm_table_tr1">';
+						html += '<th><img src="${pageContext.request.contextPath}/resources/icons/message.png" width="20" height="20"></th>';
+						html += '<th>알림 내용</th>';
+						html += '<th>보낸 사람</th>';
+						html += '<th>받는 사람</th>';
+						html += '<th>날짜</th>';
+						html += '</tr>';
+						for(var i = 0; i < result.length; i++){
+							var vo = result[i];
+							html += '<tr>';
+							html += '<td><img src="${pageContext.request.contextPath}/resources/icons/message.png" width="20" height="20"></td>';
+							html += '<td>'+ vo.alarm_content + '</td>';
+							html += '<td>'+ vo.alarm_sendid + '</td>';
+							html += '<td>'+ vo.alarm_receiveid  + '</td>';
+							html += '<td>' + vo.alarm_date + '</td>';
+							html += '</tr>';
+						}
+						$("#header_alarm_table_tr1").nextAll().remove();
+						$(".alarm_modal_content").append(html);
+					}
+				},
 			error: function(){
 			
 			}
@@ -226,27 +233,30 @@ $("input[name=header_btn]").click(function(){
 			type:"post",
 			dataType:"json",
 			success: function(result){
-				
-               $(".alarm_modal_content").find("*").remove();
-				var html = "";
-				html += '<table id="header_alarm_table">'
-				html += '<tr id="header_alarm_table_tr1">';
-				html += '<th><img src="${pageContext.request.contextPath}/resources/icons/receive.png" width="20" height="20"></th>';
-				html += '<th>알림 내용</th>';
-				html += '<th>보낸 사람</th>';
-				html += '<th>날짜</th>';
-				html += '</tr>';
-				for(var i = 0; i < result.length; i++){
-					var vo = result[i];
-					html += '<tr>';
-					html += '<td><img src="${pageContext.request.contextPath}/resources/icons/receive.png" width="20" height="20"></td>';
-					html += '<td>'+ vo.alarm_content + '</td>';
-					html += '<td>'+ vo.alarm_sendid + '</td>';
-					html += '<td>' + vo.alarm_date + '</td>';
-					html += '</tr>';
-				}
-				$("#header_alarm_table_tr1").nextAll().remove();
-				$(".alarm_modal_content").append(html);
+				if(result == "F"){
+					alert("정보 조회에 실패했습니다.");
+				} else {
+		               $(".alarm_modal_content").find("*").remove();
+						var html = "";
+						html += '<table id="header_alarm_table">'
+						html += '<tr id="header_alarm_table_tr1">';
+						html += '<th><img src="${pageContext.request.contextPath}/resources/icons/receive.png" width="20" height="20"></th>';
+						html += '<th>알림 내용</th>';
+						html += '<th>보낸 사람</th>';
+						html += '<th>날짜</th>';
+						html += '</tr>';
+						for(var i = 0; i < result.length; i++){
+							var vo = result[i];
+							html += '<tr>';
+							html += '<td><img src="${pageContext.request.contextPath}/resources/icons/receive.png" width="20" height="20"></td>';
+							html += '<td>'+ vo.alarm_content + '</td>';
+							html += '<td>'+ vo.alarm_sendid + '</td>';
+							html += '<td>' + vo.alarm_date + '</td>';
+							html += '</tr>';
+						}
+						$("#header_alarm_table_tr1").nextAll().remove();
+						$(".alarm_modal_content").append(html);
+					}
 			},
 			error: function(){
 			
@@ -262,27 +272,31 @@ $("input[name=header_btn]").click(function(){
 			type:"post",
 			dataType:"json",
 			success: function(result){
-                $(".alarm_modal_content").find("*").remove();
-				var html = "";
-				html += '<table id="header_alarm_table">'
-				html += '<tr id="header_alarm_table_tr1">';
-				html += '<th><img src="${pageContext.request.contextPath}/resources/icons/send.png" width="20" height="20"></th>';
-				html += '<th>알림 내용</th>';
-				html += '<th>받는 사람</th>';
-				html += '<th>날짜</th>';
-				html += '</tr>';
-				for(var i = 0; i < result.length; i++){
-					var vo = result[i];
-					html += '<tr>';
-					html += '<td><img src="${pageContext.request.contextPath}/resources/icons/send.png" width="20" height="20"></td>';
-					html += '<td>'+ vo.alarm_content + '</td>';
-					html += '<td>'+ vo.alarm_receiveid + '</td>';
-					html += '<td>' + vo.alarm_date + '</td>';
+				if(result == "F"){
+					alert("정보 조회에 실패했습니다.");
+				} else {
+	                $(".alarm_modal_content").find("*").remove();
+					var html = "";
+					html += '<table id="header_alarm_table">'
+					html += '<tr id="header_alarm_table_tr1">';
+					html += '<th><img src="${pageContext.request.contextPath}/resources/icons/send.png" width="20" height="20"></th>';
+					html += '<th>알림 내용</th>';
+					html += '<th>받는 사람</th>';
+					html += '<th>날짜</th>';
 					html += '</tr>';
+					for(var i = 0; i < result.length; i++){
+						var vo = result[i];
+						html += '<tr>';
+						html += '<td><img src="${pageContext.request.contextPath}/resources/icons/send.png" width="20" height="20"></td>';
+						html += '<td>'+ vo.alarm_content + '</td>';
+						html += '<td>'+ vo.alarm_receiveid + '</td>';
+						html += '<td>' + vo.alarm_date + '</td>';
+						html += '</tr>';
+					}
+					
+					$("#header_alarm_table_tr1").nextAll().remove();
+					$(".alarm_modal_content").append(html);
 				}
-				
-				$("#header_alarm_table_tr1").nextAll().remove();
-				$(".alarm_modal_content").append(html);
 			},
 			error: function(){
 			

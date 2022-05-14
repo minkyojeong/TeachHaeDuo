@@ -39,17 +39,23 @@ public class TeacherReportListController extends HttpServlet {
 		// 관리자 로그인 확인
 		AdminVo aVo = (AdminVo) request.getSession().getAttribute("ssMV");
 		if (aVo == null) { // 관리자 로그인 안되어있다면
-
-			response.sendRedirect(request.getContextPath());
+			request.getSession().setAttribute("msgLogin", "로그인 먼저 해주세요");
+			response.sendRedirect("login");
+			return;
 		} else { // 되어있다면
 
 			// 화면에 뿌려줄 데이터 가지고 오기
 			ArrayList<ReportVo> voList = new ReportService().readAllReport();
-			// 가져온 데이터 request에 담기
-			request.setAttribute("voList", voList);
-			// 정보 들고 리스트 페이지 이동
-			request.getRequestDispatcher("WEB-INF/view/admin/teacherReportList.jsp").forward(request, response);
-
+			if (voList != null) {
+				// 가져온 데이터 request에 담기
+				request.setAttribute("voList", voList);
+				// 정보 들고 리스트 페이지 이동
+				request.getRequestDispatcher("WEB-INF/view/admin/teacherReportList.jsp").forward(request, response);
+			} else {
+				// 조회 실패
+				request.getSession().setAttribute("msgTeacherReportList", "정보 조회에 실패했습니다.");
+				response.sendRedirect("adminMain");
+			}
 		}
 	}
 

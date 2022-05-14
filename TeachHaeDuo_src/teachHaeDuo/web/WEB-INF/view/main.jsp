@@ -61,5 +61,15 @@
 		<jsp:include page="template_footer.jsp"></jsp:include>
 	</div>
 	<script src="<%=request.getContextPath()%>/resources/js/main.js" type="text/javascript"></script>
+	<script>
+$(function(){
+	var msgMypageVal = '${msgMypage}';
+	if(msgMypageVal != null && msgMypageVal != ""){
+		alert('${msgMypage}');
+		location.replace("<%=request.getContextPath() %>");
+	}
+});
+</script>
+<% request.removeAttribute("msgMypage"); %>
 </body>
 </html>

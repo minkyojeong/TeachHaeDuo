@@ -16,17 +16,18 @@ import kh.semi.thduo.member.vo.MemberVo;
 @WebServlet("/teacherUpdate")
 public class TeacherUpdateController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
-    public TeacherUpdateController() {
-        super();
-        // TODO Auto-generated constructor stub
-    }
 
 	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
+	 * @see HttpServlet#HttpServlet()
+	 */
+	public TeacherUpdateController() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+
+	/**
+	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
+	 *      response)
 	 */
 //	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 //		// TODO Auto-generated method stub
@@ -34,26 +35,32 @@ public class TeacherUpdateController extends HttpServlet {
 //	}
 
 	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
+	 *      response)
 	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-				// 세션에 담긴 정보 가져오기
-				MemberVo ssMV = (MemberVo)request.getSession().getAttribute("ssMV");
-				String mId = ssMV.getmId();
-				
-				// 입력 받은 데이터 가져오기
-				String pw = request.getParameter("pw");
-				
-				// 아이디 비밀번호 확인
-				MemberVo vo = new MemberService().login(mId, pw);
-				
-				// 입력된 정보 다르다면
-				if(vo == null) {
-					request.getSession().setAttribute("msgPw", "비밀번호가 틀렸습니다. 다시 로그인해주세요");
-					response.sendRedirect("teacherUpdateLogin");
-				} else { // 입력된 정보가 맞으면
-					request.getRequestDispatcher("WEB-INF/view/mypage/teacherUpdate.jsp").forward(request, response);
-				}
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		// 입력받은 데이터 가져오기
+		String pw = request.getParameter("pw");
+
+		// 로그인 상태 확인
+		MemberVo ssMV = (MemberVo) request.getSession().getAttribute("ssMV");
+		String mId = ssMV.getmId();
+		if (mId == null) {
+			request.getSession().setAttribute("msgLogin", "로그인 먼저 해주세요");
+			response.sendRedirect("login");
+			return;
+		}
+		// 아이디 비밀번호 확인
+		MemberVo vo = new MemberService().login(mId, pw);
+
+		// 입력된 정보 다르다면
+		if (vo == null) {
+			request.getSession().setAttribute("msgPw", "비밀번호가 틀렸습니다. 다시 로그인해주세요");
+			response.sendRedirect("teacherUpdateLogin");
+		} else { // 입력된 정보가 맞으면
+			request.getRequestDispatcher("WEB-INF/view/mypage/teacherUpdate.jsp").forward(request, response);
+		}
 	}
 
 }

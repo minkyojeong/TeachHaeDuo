@@ -47,16 +47,24 @@ public class PencilListController extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		System.out.println("연필 사용내역 컨트롤러 dopost");
+		// ajax로 데이터 보내기 위한 객체 생성
 		PrintWriter out = response.getWriter();
+		
+		// 사용할 변수 선언
+		String mId = null;
+		// 로그인 확인
 		MemberVo vo = (MemberVo)request.getSession().getAttribute("ssMV");
-		String mId = "";
-		if(vo == null) {
+		if(vo == null) { // 로그인 안되어있다면
+			request.getSession().setAttribute("msgLogin", "로그인 먼저 해주세요");
 			response.sendRedirect("login");
-		} else {
+			return;
+		} else { // 되어있다면
 			mId = vo.getmId();
 			System.out.println("연필 사용내역 서비스 호출 m_id:" + mId);
+			// 서비스 호출
 			ArrayList<PencilVo> result = new PencilService().listPencil(mId);
 			System.out.println("리스트 결과:" + result);
+			// gson에 담아 ajax로 데이터 넘겨주기
 			Gson gobj = new GsonBuilder().setPrettyPrinting().create();
 			String resStr = gobj.toJson(result);
 			out.println(resStr);

@@ -37,14 +37,17 @@ public class MemberUpdateContoller extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
-		// 세션에 담긴 정보 가져오기
-		MemberVo ssMV = (MemberVo)request.getSession().getAttribute("ssMV");
-		String mId = ssMV.getmId();
-		
 		// 입력받은 데이터 가져오기
 		String pw = request.getParameter("pw");
 		
+		// 로그인 상태 확인
+		MemberVo ssMV = (MemberVo)request.getSession().getAttribute("ssMV");
+		String mId = ssMV.getmId();
+		if(mId == null) {
+			request.getSession().setAttribute("msgLogin", "로그인 먼저 해주세요");
+			response.sendRedirect("login");
+			return;
+		}
 		// 아이디 비밀번호 확인
 		MemberVo vo = new MemberService().login(mId, pw);
 		

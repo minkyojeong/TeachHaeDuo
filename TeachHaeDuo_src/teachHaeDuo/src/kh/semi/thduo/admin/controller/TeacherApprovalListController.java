@@ -42,16 +42,23 @@ public class TeacherApprovalListController extends HttpServlet {
 
 		// 관리자 로그인이 안되어있다면
 		if (aVo == null) {
-
-			response.sendRedirect(request.getContextPath());
+			request.getSession().setAttribute("msgLogin", "로그인 먼저 해주세요");
+			response.sendRedirect("login");
+			return;
 		} else {
 			// 화면에 뿌려줄 선생님 데이터 가져오기
 			ArrayList<MemberVo> voList = new TeacherService().readTeacherApprovalList();
-
-			// 가져온 데이터 request에 담기
-			request.setAttribute("voList", voList);
-			// 정보 들고 리스트 페이지 이동
-			request.getRequestDispatcher("WEB-INF/view/admin/teacherApprovalList.jsp").forward(request, response);
+			// 데이터 잘 가져왔다면
+			if (voList != null) {
+				// 가져온 데이터 request에 담기
+				request.setAttribute("voList", voList);
+				// 정보 들고 리스트 페이지 이동
+				request.getRequestDispatcher("WEB-INF/view/admin/teacherApprovalList.jsp").forward(request, response);
+			} else {
+				// 조회 실패
+				request.getSession().setAttribute("msgApprovalList", "정보 조회에 실패했습니다.");
+				response.sendRedirect("adminMain");
+			}
 		}
 	}
 

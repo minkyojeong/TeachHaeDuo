@@ -1,4 +1,4 @@
-package kh.semi.thduo.pencil.controller;
+package kh.semi.thduo.admin.controller;
 
 import java.io.IOException;
 import javax.servlet.ServletException;
@@ -8,16 +8,16 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- * Servlet implementation class PencilChargeController
+ * Servlet implementation class AdminMainController
  */
-@WebServlet("/pencilCharge")
-public class PencilChargeController extends HttpServlet {
+@WebServlet("/adminMain")
+public class AdminMainController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public PencilChargeController() {
+    public AdminMainController() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -26,15 +26,14 @@ public class PencilChargeController extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		
+		System.out.println("관리자 메인페이지 doGet");
+		request.getRequestDispatcher("WEB-INF/view/admin/adminMain.jsp").forward(request, response);
 	}
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 //	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-//		// TODO Auto-generated method stub
 //		doGet(request, response);
 //	}
 

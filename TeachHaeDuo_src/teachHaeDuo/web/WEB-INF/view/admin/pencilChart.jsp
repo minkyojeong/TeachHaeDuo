@@ -93,8 +93,6 @@
         </div>
     </div>
 </div>
-</body>
-
 <script>
 
 /* modal 달조회 */
@@ -151,4 +149,5 @@ $("#pre2_year").click(function(){
 	location.href="pencilChart?type=Y&num=24";
 });
 </script>
+</body>
 </html>

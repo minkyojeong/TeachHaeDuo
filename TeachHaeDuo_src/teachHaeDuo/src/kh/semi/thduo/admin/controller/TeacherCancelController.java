@@ -41,15 +41,16 @@ public class TeacherCancelController extends HttpServlet {
 		String mId = request.getParameter("mId");
 		String mNickname = request.getParameter("mNickname");
 		String tNo = request.getParameter("tNo");
-		
+
 		// 사용할 변수 선언
 		String yD = "D";
-
+		int result = 0;
 		// 관리자 로그인 확인
 		AdminVo aVo = (AdminVo) request.getSession().getAttribute("ssMV");
 		if (aVo == null) { // 관리자 로그인 안되어있다면
-
-			response.sendRedirect(request.getContextPath());
+			request.getSession().setAttribute("msgLogin", "로그인 먼저 해주세요");
+			response.sendRedirect("login");
+			return;
 		} else { // 되어있다면
 
 			// 자격 박탈 알람 보내기 and t_profile update
@@ -59,7 +60,9 @@ public class TeacherCancelController extends HttpServlet {
 			vo.setAlarm_sendid("관리자");
 			vo.setM_id(mId);
 
-			int result = new AlarmService().sendTeacherCancelAlarm(vo,yD,tNo);
+			if (vo != null) {
+				result = new AlarmService().sendTeacherCancelAlarm(vo, yD, tNo);
+			}
 			// 실패
 			if (result == 0) {
 				request.getSession().setAttribute("msgTeacherCancel", "처리 도중 오류가 발생했습니다. 다시 시도해주세요.");

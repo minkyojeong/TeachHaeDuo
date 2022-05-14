@@ -76,9 +76,11 @@ $(function(){
 		alert('${msgApproval}');
 		location.replace("teacherApprovalList");
 	}
+	
 });
 </script>
 <% request.getSession().removeAttribute("msgApproval"); %>
+
 </body>
 
 </html>

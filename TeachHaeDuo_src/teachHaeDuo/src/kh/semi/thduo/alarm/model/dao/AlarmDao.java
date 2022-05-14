@@ -292,7 +292,7 @@ public class AlarmDao {
 		public int sendTeacherCancelAlarm(Connection conn, AlarmVo vo, String yD,String tNo) {
 			int result = 0;
 			System.out.println("sendTeacherCancelAlarm dao 진입:"+vo+yD+tNo);
-			// 알람 테이블에 삽입, T_PROFILE 테이블엔 업데이트
+			// 알람 테이블에 삽입, T_PROFILE 테이블엔 업데이트, 신고 테이블에서는 삭제
 			String sql = "INSERT INTO alarm VALUES((SELECT NVL(MAX(alarm_no), 0) + 1 FROM alarm), ?, DEFAULT, ?, ?, ?)";
 			String sql2 = "update t_profile set T_APPROVAL=? where t_no=?";
 			String sql3 = "delete from member_report where m_r_receiveid = ?";

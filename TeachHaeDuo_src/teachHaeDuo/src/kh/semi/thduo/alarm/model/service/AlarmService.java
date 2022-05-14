@@ -137,10 +137,10 @@ public class AlarmService {
 		result = dao.sendTeacherCancelAlarm(conn, vo, yD, tNo);
 		System.out.println("sendTeacherCancelAlarm service result:" + result);
 
-		// 2개 테이블 조작 할건데, 하나라도 실패해서 리턴값 0이 온다면 롤백
+		// 3개 테이블 조작 할건데, 하나라도 실패해서 리턴값 0이 온다면 롤백
 		if (result == 0) {
 			rollback(conn);
-		} else { // 2개 다 성공하면 커밋
+		} else { // 3개 다 성공하면 커밋
 			commit(conn);
 		}
 
