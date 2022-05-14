@@ -46,7 +46,7 @@ public class TeacherUpdateDoController extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		System.out.println("교습정보 수정 doPost");
-		
+
 		// client가 입력한 데이터 가져올때 한글깨짐 방지
 		request.setCharacterEncoding("UTF-8");
 		// 학력
@@ -96,7 +96,6 @@ public class TeacherUpdateDoController extends HttpServlet {
 		}
 		// TODOTODO 배열 바꾸기 []
 		System.out.println("student toString :" + Arrays.toString(studentArr));
-		
 
 		// 어학
 		String[] language = request.getParameterValues("language");
@@ -206,64 +205,73 @@ public class TeacherUpdateDoController extends HttpServlet {
 			}
 		} else if (profileYn.equals("Y")) {
 			System.out.println("등록된 교습정보있어~");
-			PencilVo vo = new PencilVo();
-			vo.setCpCash(-500);
-			vo.setCpContent("교습 정보 변경");
-			vo.setmId(mId);
-			int resultPencil = new PencilService().minusPencil(vo);
-			if (resultPencil == 0) {
-				request.setAttribute("msgTeacherUpdate", "교습 정보 등록이 실패했습니다.");
+			if (balance < 500) {
+				request.setAttribute("msgTeacherUpdate", "잔액이 부족합니다. 충전 후 이용해주세요.");
 				request.getRequestDispatcher("WEB-INF/view/mypage/mypageTeacher.jsp").forward(request, response);
 			} else {
-				TeacherVo tVo = new TeacherVo();
-				tVo.setT_no(tNo);
-				tVo.setT_major(major);
-				tVo.setT_intro(tIntro.replace("\r\n", "<br>"));
-				int resultObjectDelete = new TeacherService().deleteObject(tNo);
-				if(resultObjectDelete == 0) {
-					System.out.println("존재하는 담당과목 삭제 실패");
-					request.setAttribute("msgTeacherUpdate", "교습 정보 등록이 실패했습니다.");
-					request.getRequestDispatcher("WEB-INF/view/mypage/mypageTeacher.jsp").forward(request, response);
-				}
-				int resultObject = new TeacherService().insertObject(objectArr, tNo);
-				if (resultObject == 0) {
-					System.out.println("담당과목 넣기 실패");
-					request.setAttribute("msgTeacherUpdate", "교습 정보 등록이 실패했습니다.");
-					request.getRequestDispatcher("WEB-INF/view/mypage/mypageTeacher.jsp").forward(request, response);
-				}
-				int resultAreaDelete = new TeacherService().deleteActiveArea(tNo);
-				if(resultAreaDelete == 0) {
-					System.out.println("존재하는 활동지역 삭제 실패");
-					request.setAttribute("msgTeacherUpdate", "교습 정보 등록이 실패했습니다.");
-					request.getRequestDispatcher("WEB-INF/view/mypage/mypageTeacher.jsp").forward(request, response);
-				}
-				int resultArea = new TeacherService().insertActiveArea(activeAreaArr, tNo);
-				if (resultArea == 0) {
-					System.out.println("활동지역 넣기 실패");
-					request.setAttribute("msgTeacherUpdate", "교습 정보 등록이 실패했습니다.");
-					request.getRequestDispatcher("WEB-INF/view/mypage/mypageTeacher.jsp").forward(request, response);
-				}
-				tVo.setOnline_yna(onlineYn);
-				tVo.setT_tcnt(tCnt);
-				tVo.setT_tprice(tPrice);
-				tVo.setT_wantstud(Arrays.toString(studentArr));
-				tVo.setT_language(Arrays.toString(languageScore));
-				tVo.setT_career(tCareer);
-				tVo.setT_special(tSpecial.replace("\r\n", "<br>"));
-				
-
-				result = new TeacherService().updateTeacher(tVo);
-				if (result == 0) {
-					System.out.println("t_profile 넣기 실패");
+				PencilVo vo = new PencilVo();
+				vo.setCpCash(-500);
+				vo.setCpContent("교습 정보 변경");
+				vo.setmId(mId);
+				int resultPencil = new PencilService().minusPencil(vo);
+				if (resultPencil == 0) {
 					request.setAttribute("msgTeacherUpdate", "교습 정보 등록이 실패했습니다.");
 					request.getRequestDispatcher("WEB-INF/view/mypage/mypageTeacher.jsp").forward(request, response);
 				} else {
-					System.out.println("t_profile update 성공");
-					request.setAttribute("msgTeacherUpdate", "교습 정보가 변경되었습니다.");
-					request.getRequestDispatcher("WEB-INF/view/mypage/mypageTeacher.jsp").forward(request, response);
+					TeacherVo tVo = new TeacherVo();
+					tVo.setT_no(tNo);
+					tVo.setT_major(major);
+					tVo.setT_intro(tIntro.replace("\r\n", "<br>"));
+					int resultObjectDelete = new TeacherService().deleteObject(tNo);
+					if (resultObjectDelete == 0) {
+						System.out.println("존재하는 담당과목 삭제 실패");
+						request.setAttribute("msgTeacherUpdate", "교습 정보 등록이 실패했습니다.");
+						request.getRequestDispatcher("WEB-INF/view/mypage/mypageTeacher.jsp").forward(request,
+								response);
+					}
+					int resultObject = new TeacherService().insertObject(objectArr, tNo);
+					if (resultObject == 0) {
+						System.out.println("담당과목 넣기 실패");
+						request.setAttribute("msgTeacherUpdate", "교습 정보 등록이 실패했습니다.");
+						request.getRequestDispatcher("WEB-INF/view/mypage/mypageTeacher.jsp").forward(request,
+								response);
+					}
+					int resultAreaDelete = new TeacherService().deleteActiveArea(tNo);
+					if (resultAreaDelete == 0) {
+						System.out.println("존재하는 활동지역 삭제 실패");
+						request.setAttribute("msgTeacherUpdate", "교습 정보 등록이 실패했습니다.");
+						request.getRequestDispatcher("WEB-INF/view/mypage/mypageTeacher.jsp").forward(request,
+								response);
+					}
+					int resultArea = new TeacherService().insertActiveArea(activeAreaArr, tNo);
+					if (resultArea == 0) {
+						System.out.println("활동지역 넣기 실패");
+						request.setAttribute("msgTeacherUpdate", "교습 정보 등록이 실패했습니다.");
+						request.getRequestDispatcher("WEB-INF/view/mypage/mypageTeacher.jsp").forward(request,
+								response);
+					}
+					tVo.setOnline_yna(onlineYn);
+					tVo.setT_tcnt(tCnt);
+					tVo.setT_tprice(tPrice);
+					tVo.setT_wantstud(Arrays.toString(studentArr));
+					tVo.setT_language(Arrays.toString(languageScore));
+					tVo.setT_career(tCareer);
+					tVo.setT_special(tSpecial.replace("\r\n", "<br>"));
+
+					result = new TeacherService().updateTeacher(tVo);
+					if (result == 0) {
+						System.out.println("t_profile 넣기 실패");
+						request.setAttribute("msgTeacherUpdate", "교습 정보 등록이 실패했습니다.");
+						request.getRequestDispatcher("WEB-INF/view/mypage/mypageTeacher.jsp").forward(request,
+								response);
+					} else {
+						System.out.println("t_profile update 성공");
+						request.setAttribute("msgTeacherUpdate", "교습 정보가 변경되었습니다.");
+						request.getRequestDispatcher("WEB-INF/view/mypage/mypageTeacher.jsp").forward(request,
+								response);
+					}
 				}
 			}
-
 		}
 
 		// 회원가입시 선생님 번호 생성 후 해야될거같음..

@@ -25,6 +25,7 @@ $(function() {
 	$("#acti_area_select_btn").click(function() {
 		console.log("확인버튼 눌렀어");
 		$("#acti_area_modal").hide();
+		$(".active_div").nextAll().remove();
 		var acti = [];
 		$("input[name=acti_area]:checked").each(function(){
 			var chk = $(this).val();
@@ -48,6 +49,8 @@ $(function() {
 	$("#area_reset").click(function() {
 		console.log("초기화버튼");
 		$(".active_div").nextAll().remove();
+		$("input[name=acti_area]").prop('checked',false);
+		chk_area_arr = [];
 	});
 
 	// 어학

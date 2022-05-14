@@ -28,17 +28,17 @@
 					교습 정보 등록
 				</p>
 			</div>
-			<form name="teacherUpdatefrm" action="teacherUpdate.do" method="post">
+			<form name="teacherUpdatefrm" action = "teacherUpdate.do" method = "post">
 				<table id="teacherUpdateTable">
 					<tr>
 						<td>학력<sup> *</sup></td>
 						<td><input type="text" name="major"
-							placeholder="최종학력을 입력해주세요."></td>
+							placeholder="최종학력을 입력해주세요." required></td>
 					</tr>
 					<tr>
 						<td>교습 소개<sup> *</sup></td>
 						<td><textarea class="text_area" name="tIntro"
-								placeholder="내용을 입력해주세요.(최대 한글1000자)"></textarea></td>
+								placeholder="내용을 입력해주세요.(최대 한글1000자)" required></textarea></td>
 					</tr>
 					<tr>
 						<td>교습 과목<sup> *</sup></td>
@@ -159,7 +159,7 @@
 					</tr>
 				</table>
 				<div id="bottom_div" style="margin-top:100px;">
-					<button type="submit" id="submit" class="btn2_3 update_btn">교습
+					<button type="button" id="submit_btn" class="btn2_3 update_btn">교습
 						정보 저장</button>
 					<button type="button" id="cancel" class="btn2_3 update_btn">취소</button>
 				</div>
@@ -262,10 +262,59 @@
 		MemberVo ssMV = (MemberVo) request.getSession().getAttribute("ssMV");
 	%>
 	<script>
+	var chk_obj_arr = [];
+	var chk_area_arr = [];
 	$("#cancel").click(function(){
     	console.log("취소 버튼 클릭");
 		location.href = "mypage";
 		});
+	
+	$("#submit_btn").click(checkTeacherUpdate);
+	
+	function checkTeacherUpdate(){
+		// 필수 사항 입력했는지 확인
+		
+		// 교습 과목 체크했는지 확인
+		$("input:checkbox[name=object]:checked").each(function(){
+			chk_obj_arr = [];
+			var chk = $(this).val();
+			chk_obj_arr.push(chk);
+		});
+		console.log(chk_obj_arr);
+		if(chk_obj_arr.length == 0){
+			alert("교습 과목을 선택해주세요.");
+			return;
+		};
+		
+		// 활동 지역 체크 했는지 확인
+		$("input:checkbox[name=acti_area]:checked").each(function(){
+			chk_area_arr = [];
+			var chk = $(this).val();
+			chk_area_arr.push(chk);
+		});
+		console.log(chk_area_arr);
+		if(chk_area_arr.length == 0){
+			alert("교습 가능 지역을 선택해주세요.");
+			return;
+		};
+		
+		// 온라인 교습 여부 체크 했는지 확인
+		console.log($("input:radio[name=online_yna]").is(":checked"));
+		if(!($("input:radio[name=online_yna]").is(":checked"))){
+			alert("온라인 교습 여부를 선택해주세요.");
+			return;
+		};
+		
+		// 희망 학생 선택했는지 확인
+		console.log($("input:checkbox[name=student]").is(":checked"));
+		if(!($("input:checkbox[name=student]").is(":checked"))){
+			alert("희망 학생을 선택해주세요.");
+			return;
+		};
+		
+		var frm = document.teacherUpdatefrm;
+		frm.submit();
+	}
 	
 	
 	</script>
