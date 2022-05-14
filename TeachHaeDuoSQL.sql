@@ -96,7 +96,6 @@ CREATE TABLE "Q_BOARD" (
 	"B_WRITER"	VARCHAR2(60)		NOT NULL,
 	"B_WRITE_DATE"	TIMESTAMP	DEFAULT SYSTIMESTAMP	NOT NULL,
 	"B_CNT"	NUMBER	DEFAULT 0	NOT NULL,
-	"B_REPORT_CNT"	NUMBER	DEFAULT 0	NULL,
 	"M_ID"	VARCHAR2(15)		NOT NULL
 );
 
@@ -741,3 +740,6 @@ CREATE SEQUENCE b_r_no_sequence
        NOCACHE
        NOORDER;
        commit;
+       
+       select * from q_board;
+       
