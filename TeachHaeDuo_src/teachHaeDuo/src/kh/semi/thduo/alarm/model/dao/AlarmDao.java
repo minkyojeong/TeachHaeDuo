@@ -287,6 +287,59 @@ public class AlarmDao {
 		
 		return result;
 	}
+	
+	// 관리자 자격박탈 알람 보내기
+		public int sendTeacherCancelAlarm(Connection conn, AlarmVo vo, String yD,String tNo) {
+			int result = 0;
+			System.out.println("sendTeacherCancelAlarm dao 진입:"+vo+yD+tNo);
+			// 알람 테이블에 삽입, T_PROFILE 테이블엔 업데이트
+			String sql = "INSERT INTO alarm VALUES((SELECT NVL(MAX(alarm_no), 0) + 1 FROM alarm), ?, DEFAULT, ?, ?, ?)";
+			String sql2 = "update t_profile set T_APPROVAL=? where t_no=?";
+			String sql3 = "delete from member_report where m_r_receiveid = ?";
+			
+			try {
+				pstmt = conn.prepareStatement(sql);
+				pstmt.setString(1, vo.getAlarm_content());
+				pstmt.setString(2, vo.getAlarm_sendid());
+				pstmt.setString(3, vo.getAlarm_receiveid());
+				pstmt.setString(4, vo.getM_id());
+				
+				result = pstmt.executeUpdate();
+				System.out.println("dao result1:" + result);
+				// 알람 테이블에 삽입 실패했다면
+				if(result == 0) {
+					System.out.println("알람 테이블 넣기 실패 result:"+ result);
+					return result;
+				} else { // 알람 테이블에 삽입 성공했다면
+					System.out.println("알람 테이블 넣기 성공 result:"+ result);
+					pstmt = conn.prepareStatement(sql2);
+					pstmt.setString(1, yD);
+					pstmt.setString(2, tNo);
+					result = pstmt.executeUpdate();
+					System.out.println("dao result2:"+ result);
+					if(result == 0) {
+						System.out.println("선생님 테이블 넣기 실패 result:"+ result);
+						return result;
+					} else { // 선생님 업데이트도 성공했다면
+						System.out.println("선생님 테이블 넣기 성공 result:"+ result);
+						pstmt = conn.prepareStatement(sql3);
+						pstmt.setString(1, vo.getM_id());
+						result = pstmt.executeUpdate();
+						System.out.println("dao result3:"+ result);
+						if(result == 0) {
+							System.out.println("신고테이블 테이블 삭제 실패 result:"+ result);
+							return result;
+						}
+					} 
+				}
+			} catch (SQLException e) {
+				e.printStackTrace();
+			} finally {
+				close(pstmt);
+			}
+			
+			return result;
+		}
 }
 
 

@@ -1,0 +1,35 @@
+@charset "UTF-8";
+
+section {
+	padding: 10px;
+}
+
+table.teacherReport-tableAll {
+	width: 100%;
+	border-top: 1px solid #444444;
+	border-collapse: collapse;
+	text-align: center;
+	font-family: "MinSans-Medium";
+	table-layout: fixed;
+}
+
+table.teacherReport-tableAll th, table.teacherReport-tableAll td {
+	border-bottom: 1px solid #444444;
+	padding: 10px;
+}
+
+table.teacherReport-tableAll th {
+	background-color: #fed08b;
+}
+
+.teacherReport-title {
+	font-size: 20px;
+	padding: 20px 30px;
+	font-family: "MinSans-Bold"
+}
+
+.teacherReport-tableAll {
+	padding: 10px;
+}
+
+

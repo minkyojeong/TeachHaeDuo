@@ -5,21 +5,58 @@ import java.sql.Timestamp;
 public class ReportVo {
 	private int m_r_no;
 	private String m_r_sendid;
+	private String m_r_sendName;
 	private String m_r_receiveid;
+	private String m_r_receiveName;
 	private String m_r_category;
 	private String m_r_content;
 	private Timestamp t_r_date;
 	private String m_id;
+	private String t_no;
+	private String m_r_receiveNickname;
 	
+	
+
 	public ReportVo() {
 		super();
 	}
 
 	@Override
 	public String toString() {
-		return "ReportVo [m_r_no=" + m_r_no + ", m_r_sendid=" + m_r_sendid + ", m_r_receiveid=" + m_r_receiveid
-				+ ", m_r_category=" + m_r_category + ", m_r_content=" + m_r_content + ", t_r_date=" + t_r_date
-				+ ", m_id=" + m_id + "]";
+		return "ReportVo [m_r_no=" + m_r_no + ", m_r_sendid=" + m_r_sendid + ", m_r_sendName=" + m_r_sendName
+				+ ", m_r_receiveid=" + m_r_receiveid + ", m_r_receiveName=" + m_r_receiveName + ", m_r_category="
+				+ m_r_category + ", m_r_content=" + m_r_content + ", t_r_date=" + t_r_date + ", m_id=" + m_id
+				+ ", t_no=" + t_no + ", m_r_receiveNickname=" + m_r_receiveNickname + "]";
+	}
+	public String getM_r_receiveNickname() {
+		return m_r_receiveNickname;
+	}
+
+	public void setM_r_receiveNickname(String m_r_receiveNickname) {
+		this.m_r_receiveNickname = m_r_receiveNickname;
+	}
+	public String getT_no() {
+		return t_no;
+	}
+
+	public void setT_no(String t_no) {
+		this.t_no = t_no;
+	}
+
+	public String getM_r_sendName() {
+		return m_r_sendName;
+	}
+
+	public void setM_r_sendName(String m_r_sendName) {
+		this.m_r_sendName = m_r_sendName;
+	}
+
+	public String getM_r_receiveName() {
+		return m_r_receiveName;
+	}
+
+	public void setM_r_receiveName(String m_r_receiveName) {
+		this.m_r_receiveName = m_r_receiveName;
 	}
 
 	public int getM_r_no() {

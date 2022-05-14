@@ -29,25 +29,25 @@ public class ReportService {
 	
 	//모든 신고 내역 읽기
 	public ArrayList<ReportVo> readAllReport() {
-		ArrayList<ReportVo> retVolist = null;
+		ArrayList<ReportVo> voList = null;
 		Connection conn = getConnection();
 		
-		retVolist = dao.readAllReport(conn);
+		voList = dao.readAllReport(conn);
 		
 		close(conn);
 		
-		return retVolist;
+		return voList;
 	}
 	
 	//선택한 신고 내역 읽기
-	public ReportVo readOneReport(int m_r_no) {
-		ReportVo retVo = null;
+	public ReportVo readOneReport(int rNo) {
+		ReportVo rVo = null;
 		Connection conn = getConnection();
 		
-		retVo = dao.readOneReport(conn, m_r_no);
+		rVo = dao.readOneReport(conn, rNo);
 		
 		close(conn);
 		
-		return retVo;
+		return rVo;
 	}
 }
