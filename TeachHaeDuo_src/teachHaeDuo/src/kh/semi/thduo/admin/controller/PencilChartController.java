@@ -38,42 +38,52 @@ public class PencilChartController extends HttpServlet {
 
 		AdminVo vo = (AdminVo) request.getSession().getAttribute("ssMV");
 		String type = request.getParameter("type");
+		String numStr = request.getParameter("num");
+		int num = -1;
+		try {
+			if(numStr != null) {
+				num = Integer.parseInt(numStr);
+			}
+		} catch (NumberFormatException e) {
+			e.printStackTrace();
+		}
 		System.out.println(type);
-//		// 관리자 로그인이 안되어있다면
-//		if (vo == null) {
-//
-//			response.sendRedirect(request.getContextPath());
-//		} else { // 되어 있다면
-//			ArrayList<MemberVo> voList = null;
-//			// 전체 매출 조회
-//			if (type.equals("A")) {
-//				// 화면에 뿌려줄 매출 데이터 가져오기
-//				voList = new PencilService().allPencilChart();
-//
-//				// 가져온 데이터 request에 담기
-//				request.setAttribute("voList", voList);
-//				// 정보 들고 리스트 페이지 이동
-//				request.getRequestDispatcher("WEB-INF/view/admin/pencilChart.jsp").forward(request, response);
-//			}
-//			if (type.equals("M")) {
-//				// 화면에 뿌려줄 매출 데이터 가져오기
-//				voList = new PencilService().monthPencilChart();
-//
-//				// 가져온 데이터 request에 담기
-//				request.setAttribute("voList", voList);
-//				// 정보 들고 리스트 페이지 이동
-//				request.getRequestDispatcher("WEB-INF/view/admin/pencilChart.jsp").forward(request, response);
-//			}
-//			if (type.equals("Y")) {
-//				// 화면에 뿌려줄 매출 데이터 가져오기
-//				voList = new PencilService().yearPencilChart();
-//
-//				// 가져온 데이터 request에 담기
-//				request.setAttribute("voList", voList);
-//				// 정보 들고 리스트 페이지 이동
-//				request.getRequestDispatcher("WEB-INF/view/admin/pencilChart.jsp").forward(request, response);
-//			}
-//		}
+		System.out.println(num);
+		// 관리자 로그인이 안되어있다면
+		if (vo == null) {
+
+			response.sendRedirect(request.getContextPath());
+		} else { // 되어 있다면
+			ArrayList<MemberVo> voList = null;
+			// 전체 매출 조회
+			if (type.equals("A")) {
+				// 화면에 뿌려줄 매출 데이터 가져오기
+				voList = new PencilService().allPencilChart();
+
+				// 가져온 데이터 request에 담기
+				request.setAttribute("voList", voList);
+				// 정보 들고 리스트 페이지 이동
+				request.getRequestDispatcher("WEB-INF/view/admin/pencilChart.jsp").forward(request, response);
+			}
+			if (type.equals("M")) {
+				// 화면에 뿌려줄 매출 데이터 가져오기
+				voList = new PencilService().monthPencilChart(num);
+
+				// 가져온 데이터 request에 담기
+				request.setAttribute("voList", voList);
+				// 정보 들고 리스트 페이지 이동
+				request.getRequestDispatcher("WEB-INF/view/admin/pencilChart.jsp").forward(request, response);
+			}
+			if (type.equals("Y")) {
+				// 화면에 뿌려줄 매출 데이터 가져오기
+				voList = new PencilService().yearPencilChart(num);
+
+				// 가져온 데이터 request에 담기
+				request.setAttribute("voList", voList);
+				// 정보 들고 리스트 페이지 이동
+				request.getRequestDispatcher("WEB-INF/view/admin/pencilChart.jsp").forward(request, response);
+			}
+		}
 
 	}
 

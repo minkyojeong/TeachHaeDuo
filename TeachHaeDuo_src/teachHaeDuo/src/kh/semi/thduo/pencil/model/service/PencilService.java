@@ -121,24 +121,24 @@ public class PencilService {
 		return result;
 	}
 
-	// 관리자 이번달 매출 조회
-	public ArrayList<MemberVo> monthPencilChart() {
+	// 관리자 달 매출 조회
+	public ArrayList<MemberVo> monthPencilChart(int num) {
 		ArrayList<MemberVo> result = null;
 
 		Connection conn = getConnection();
-		result = dao.monthPencilChart(conn);
+		result = dao.monthPencilChart(conn, num);
 
 		close(conn);
 
 		return result;
 	}
 
-	// 관리자 이번년도 매출 조회
-	public ArrayList<MemberVo> yearPencilChart() {
+	// 관리자 년도 매출 조회
+	public ArrayList<MemberVo> yearPencilChart(int num) {
 		ArrayList<MemberVo> result = null;
 
 		Connection conn = getConnection();
-		result = dao.yearPencilChart(conn);
+		result = dao.yearPencilChart(conn,num);
 
 		close(conn);
 

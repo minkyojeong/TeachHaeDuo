@@ -24,7 +24,6 @@
 <body>
 
  <div class="main_wrap">
-		<jsp:include page="../template_header.jsp"></jsp:include>
 		<jsp:include page="../template_nav.jsp"></jsp:include>
 		   <div class="wrap content">
 			   <section>
@@ -69,7 +68,6 @@
 	              </div>
 	            </section>
 		</div>
-	<jsp:include page="../template_footer.jsp"></jsp:include>
 </div>
 <script>
 $(function(){

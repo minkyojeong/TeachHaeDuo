@@ -168,13 +168,14 @@ public class PencilDao {
 		return voList;
 	}
 	
-	// 관리자 이번달 매출 조회
-	public ArrayList<MemberVo> monthPencilChart(Connection conn) {
+	// 관리자 달 매출 조회
+	public ArrayList<MemberVo> monthPencilChart(Connection conn, int num) {
 		ArrayList<MemberVo> voList = null;
 
-		String sql="select cp_date, cp_cash, p.m_id, m.m_name, m.role_st, m.m_phone, m.m_email, m.gender_fm from check_pencil p join member m on p.m_id = m.m_id where cp_cash>0 and (SUBSTR(to_char(cp_date,'yymm'),0,4))=SUBSTR(to_char(sysdate,'yymm'),0,4) order by cp_date desc";
+		String sql="select cp_date, cp_cash, p.m_id, m.m_name, m.role_st, m.m_phone, m.m_email, m.gender_fm from check_pencil p join member m on p.m_id = m.m_id where cp_cash>0 and to_char(cp_date,'yymm') between to_char(add_months(sysdate,-?),'yymm') and (to_char(sysdate,'yymm')) order by cp_date desc";
 		try {
 			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, num);
 			rs = pstmt.executeQuery();
 			
 			if(rs != null) {
@@ -201,13 +202,14 @@ public class PencilDao {
 		return voList;
 	}
 	
-	// 관리자 이번년도 매출 조회
-	public ArrayList<MemberVo> yearPencilChart(Connection conn) {
+	// 관리자 년도 매출 조회
+	public ArrayList<MemberVo> yearPencilChart(Connection conn, int num) {
 		ArrayList<MemberVo> voList = null;
 
-		String sql="select cp_date, cp_cash, p.m_id, m.m_name, m.role_st, m.m_phone, m.m_email, m.gender_fm from check_pencil p join member m on p.m_id = m.m_id where cp_cash>0 and (to_char(cp_date,'yy'))=to_char(sysdate,'yy') order by cp_date desc";
+		String sql="select cp_date, cp_cash, p.m_id, m.m_name, m.role_st, m.m_phone, m.m_email, m.gender_fm from check_pencil p join member m on p.m_id = m.m_id where cp_cash>0 and (to_char(cp_date,'yy')) = to_char(add_months(sysdate,-?),'yy') order by cp_date desc";
 		try {
 			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, num);
 			rs = pstmt.executeQuery();
 			
 			if(rs != null) {

@@ -3,7 +3,9 @@
 section {
 	padding: 10px;
 }
-
+div.pencil_chart_btn{
+	padding: 10px;
+}
 table.pencilchart-tableAll {
 	width: 100%;
 	border-top: 1px solid #444444;
@@ -30,3 +32,127 @@ table.pencilchart-tableAll th {
 .pencilchart-tableAll {
 	padding: 10px;
 }
+
+
+/* modal 달 조회 */
+#month_chart_modal.month_chart_modal_overlay{
+	width: 100%;
+	height: 100%;
+	position: absolute;
+	left: 0;
+	top: 0;
+	display: none;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	background-color: rgba(0, 0, 0, 0.7);
+	border-radius: 10px;
+	border: 1px solid rgba(255, 255, 255, 0.18);
+}
+
+#month_chart_modal .month_chart_modal_window {
+	background: white;
+	border-radius: 10px;
+	border: 1px solid black;
+	width: 300px;
+	height: 100px;
+	position: fixed;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	padding: 10px;
+	overflow: auto;
+}
+
+#month_chart_modal .month_chart_modal_title {
+	padding-left: 10px;
+	display: inline;
+	color: black;
+}
+.month_chart_modal_title img {
+	float:left;
+}
+.month_chart_modal_title p {
+	float:left;
+}
+
+#month_chart_modal .month_chart_modal_close {
+	display: inline;
+	float: right;
+	padding-right: 10px;
+	cursor: pointer;
+	color: black;
+}
+
+#month_chart_modal .month_chart_modal_content {
+	margin-top: 20px;
+	padding: 0px 10px;
+	color: black;
+	display:flex;
+	justify-content: center;
+}
+button.month{
+	margin:10px;
+}
+
+/* modal 연 조회 */
+#year_chart_modal.year_chart_modal_overlay{
+	width: 100%;
+	height: 100%;
+	position: absolute;
+	left: 0;
+	top: 0;
+	display: none;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	background-color: rgba(0, 0, 0, 0.7);
+	border-radius: 10px;
+	border: 1px solid rgba(255, 255, 255, 0.18);
+}
+
+#year_chart_modal .year_chart_modal_window {
+	background: white;
+	border-radius: 10px;
+	border: 1px solid black;
+	width: 300px;
+	height: 100px;
+	position: fixed;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	padding: 10px;
+	overflow: auto;
+}
+
+#year_chart_modal .year_chart_modal_title {
+	padding-left: 10px;
+	display: inline;
+	color: black;
+}
+.year_chart_modal_title img {
+	float:left;
+}
+.year_chart_modal_title p {
+	float:left;
+}
+
+#year_chart_modal .year_chart_modal_close {
+	display: inline;
+	float: right;
+	padding-right: 10px;
+	cursor: pointer;
+	color: black;
+}
+
+#year_chart_modal .year_chart_modal_content {
+	margin-top: 20px;
+	padding: 0px 10px;
+	color: black;
+	display:flex;
+	justify-content: center;
+}
+button.year{
+	margin:10px;
+}
+
