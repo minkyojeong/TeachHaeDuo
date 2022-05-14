@@ -1,3 +1,11 @@
+    <link href="<%=request.getContextPath()%>/resources/css/reset.css" rel="stylesheet" type="text/css">
+<link href="${pageContext.request.contextPath}/resources/css/button.css" rel="stylesheet" type="text/css">
+<link href="<%=request.getContextPath()%>/resources/css/font.css" rel="stylesheet" type="text/css">
+<link href="<%=request.getContextPath()%>/resources/css/common.css" rel="stylesheet" type="text/css">
+<link href="<%=request.getContextPath()%>/resources/css/header.css" rel="stylesheet" type="text/css">
+<link href="<%=request.getContextPath()%>/resources/css/footer.css" rel="stylesheet" type="text/css">
+<link href="<%=request.getContextPath()%>/resources/icons/sun.ico" rel="shortcut icon" type="image/x-icon">
+
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
     <%@ page import="kh.semi.thduo.board.vo.BoardVo" %>
@@ -25,6 +33,7 @@ width:1100px;
 .board_title{
 margin-top:50px;
 width:1100px;
+float:left;
 }
 .board_title>h1{
 font-weight:600;
@@ -39,8 +48,9 @@ font-weight:600;
 			if(vo!=null){
 		%>
 	<div class="container">
+	<jsp:include page="../template_header.jsp"></jsp:include>
 		<div class="board_title">
-				<h1>질문하기 게시판</h1>
+				
 		</div>
 		<div class="wrap_container">
       		<form action="BoardUpdate" method="post" >

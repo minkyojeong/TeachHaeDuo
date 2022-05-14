@@ -1,13 +1,14 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
       <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-      <link href="<%=request.getContextPath()%>/resources/css/header.css"
-	rel="stylesheet" type="text/css">
-	<link href="<%=request.getContextPath()%>/resources/css/footer.css" rel="stylesheet" type="text/css">
-<link href="<%=request.getContextPath()%>/resources/css/font.css" rel="stylesheet" type="text/css">
 <link href="<%=request.getContextPath()%>/resources/css/reset.css" rel="stylesheet" type="text/css">
-<link href="<%=request.getContextPath()%>/resources/css/boardList.css" rel="stylesheet" type="text/css">
+<link href="${pageContext.request.contextPath}/resources/css/button.css" rel="stylesheet" type="text/css">
+<link href="<%=request.getContextPath()%>/resources/css/font.css" rel="stylesheet" type="text/css">
 <link href="<%=request.getContextPath()%>/resources/css/nav.css" rel="stylesheet" type="text/css">
+<link href="<%=request.getContextPath()%>/resources/css/common.css" rel="stylesheet" type="text/css">
+<link href="<%=request.getContextPath()%>/resources/css/header.css" rel="stylesheet" type="text/css">
+<link href="<%=request.getContextPath()%>/resources/icons/sun.ico" rel="shortcut icon" type="image/x-icon">
+<link href="<%=request.getContextPath()%>/resources/css/footer.css" rel="stylesheet" type="text/css">
 <!DOCTYPE html>
 <html>
 <head>
@@ -25,7 +26,7 @@
 		<jsp:include page="../template_nav.jsp"></jsp:include>
 		<div class="wrqp_all" style="width:1100px; text-align:center; display:inline-block;">
 		<div style="width:1000px;height:100px;" >
-			<h1 style="font-size:30px;font-weight:500;float:left;margin-top:40px;">신고글 관리</h1>
+			<h1 style="font-size:30px;font-weight:500;float:left;margin-left:75px;margin-top:40px;">신고글 관리</h1>
 		</div>
 		<div class="wrap_report" style="width:1000px; display:inline-block; text-align:center;">
 			<c:forEach items="${reportList }" var="vo">

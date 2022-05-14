@@ -33,7 +33,7 @@ height:200px;
 text-align:center;
 display:inline-block;
 border-bottom: 1px solid rgb(174,174,174);
-
+overflow:auto;
 }
 #modal>button{
 width:50px;
@@ -86,7 +86,6 @@ height:700px;
 border: 1px solid rgb(174,174,174);
 border-radius:5px;
 margin-bottom:30px;
-
 }
 #title{
 margin-bottom:10px;

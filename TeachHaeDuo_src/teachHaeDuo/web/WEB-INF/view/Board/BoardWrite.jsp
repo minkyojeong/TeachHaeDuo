@@ -52,7 +52,6 @@ font-weight:600;
       		<form action="BoardWriteDo" method="post" >
       			<input type="text" name="bTitle" maxlength="100" required placeholder="제목" style="width:900px; height:25px;float:left;margin-right:10px;">
        			<select name="bCategory" style="width:100px; height:30px;margin-bottom:10px;">
-       				<option value="">게시판 선택</option>
         			<option>학습 질문하기</option>
         			<option>자유게시판</option>
         		</select>
@@ -67,7 +66,6 @@ font-weight:600;
             	</div>
         	</form>
        </div>
-       <jsp:include page="../template_footer.jsp"></jsp:include>
 	</div>
 </body>
 </html>

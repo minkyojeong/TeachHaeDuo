@@ -37,8 +37,7 @@ public class BoardReadController extends HttpServlet {
 		// TODO Auto-generated method stub
 		String bNo = request.getParameter("bno");
 		MemberVo ssvo = (MemberVo)request.getSession().getAttribute("ssMV");
-		AdminVo advo = (AdminVo)request.getSession().getAttribute("ssMV");
-		if(ssvo == null && advo == null)  {  // 로그아웃 상태라면 login 페이지로 진입
+		if(ssvo == null)  {  // 로그아웃 상태라면 login 페이지로 진입
 			response.sendRedirect("login");
 			return;
 		} else {  // 로그인한 상태라면 write page 진입

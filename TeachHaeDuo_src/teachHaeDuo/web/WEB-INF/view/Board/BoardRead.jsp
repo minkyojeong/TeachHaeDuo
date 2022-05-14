@@ -1,7 +1,6 @@
 <%@page import="kh.semi.thduo.board.vo.BoardVo"%>
 <%@page import="kh.semi.thduo.board.vo.BoardReCommentVo"%>
 <%@page import="kh.semi.thduo.member.vo.MemberVo"%>
-<%@page import="kh.semi.thduo.admin.vo.AdminVo"%>
 <%@ page import="java.util.ArrayList" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
@@ -43,9 +42,6 @@ $(function btn2(){
 						<%
 					    MemberVo ssvo = (MemberVo)session.getAttribute("ssMV");
 						String ssId = ssvo.getmNickname();%>
-								<%
-					    AdminVo advo = (AdminVo)session.getAttribute("ssMV");
-						%>
 					
 <%
 ArrayList<BoardReCommentVo> rvolist = (ArrayList<BoardReCommentVo>)request.getAttribute("rvo");
