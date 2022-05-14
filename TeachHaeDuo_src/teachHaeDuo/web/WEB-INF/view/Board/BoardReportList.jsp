@@ -43,11 +43,11 @@
 					<th>신고 일자</th>
 					</tr>
 					<tr align ="center" style="font-size: 20px; border:1px solid #fed08b">
-						<td>${vo.getbNo()}</td>
-						<td>${vo.getbRNo()}</td>
-						<td>${vo.getbRWriter()}</td>
-						<td>${vo.getbRCategory()}</td>
-						<td>${vo.getbRWriteDate().substring(0,16)}</td>
+						<td width=50px style="word-break:break-all">${vo.getbNo()}</td>
+						<td width=50px style="word-break:break-all">${vo.getbRNo()}</td>
+						<td width=50px style="word-break:break-all">${vo.getbRWriter()}</td>
+						<td width=50px style="word-break:break-all">${vo.getbRCategory()}</td>
+						<td width=50px style="word-break:break-all">${vo.getbRWriteDate().substring(0,16)}</td>
 					</tr>
 			
 					</table>
