@@ -13,6 +13,7 @@
 <link href="<%=request.getContextPath()%>/resources/css/reset.css" rel="stylesheet" type="text/css">
 <link href="<%=request.getContextPath()%>/resources/css/boardList.css" rel="stylesheet" type="text/css">
 
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -24,12 +25,29 @@
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/font.css">
 <title>BoardList</title>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-</script>
+
+<style>
+body {
+	width: 1600px;
+	box-sizing: border-box;
+	margin: 0 auto;
+}
+
+.wrap.content {
+	width: 1280px;
+	
+}
+
+a {
+    text-decoration: none;
+}
+</style>
 
 </head>
 <body>
 	<div class="container">
-	<jsp:include page="../template_header.jsp"></jsp:include>
+		<jsp:include page="../template_header.jsp"></jsp:include>
+		<div class="wrap.content">
 		<div class="board_box">
 			<div class="board_title">
 				<h1>질문하기 게시판</h1>
@@ -75,6 +93,7 @@
 			<a href="BoardList?page=${endPage+1 }">다음</a>
 			</c:if>
 		</p>
+	</div>
 	</div>
 	<jsp:include page="../template_footer.jsp"></jsp:include>
 </div>

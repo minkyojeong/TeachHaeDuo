@@ -10,6 +10,7 @@ rel="stylesheet" type="text/css">
 <link href="<%=request.getContextPath()%>/resources/css/font.css" rel="stylesheet" type="text/css">
 <link href="<%=request.getContextPath()%>/resources/css/reset.css" rel="stylesheet" type="text/css">
 <link href="<%=request.getContextPath()%>/resources/css/boardread.css" rel="stylesheet" type="text/css">
+<link href="<%=request.getContextPath()%>/resources/css/common.css" rel="stylesheet" type="text/css">
 <!DOCTYPE html>
 <html>
 <head>
@@ -50,6 +51,7 @@ ArrayList<BoardReCommentVo> rvolist = (ArrayList<BoardReCommentVo>)request.getAt
 			BoardVo vo = (BoardVo)request.getAttribute("bvo");
 			if(vo!=null){
 		%>
+		
 <div class="container">
 <jsp:include page="../template_header.jsp"></jsp:include>
 <div class="wrap_container">
