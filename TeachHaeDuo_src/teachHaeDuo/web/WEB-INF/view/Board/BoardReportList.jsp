@@ -18,19 +18,23 @@
 	#tb:hover{
 		background:rgb(220,220,220);
 	}
+	h1 {font-size: 20px;
+  padding: 20px 30px;
+  font-family: "MinSans-Bold"
+  }
 </style>
 </head>
 <body>
 	<div class="container">
 		<jsp:include page="../template_header.jsp"></jsp:include>
 		<jsp:include page="../template_nav.jsp"></jsp:include>
-		<div class="wrqp_all" style="width:1100px; text-align:center; display:inline-block;">
-		<div style="width:1000px;height:100px;" >
-			<h1 style="font-size:30px;font-weight:500;float:left;margin-left:75px;margin-top:40px;">신고글 관리</h1>
+		<div class="wrap_all" style="width:1400px; text-align:center; display:inline-block;">
+		<div style=" padding: 10px;width:1000px;height:60px;" >
+			<h1 style="float:left;">신고글 관리</h1>
 		</div>
 		<div class="wrap_report" style="width:1000px; display:inline-block; text-align:center;">
 			<c:forEach items="${reportList }" var="vo">
-				<table id="tb"border="1" width ="1000" height="70" align = "center" style="font-size: 20px; border:1px solid #fed08b; margin:20px;cursor:pointer;" onClick = " location.href='BoardRead?bno=${vo.getbNo()}'" onMouseOver = " window.status = '' " onMouseOut = " window.status = ''">
+				<table id="tb"border="1" width ="1000" height="70" align = "center" style="font-size: 20px; border:1px solid #fed08b; cursor:pointer; margin-bottom:10px;" onClick = " location.href='BoardRead?bno=${vo.getbNo()}'" onMouseOver = " window.status = '' " onMouseOut = " window.status = ''">
     			<tr bgcolor="#fed08b" align ="center" style="font-size: 20px; border:1px solid #fed08b;">
 					<th>글 번호</th>
 					<th>신고 번호</th>
@@ -48,7 +52,7 @@
 			
 					</table>
 							</c:forEach>
-					<p>
+					<p style="margin-top:20px;">
 			<c:if test="${    startPage    >    1    }">
 			<a href="BoardReportList?page=${startPage-1 }">이전</a>&nbsp;&nbsp;&nbsp;&nbsp;
 			</c:if>
