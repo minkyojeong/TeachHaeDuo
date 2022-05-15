@@ -21,15 +21,30 @@
 <title>선생님찾기 메인</title>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <style>
-.arrow.next{
-	background-color: white;
+.page_nation .arrow.prev.btnPage {
+    opacity: 1;
+}
+
+.page_nation .arrow.next.btnPage {
+    opacity: 1;
+}
+.page_nation .arrow.next{
+    background: #f8f8f8  no-repeat center center;
+    font-size:0;
+    color: #fff;
+    margin-right: 7px;
 	background-image: url('resources/icons/next_arrow.jpg' );
 	background-size: 38px 38px; 
+	opacity: 0.2;
 }
-.arrow .prev{
-	background-color: white;
+.page_nation .arrow.prev{
+    background: #f8f8f8  no-repeat center center;
+    font-size:0;
+    color: #fff;
+    margin-left: 7px;
 	background-image: url('resources/icons/prev_arrow.jpg');
-	background-size: 26px 36px;
+	background-size: 38px 38px; 
+	opacity: 0.2;
 }
 </style>
 </head>
@@ -173,22 +188,13 @@
 				</section>
 				<!-- 페이징처리 -->
 				<div class="page_wrap">
-					<%-- 
-					<div class="page_nation">
-						<a class="arrow prev" href="#"><img src="${pageContext.request.contextPath}/resources/icons/page_prev.png"></a>
-						<a href="#" class="active">1</a> 
-						<a href="#">2</a> 
-						<a href="#">3</a>
-						<a class="arrow next" href="#"><img src="${pageContext.request.contextPath}/resources/icons/page_next.png"></a>
-					</div>
-					 --%>
 					<div class="page_nation">
 					<c:choose>
 						<c:when test="${startPage > 1}">
 							<input type="button" class="arrow prev btnPage" value="${startPage-1 }">
 						</c:when>
 						<c:otherwise>
-							<input type="button" class="arrow prev btnPage disabled" value="${startPage-1 }">
+							<input type="button" class="arrow prev">
 						</c:otherwise>
 					</c:choose>
 					<c:forEach var="i" begin="${startPage}" end="${endPage }">
@@ -200,11 +206,11 @@
 						</c:if>
 					</c:forEach>
 					<c:choose>
-						<c:when test="${endPage > totalPageCnt}">
+						<c:when test="${endPage < totalPageCnt}">
 							<input type="button" class="arrow next btnPage" value="${endPage+1 }">
 						</c:when>
 						<c:otherwise>
-							<input type="button" class="arrow next btnPage disabled" value="${endPage+1 }">
+							<input type="button" class="arrow next">
 						</c:otherwise>
 					</c:choose>
 					</div>
@@ -296,13 +302,11 @@
 		$("#btn_like").on("click", function() {
 			if ($(this).hasClass("enabled")) {
 				$(this).html('<img src="${pageContext.request.contextPath}/resources/icons/like.png"><span class="btn_text">찜</span>');
-				//$("#btn_like > img").attr("src", "${pageContext.request.contextPath}/resources/icons/like.png");
 				$(this).css({background : "#F3F4F6", color : "black"});
 				$(this).removeClass("enabled");
 				liked = "";
 			} else {
 				$(this).html('<img src="${pageContext.request.contextPath}/resources/icons/like_color.png"><span class="btn_text">찜</span>');
-			//	$("#btn_like > img").attr("src", "${pageContext.request.contextPath}/resources/icons/like_color.png");
 				$(this).css({background : "gray", color : "white"});
 				$(this).addClass("enabled");
 				liked = 'Y';
@@ -313,13 +317,11 @@
 		$("#btn_recruit").on("click", function() {
 			if ($(this).hasClass("enabled")) {
 				$(this).html('<img src="${pageContext.request.contextPath}/resources/icons/recruit.png"><span class="btn_text">모집중</span>');
-			//	$("#btn_recruit > img").attr("src", "${pageContext.request.contextPath}/resources/icons/recruit.png");
 				$(this).css({background : "#F3F4F6", color : "black"});
 				$(this).removeClass("enabled");
 				t_recruit_yn = "";
 			} else {
 				$(this).html('<img src="${pageContext.request.contextPath}/resources/icons/recruit_color.png"><span class="btn_text">모집중</span>');
-			//	$("#btn_recruit > img").attr("src", "${pageContext.request.contextPath}/resources/icons/recruit_color.png");
 				$(this).css({background : "gray",color : "white"});
 				$(this).addClass("enabled");
 				t_recruit_yn = 'Y';
@@ -331,13 +333,11 @@
 		$("#btn_online").on("click", function() {
 			if ($(this).hasClass("enabled")) {
 				$(this).html('<img src="${pageContext.request.contextPath}/resources/icons/online.png"><span class="btn_text">온라인 교습</span>');
-			//	$("#btn_online > img").attr("src", "${pageContext.request.contextPath}/resources/icons/online.png");
 				$(this).css({background : "#F3F4F6", color : "black"});
 				$(this).removeClass("enabled");
 				online_yna = "";
 			} else {
 				$(this).html('<img src="${pageContext.request.contextPath}/resources/icons/online_white.png"><span class="btn_text">온라인 교습</span>');
-		//		$("#btn_online > img").attr("src", "${pageContext.request.contextPath}/resources/icons/online_white.png");
 				$(this).css({background : "gray", color : "white"});
 				$(this).addClass("enabled");
 				online_yna = 'Y';
@@ -353,7 +353,6 @@
 				online_yna = "";
 			} else {
 				$(this).html('<img src="${pageContext.request.contextPath}/resources/icons/offline_white.png"><span class="btn_text">오프라인 교습</span>');
-			//	$("#btn_offline > img").attr("src", "${pageContext.request.contextPath}/resources/icons/offline_white.png");
 				$(this).css({background : "gray", color : "white"});
 				$(this).addClass("enabled");
 				online_yna = 'N';
@@ -434,9 +433,8 @@
 						//htmlPageVal +='<div class="page_nation">';
 					if(startPage > 1){
 						htmlPageVal +='<input type="button" class="arrow prev btnPage" value="'+(startPage-1)+'">';
-						htmlPageVal +='<img src="${pageContext.request.contextPath}/resources/icons/page_prev.png">';
 					}else {
-						htmlPageVal +='<img src="${pageContext.request.contextPath}/resources/icons/page_prev.png">';
+						htmlPageVal +='<input type="button" class="arrow prev" >';
 					}
 										
 					for(var i=startPage; i<=endPage; i++){
@@ -448,17 +446,14 @@
 					}
 					if(endPage < totalPageCnt){
 						htmlPageVal +='<input type="button" class="arrow next btnPage" value="'+(Number(endPage)+1)+'" >';
-						htmlPageVal +='<img src="${pageContext.request.contextPath}/resources/icons/page_next.png">';
 					} else {
-						htmlPageVal +='<img src="${pageContext.request.contextPath}/resources/icons/page_next.png">';
+						htmlPageVal +='<input type="button" class="arrow next" >';
 					}
 						//htmlPageVal +='</div>';
-						$(".page_nation").html(htmlPageVal); // 
+						$(".page_nation").html(htmlPageVal); 
 						
 						// 많이중요!!!
 						$(".btnPage").click(btnPageClickHandler);
-						
-						
 					} else {
 						htmlVal = "<h1 class='nothing'>해당되는 선생님이 없습니다.</h1>";
 						
@@ -466,7 +461,6 @@
 					}
 				},
 				error : function() {
-
 				}
 			});
 		}
