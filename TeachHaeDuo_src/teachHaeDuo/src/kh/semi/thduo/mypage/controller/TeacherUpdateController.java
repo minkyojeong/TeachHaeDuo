@@ -45,7 +45,7 @@ public class TeacherUpdateController extends HttpServlet {
 
 		// 로그인 상태 확인
 		MemberVo ssMV = (MemberVo) request.getSession().getAttribute("ssMV");
-		
+
 		// 로그인 안되어있다면
 		if (ssMV == null) {
 			request.getSession().setAttribute("msgLogin", "로그인 먼저 해주세요");

@@ -193,6 +193,23 @@ public class TeacherService {
 		return voList;
 	}
 	
+	// 선생님 모집여부 변경
+	public int recruitYNChange(MemberVo vo) {
+		int result = 0;
+		Connection conn = null;
+
+		conn = getConnection();
+		result = dao.recruitYNChange(conn, vo);
+		if(result == 1) {
+			commit(conn);
+		} else {
+			rollback(conn);
+		}
+		close(conn);
+
+		return result;
+	}
+	
 	// 성별에 맞는 선생님 정보 읽기
 //		public ArrayList<TeacherVo> readGenderTeacher(String genderFm) {
 //			ArrayList<TeacherVo> retVolist = null;

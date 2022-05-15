@@ -1,19 +1,12 @@
 <%@page import="kh.semi.thduo.member.vo.MemberVo"%>
-<link href="<%=request.getContextPath()%>/resources/css/reset.css"
-	rel="stylesheet" type="text/css">
-<link href="<%=request.getContextPath()%>/resources/css/common.css"
-	rel="stylesheet" type="text/css">
-<link href="${pageContext.request.contextPath}/resources/css/button.css"
-	rel="stylesheet" type="text/css">
-<link
-	href="${pageContext.request.contextPath}/resources/css/mypageUpdate.css"
-	rel="stylesheet" type="text/css">
-<link href="<%=request.getContextPath()%>/resources/css/font.css"
-	rel="stylesheet" type="text/css">
-<link href="<%=request.getContextPath()%>/resources/css/header.css"
-	rel="stylesheet" type="text/css">
-<link href="<%=request.getContextPath()%>/resources/css/footer.css"
-	rel="stylesheet" type="text/css">
+<link href="<%=request.getContextPath()%>/resources/css/reset.css" rel="stylesheet" type="text/css">
+<link href="<%=request.getContextPath()%>/resources/css/common.css" rel="stylesheet" type="text/css">
+<link href="${pageContext.request.contextPath}/resources/css/button.css" rel="stylesheet" type="text/css">
+<link href="${pageContext.request.contextPath}/resources/css/mypageUpdate.css" rel="stylesheet" type="text/css">
+<link href="<%=request.getContextPath()%>/resources/css/font.css" rel="stylesheet" type="text/css">
+<link href="<%=request.getContextPath()%>/resources/css/header.css" rel="stylesheet" type="text/css">
+<link href="<%=request.getContextPath()%>/resources/css/footer.css" rel="stylesheet" type="text/css">
+<link href="<%=request.getContextPath()%>/resources/icons/sun.ico" rel="shortcut icon" type="image/x-icon">
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
@@ -32,18 +25,14 @@
 		<div class="wrap content">
 			<form name="frm_update">
 				<div id="top_div">
-					<p id="updateTitle">
-						회원 정보 수정
-					</p>
+					<p id="updateTitle">회원 정보 수정</p>
 				</div>
 				<div id="middle_div">
 					<table id="memberUpdateTable">
 						<tr>
 							<td>아이디</td>
 							<td colspan="2">
-								<%
-									MemberVo ssMV = (MemberVo) request.getSession().getAttribute("ssMV");
-								%>
+								<%MemberVo ssMV = (MemberVo) request.getSession().getAttribute("ssMV");%>
 								<%=ssMV.getmId()%>
 							</td>
 						</tr>
@@ -61,8 +50,7 @@
 						</tr>
 						<tr>
 							<td>비밀번호 변경</td>
-							<td><input type="password" class="in_box" name="mPw" id="pw" tabindex="2" maxlength="20"
-								placeholder="8자이상 영문대소문자, 숫자, 특수문자가 각각 1개이상">
+							<td><input type="password" class="in_box" name="mPw" id="pw" tabindex="2" maxlength="20" placeholder="8자이상 영문대소문자, 숫자, 특수문자가 각각 1개이상">
 								<font id="pwd_info" size="2"></font>
 							</td>
 							</tr>
@@ -97,16 +85,6 @@
 									<font id="checkmEmail_info" size="2"></font>
 								</td>
 						</tr>
-						<!-- <tr id="email_Cert">
-								<td id="title">인증번호</td>
-								<td><input type="text" id="cert" class="in_box">
-									<input type="hidden" id="certChk" class="in_box">
-									<input type="hidden" id="certEmail" class="in_box">
-									<input type="button" id="bnt_Cert2"  class="btn2_3" value="인증하기">
-									<font id="cert_info" size="2"></font><br/>
-									
-								</td>
-							</tr> -->
 					</table>
 				</div>
 				<div id="low_div" style="margin-top:100px;">

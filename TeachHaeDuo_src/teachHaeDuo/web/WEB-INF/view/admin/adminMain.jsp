@@ -8,6 +8,7 @@
 <link href="<%=request.getContextPath()%>/resources/css/header.css" rel="stylesheet" type="text/css">
 <link href="<%=request.getContextPath()%>/resources/icons/sun.ico" rel="shortcut icon" type="image/x-icon">
 <link href="<%=request.getContextPath()%>/resources/css/footer.css" rel="stylesheet" type="text/css">
+<link href="<%=request.getContextPath()%>/resources/css/adminMain.css" rel="stylesheet" type="text/css">
 
 
 <%@ page language="java" contentType="text/html; charset=UTF-8"
@@ -24,10 +25,10 @@
 
 	<div class="main_wrap">
 		<jsp:include page="../template_nav.jsp"></jsp:include>
-		<div class="wrap content">
+		<div class="wrap content admin_main_div">
 			<section>
-				<div style="padding:50px;">
-					<p style="font-family: MinSans-Medium">메뉴를 선택해주세요.</p>
+				<div id="section_div">
+					<p>메뉴를 선택해주세요.</p>
 				</div>
 			</section>
 		</div>

@@ -9,6 +9,7 @@
 <link href="<%=request.getContextPath()%>/resources/icons/sun.ico" rel="shortcut icon" type="image/x-icon">
 <link href="<%=request.getContextPath()%>/resources/css/footer.css" rel="stylesheet" type="text/css">
 <link href="<%=request.getContextPath()%>/resources/css/pencilChart.css" rel="stylesheet" type="text/css">
+<link href="<%=request.getContextPath()%>/resources/icons/sun.ico" rel="shortcut icon" type="image/x-icon">
 
 
 <%@ page language="java" contentType="text/html; charset=UTF-8"

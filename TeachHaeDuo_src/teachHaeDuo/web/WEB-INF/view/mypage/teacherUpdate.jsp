@@ -1,8 +1,6 @@
 <%@page import="kh.semi.thduo.member.vo.MemberVo"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-
-	
 <link href="<%=request.getContextPath()%>/resources/css/reset.css" rel="stylesheet" type="text/css">
 <link href="<%=request.getContextPath()%>/resources/css/common.css" rel="stylesheet" type="text/css">
 <link href="${pageContext.request.contextPath}/resources/css/button.css" rel="stylesheet" type="text/css">
@@ -10,6 +8,7 @@
 <link href="<%=request.getContextPath()%>/resources/css/header.css" rel="stylesheet" type="text/css">
 <link href="<%=request.getContextPath()%>/resources/css/footer.css" rel="stylesheet" type="text/css">
 <link href="<%=request.getContextPath()%>/resources/css/font.css" rel="stylesheet" type="text/css">
+<link href="<%=request.getContextPath()%>/resources/icons/sun.ico" rel="shortcut icon" type="image/x-icon">
 <!DOCTYPE html>
 
 <head>
@@ -24,21 +23,17 @@
 		<jsp:include page="../template_header.jsp"></jsp:include>
 		<div class="wrap content">
 			<div id="top_div">
-				<p id="updateTitle">
-					교습 정보 등록
-				</p>
+				<p id="updateTitle">교습 정보 등록</p>
 			</div>
 			<form name="teacherUpdatefrm">
 				<table id="teacherUpdateTable">
 					<tr>
 						<td>학력<sup> *</sup></td>
-						<td><input type="text" name="major"
-							placeholder="최종학력을 입력해주세요." required></td>
+						<td><input type="text" name="major" placeholder="최종학력을 입력해주세요." required></td>
 					</tr>
 					<tr>
 						<td>교습 소개<sup> *</sup></td>
-						<td><textarea class="text_area" name="tIntro"
-								placeholder="내용을 입력해주세요.(최대 한글1000자)" required></textarea></td>
+						<td><textarea class="text_area" name="tIntro" placeholder="내용을 입력해주세요.(최대 한글1000자)" required></textarea></td>
 					</tr>
 					<tr>
 						<td>교습 과목<sup> *</sup></td>
@@ -58,41 +53,10 @@
 								<button id="area_select" class="btn2_3" type="button">지역 선택</button>
 								<button id="area_reset" class="btn2_3" type="button">선택 초기화</button>
 							</div>
-									                                                                  
-							<!-- <div style="display: flex">
-								<select class="sel">
-									<option value="">선택해주세요.</option>
-									<option value="강남구">강남구</option>
-									<option value="강동구">강동구</option>
-									<option value="강북구">강북구</option>
-									<option value="강서구">강서구</option>
-									<option value="관악구">관악구</option>
-									<option value="광진구">광진구</option>
-									<option value="구로구">구로구</option>
-									<option value="금천구">금천구</option>
-									<option value="노원구">노원구</option>
-									<option value="도봉구">도봉구</option>
-									<option value="동대문구">동대문구</option>
-									<option value="동작구">동작구</option>
-									<option value="마포구">마포구</option>
-									<option value="서대문구">서대문구</option>
-									<option value="서초구">서초구</option>
-									<option value="성동구">성동구</option>
-									<option value="성북구">성북구</option>
-									<option value="송파구">송파구</option>
-									<option value="양천구">양천구</option>
-									<option value="영등포구">영등포구</option>
-									<option value="용산구">용산구</option>
-									<option value="은평구">은평구</option>
-									<option value="종로구">종로구</option>
-									<option value="중구">중구</option>
-									<option value="중랑구">중랑구</option>
-								</select> &nbsp;&nbsp;&nbsp; -->
 						</td>
 					</tr>
 					<tr>
 						<td></td>
-						
 						<td>
 							<div id="active">
 								<div class="active_div">-선택 지역 목록-</div>
@@ -101,48 +65,42 @@
 					</tr>
 					<tr>
 						<td>온라인 교습 여부<sup> *</sup></td>
-						<td><label for="online"> <input type="radio"
-								name="online_yna" id="online" value="Y">온라인
-						</label> <label for="offline"> <input type="radio"
-								name="online_yna" id="offline" value="N">오프라인
-						</label> <label for="all"> <input type="radio" name="online_yna"
-								id="all" value="A">모두
-						</label></td>
-					</tr>
-					<tr>
-						<td>교습 횟수</td>
-						<td><input type="text" name="tcnt"
-							placeholder="예) 주2회, 미입력시 협의"></td>
-					</tr>
-					<tr>
-						<td>비용</td>
-						<td><input type="text" name="tprice" placeholder="미입력시 협의">
+						<td>
+							<label for="online"> <input type="radio" name="online_yna" id="online" value="Y">온라인</label>
+							<label for="offline"> <input type="radio" name="online_yna" id="offline" value="N">오프라인</label>
+							<label for="all"> <input type="radio" name="online_yna" id="all" value="A">모두</label>
 						</td>
 					</tr>
 					<tr>
+						<td>교습 횟수</td>
+						<td><input type="text" name="tcnt" placeholder="예) 주2회, 미입력시 협의"></td>
+					</tr>
+					<tr>
+						<td>비용</td>
+						<td><input type="text" name="tprice" placeholder="미입력시 협의"></td>
+					</tr>
+					<tr>
 						<td>희망 학생<sup> *</sup></td>
-						<td><label for="student1"> <input name="student" type="checkbox"
-								id="student1" value="초등학생">초등학생
-						</label> <label for="student2"> <input name="student" type="checkbox"
-								id="student2" value="중학생">중학생
-						</label> <label for="student3"> <input name="student" type="checkbox"
-								id="student3" value="고등학생">고등학생
-						</label> <label for="student4"> <input name="student" type="checkbox"
-								id="student4" value="일반인">일반인
-						</label> <label for="student5"> <input name="student" type="checkbox"
-								id="student5" value="무관">무관
-						</label></td>
+						<td>
+							<label for="student1"> <input name="student" type="checkbox" id="student1" value="초등학생">초등학생</label>
+							<label for="student2"> <input name="student" type="checkbox" id="student2" value="중학생">중학생</label>
+							<label for="student3"> <input name="student" type="checkbox" id="student3" value="고등학생">고등학생</label>
+							<label for="student4"> <input name="student" type="checkbox" id="student4" value="일반인">일반인</label>
+							<label for="student5"> <input name="student" type="checkbox" id="student5" value="무관">무관</label>
+						</td>
 					</tr>
 					<tr id="language_tr1">
 						<td>어학</td>
-						<td><select name="language">
+						<td>
+							<select name="language">
 								<option value="">선택해주세요.</option>
 								<option value="TOEIC">TOEIC</option>
 								<option value="TOFEL">TOFEL</option>
 								<option value="TEPS">TEPS</option>
 								<option value="JPT">JPT</option>
 								<option value="HSK">HSK</option>
-						</select> <input type="text" name="score">
+							</select> 
+							<input type="text" name="score">
 							<button type="button" id="language_plus_btn" class="btn2_3">추가</button>
 							<button type="button" id="language_delete_btn" class="btn2_3">삭제</button>
 						</td>
@@ -154,13 +112,11 @@
 					</tr>
 					<tr>
 						<td>특이 사항</td>
-						<td><textarea class="text_area" name="tSpecial"
-								placeholder="내용을 입력해주세요. (최대 한글100자)"></textarea></td>
+						<td><textarea class="text_area" name="tSpecial" placeholder="내용을 입력해주세요. (최대 한글100자)"></textarea></td>
 					</tr>
 				</table>
 				<div id="bottom_div" style="margin-top:100px;">
-					<button type="button" id="submit_btn" class="btn2_3 update_btn">교습
-						정보 저장</button>
+					<button type="button" id="submit_btn" class="btn2_3 update_btn">교습 정보 저장</button>
 					<button type="button" id="cancel" class="btn2_3 update_btn">취소</button>
 				</div>
 			</form>
@@ -168,7 +124,8 @@
 		<div id="acti_area_modal" class="acti_area_modal_overlay">
 			<div class="acti_area_modal_window">
 				<div class="acti_area_modal_title">
-	                <img src="${pageContext.request.contextPath}/resources/icons/acti_area_map.png" width="30" height="30" style="margin-right:10px">
+	                <img src="${pageContext.request.contextPath}/resources/icons/acti_area_map.png" 
+	                			width="30" height="30" style="margin-right:10px">
 	                <p style="line-height:30px">교습 가능 지역</p>
 	                <div class="acti_area_modal_close">X</div>
 	            </div>
@@ -262,18 +219,19 @@
 		MemberVo ssMV = (MemberVo) request.getSession().getAttribute("ssMV");
 	%>
 	<script>
-	var chk_obj_arr = [];
-	var chk_area_arr = [];
+	
 	$("#cancel").click(function(){
     	console.log("취소 버튼 클릭");
 		location.href = "mypage";
 		});
 	
-	$("#submit_btn").click(checkTeacherUpdate);
 	
+	
+	$("#submit_btn").click(checkTeacherUpdate);
+	// 필수 사항 입력했는지 확인
 	function checkTeacherUpdate(){
-		// 필수 사항 입력했는지 확인
-		
+		var chk_obj_arr = [];
+		var chk_area_arr = [];
 		// 교습 과목 체크했는지 확인
 		$("input:checkbox[name=object]:checked").each(function(){
 			chk_obj_arr = [];
@@ -285,7 +243,6 @@
 			alert("교습 과목을 선택해주세요.");
 			return;
 		};
-		
 		// 활동 지역 체크 했는지 확인
 		$("input:checkbox[name=acti_area]:checked").each(function(){
 			chk_area_arr = [];
@@ -297,21 +254,18 @@
 			alert("교습 가능 지역을 선택해주세요.");
 			return;
 		};
-		
 		// 온라인 교습 여부 체크 했는지 확인
 		console.log($("input:radio[name=online_yna]").is(":checked"));
 		if(!($("input:radio[name=online_yna]").is(":checked"))){
 			alert("온라인 교습 여부를 선택해주세요.");
 			return;
 		};
-		
 		// 희망 학생 선택했는지 확인
 		console.log($("input:checkbox[name=student]").is(":checked"));
 		if(!($("input:checkbox[name=student]").is(":checked"))){
 			alert("희망 학생을 선택해주세요.");
 			return;
 		};
-		
 		var frm = document.teacherUpdatefrm;
 		frm.method="post";
 		frm.action="teacherUpdate.do";

@@ -183,7 +183,6 @@ public class TeacherUpdateDoController extends HttpServlet {
 
 				// 변수 가지고 서비스 호출
 				System.out.println("컨트롤러 tVo :" + tVo);
-				System.out.println("컨트롤러 onlineYn :" + tVo.getOnline_yna());
 				result = new TeacherService().updateTeacher(tVo, pVo, objectArr, activeAreaArr);
 				// 실패
 				if (result == 0) {

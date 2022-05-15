@@ -46,7 +46,9 @@ div#notice {
 	margin-top:30px;
 	overflow:hidden;
 }
-
+#p_alarm:hover{
+	color: #c0c0c0;
+}
 
 /* 알람 모달창 */
 

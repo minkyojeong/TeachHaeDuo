@@ -41,3 +41,12 @@ table.teacherReport-tableAll tr td:nth-child(6) {
 
 }
 
+
+table.teacherReport-tableAll a:link {
+	color: black
+}
+
+table.teacherReport-tableAll a:visited {
+	color: black;
+}
+

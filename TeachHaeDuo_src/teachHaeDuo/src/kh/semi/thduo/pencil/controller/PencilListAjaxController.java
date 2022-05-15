@@ -23,13 +23,13 @@ import kh.semi.thduo.pencil.model.vo.PencilVo;
  * Servlet implementation class PencilListController
  */
 @WebServlet("/listPencil.ax")
-public class PencilListController extends HttpServlet {
+public class PencilListAjaxController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public PencilListController() {
+    public PencilListAjaxController() {
         super();
         // TODO Auto-generated constructor stub
     }

@@ -36,9 +36,6 @@ public class MypageController extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		System.out.println("마이페이지 doget");
 		
-		// 세션에 담긴 정보 가져오기
-		MemberVo ssMV = (MemberVo)request.getSession().getAttribute("ssMV");
-		
 		// 사용할 변수 선언
 		String mId = null;;
 		String roleSt = null;
@@ -47,6 +44,7 @@ public class MypageController extends HttpServlet {
 		String tNo = null;
 		
 		// 로그인이 안됐을 경우
+		MemberVo ssMV = (MemberVo)request.getSession().getAttribute("ssMV");
 		if(ssMV == null) {
 			request.getSession().setAttribute("msgLogin", "로그인 먼저 해주세요");
 			response.sendRedirect("login");

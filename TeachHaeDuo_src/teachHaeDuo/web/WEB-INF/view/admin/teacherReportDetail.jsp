@@ -1,25 +1,16 @@
 <%@page import="kh.semi.thduo.report.model.vo.ReportVo"%>
 <%@page import="kh.semi.thduo.teacher.model.vo.TeacherVo"%>
 <%@page import="java.util.ArrayList"%>
-<link href="<%=request.getContextPath()%>/resources/css/reset.css"
-	rel="stylesheet" type="text/css">
-<link href="${pageContext.request.contextPath}/resources/css/button.css"
-	rel="stylesheet" type="text/css">
-<link href="<%=request.getContextPath()%>/resources/css/font.css"
-	rel="stylesheet" type="text/css">
-<link href="<%=request.getContextPath()%>/resources/css/nav.css"
-	rel="stylesheet" type="text/css">
-<link href="<%=request.getContextPath()%>/resources/css/common.css"
-	rel="stylesheet" type="text/css">
-<link href="<%=request.getContextPath()%>/resources/css/header.css"
-	rel="stylesheet" type="text/css">
-<link href="<%=request.getContextPath()%>/resources/icons/sun.ico"
-	rel="shortcut icon" type="image/x-icon">
-<link href="<%=request.getContextPath()%>/resources/css/footer.css"
-	rel="stylesheet" type="text/css">
-<link
-	href="<%=request.getContextPath()%>/resources/css/teacherReportDetail.css"
-	rel="stylesheet" type="text/css">
+<link href="<%=request.getContextPath()%>/resources/css/reset.css" rel="stylesheet" type="text/css">
+<link href="${pageContext.request.contextPath}/resources/css/button.css" rel="stylesheet" type="text/css">
+<link href="<%=request.getContextPath()%>/resources/css/font.css" rel="stylesheet" type="text/css">
+<link href="<%=request.getContextPath()%>/resources/css/nav.css" rel="stylesheet" type="text/css">
+<link href="<%=request.getContextPath()%>/resources/css/common.css" rel="stylesheet" type="text/css">
+<link href="<%=request.getContextPath()%>/resources/css/header.css" rel="stylesheet" type="text/css">
+<link href="<%=request.getContextPath()%>/resources/icons/sun.ico" rel="shortcut icon" type="image/x-icon">
+<link href="<%=request.getContextPath()%>/resources/css/footer.css" rel="stylesheet" type="text/css">
+<link href="<%=request.getContextPath()%>/resources/css/teacherReportDetail.css" rel="stylesheet" type="text/css">
+
 
 
 <%@ page language="java" contentType="text/html; charset=UTF-8"

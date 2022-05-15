@@ -9,6 +9,7 @@
 <link href="<%=request.getContextPath()%>/resources/icons/sun.ico" rel="shortcut icon" type="image/x-icon">
 <link href="<%=request.getContextPath()%>/resources/css/footer.css" rel="stylesheet" type="text/css">
 <link href="<%=request.getContextPath()%>/resources/css/teacherApprovalList.css" rel="stylesheet" type="text/css">
+<link href="<%=request.getContextPath()%>/resources/icons/sun.ico" rel="shortcut icon" type="image/x-icon">
 
 
 <%@ page language="java" contentType="text/html; charset=UTF-8"
@@ -58,8 +59,8 @@
 										<a href="teacherCertificate?file=${vo.getmCertificate()}">증명서 보기</a>
 									</td>
 									<td>
-										<a href="teacherApproval.do?tNoOk=${vo.gettNo()}&nickname=${vo.getmNickname()}&mId=${vo.getmId()}">승인</a>
-										<a href="teacherApproval.do?tNoNo=${vo.gettNo()}&nickname=${vo.getmNickname()}&mId=${vo.getmId()}">비승인</a>
+										<a id="ok_btn" href="teacherApproval.do?tNoOk=${vo.gettNo()}&nickname=${vo.getmNickname()}&mId=${vo.getmId()}">승인</a>
+										<a id="no_btn"  href="teacherApproval.do?tNoNo=${vo.gettNo()}&nickname=${vo.getmNickname()}&mId=${vo.getmId()}">비승인</a>
 									</td>
 								</tr>
 								</c:forEach>
@@ -77,7 +78,26 @@ $(function(){
 		location.replace("teacherApprovalList");
 	}
 	
+	$("#ok_btn").click(function(e){
+		var confm = confirm("승인처리 하시겠습니까?");
+		if (confm == false) {
+			preventClick(e);
+			alert("취소하셨습니다.")
+			location.replace("teacherApprovalList");
+		} 
+	});
+	$("#no_btn").click(function(e){
+		var confm = confirm("비승인처리 하시겠습니까?");
+		if (confm == false) {
+			preventClick(e);
+			alert("취소하셨습니다.")
+			location.replace("teacherApprovalList");
+		}
+	});
 });
+function preventClick(e){
+	e.preventDefault()
+}
 </script>
 <% request.getSession().removeAttribute("msgApproval"); %>
 

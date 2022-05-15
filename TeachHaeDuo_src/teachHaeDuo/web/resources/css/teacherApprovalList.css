@@ -30,3 +30,11 @@ table.teacher-tableAll th {
 .teacher-tableAll {
 	padding: 10px;
 }
+
+table.teacher-tableAll a:link {
+	color: black
+}
+
+table.teacher-tableAll a:visited {
+	color: black;
+}

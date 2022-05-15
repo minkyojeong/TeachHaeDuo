@@ -473,11 +473,14 @@ public class TeacherDao {
 		System.out.println("tVo.getOnline_yna() :" + tVo.getOnline_yna());
 		String sql = "update t_profile set t_major=? , online_yna=? , " + "t_tcnt=? , t_tprice=? , t_wantstud=? , "
 				+ "t_career=? , t_language=? , t_special=? , t_profile_yn='Y' , " + "t_intro=? where t_no=?";
-		String sqlPencil = "INSERT INTO check_pencil(cp_no, cp_content, cp_cash, cp_date, m_id) values((SELECT NVL(MAX(cp_no), 0) + 1 FROM check_pencil WHERE m_id = ?), ?, ?, default, ?)";
+		String sqlPencil = "INSERT INTO check_pencil(cp_no, cp_content, cp_cash, cp_date, m_id) "
+							+ "values((SELECT NVL(MAX(cp_no), 0) + 1 FROM check_pencil WHERE m_id = ?), ?, ?, default, ?)";
 		String sqlDeleteObject = "delete from teach_object where t_no=?";
-		String sqlInsertObject = "insert into TEACH_OBJECT (ob_code, t_no) values( (select ob_code from object where ob_name=?) , ?)";
+		String sqlInsertObject = "insert into TEACH_OBJECT (ob_code, t_no) "
+								+ "values( (select ob_code from object where ob_name=?) , ?)";
 		String sqlDeleteactiveArea = "delete from acti_area where t_no=?";
-		String sqlInsertactiveArea = "insert into ACTI_AREA (t_no, area_code) values(?, (select area_code from area where area_name=?) )";
+		String sqlInsertactiveArea = "insert into ACTI_AREA (t_no, area_code) "
+									+ "values(?, (select area_code from area where area_name=?) )";
 		try {
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, tVo.getT_major());
@@ -659,6 +662,32 @@ public class TeacherDao {
 
 		return voList;
 	}
+	
+	// 선생님 모집 여부 변경
+	public int recruitYNChange(Connection conn, MemberVo vo) {
+		int result = 0;
+		String sql = "";
+		String yn = vo.gettRecruitYn();
+		if(yn.equals("Y")) {
+			sql = "update t_profile set T_RECRUIT_YN = " + "'N' where m_id =? ";
+		} else {
+			sql = "update t_profile set T_RECRUIT_YN = " + "'Y' where m_id =? ";
+		}
+		
+		if(sql != "") {
+			try {
+				pstmt = conn.prepareStatement(sql);
+				pstmt.setString(1, vo.getmId());
+				result = pstmt.executeUpdate();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			} finally {
+				close(pstmt);
+			}
+		}
+		return result;
+	}
+	
 
 	// 성별에 맞는 선생님 정보 읽기
 //	public ArrayList<TeacherVo> readGenderTeacher(Connection conn, String genderFm) {

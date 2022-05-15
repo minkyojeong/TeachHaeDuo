@@ -266,17 +266,17 @@ public class AlarmDao {
 			// 알람 테이블에 삽입 실패했다면
 			if(result == 0) {
 				System.out.println("알람 테이블 넣기 실패 result:"+ result);
-				return result;
-			} else { // 알람 테이블에 삽입 성공했다면
+				return 0;
+			} else { // 알람 테이블에 삽입 성공했다면 t_profile 업데이트
 				System.out.println("알람 테이블 넣기 성공 result:"+ result);
 				pstmt = conn.prepareStatement(sql2);
 				pstmt.setString(1, yD);
 				pstmt.setString(2, tNo);
 				result = pstmt.executeUpdate();
 				System.out.println("dao result2:"+ result);
-				if(result == 0) {
+				if(result == 0) { // t_profile 업데이트 실패
 					System.out.println("선생님 테이블 넣기 실패 result:"+ result);
-					return result;
+					return 0;
 				}
 			}
 		} catch (SQLException e) {
@@ -309,26 +309,26 @@ public class AlarmDao {
 				// 알람 테이블에 삽입 실패했다면
 				if(result == 0) {
 					System.out.println("알람 테이블 넣기 실패 result:"+ result);
-					return result;
-				} else { // 알람 테이블에 삽입 성공했다면
+					return 0;
+				} else { // 알람 테이블에 삽입 성공했다면 t_profile 업데이트
 					System.out.println("알람 테이블 넣기 성공 result:"+ result);
 					pstmt = conn.prepareStatement(sql2);
 					pstmt.setString(1, yD);
 					pstmt.setString(2, tNo);
 					result = pstmt.executeUpdate();
 					System.out.println("dao result2:"+ result);
-					if(result == 0) {
+					if(result == 0) { // t_profile 업데이트 실패시
 						System.out.println("선생님 테이블 넣기 실패 result:"+ result);
-						return result;
-					} else { // 선생님 업데이트도 성공했다면
+						return 0;
+					} else { // t_profile 업데이트도 성공했다면 신고 테이블에 delete
 						System.out.println("선생님 테이블 넣기 성공 result:"+ result);
 						pstmt = conn.prepareStatement(sql3);
 						pstmt.setString(1, vo.getM_id());
 						result = pstmt.executeUpdate();
 						System.out.println("dao result3:"+ result);
-						if(result == 0) {
+						if(result == 0) { // 신고 테이블 delete 실패시
 							System.out.println("신고테이블 테이블 삭제 실패 result:"+ result);
-							return result;
+							return 0;
 						}
 					} 
 				}

@@ -9,7 +9,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import kh.semi.thduo.alarm.model.service.AlarmService;
 import kh.semi.thduo.member.vo.MemberVo;
-import kh.semi.thduo.teacher.model.service.RecruitYNChangeService;
+import kh.semi.thduo.teacher.model.service.TeacherService;
 
 /**
  * Servlet implementation class AlarmYNChange
@@ -23,7 +23,6 @@ public class RecruitYNChangeController extends HttpServlet {
      */
     public RecruitYNChangeController() {
         super();
-        // TODO Auto-generated constructor stub
     }
 
 	/**
@@ -51,7 +50,7 @@ public class RecruitYNChangeController extends HttpServlet {
 			vo.settRecruitYn(ssMV.gettRecruitYn());
 			vo.setmId(ssMV.getmId());
 			// 서비스 호출
-			result = new RecruitYNChangeService().recruitYNChange(vo);
+			result = new TeacherService().recruitYNChange(vo);
 		}
 		
 		// 성공
