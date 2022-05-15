@@ -16,8 +16,8 @@
 <meta charset="UTF-8">
 <title>로그인</title>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<script type="text/javascript">
 
+<script type="text/javascript">
 $(function() {
 	$('#btn_Yes').on("click", function() {
 		var frm = document.frm_login;
@@ -31,13 +31,11 @@ $(function() {
 			frm.method = 'post';
 			frm.submit();
 		}
-		
 	});
 });
-
 </script>
-</head>
 
+</head>
 <body>
 <div class="main_wrap">
 	 <jsp:include page="../template_header.jsp"></jsp:include>
@@ -60,7 +58,6 @@ $(function() {
                             <input type="text" name="id"  class="form-control" placeholder="아이디" required="required"> <br>
                             <input type="password" name="pwd" class="form-control" placeholder="비밀번호"  required="required"><br>
                             <p id="check" class="check"><%request.getAttribute("login_msg"); %>${login_msg}</p><br/>
-            
                             <button type="button" id="btn_Yes" class="form-control">로그인</button>  
                         </div>
                     </form>
@@ -73,7 +70,9 @@ $(function() {
 		</div>
 	     <jsp:include page="../template_footer.jsp"></jsp:include>
 	</div>
-	<script>
+	
+<% request.getSession().removeAttribute("msgLogin"); %> 	
+<script>
 $(function(){
 	var msgLoginVal = '${msgLogin}';
 	if(msgLoginVal != null && msgLoginVal != ""){
@@ -82,6 +81,6 @@ $(function(){
 	}
 });
 </script>
-<% request.getSession().removeAttribute("msgLogin"); %>  
+ 
 </body>	
 </html>

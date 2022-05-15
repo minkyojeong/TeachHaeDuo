@@ -46,11 +46,10 @@ public class MemberLoginController extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
+		System.out.println("doPost - login");
 		// 로그인시 id, pw 받기 
 		String mId = request.getParameter("id");
 		String pw = request.getParameter("pwd");
-
-		System.out.println("doPost - login");
 		System.out.println(mId);
 		System.out.println(pw);
 		MemberVo vo = new MemberService().readFindId(mId);
@@ -64,7 +63,6 @@ public class MemberLoginController extends HttpServlet {
             // 로그인  id 와 pw 확인 시  없으면 
 		MemberVo vo2 = new MemberService().login(mId, pw);
 		if (vo2 == null) {
-
 			request.setAttribute("login_msg", "비밀번호가 틀렸습니다.");
 			request.getRequestDispatcher("WEB-INF/view/member/login.jsp").forward(request, response);
 			return;
@@ -77,11 +75,7 @@ public class MemberLoginController extends HttpServlet {
 			System.out.println("리스트 결과:" + result);
 			request.getSession().setAttribute("nicknameList", result);
 			response.sendRedirect(request.getContextPath() + "/"); // 절대경로를 의미하며 -context root가 없음.
-
 			return;
-			
 		}
-
 	}
-
 }

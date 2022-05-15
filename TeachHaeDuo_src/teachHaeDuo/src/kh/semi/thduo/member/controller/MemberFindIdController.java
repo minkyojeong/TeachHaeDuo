@@ -47,30 +47,21 @@ public class MemberFindIdController extends HttpServlet {
 				String mEmail = request.getParameter("mEmail");
 				String mName = request.getParameter("mName");
 				
-				
 				Enumeration params = request.getParameterNames();
 				while(params.hasMoreElements()) {
 				  String name = (String) params.nextElement();
 				  System.out.print(name + " : " + request.getParameter(name) + "     "); 
-				}
-				
-				System.out.println("doPost - findId  아이디찾기");
+				}	
 				System.out.println(mEmail);
 				System.out.println(mName);
-				
 				
 				MemberVo vo = new MemberService().readFindId(mEmail, mName);
 				System.out.println(vo );
 				
 				if(vo == null) {
 					out.print("");
-//					response.sendRedirect("findid");
 				} else {
-					//request.getSession().setAttribute("ssMV", vo);
-//					request.setAttribute("mId", vo.getmId());
 					out.print(vo.getmId());
-//					response.sendRedirect("findid");   // 절대경로>>>request.getContextPath()
-//					response.sendRedirect("./");   // 상대경로
 				}
 				out.flush();
 				out.close();

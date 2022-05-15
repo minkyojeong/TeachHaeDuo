@@ -52,31 +52,26 @@ public class MemberFindPwController extends HttpServlet {
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		
 		System.out.println("doPost - findPw 비밀번호 정보 조회 ");
 		// ajax로 들어옴
 		PrintWriter out = response.getWriter();
 		// 비밀번호찾기
 		String mId = request.getParameter("mId");
 		String mEmail = request.getParameter("mEmail");
-
 		// 데이터 확인용
 		Enumeration params = request.getParameterNames();
 		while (params.hasMoreElements()) {
 			String name = (String) params.nextElement();
 			System.out.print(name + " : " + request.getParameter(name) + "     ");
 		}
-
 		// id email 확인
 		int result = new MemberService().readFindPw(mId, mEmail);
-		
 		if (result == 0) {
 			out.print("empty");
 			out.flush();
 			out.close();
 			return;
 		}
-		
 		// 인증 번호 생성기
 		StringBuffer temp = new StringBuffer();
 		Random rnd = new Random();
@@ -98,17 +93,14 @@ public class MemberFindPwController extends HttpServlet {
 			}
 		}
 		String random = temp.toString();
-
 		System.out.println("random " + random);
 
-		
 		// mail server 설정
 		String host = "smtp.gmail.com";
 		String user = "testminkyotest@gmail.com"; // 자신의 구글 계정
 		String password = "wjdalsry1212";// 자신의 구글 패스워드
 
 		// 메일 받을 주소
-		 //String to_email = m.getEmail(); 
 		String to_email = mEmail;
 		//String to_email = "sunea24@naver.com";
 
@@ -128,35 +120,27 @@ public class MemberFindPwController extends HttpServlet {
 			}
 		});
 		
-
 		try {
 			MimeMessage msg = new MimeMessage(session);
 			msg.setFrom(new InternetAddress(user, "VISITOR"));
 			
 			InternetAddress to = new InternetAddress(to_email);   
 			msg.setRecipient(Message.RecipientType.TO, to);    
-
 			// 메일 제목
 			msg.setSubject("안녕하세요  새 패스워드 메일입니다.");
 			// 메일 내용
 			msg.setText("패스워드는 :" + random);
-
-			
 			Transport.send(msg);
 			System.out.println("새 패스워드 이메일 전송");
 
 		} catch (Exception e) {
-			e.printStackTrace();// TODO: handle exception
+			e.printStackTrace();
 		}
-		
 		HttpSession saveKey = request.getSession();
 		saveKey.setAttribute("AuthenticationKey", random); 
-		
 		// 새(임시) 비밀번호 업데이트
 		result = new MemberService().updateRandomPw(random, mId); 
-		
 		System.out.println(result);
-
 		out.print("success");
 		out.flush();
 		out.close();
