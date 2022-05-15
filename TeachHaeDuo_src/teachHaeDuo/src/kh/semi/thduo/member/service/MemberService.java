@@ -47,7 +47,7 @@ public class MemberService {
 			System.out.println("학생입니다.");
 			
 			String sNo = new StudentService().readStudentCheck();// readStudentCheck DB가서 번호 체크
-			if (sNo.length() == 0) { // 길이가 0 같은면 S1
+			if (sNo == null) { // 수정 요청으로 수정 
 				sNo = "S1";
 			} else {
 				int no = Integer.parseInt(sNo) + 1;
