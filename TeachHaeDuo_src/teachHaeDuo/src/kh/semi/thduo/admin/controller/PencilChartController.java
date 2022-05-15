@@ -66,12 +66,14 @@ public class PencilChartController extends HttpServlet {
 					// 데이터 들고 페이지 이동
 					voListRequestForward(request, response, voList);
 				}
+				// 달별 조회
 				if (type.equals("M")) {
 					// 화면에 뿌려줄 매출 데이터 가져오기
 					voList = new PencilService().monthPencilChart(num);
 					// 데이터 들고 페이지 이동
 					voListRequestForward(request, response, voList);
 				}
+				// 연도별 조회
 				if (type.equals("Y")) {
 					// 화면에 뿌려줄 매출 데이터 가져오기
 					voList = new PencilService().yearPencilChart(num);

@@ -186,10 +186,8 @@ public class TeacherService {
 	public ArrayList<MemberVo> readTeacherApprovalList(){
 		ArrayList<MemberVo> voList = null;
 		Connection conn = getConnection();
-
 		voList = dao.readTeacherApprovalList(conn);
 		close(conn);
-		
 		return voList;
 	}
 	

@@ -26,6 +26,7 @@
 <body>
 
 	<div class="main_wrap">
+		<jsp:include page="../admin_header.jsp"></jsp:include>
 		<jsp:include page="../template_nav.jsp"></jsp:include>
 		<div class="wrap content">
 			<section>
@@ -33,19 +34,19 @@
 					<p class="teacherReport-title">신고 상세 조회</p>
 					<div class="teacherReport-tableAll">
 						<table class="teacherReport-tableAll">
-						<% ReportVo vo = (ReportVo)request.getAttribute("rVo"); %>
+						<% String content = (String)request.getAttribute("rVo"); %>
 							<tr id=title>
 								<th>신고 내용</th>
 							</tr>
 							<tr>
-								<td><%= vo.getM_r_content() %></td>
+								<td><%= content %></td>
 							</tr>
 						</table>
 					</div>
 				</div>
 			</section>
 		</div>
-
+	<jsp:include page="../template_footer.jsp"></jsp:include>
 	</div>
 
 <script>

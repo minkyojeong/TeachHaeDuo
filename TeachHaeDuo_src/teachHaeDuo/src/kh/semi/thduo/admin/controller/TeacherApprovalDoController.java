@@ -44,6 +44,7 @@ public class TeacherApprovalDoController extends HttpServlet {
 		String yD = null;
 		int result = 0;
 		System.out.println("nickname:" + nickname);
+		// 관리자 로그인 여부 확인
 		AdminVo aVo = (AdminVo) request.getSession().getAttribute("ssMV");
 		if (aVo == null) {
 			request.getSession().setAttribute("msgLogin", "로그인 먼저 해주세요");

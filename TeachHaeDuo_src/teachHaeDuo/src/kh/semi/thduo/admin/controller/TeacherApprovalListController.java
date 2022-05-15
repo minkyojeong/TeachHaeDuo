@@ -39,7 +39,6 @@ public class TeacherApprovalListController extends HttpServlet {
 		System.out.println("doGet - teacherList 페이지 이동");
 
 		AdminVo aVo = (AdminVo) request.getSession().getAttribute("ssMV");
-
 		// 관리자 로그인이 안되어있다면
 		if (aVo == null) {
 			request.getSession().setAttribute("msgLogin", "로그인 먼저 해주세요");

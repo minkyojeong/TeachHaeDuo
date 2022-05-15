@@ -31,11 +31,8 @@ public class ReportService {
 	public ArrayList<ReportVo> readAllReport() {
 		ArrayList<ReportVo> voList = null;
 		Connection conn = getConnection();
-		
 		voList = dao.readAllReport(conn);
-		
 		close(conn);
-		
 		return voList;
 	}
 	
@@ -43,11 +40,8 @@ public class ReportService {
 	public ReportVo readOneReport(int rNo) {
 		ReportVo rVo = null;
 		Connection conn = getConnection();
-		
 		rVo = dao.readOneReport(conn, rNo);
-		
 		close(conn);
-		
 		return rVo;
 	}
 }

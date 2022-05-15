@@ -631,8 +631,10 @@ public class TeacherDao {
 	// 비승인 선생님 정보 읽기
 	public ArrayList<MemberVo> readTeacherApprovalList(Connection conn) {
 		ArrayList<MemberVo> voList = null;
-		String sql = "select m_id, m_name, m_nickname, m_birth, m_phone, m_email, gender_fm, m_date, m_certificate, t_no from member m join t_profile t USING(M_ID) where T_APPROVAL='N'";
-
+		String sql = "select m_id, m_name, m_nickname, m_birth, "
+				+ "m_phone, m_email, gender_fm, m_date, m_certificate, "
+				+ "t_no from member m join t_profile t USING(M_ID) "
+				+ "where T_APPROVAL='N'";
 		try {
 			pstmt = conn.prepareStatement(sql);
 			rs = pstmt.executeQuery();
@@ -659,7 +661,6 @@ public class TeacherDao {
 			close(rs);
 			close(pstmt);
 		}
-
 		return voList;
 	}
 	

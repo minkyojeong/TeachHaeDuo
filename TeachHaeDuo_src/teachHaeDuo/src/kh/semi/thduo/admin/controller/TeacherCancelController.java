@@ -37,11 +37,11 @@ public class TeacherCancelController extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		System.out.println("선생님 자격박탈 doGet");
+		
 		// 전달받은 데이터 가져오기
 		String mId = request.getParameter("mId");
 		String mNickname = request.getParameter("mNickname");
 		String tNo = request.getParameter("tNo");
-
 		// 사용할 변수 선언
 		String yD = "D";
 		int result = 0;
@@ -52,14 +52,12 @@ public class TeacherCancelController extends HttpServlet {
 			response.sendRedirect("login");
 			return;
 		} else { // 되어있다면
-
 			// 자격 박탈 알람 보내기 and t_profile update
 			AlarmVo vo = new AlarmVo();
 			vo.setAlarm_content("신고로 인해 선생님 자격이 박탈되었습니다. 자세한 사항은 1:1문의 메일을 통해 문의해주세요.");
 			vo.setAlarm_receiveid(mNickname);
 			vo.setAlarm_sendid("관리자");
 			vo.setM_id(mId);
-
 			if (vo != null) {
 				result = new AlarmService().sendTeacherCancelAlarm(vo, yD, tNo);
 			}
@@ -71,7 +69,6 @@ public class TeacherCancelController extends HttpServlet {
 				request.getSession().setAttribute("msgTeacherCancel", "자격박탈 처리 되었습니다.");
 				response.sendRedirect(request.getHeader("referer"));
 			}
-
 		}
 	}
 

@@ -54,13 +54,14 @@ public class TeacherReportDetailController extends HttpServlet {
 			response.sendRedirect("login");
 			return;
 		} else { // 되어있다면
-
 			// 화면에 뿌려줄 데이터 가지고 오기
 			ReportVo rVo = new ReportService().readOneReport(rNo);
+			// 개행 문자들 html 태그로 변경
+			String rVoRe = rVo.getM_r_content().replace("(\r\n|\n)", "<br>");
 			System.out.println("rVo :" + rVo);
-			if (rVo != null) {
+			if (rVoRe != null) {
 				// 가져온 데이터 request에 담기
-				request.setAttribute("rVo", rVo);
+				request.setAttribute("rVo", rVoRe);
 				// 정보 들고 리스트 페이지 이동
 				request.getRequestDispatcher("WEB-INF/view/admin/teacherReportDetail.jsp").forward(request, response);
 			} else {

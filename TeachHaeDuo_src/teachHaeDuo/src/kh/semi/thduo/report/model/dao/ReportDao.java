@@ -77,8 +77,11 @@ public class ReportDao {
 	// 선택한 신고 내역 읽기
 	public ReportVo readOneReport(Connection conn, int rNo) {
 		ReportVo rVo = null;
-		String sql = "select m_r_no, M_R_SENDID, m1.m_name send_name, M_R_RECEIVEID, m2.m_name receive_name, M_R_CATEGORY, M_R_CONTENT, M_R_DATE from member_report mr join member m1 on mr.m_r_sendid=m1.m_id join member m2 on mr.m_r_receiveid=m2.m_id where m_r_no=?";
-
+		String sql = "select m_r_no, M_R_SENDID, m1.m_name send_name, "
+				+ "M_R_RECEIVEID, m2.m_name receive_name, M_R_CATEGORY, "
+				+ "M_R_CONTENT, M_R_DATE from member_report mr "
+				+ "join member m1 on mr.m_r_sendid=m1.m_id "
+				+ "join member m2 on mr.m_r_receiveid=m2.m_id where m_r_no=?";
 		try {
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setInt(1, rNo);

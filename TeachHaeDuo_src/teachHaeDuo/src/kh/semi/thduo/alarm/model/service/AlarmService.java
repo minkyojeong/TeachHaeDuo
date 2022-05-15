@@ -108,14 +108,12 @@ public class AlarmService {
 		setAutocommit(conn, false);
 		result = dao.sendApprovalAlarm(conn, vo, yD, tNo);
 		System.out.println("sendApprovalAlarm service result:" + result);
-
 		// 2개 테이블 조작 할건데, 하나라도 실패해서 리턴값 0이 온다면 롤백
 		if (result == 0) {
 			rollback(conn);
 		} else { // 2개 다 성공하면 커밋
 			commit(conn);
 		}
-
 		return result;
 	}
 
@@ -128,14 +126,12 @@ public class AlarmService {
 		setAutocommit(conn, false);
 		result = dao.sendTeacherCancelAlarm(conn, vo, yD, tNo);
 		System.out.println("sendTeacherCancelAlarm service result:" + result);
-
 		// 3개 테이블 조작 할건데, 하나라도 실패해서 리턴값 0이 온다면 롤백
 		if (result == 0) {
 			rollback(conn);
 		} else { // 3개 다 성공하면 커밋
 			commit(conn);
 		}
-
 		return result;
 	}
 }

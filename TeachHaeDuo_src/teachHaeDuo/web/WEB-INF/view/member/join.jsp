@@ -399,7 +399,7 @@
 	        buttons: {
 	            choose: {
 	                files: {
-	                    one: '사진 변경'
+	                    one: '증명서 등록'
 	                }
 	            }
 	        }
