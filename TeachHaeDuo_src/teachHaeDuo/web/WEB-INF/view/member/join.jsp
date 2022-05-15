@@ -443,92 +443,79 @@ function open_Postcode() { //다음 카카오 주소찾기
 						<table id="memberTable">
 							<tr>
 								<td id="title">아이디</td>
-								<td><input type="text" class="in_box" name="mId" id="mId" tabindex="1" placeholder=" 숫자 ,영문대소문자 6~15자리"
-									title="6자 이상의 영문대소문자와 숫자로만 입력." required> 
-									<font id="checkId" size="2"></font>
+								<td><input type="text" class="in_box" name="mId" id="mId" tabindex="1" placeholder="숫자,영문대소문자 6~15자리" title="6자 이상의 영문대소문자와 숫자로만 입력." required></td>
+							    <td><font id="checkId" size="2"></font></td>
 							</tr>
 							<tr>
 								<td id="title">비밀번호</td>
-								<td><input type="password" class="in_box" name="mPw" id="pw" tabindex="2" maxlength="20"
-									placeholder="8자이상 영문대소문자, 숫자, 특수문자가 각각 1개이상" required>
-									<font id="pwd_info" size="2"></font>
-								</td>
+								<td><input type="password" class="in_box" name="mPw" id="pw" tabindex="2" maxlength="20" placeholder="8자이상 영문대소문자, 숫자, 특수문자가 각각 1개이상" required></td>
+								<td><font id="pwd_info" size="2"></font></td>
+								
 							</tr>
 							<tr>
 								<td id="title">비밀번호 확인</td>
-								<td><input type="password" class="in_box" size="30" name="passwordcheck" id="pw_cf" tabindex="3" maxlength="60"
-									onkeyup="check_pw();" placeholder="비밀번호 확인" required/> 
-									<font id="pw_check_msg" size="2"> </font>
-								</td>
+								<td><input type="password" class="in_box" size="30" name="passwordcheck" id="pw_cf" tabindex="3" maxlength="60" onkeyup="check_pw();" placeholder="비밀번호 확인" required/></td>
+								<td><font id="pw_check_msg" size="2"></font></td>
+								
 							</tr>
 							<tr>
 								<td id="title">닉네임</td>
-								<td><input type="text" class="in_box" name="mNickName" id="mNickName" tabindex="4" maxlength="60"
-									placeholder="한글, 영문, 특수문자를 포함한 2 ~ 12글자" required> 
-									<font id="checkNickName" size="2"></font>
-								</td>
+								<td><input type="text" class="in_box" name="mNickName" id="mNickName" tabindex="4" maxlength="60" placeholder="한글, 영문, 특수문자를 포함한 2 ~ 12글자" required></td>
+								<td><font id="checkNickName" size="2"></font></td>
+								
 							</tr>
 							<tr>
 								<td id="title">이름</td>
-								<td><input type="text" class="in_box" name="mName" tabindex="5" maxlength="60" required>
-								</td>
+								<td><input type="text" class="in_box" name="mName" tabindex="5" maxlength="60" required></td>
+								<td></td>
 
 							</tr>
 							<tr>
 								<td id="title">생년월일</td>
-								<td><input type="text" class="in_box" name="mBirth" id="mBirth" tabindex="5" maxlength="8" id="mBirth"
-									placeholder="예) 210210" required> 
-									<font id="mBirth_info" size="2"></font>
-								</td>
+								<td><input type="text" class="in_box" name="mBirth" id="mBirth" tabindex="5" maxlength="8" id="mBirth" placeholder="예) 210210" required></td> 
+								<td><font id="mBirth_info" size="2"></font></td>
 							</tr>
 							<tr>
 								<td id="title">휴대전화번호</td>
-								<td><input type="text" class="in_box" name="mPhone" id="phone" tabindex="6" maxlength="13"
-									placeholder="예) 010-2222-3333" required /> <font
-									id="phone_info" size="2"></font></td>
+								<td><input type="text" class="in_box" name="mPhone" id="phone" tabindex="6" maxlength="13" placeholder="예) 010-2222-3333" required /></td> 
+									<td><font id="phone_info" size="2"></font></td>
 							</tr>
 							<tr>
 								<td id="title">이메일주소</td>
-								<td><input type="email" class="in_box" name="mEmail" id="mEmail" tabindex="7" required
-									placeholder="예) id@domain.com" required> 
-									<input type="button" id="bnt_Cert1" class="btn2_3" value="인증번호 전송">
-									<font id="checkmEmail_info" size="2"></font>
-								</td>
+								<td><input type="email" class="in_box" name="mEmail" id="mEmail" tabindex="7" required placeholder="예) id@domain.com" required></td>
+									<td><input type="button" id="bnt_Cert1" class="btn2_3" value="인증번호 전송"><font id="checkmEmail_info" size="2"></font></td>
+									
+								
 							</tr>
 							<tr id="email_Cert">
 								<td id="title">인증번호</td>
 								<td><input type="text" id="cert" class="in_box">
 									<input type="hidden" id="certChk" class="in_box">
-									<input type="hidden" id="certEmail" class="in_box">
-									<input type="button" id="bnt_Cert2"  class="btn2_3" value="인증하기">
-									<font id="cert_info" size="2"></font><br/>
-									
-								</td>
+									<input type="hidden" id="certEmail" class="in_box"></td>
+								<td><input type="button" id="bnt_Cert2"  class="btn2_3" value="인증하기"><font id="cert_info" size="2"></font></td>
 							</tr>
-				
 							<tr>
 								<td id="title">주소</td>
-								<td><input type="text" class="in_box" name="mAddress1" id="mAddress1" tabindex="8" readonly required /> 
-									<input type="button" class="btn2_3" value="주소검색" id="postcode_button" onclick="open_Postcode()"><br> 
-									<input type="text" class="in_box" name="mAddress2" id="mAddress2" placeholder="상세주소 입력해 주세요" required />
-								</td>
+								<td><input type="text" class="in_box" name="mAddress1" id="mAddress1" tabindex="8" readonly required /><br>
+									<input type="text" class="in_box" name="mAddress2" id="mAddress2" placeholder="상세주소 입력해 주세요" required /></td>
+								<td><input type="button" class="btn2_3" value="주소검색" id="postcode_button" onclick="open_Postcode()"></td> 
 							</tr>
 							<tr>
 								<td id="title">성별</td>
 								<td><input type="radio" name="genderFm" value="M" checked>남
-									<input type="radio" name="genderFm" value="F">여
-								</td>
+									<input type="radio" name="genderFm" value="F">여</td>
+								<td></td>
 							</tr>
 							<tr>
 								<td id="title">신분</td>
 								<td><input type="radio" name="roleSt" id="radioS" value="S" checked>학생 
-									<input type="radio" name="roleSt" id="radioT" value="T">선생님
-								</td>
+									<input type="radio" name="roleSt" id="radioT" value="T">선생님</td>
+								<td></td>
 							</tr>
 							<tr id="fileupload">
 								<td id="file">증명서류</td>
-								<td><input type="file" name="joinupload">
-								</td>
+								<td><input type="file" name="joinupload"></td>
+								<td></td>
 							</tr>
 						</table>
 						<div id="joinbnt">
