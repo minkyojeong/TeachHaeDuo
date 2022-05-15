@@ -40,25 +40,21 @@ public class AdminLoginController extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
+		// 관리자 로그인
 		doGet(request, response);
 		String adminId = request.getParameter("id");
 		String adminPw = request.getParameter("pwd");
 
 		System.out.println("doPost - adminlogin");
-	// id admin, pw amdin1234
-		
+	
 		AdminVo vo = new AdminService().login(adminId,adminPw);
         if(vo==null) {
         	request.setAttribute("login_msg", "로그인 실패했습니다.");
 			request.getRequestDispatcher("WEB-INF/view/member/login.jsp").forward(request, response);
         }else {
-        
         	System.out.println("로그인 성공");
 			request.getSession().setAttribute("ssMV", vo);
 			response.sendRedirect(request.getContextPath()+"/adminMain"); 
         }
-		
 	}
-
 }

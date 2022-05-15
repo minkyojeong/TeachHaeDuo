@@ -15,7 +15,8 @@ public class AdminDao {
 	private Statement stmt = null;
 	private PreparedStatement pstmt = null;
 	private ResultSet rs = null;
-
+ 
+	 //관리자 로그인 (DB id,pw 확인) 
 	public AdminVo login(Connection conn, String adminId, String adminPw) { 
 		AdminVo retVo = null;
 		String sql = "SELECT ADMIN_ID, ADMIN_PW FROM ADMIN where ADMIN_ID=? and ADMIN_PW=?";

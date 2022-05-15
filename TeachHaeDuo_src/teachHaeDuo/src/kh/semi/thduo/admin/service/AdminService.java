@@ -8,13 +8,11 @@ import java.sql.Connection;
 import kh.semi.thduo.admin.dao.AdminDao;
 import kh.semi.thduo.admin.vo.AdminVo;
 
-
-
 public class AdminService {
 	
 	private AdminDao dao = new AdminDao(); 
-	
-	// 회원 로그인 ok
+
+	// 관리자 로그인 ok
 			public AdminVo login(String adminId, String adminPw) {
 				AdminVo retVo = null;
 				Connection conn = getConnection();
