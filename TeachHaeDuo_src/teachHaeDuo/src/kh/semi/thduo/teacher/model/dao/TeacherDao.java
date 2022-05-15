@@ -528,7 +528,7 @@ public class TeacherDao {
 						}
 						System.out.println("담당과목 넣기 result:" + result);
 						if (result < 1) { // 반복문 빠져나와서 리턴
-							return result;
+							return 0;
 						} else { // 담당과목 넣기 성공한다면 기존에 활동지역 삭제
 							pstmt = conn.prepareStatement(sqlDeleteactiveArea);
 							pstmt.setString(1, tVo.getT_no());

@@ -53,8 +53,6 @@ public class ReceiveAlarmListAjaxController extends HttpServlet {
 		PrintWriter out = response.getWriter();
 		// 세션에 담긴 정보 가져오기
 		MemberVo vo = (MemberVo) request.getSession().getAttribute("ssMV");
-		// 사용할 변수 선언
-		String mNickname = "";
 
 		// 로그인이 안되어있다면
 		if (vo == null) {
@@ -62,17 +60,15 @@ public class ReceiveAlarmListAjaxController extends HttpServlet {
 			response.sendRedirect("login");
 			return;
 		} else { // 되어있다면
-			// 세션에서 받아온 정보 변수에 담기
-			mNickname = vo.getmNickname();
-			System.out.println("받은 알람 서비스 호출 mNickname:" + mNickname);
+			System.out.println("받은 알람 서비스 호출 mNickname:" + vo.getmNickname());
 
-			if (mNickname != null) {
+			if (vo.getmNickname() != null) {
 				// 서비스 호출
-				ArrayList<AlarmVo> voList = new AlarmService().receiveListAlarm(mNickname);
+				ArrayList<AlarmVo> voList = new AlarmService().receiveListAlarm(vo.getmNickname());
 				System.out.println("리스트 결과:" + voList);
-
+				// 데이터를 잘 받아왔는지
 				if (voList != null) {
-//				// 리턴 값을 gson에 담아 ajax에 넘기기
+				// 리턴 값을 gson에 담아 ajax에 넘기기
 					Gson gobj = new GsonBuilder().setPrettyPrinting().create();
 					String resStr = gobj.toJson(voList);
 					out.println(resStr);
@@ -87,6 +83,5 @@ public class ReceiveAlarmListAjaxController extends HttpServlet {
 				}
 			}
 		}
-
 	}
 }

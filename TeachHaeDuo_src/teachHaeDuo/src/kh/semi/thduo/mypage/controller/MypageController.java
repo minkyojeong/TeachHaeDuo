@@ -33,15 +33,9 @@ public class MypageController extends HttpServlet {
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) 
+			throws ServletException, IOException {
 		System.out.println("마이페이지 doget");
-		
-		// 사용할 변수 선언
-		String mId = null;;
-		String roleSt = null;
-		String mNickname = null;
-		String sNo = null;
-		String tNo = null;
 		
 		// 로그인이 안됐을 경우
 		MemberVo ssMV = (MemberVo)request.getSession().getAttribute("ssMV");
@@ -49,28 +43,17 @@ public class MypageController extends HttpServlet {
 			request.getSession().setAttribute("msgLogin", "로그인 먼저 해주세요");
 			response.sendRedirect("login");
 			return;
-		} else {
-			mId = ssMV.getmId();
-			roleSt = ssMV.getRoleSt();
-			mNickname = ssMV.getmNickname();
-			sNo = ssMV.getsNo();
-			tNo = ssMV.gettNo();
-			System.out.println(roleSt);
+		} else { // 되어있을 경우
+			System.out.println(ssMV.getRoleSt());
 			
 			// 로그인한 회원이 학생, 선생님에 따라서 다른 페이지 진입
-			if(roleSt.equals("T")) {
+			if(ssMV.getRoleSt().equals("T")) {
 				System.out.println("선생 마이페이지 진입");
 				// 마이페이지에서 보여줄 정보들 가져오기
-				TeacherVo tVo = new TeacherService().readTeacherInfo(tNo);
-				if(tVo == null) {
-					System.out.println("선생님 정보 못읽어와");
-					request.setAttribute("msgMypage", "마이페이지에 진입 할 수 없습니다. 관리자에게 문의하세요.");
-					request.getRequestDispatcher("WEB-INF/view/main.jsp").forward(request, response);
-					return;
-				}
-				int numberOfSendAlarm = new AlarmService().numberOfSendAlarm(mNickname);
-				int numberOfReceiveAlarm = new AlarmService().numberOfReceiveAlarm(mNickname);
-				int balance = new PencilService().checkPencil(mId);
+				TeacherVo tVo = new TeacherService().readTeacherInfo(ssMV.gettNo());
+				int numberOfSendAlarm = new AlarmService().numberOfSendAlarm(ssMV.getmNickname());
+				int numberOfReceiveAlarm = new AlarmService().numberOfReceiveAlarm(ssMV.getmNickname());
+				int balance = new PencilService().checkPencil(ssMV.getmId());
 				System.out.println(tVo);
 				// 가져온 정보 담기
 				request.setAttribute("tVo", tVo);
@@ -79,13 +62,13 @@ public class MypageController extends HttpServlet {
 				request.setAttribute("balance", balance);
 				// 담은 정보 가지고 선생님 마이페이지 진입
 				request.getRequestDispatcher("WEB-INF/view/mypage/mypageTeacher.jsp").forward(request, response);
-			} else if(roleSt.equals("S")) {
+			} else if(ssMV.getRoleSt().equals("S")) {
 				System.out.println("학생 마이페이지 진입");
 				// 마이페이지에서 보여줄 정보들 가져오기
-				int numberOfSendAlarm = new AlarmService().numberOfSendAlarm(mNickname);
-				int numberOfReceiveAlarm = new AlarmService().numberOfReceiveAlarm(mNickname);
-				int balance = new PencilService().checkPencil(mId);
-				int numberOfLike = new LikeService().numberOfLike(sNo);
+				int numberOfSendAlarm = new AlarmService().numberOfSendAlarm(ssMV.getmNickname());
+				int numberOfReceiveAlarm = new AlarmService().numberOfReceiveAlarm(ssMV.getmNickname());
+				int balance = new PencilService().checkPencil(ssMV.getmId());
+				int numberOfLike = new LikeService().numberOfLike(ssMV.getsNo());
 				// 가져온 정보 담기
 				request.setAttribute("numberOfSendAlarm", numberOfSendAlarm);
 				request.setAttribute("numberOfReceiveAlarm", numberOfReceiveAlarm);
@@ -95,8 +78,6 @@ public class MypageController extends HttpServlet {
 				request.getRequestDispatcher("WEB-INF/view/mypage/mypageStudent.jsp").forward(request, response);
 			}
 		}
-		
-		
 	}
 
 	/**

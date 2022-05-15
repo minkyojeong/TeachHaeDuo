@@ -41,7 +41,6 @@ public class TeacherApprovalDoController extends HttpServlet {
 		String mId = request.getParameter("mId");
 
 		// 사용할 변수 선언
-		String tNo = null;
 		String yD = null;
 		int result = 0;
 		System.out.println("nickname:" + nickname);
@@ -54,7 +53,6 @@ public class TeacherApprovalDoController extends HttpServlet {
 			// 비승인 버튼을 눌렀을시
 			if (tNoOk == null || tNoOk.equals("")) {
 				System.out.println("비승인버튼이야");
-				tNo = tNoNo;
 				// 비승인 알람 보내기 and t_profile update
 				AlarmVo vo = new AlarmVo();
 				vo.setAlarm_content("승인이 거부되었습니다. 자세한 사항은 1:1문의 메일을 통해 문의해주세요.");
@@ -62,10 +60,9 @@ public class TeacherApprovalDoController extends HttpServlet {
 				vo.setAlarm_sendid("관리자");
 				vo.setM_id(mId);
 				yD = "D";
-				if (vo != null && tNo != null) {
-					result = new AlarmService().sendApprovalAlarm(vo, yD, tNo);
+				if (vo != null && tNoNo != null) {
+					result = new AlarmService().sendApprovalAlarm(vo, yD, tNoNo);
 				}
-
 				// 실패
 				if (result == 0) {
 					request.getSession().setAttribute("msgApproval", "처리 도중 오류가 발생했습니다. 다시 시도해주세요.");
@@ -74,11 +71,9 @@ public class TeacherApprovalDoController extends HttpServlet {
 					request.getSession().setAttribute("msgApproval", "비승인 처리 되었습니다.");
 					response.sendRedirect(request.getHeader("referer"));
 				}
-
 				// 승인 버튼 눌렀을시
 			} else {
 				System.out.println("승인버튼이야");
-				tNo = tNoOk;
 				// 승인 알람 보내기 and t_profile update
 				AlarmVo vo = new AlarmVo();
 				vo.setAlarm_content("선생님 승인이 되었습니다. 교습 정보를 등록해주세요.");
@@ -86,10 +81,9 @@ public class TeacherApprovalDoController extends HttpServlet {
 				vo.setAlarm_sendid("관리자");
 				vo.setM_id(mId);
 				yD = "Y";
-				if (vo != null && tNo != null) {
-					result = new AlarmService().sendApprovalAlarm(vo, yD, tNo);
+				if (vo != null && tNoOk != null) {
+					result = new AlarmService().sendApprovalAlarm(vo, yD, tNoOk);
 				}
-
 				// 실패
 				if (result == 0) {
 					request.getSession().setAttribute("msgApproval", "처리 도중 오류가 발생했습니다. 다시 시도해주세요.");
@@ -98,7 +92,6 @@ public class TeacherApprovalDoController extends HttpServlet {
 					request.getSession().setAttribute("msgApproval", "승인 처리 되었습니다.");
 					response.sendRedirect(request.getHeader("referer"));
 				}
-
 			}
 		}
 	}

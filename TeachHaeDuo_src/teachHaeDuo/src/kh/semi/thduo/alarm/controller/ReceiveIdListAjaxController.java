@@ -48,12 +48,8 @@ public class ReceiveIdListAjaxController extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		System.out.println("받은 알람 아이디 리스트 컨트롤러 dopost");
-		// ajax로 데이터 보내기 위한 객체 생성
-		PrintWriter out = response.getWriter();
 		// 세션에 담긴 정보 가져오기
 		MemberVo vo = (MemberVo) request.getSession().getAttribute("ssMV");
-		// 사용할 변수 선언
-		String mNickname = "";
 
 		// 로그인이 안되어있다면
 		if (vo == null) {
@@ -62,11 +58,10 @@ public class ReceiveIdListAjaxController extends HttpServlet {
 			return;
 		} else {// 되어있다면
 			// 세션에서 받아온 정보 변수에 담기
-			mNickname = vo.getmNickname();
-			if (mNickname != null) {
-				System.out.println("받은 알람 서비스 호출 mNickname:" + mNickname);
+			if (vo.getmNickname() != null) {
+				System.out.println("받은 알람 서비스 호출 mNickname:" + vo.getmNickname());
 				// 서비스 호출
-				ArrayList<AlarmVo> result = new AlarmService().receiveIdList(mNickname);
+				ArrayList<AlarmVo> result = new AlarmService().receiveIdList(vo.getmNickname());
 				System.out.println("리스트 결과:" + result);
 				// 리턴값 세션에 저장
 				request.getSession().setAttribute("nicknameList", result);

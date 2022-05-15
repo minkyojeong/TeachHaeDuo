@@ -35,9 +35,6 @@ public class PencilChartController extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		System.out.println("doGet - pencilChart 페이지 이동");
-
-		// 관리자 세션 정보 받아오기
-		AdminVo aVo = (AdminVo) request.getSession().getAttribute("ssMV");
 		// 받아온 데이터값 변수에 넣기
 		String type = request.getParameter("type");
 		String numStr = request.getParameter("num");
@@ -52,6 +49,8 @@ public class PencilChartController extends HttpServlet {
 		}
 		System.out.println(type);
 		System.out.println(num);
+		// 관리자 세션 정보 받아오기
+		AdminVo aVo = (AdminVo) request.getSession().getAttribute("ssMV");
 		// 관리자 로그인이 안되어있다면
 		if (aVo == null) {
 			request.getSession().setAttribute("msgLogin", "로그인 먼저 해주세요");

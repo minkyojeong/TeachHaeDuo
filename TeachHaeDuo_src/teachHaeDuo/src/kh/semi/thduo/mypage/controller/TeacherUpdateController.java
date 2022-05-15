@@ -52,9 +52,8 @@ public class TeacherUpdateController extends HttpServlet {
 			response.sendRedirect("login");
 			return;
 		}
-		String mId = ssMV.getmId();
 		// 아이디 비밀번호 확인
-		MemberVo vo = new MemberService().login(mId, pw);
+		MemberVo vo = new MemberService().login(ssMV.getmId(), pw);
 
 		// 입력된 정보 다르다면
 		if (vo == null) {

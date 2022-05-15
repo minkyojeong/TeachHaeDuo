@@ -47,16 +47,18 @@ public class LikeListAjaxController extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		System.out.println("찜내역 컨트롤러 dopost");
+		// ajax로 데이터 넘겨주기 위한 객체 생성
 		PrintWriter out = response.getWriter();
+		// 로그인 여부 확인
 		MemberVo vo = (MemberVo)request.getSession().getAttribute("ssMV");
-		String s_no = "";
 		if(vo == null) {
 			response.sendRedirect("login");
 		} else {
-			s_no = vo.getsNo();
-			System.out.println("찜내역 서비스 호출 mNickname:" + s_no);
-			ArrayList<LikeVo> result = new LikeService().readLikeList(s_no);
+			// 넘겨줄 데이터 읽어오기, 서비스 호출
+			System.out.println("찜내역 서비스 호출 mNickname:" + vo.getsNo());
+			ArrayList<LikeVo> result = new LikeService().readLikeList(vo.getsNo());
 			System.out.println("리스트 결과:" + result);
+			// json에 담아 ajax로 넘겨줌
 			Gson gobj = new GsonBuilder().setPrettyPrinting().create();
 			String resStr = gobj.toJson(result);
 			out.println(resStr);

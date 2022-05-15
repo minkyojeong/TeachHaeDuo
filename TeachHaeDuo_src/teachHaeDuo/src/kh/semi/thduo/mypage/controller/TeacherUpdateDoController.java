@@ -49,6 +49,7 @@ public class TeacherUpdateDoController extends HttpServlet {
 		
 		// client가 입력한 데이터 가져올때 한글깨짐 방지
 		request.setCharacterEncoding("UTF-8");
+		// client가 입력한 데이터 받아오기
 		// 학력
 		String major = request.getParameter("major");
 		System.out.println("major :" + major);
@@ -129,11 +130,7 @@ public class TeacherUpdateDoController extends HttpServlet {
 		System.out.println("tSpecial: " + tSpecial);
 
 		// 사용할 변수 선언, 객체 선언
-		String tNo = null;
-		String mId = null;
 		int result = 0;
-		int balance = 0;
-		String profileYn = null;
 		PencilVo pVo = new PencilVo();
 		TeacherVo tVo = new TeacherVo();
 		// 로그인 여부 확인
@@ -143,19 +140,16 @@ public class TeacherUpdateDoController extends HttpServlet {
 			response.sendRedirect("login");
 			return;
 		}
-		// 변수 세팅
-		tNo = ssMV.gettNo();
-		mId = ssMV.getmId();
 
 		// 기존에 프로필 등록 여부 확인
-		profileYn = new TeacherService().checkProfile(tNo);
+		String profileYn = new TeacherService().checkProfile(ssMV.gettNo());
 		System.out.println("프로필 등록 여부: " + profileYn);
 
 		// 기존에 등록된 프로필이 없다면
 		if (profileYn.equals("N")) {
 			System.out.println("최초등록이야~");
 			// 잔액 확인
-			balance = new PencilService().checkPencil(mId);
+			int balance = new PencilService().checkPencil(ssMV.getmId());
 			System.out.println("잔액 확인:" + balance);
 			// 잔액이 모자라면
 			if (balance < 5000) {
@@ -163,7 +157,7 @@ public class TeacherUpdateDoController extends HttpServlet {
 				request.getRequestDispatcher("WEB-INF/view/mypage/mypageTeacher.jsp").forward(request, response);
 			} else { // 잔액이 충분하면
 				
-				// 변수 세팅
+				// vo 세팅
 				tVo.setOnline_yna(onlineYn);
 				tVo.setT_tcnt(tCnt);
 				tVo.setT_tprice(tPrice);
@@ -175,13 +169,13 @@ public class TeacherUpdateDoController extends HttpServlet {
 				pVo = new PencilVo();
 				pVo.setCpCash(-5000);
 				pVo.setCpContent("교습 정보 최초 등록");
-				pVo.setmId(mId);
+				pVo.setmId(ssMV.getmId());
 				
-				tVo.setT_no(tNo);
+				tVo.setT_no(ssMV.gettNo());
 				tVo.setT_major(major);
 				tVo.setT_intro(tIntro.replace("\r\n", "<br>"));
 
-				// 변수 가지고 서비스 호출
+				// 데이터 가지고 서비스 호출
 				System.out.println("컨트롤러 tVo :" + tVo);
 				result = new TeacherService().updateTeacher(tVo, pVo, objectArr, activeAreaArr);
 				// 실패
@@ -200,7 +194,7 @@ public class TeacherUpdateDoController extends HttpServlet {
 		} else if (profileYn.equals("Y")) {
 			System.out.println("등록된 교습정보있어~");
 			// 잔액 확인
-			balance = new PencilService().checkPencil(mId);
+			int balance = new PencilService().checkPencil(ssMV.getmId());
 			System.out.println("잔액 확인:" + balance);
 			// 잔액이 모자라면
 			if (balance < 500) {
@@ -221,9 +215,9 @@ public class TeacherUpdateDoController extends HttpServlet {
 				pVo = new PencilVo();
 				pVo.setCpCash(-500);
 				pVo.setCpContent("교습 정보 변경");
-				pVo.setmId(mId);
+				pVo.setmId(ssMV.getmId());
 				
-				tVo.setT_no(tNo);
+				tVo.setT_no(ssMV.gettNo());
 				tVo.setT_major(major);
 				tVo.setT_intro(tIntro.replace("\r\n", "<br>"));
 

@@ -60,8 +60,8 @@
 										<a href="teacherCertificate?file=${vo.getmCertificate()}">증명서 보기</a>
 									</td>
 									<td>
-										<a id="ok_btn" href="teacherApproval.do?tNoOk=${vo.gettNo()}&nickname=${vo.getmNickname()}&mId=${vo.getmId()}">승인</a>
-										<a id="no_btn"  href="teacherApproval.do?tNoNo=${vo.gettNo()}&nickname=${vo.getmNickname()}&mId=${vo.getmId()}">비승인</a>
+										<a class="ok_btn" href="teacherApproval.do?tNoOk=${vo.gettNo()}&nickname=${vo.getmNickname()}&mId=${vo.getmId()}">승인</a>
+										<a class="no_btn"  href="teacherApproval.do?tNoNo=${vo.gettNo()}&nickname=${vo.getmNickname()}&mId=${vo.getmId()}">비승인</a>
 									</td>
 								</tr>
 								</c:forEach>
@@ -80,7 +80,7 @@ $(function(){
 		location.replace("teacherApprovalList");
 	}
 	
-	$("#ok_btn").click(function(e){
+	$(".ok_btn").click(function(e){
 		var confm = confirm("승인처리 하시겠습니까?");
 		if (confm == false) {
 			preventClick(e);
@@ -88,7 +88,7 @@ $(function(){
 			location.replace("teacherApprovalList");
 		} 
 	});
-	$("#no_btn").click(function(e){
+	$(".no_btn").click(function(e){
 		var confm = confirm("비승인처리 하시겠습니까?");
 		if (confm == false) {
 			preventClick(e);

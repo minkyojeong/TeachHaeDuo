@@ -42,19 +42,18 @@ public class MemberUpdateContoller extends HttpServlet {
 		
 		// 로그인 상태 확인
 		MemberVo ssMV = (MemberVo)request.getSession().getAttribute("ssMV");
-		String mId = ssMV.getmId();
-		if(mId == null) {
+		if(ssMV.getmId() == null) {
 			request.getSession().setAttribute("msgLogin", "로그인 먼저 해주세요");
 			response.sendRedirect("login");
 			return;
 		}
 		// 아이디 비밀번호 확인
-		MemberVo vo = new MemberService().login(mId, pw);
+		MemberVo vo = new MemberService().login(ssMV.getmId(), pw);
 		
 		// 입력한 정보가 다르다면
 		if(vo == null) {
 			request.getSession().setAttribute("msgPw", "비밀번호가 틀렸습니다. 다시 로그인해주세요");
-			response.sendRedirect("memberUpdateLogin"); // memberUpdateLogin.jsp 이동하게 하는 컨트롤러 url매핑
+			response.sendRedirect("memberUpdateLogin"); 
 		} else { // 입력한 정보가 맞다면
 			request.getRequestDispatcher("WEB-INF/view/mypage/memberUpdate.jsp").forward(request, response);
 		}

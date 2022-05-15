@@ -52,8 +52,6 @@ public class AllAlarmListAjaxContoller extends HttpServlet {
 		PrintWriter out = response.getWriter();
 		// 세션에 담긴 정보 가져오기
 		MemberVo vo = (MemberVo) request.getSession().getAttribute("ssMV");
-		// 사용할 변수 선언
-		String mNickname = null;
 
 		// 로그인이 안되어있다면
 		if (vo == null) {
@@ -61,13 +59,10 @@ public class AllAlarmListAjaxContoller extends HttpServlet {
 			response.sendRedirect("login");
 			return;
 		} else { // 로그인이 되어있다면
-
-			// 세션에서 담아온 정보 변수에 담기
-			mNickname = vo.getmNickname();
-			System.out.println("전체알람 서비스 호출 mNickname:" + mNickname);
-			if (mNickname != null) {
+			System.out.println("전체알람 서비스 호출 mNickname:" + vo.getmNickname());
+			if (vo.getmNickname() != null) {
 				// 서비스 호출
-				ArrayList<AlarmVo> voList = new AlarmService().allListAlarm(mNickname);
+				ArrayList<AlarmVo> voList = new AlarmService().allListAlarm(vo.getmNickname());
 				System.out.println("리스트 결과:" + voList);
 				if (voList != null) {
 //					// 리턴 값을 gson에 담아 ajax에 넘기기
@@ -84,9 +79,7 @@ public class AllAlarmListAjaxContoller extends HttpServlet {
 					out.close();
 				}
 			}
-
 		}
-
 	}
 
 }
