@@ -60,7 +60,7 @@ public class MemberJoinEmailAjaxController extends HttpServlet {
 
 		// ajax로 들어옴
 		PrintWriter out = response.getWriter();
-		// 비밀번호찾기
+		// 
 		String mEmail = request.getParameter("mEmail");
 		
 		// 인증 번호 생성기

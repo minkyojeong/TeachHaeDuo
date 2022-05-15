@@ -66,15 +66,15 @@
                               
                             if(result == "empty"){
                                  $("#id_content").html("<p>회원정보가 없습니다.</p>");
-                                 location.href = "findpw.jsp";
+                               
                                  
                             } else if (result == "success"){
                                  $("#id_content").html("<p>임시 비밀번호가 메일로 전송 되었습니다. </p>");
-                                   location.href = "login.jsp";
-                                
+                                  // location.href = "login";
+                               
                             } else{
                                  $("#id_content").html("<p>임시 비밀번호가 메일로 전송 실패되었습니다. </p>");
-                                 location.href = "findpw.jsp";
+                                 //location.href = "findpw";
                             }
                               $(".modal").show();
                           },
