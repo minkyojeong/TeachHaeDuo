@@ -26,11 +26,14 @@
             <section>
                 <div id="IdFind">
                     <div class="modal">
-                        <div class="modal_content">
-                                <div class="btn_close"><button>닫기</button></div>
-                                <div id="id_content">
-                                
+                        <div class="message_content">
+                             <p class="modal_title">아이디 찾기</p> 
+                                 <div id="id_content">
+	                                
                                  </div>
+                                 <div class="message_send">
+									   <button type="button" class="btn_close">닫기</button>
+				                 </div>
                         </div>
                     </div>
                     <div class="card align-middle" style="width:25rem;">

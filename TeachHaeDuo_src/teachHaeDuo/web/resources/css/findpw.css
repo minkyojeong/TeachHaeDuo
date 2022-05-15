@@ -11,16 +11,50 @@
 	background-color: rgba(128, 128, 128, .9);
 }
 
-.modal>.modal_content {
-	position: relative;
-	top: 100px;
-	margin: auto;
-	width: 200px;
-	background-color: white;
-	padding: 20px;
+
+.modal > .message_content {
+    position: relative;
+    top: 100px;
+    margin: auto;
+    width: 400px;
+    height:150px;
+    background-color: #fffaf5;
+    border-radius: 10px;
+    padding: 10px;
+    font-family: MinSans-Medium;
+    cursor: default;
 }
 
-    section{
+.btn_close {
+    border: none;
+    cursor: pointer;
+    float: right;
+    color:  #FA9D00;
+    padding: 10px;
+    background-color: transparent;
+    font-family: MinSans-Bold;
+    font-size: 15px;
+ }
+ 
+ .modal_title {
+    font-family: MinSans-Bold;
+    color: #5e5e5e;
+    font-size: 20px;
+}
+.message_content .message_send {
+    margin-top: 10px;
+}
+
+ section #id_content {
+            border: 1px solid rgb(165, 161, 161);
+            padding: 20px;
+            text-align: center;
+            color: #495057;
+            border: none;
+       
+        }
+
+  section{
             width:100%;
             margin: 0;
               padding-top: 200px ;
@@ -153,6 +187,7 @@
     section .check{
             color : red;
     }
+    
     section .modal_content> p {
             border: 1px solid rgb(165, 161, 161);
             padding: 10px;

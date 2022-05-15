@@ -2,18 +2,59 @@
 
 .modal {
     display: none;
-    position: fixed; top: 0; left: 0; 
-    width: 100%; height: 100%;
+    position: fixed; 
+    top: 0; 
+    left: 0; 
+    width: 100%; 
+    height: 100%;
     z-index: 1;
     background-color: rgba(128, 128, 128, .9);
 }
- .modal > .modal_content {
-    position: relative;  top:100px;
+
+.modal > .message_content {
+    position: relative;
+    top: 100px;
     margin: auto;
     width: 400px;
-    background-color: white;
-    padding: 20px;
+    height:150px;
+    background-color: #fffaf5;
+    border-radius: 10px;
+    padding: 10px;
+    font-family: MinSans-Medium;
+    cursor: default;
+   
 }
+.btn_close {
+    border: none;
+    cursor: pointer;
+    float: right;
+    color:  #FA9D00;
+    padding: 10px;
+    background-color: transparent;
+    font-family: MinSans-Bold;
+    font-size: 15px;
+ }
+ 
+ .modal_title {
+    font-family: MinSans-Bold;
+    color: #5e5e5e;
+    font-size: 20px;
+}
+.message_content .message_send {
+    margin-top: 10px;
+}
+
+
+ section #id_content {
+            border: 1px solid rgb(165, 161, 161);
+            padding: 20px;
+            text-align: center;
+            color: #495057;
+            border: none;
+       
+        }
+
+
 
     section{
             width:100%;
@@ -144,12 +185,6 @@
     section .check{
             color : red;
     }
-   section #id_content {
-            border: 1px solid rgb(165, 161, 161);
-            padding: 20px;
-            text-align: center;
-            color: #495057;
-       
-        }       
+         
     
    

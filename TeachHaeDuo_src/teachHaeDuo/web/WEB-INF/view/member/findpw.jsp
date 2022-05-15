@@ -25,13 +25,17 @@
             <section>
                 <div id="PwFind">
                     <div class="modal">
-                        <div class="modal_content">
-                            <div class="btn_close"><button>닫기</button></div>
                     
-                               <div id="id_content">
-                                 
-                               </div>
+                        <div class="message_content">
+                              <p class="modal_title">비밀번호 재설정 </p>                                                                     
+	                               <div id="id_content">
+	                               
+	                               </div>
+                               <div class="message_send">
+								   	<button type="button" class="btn_close">닫기</button>
+			                  </div>
                         </div>
+                        
                     </div>
                     <div class="card align-middle" style="width:25rem;">        
                         <div>
@@ -61,12 +65,16 @@
                             console.log(result);
                               
                             if(result == "empty"){
-                                 $("#id_content").html("<p>회원정보가 없습니다.</p>  비밀번호 찾기");
-                            } else if (result == "success"){
-                                 $("#id_content").html("<p>임시 비밀번호가 메일로 전송 되었습니다. </p> 로그인 페이지 이동");
+                                 $("#id_content").html("<p>회원정보가 없습니다.</p>");
+                                 location.href = "findpw.jsp";
                                  
+                            } else if (result == "success"){
+                                 $("#id_content").html("<p>임시 비밀번호가 메일로 전송 되었습니다. </p>");
+                                   location.href = "login.jsp";
+                                
                             } else{
-                                 $("#id_content").html("<p>임시 비밀번호가 메일로 전송 실패되었습니다. </p>  비밀번호 찾기 페이지");
+                                 $("#id_content").html("<p>임시 비밀번호가 메일로 전송 실패되었습니다. </p>");
+                                 location.href = "findpw.jsp";
                             }
                               $(".modal").show();
                           },
