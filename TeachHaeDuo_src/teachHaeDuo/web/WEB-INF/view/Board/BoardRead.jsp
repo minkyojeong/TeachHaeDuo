@@ -109,7 +109,7 @@ ArrayList<BoardReCommentVo> rvolist = (ArrayList<BoardReCommentVo>)request.getAt
 					<td width=40 style="word-break:break-all"><%= rvo.getrWriteDate().substring(0,10) %></td>
 					<td width=200 style="word-break:break-all"><%= rvo.getrContent() %></td>
 						<%if( ssId.equals(vo.getbWriter()))  { %>
-					<td><button type="button" onclick="location.href='BoardReCommentDelete?bno=<%= vo.getbNo() %>&rno=<%= rvo.getrNo() %>'">삭제</button>
+					<td width=40 style="word-break:break-all"><button type="button" onclick="location.href='BoardReCommentDelete?bno=<%= vo.getbNo() %>&rno=<%= rvo.getrNo() %>'">삭제</button>
 					<%} %>
 				</tr>
 				<tr>

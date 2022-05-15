@@ -53,17 +53,21 @@ textarea{width:500px; height:100px;
 	<jsp:include page="../template_header.jsp"></jsp:include>
 		<div class="wrap_container">
       		<form action="BoardWriteDo" method="post" >
-      		<div>
+      		<div style="height:35px; margin-bottom:10px;">
       			<input type="text" name="bTitle" maxlength="100" required placeholder="제목" style="width:900px; height:30px;float:left;margin-right:10px;">
        			<select name="bCategory" style="width:190px; height:30px;margin-bottom:10px; float:right;">
         			<option>학습 질문하기</option>
         			<option>자유게시판</option>
         		</select>
         	</div>
-            	<textarea name="editor1" id="editor1" rows="10" cols="80" style="width:1100px;height:300px;resize:none;" placeholder="여기에 작성하세요." maxlength="2048">               
+            	<textarea name="editor1" id="editor1" rows="10" cols="80" style="width:1100px;height:300px;margin-top:20px;" placeholder="여기에 작성하세요." maxlength="2048">               
             	</textarea>
             	<script>
-            	CKEDITOR.replace('editor1');
+            	CKEDITOR.replace('editor1',{
+            		width : '1100px',
+            	      height : '300px',  // 입력창의 높이
+            	      startupFocus : false
+            	});
             	</script>
             	<div style="text-align:center">
             		<button type="submit" style="width:50px;height:25px; text-align:center; margin-left:5px;margin-top:10px;">제출</button>

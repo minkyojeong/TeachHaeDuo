@@ -1,110 +1,29 @@
+
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
     <%@page import="kh.semi.thduo.admin.vo.AdminVo"%>
     <link href="<%=request.getContextPath()%>/resources/css/header.css"
 	rel="stylesheet" type="text/css">
 	<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+	<link href="<%=request.getContextPath()%>/resources/css/header.css"
+rel="stylesheet" type="text/css">
+<link href="<%=request.getContextPath()%>/resources/css/footer.css" rel="stylesheet" type="text/css">
+<link href="<%=request.getContextPath()%>/resources/css/font.css" rel="stylesheet" type="text/css">
+<link href="<%=request.getContextPath()%>/resources/css/reset.css" rel="stylesheet" type="text/css">
+<link href="<%=request.getContextPath()%>/resources/css/common.css" rel="stylesheet" type="text/css">
+	
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
-    <script>
-        $(function(){
-         $('#cs_box_n').hide();
-         $('#cs_box_q').hide();
-         $('#cs_box_email').hide();
-         $('#questionBoard').hide();
-         $('#questionBoard1').hide();
-         $('#FaqDel').hide();
-         $('#NoticeDel').hide();
-        })
-        $(document).ready(function() {
-     $('#cs_select_option').change(function() {
-       var result = $('#cs_select_option option:selected').val();
-       if (result == 'option1') {
-         $('#cs_box_q').show();
-         $('#questionBoard').show();
-         $('#FaqDel').show();
-       } else {
-         $('#cs_box_q').hide();
-         $('#questionBoard').hide();
-         $('#FaqDel').hide();
-       }
-     }); 
-   }); 
-      $(document).ready(function() {
-        $('#cs_select_option').change(function() {
-       var result = $('#cs_select_option option:selected').val();
-       if (result == 'option2') {
-         $('#cs_box_n').show();
-         $('#questionBoard1').show();
-         $('#NoticeDel').show();
-       } else {
-         $('#cs_box_n').hide();
-         $('#questionBoard1').hide();
-         $('#NoticeDel').hide();
-       }
-     }); 
-   }); 
-   $(document).ready(function() {
-        $('#cs_select_option').change(function() {
-       var result = $('#cs_select_option option:selected').val();
-       if (result == 'option3') {
-         $('#cs_box_email').show();
-       } else {
-         $('#cs_box_email').hide();
-       }
-     }); 
-   }); 
-       </script>
-    <style>
-        html, body, div, span, applet, object, iframe,
-h1, h2, h3, h4, h5, h6, p, blockquote, pre,
-a, abbr, acronym, address, big, cite, code,
-del, dfn, em, img, ins, kbd, q, s, samp,
-small, strike, strong, sub, sup, tt, var,
-b, u, i, center,
-dl, dt, dd, ol, ul, li,
-fieldset, form, label, legend,
-table, caption, tbody, tfoot, thead, tr, th, td,
-article, aside, canvas, details, embed, 
-figure, figcaption, footer, header, hgroup, 
-menu, nav, output, ruby, section, summary,
-time, mark, audio, video {
-	margin: 0;
-	padding: 0;
-	border: 0;
-	font-size: 100%;
-	font: inherit;
-	vertical-align: baseline;
-}
-/* HTML5 display-role reset for older browsers */
-article, aside, details, figcaption, figure, 
-footer, header, hgroup, menu, nav, section {
-	display: block;
-}
-body {
-	line-height: 1;
-}
-ol, ul {
-	list-style: none;
-}
-blockquote, q {
-	quotes: none;
-}
-blockquote:before, blockquote:after,
-q:before, q:after {
-	content: '';
-	content: none;
-}
-table {
-	border-collapse: collapse;
-	border-spacing: 0;
-}
+
+<style>
 .cs_container{
     width:100%;
+	text-align:center;
+	height:100%;
     
     
 }
@@ -123,6 +42,7 @@ table {
 h1{
     margin-top:100px;
     font-size:30px;
+    font-weight:550;
     float:left;
 }
 .cs_select{
@@ -148,10 +68,11 @@ padding:3px;
 }
 #cs_box_q{
     width:1100px;
-    height:400px;
+    height:300px;
     border-radius:5px;
     border:1px solid rgb(165, 165, 165);
     position:relative;
+    margin-bottom:30px;
 }
 
 #cs_box_n{
@@ -163,15 +84,17 @@ padding:3px;
 }
 .cs_q{
     width:1000px;
-    height:200px;;
+    height:100px;;
     margin: 0 auto;
     display:block;
     border-bottom: 1px solid rgb(174,174,174);
 }
 .cs_q_q{
+font-weight:500;
+margin-top:30px;
     float:left;
     padding:10px;
-    font-size: 20px;
+    font-size: 25px;
 }
 .cs_a{
    width:1000px;
@@ -179,6 +102,7 @@ padding:3px;
     margin: 0 auto;
 }
 .cs_q_a{
+margin-top:20px;
     float:left;
     padding:10px;
     font-size: 20px;
@@ -247,10 +171,29 @@ margin:10px;
 .bt:hover{
 	background:rgb(220,220,220);
 }
+.CsDiv{
+    width:900px;
+    height:50px;
+    margin:10px;
+    border-radius:5px;
+    border:2px solid rgb(165, 165, 165);
+    position:relative;
+    text-align: center;
+    background:#FA9D00;
+    line-decoration:none;
+    padding-top:30px;
+}
+.CsDiv>a{
+color:black;
+font-size: 30px;
+}
+.CsDiv:hover{
+background:
+#e49103;
+}
     </style>
 </head>
 <body>
-
 	 <div class="cs_container">
 	 <jsp:include page="../template_header.jsp"></jsp:include>
         <div class="cs_section">
@@ -259,54 +202,18 @@ margin:10px;
                 <h1>고객센터</h1>
             </div>
             <div class="cs_select">
-                <select id="cs_select_option">
-                    <option value="option4">카테고리 선택</option>
-                    <option value="option1">자주 묻는 질문</option>
-                    <option value="option2">공지사항</option>
-                    <option value="option3">1대1 문의</option>
-                </select>
-            </div>
-            <div class="write" id="questionBoard" onclick = "location.href='CsFaqWrite'">
-				<a href="CsFaqWrite" id="question">자주묻는 질문 글 쓰기</a>
-			</div>
-			<div class="write" id="questionBoard1" onclick = "location.href='CsNoticeWrite'">
-				<a href="CsNoticeWrite" id="question1">공지사항 글 쓰기</a>
-			</div>
-            <div class="cs_body">
-            	<c:forEach items="${csvo }" var="cvo">
-                <div id="cs_box_q">
-                <button type="button" class="bt" id="FaqDel" onclick="location.href='CsFaqDelete'">삭제</button>
-                    <div class="cs_q">
-                        <p class="cs_q_q">${cvo.getFaqQuestion()}</p>
-                      
-                    </div>
-                    <div class="cs_a">
-                        <p class="cs_q_a">${cvo.getFaqAnswer()}</p>
-                    </div>
-                </div>
-                </c:forEach>
-                <c:forEach items="${ vo }" var="vo">
-                <div id="cs_box_n">
-                <button type="button" class="bt" id="NoticeDel" onclick="location.href='CsNoticeDelete'">삭제</button>
-                    <div class="cs_n_title">
-                      <p style="padding:10px;float:right;">${vo.getNoticeContent()}</p>
-                    </div>
-                    <div class="cs_n">
-                        <p class="cs_n_n"></p>
-                    </div>
-                </div>
-                </c:forEach>
-                <div id="cs_box_email">
-                    <div id="cs_e">
-                    <br><br><br><br>
-                        <p>1 대 1 문의사항은 아래의 이메일로 보내주시면</p><br><br>
-                        <p>성실하게 답변 드리겠습니다</p><br><br>
-                        <a href="mailto:ig476363@gmail.com">ig476363@gmail.com</a>
-                      
-                    </div>
-                </div>
                 
-
+            </div>
+            <div class="cs_body" id="cs_body">
+            <div class="CsDiv" onclick="location.href='CsNoticeMain'" style="cursor:pointer;">
+            <a href="CsNoticeMain">공지사항</a>
+            </div>
+            <div class="CsDiv" onclick="location.href='CsFaqMain'" style="cursor:pointer;">
+            <a href="CsFaqMain">자주 묻는 질문</a>
+            </div>
+            <div class="CsDiv" onclick="location.href='${pageContext.request.contextPath}/CsOne.jsp'" style="cursor:pointer;">
+           	<a href="${pageContext.request.contextPath}/CsOne.jsp">1 대 1 문의</a> 
+            </div>
             </div>
         </div>
         </div>

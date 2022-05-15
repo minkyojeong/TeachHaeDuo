@@ -8,8 +8,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import kh.semi.thduo.admin.vo.AdminVo;
 import kh.semi.thduo.cs.service.CsService;
-import kh.semi.thduo.member.vo.MemberVo;
 
 /**
  * Servlet implementation class CsFaqDeleteController
@@ -32,10 +32,11 @@ public class CsFaqDeleteController extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		String faqNo = request.getParameter("faqno");
-		MemberVo ssvo = (MemberVo)request.getSession().getAttribute("ssMV");
-		if(ssvo == null)  {  
+		AdminVo ssvo = (AdminVo)request.getSession().getAttribute("ssMV");
+		if(ssvo == null)  {  // 로그아웃 상태라면 login 페이지로 진입
 			response.sendRedirect("login");
-		}else {
+			return;
+		} else { 
 			int result = new CsService().csFaqDelete(faqNo);
 			 if(result <1) {
 				 response.sendRedirect("error");
@@ -43,8 +44,9 @@ public class CsFaqDeleteController extends HttpServlet {
 					response.sendRedirect("CsMain.jsp");
 			 }
 		}
+		}
 		
-	}
+	
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)

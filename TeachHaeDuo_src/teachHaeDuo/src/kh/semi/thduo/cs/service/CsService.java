@@ -11,16 +11,29 @@ import kh.semi.thduo.cs.vo.CsVo;
 
 public class CsService {
 
-	public ArrayList<CsVo> csFaqList(){
+	public ArrayList<CsVo> csFaqList(int startRnum, int endRnum){
 		Connection conn = null;
 		conn = getConnection();
-		ArrayList<CsVo> csvo = new CsDao().csFaqList(conn);
+		ArrayList<CsVo> csvo = new CsDao().csFaqList(conn,startRnum,endRnum);
 		close(conn);
 		return csvo;
 		
 		
 	}
-	
+	public int csFaqCount() {
+		Connection conn=null;
+		conn = getConnection();
+		int result = new CsDao().faqCount(conn);
+		close(conn);
+		return result;
+	}
+	public int csNoticeCount() {
+		Connection conn=null;
+		conn = getConnection();
+		int result = new CsDao().noticeCount(conn);
+		close(conn);
+		return result;
+	}
 	public int csFaqWrite(String faqQuestion, String faqAnswer, String adminId) {
 		Connection conn = null;
 		conn = getConnection();
@@ -36,10 +49,10 @@ public class CsService {
 		close(conn);
 		return result;
 	}
-	public ArrayList<CsVo> csNoticeList(){
+	public ArrayList<CsVo> csNoticeList(int startRnum, int endRnum){
 		Connection conn = null;
 		conn = getConnection();
-		ArrayList<CsVo> csvo = new CsDao().csNoticeList(conn);
+		ArrayList<CsVo> csvo = new CsDao().csNoticeList(conn,startRnum, endRnum);
 		close(conn);
 		return csvo;
 		

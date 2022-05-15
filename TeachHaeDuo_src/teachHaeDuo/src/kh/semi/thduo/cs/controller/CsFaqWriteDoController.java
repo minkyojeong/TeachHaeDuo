@@ -43,7 +43,7 @@ public class CsFaqWriteDoController extends HttpServlet {
 				adminid = advo.getAdminId();
 				int result = new CsService().csFaqWrite(question, answer, adminid);
 				if(result<1) {
-					System.out.println("null-error");
+					response.sendRedirect("login");
 				}else {
 					request.getRequestDispatcher("CsMain").forward(request, response);
 				}

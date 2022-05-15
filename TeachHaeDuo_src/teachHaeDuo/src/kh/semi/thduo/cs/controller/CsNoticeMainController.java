@@ -9,24 +9,20 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import kh.semi.thduo.admin.vo.AdminVo;
-import kh.semi.thduo.board.service.BoardService;
-import kh.semi.thduo.board.vo.BoardVo;
 import kh.semi.thduo.cs.service.CsService;
 import kh.semi.thduo.cs.vo.CsVo;
-import kh.semi.thduo.member.vo.MemberVo;
 
 /**
- * Servlet implementation class CsMainController
+ * Servlet implementation class CsNoticeMainController
  */
-@WebServlet("/CsMain")
-public class CsMainController extends HttpServlet {
+@WebServlet("/CsNoticeMain")
+public class CsNoticeMainController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public CsMainController() {
+    public CsNoticeMainController() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -34,7 +30,7 @@ public class CsMainController extends HttpServlet {
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 int currentPage = 1;
 		
@@ -54,7 +50,7 @@ int currentPage = 1;
 		int entRnum=0;
 		
 		int totalCnt = 0; // 총 글 수
-		totalCnt = new CsService().csFaqCount();
+		totalCnt = new CsService().csNoticeCount();
 		
 		System.out.println("총"+totalCnt);
 		// select count(*) from board
@@ -80,15 +76,13 @@ int currentPage = 1;
 			entRnum = totalCnt;
 		}
 		System.out.println("rnum:"+ startRnum +"~"+entRnum);
-		ArrayList<CsVo> csvo = new CsService().csFaqList(startRnum, entRnum);
-		//ArrayList<CsVo> vo = new CsService().csNoticeList();
+		ArrayList<CsVo> csvo = new CsService().csNoticeList(startRnum, entRnum);
 		request.setAttribute("csvo", csvo);
-		//request.setAttribute("vo", vo);
 		request.setAttribute("startPage", startPage);
 		request.setAttribute("endPage", endPage);
 		request.setAttribute("currentPage", currentPage);
 		request.setAttribute("totalPageCnt", totalPageCnt);
-		request.getRequestDispatcher("WEB-INF/view/Cs/CsMain.jsp").forward(request, response);
+		request.getRequestDispatcher("WEB-INF/view/Cs/CsNoticeMain.jsp").forward(request, response);
 	}
 	
 
