@@ -6,6 +6,7 @@ section{
 }
  #memberList table.member-tableAll {
     width: 100%;
+    width: 1410px;
 	border-top: 1px solid #444444;
 	border-collapse: collapse;
 	text-align: center;

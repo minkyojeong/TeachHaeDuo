@@ -1,6 +1,7 @@
 @charset "UTF-8";
 .adminList{
-           height: 600px;
+	       padding-top: 10px;
+           height: 400px;
            background-color: #fed08b;
             border-radius: 10px;
            float: left;
