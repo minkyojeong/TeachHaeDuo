@@ -94,7 +94,9 @@ public class MemberJoinController extends HttpServlet {
 		System.out.println("client파일명"+multi.getParameter("joinupload"));   // 업로드한 클라이언트 pc에 있던 파일명
 		String fileName = multi.getFilesystemName("joinupload");   // 서버에 업로드한 파일명
 		System.out.println("서버 저장 파일명"+ fileName);
-		String mCertificate = fileSavePath + "/" +fileName;
+//		String mCertificate = fileSavePath + "/" +fileName;
+//		memberVo.setmCertificate(mCertificate);
+		String mCertificate = multi.getParameter("fileUrl");
 		memberVo.setmCertificate(mCertificate);
 
 

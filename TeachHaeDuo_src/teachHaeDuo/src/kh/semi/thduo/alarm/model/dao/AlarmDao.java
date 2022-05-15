@@ -43,13 +43,14 @@ public class AlarmDao {
 	public ArrayList<AlarmVo> sendListAlarm(Connection conn, String mNickname){
 		ArrayList<AlarmVo> voList = null;
 		// 최근 30일 조회
-		String sql = "select a.alarm_content, a.alarm_date,a.ALARM_sendID, a.ALARM_RECEIVEID,t.t_no from alarm a join member m on a.ALARM_RECEIVEID = m.m_nickname left outer join t_profile t on t.m_id = m.m_id where alarm_sendid = ? and alarm_date between (sysdate-30) and sysdate order by alarm_date desc";
-		
+		String sql = "select a.alarm_content, a.alarm_date,a.ALARM_sendID, a.ALARM_RECEIVEID,t.t_no "
+				+ "from alarm a join member m on a.ALARM_RECEIVEID = m.m_nickname "
+				+ "left outer join t_profile t on t.m_id = m.m_id where alarm_sendid = ? "
+				+ "and alarm_date between (sysdate-30) and sysdate order by alarm_date desc";
 		try {
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, mNickname);
 			rs = pstmt.executeQuery();
-			
 			if(rs != null) {
 				voList = new ArrayList<AlarmVo>();
 				while(rs.next()) {
@@ -61,16 +62,13 @@ public class AlarmDao {
 					vo.setT_no(rs.getString("t_no"));
 					voList.add(vo);
 				}
-				
 			}
 		} catch (SQLException e) {
-			
 			e.printStackTrace();
 		} finally {
 			close(rs);
 			close(pstmt);
 		}
-		
 		return voList;
 	}
 	
@@ -103,13 +101,14 @@ public class AlarmDao {
 	//받은 알람 리스트
 	public ArrayList<AlarmVo> receiveListAlarm(Connection conn, String mNickname){
 		ArrayList<AlarmVo> voList = null;
-		String sql = "select a.alarm_content, a.alarm_date,a.ALARM_sendID, a.ALARM_RECEIVEID,t.t_no from alarm a join member m on a.ALARM_RECEIVEID = m.m_nickname left outer join t_profile t on t.m_id = m.m_id where alarm_receiveid = ? and alarm_date between (sysdate-30) and sysdate order by alarm_date desc";
-		
+		String sql = "select a.alarm_content, a.alarm_date,a.ALARM_sendID, a.ALARM_RECEIVEID,t.t_no "
+				+ "from alarm a join member m on a.ALARM_RECEIVEID = m.m_nickname "
+				+ "left outer join t_profile t on t.m_id = m.m_id where alarm_receiveid = ? "
+				+ "and alarm_date between (sysdate-30) and sysdate order by alarm_date desc";
 		try {
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, mNickname);
 			rs = pstmt.executeQuery();
-			
 			if(rs != null) {
 				voList = new ArrayList<AlarmVo>();
 				while(rs.next()) {
@@ -121,14 +120,12 @@ public class AlarmDao {
 					vo.setT_no(rs.getString("t_no"));
 					voList.add(vo);
 				}
-				
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
 			close(pstmt);
 		}
-		
 		return voList;
 	}
 	
@@ -159,14 +156,15 @@ public class AlarmDao {
 	// 모든 알람 리스트
 	public ArrayList<AlarmVo> allListAlarm(Connection conn, String mNickname){
 		ArrayList<AlarmVo> voList = null;
-		String sql = "select a.alarm_content, a.alarm_date,a.ALARM_sendID, a.ALARM_RECEIVEID,t.t_no from alarm a join member m on a.ALARM_RECEIVEID = m.m_nickname left outer join t_profile t on t.m_id = m.m_id where alarm_receiveid = ? or alarm_sendid=? order by alarm_date desc";
-		
+		String sql = "select a.alarm_content, a.alarm_date,a.ALARM_sendID, a.ALARM_RECEIVEID,t.t_no "
+				+ "from alarm a join member m on a.ALARM_RECEIVEID = m.m_nickname "
+				+ "left outer join t_profile t on t.m_id = m.m_id where alarm_receiveid = ? or alarm_sendid=? "
+				+ "order by alarm_date desc";
 		try {
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, mNickname);
 			pstmt.setString(2, mNickname);
 			rs = pstmt.executeQuery();
-			
 			if(rs != null) {
 				voList = new ArrayList<AlarmVo>();
 				while(rs.next()) {
@@ -178,15 +176,12 @@ public class AlarmDao {
 					vo.setT_no(rs.getString("t_no"));
 					voList.add(vo);
 				}
-				
 			}
 		} catch (SQLException e) {
-			
 			e.printStackTrace();
 		} finally {
 			close(pstmt);
 		}
-		
 		return voList;
 	}
 	
@@ -201,7 +196,6 @@ public class AlarmDao {
 		} else { // 원래 수신거부 여부 N 였다면
 			sql = "update member set M_ALARM_YN = " + "'Y' where m_id =? ";
 		}
-		
 		if(sql != "") {
 			try {
 				pstmt = conn.prepareStatement(sql);

@@ -18,6 +18,7 @@
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src="${pageContext.request.contextPath}/resources/js/mypageTeacher.js"></script>
 <script src="https://ucarecdn.com/libs/widget/3.x/uploadcare.full.min.js"></script>
+
 </head>
 <body>
 <% MemberVo ssMV = (MemberVo)request.getSession().getAttribute("ssMV"); %>
@@ -44,7 +45,8 @@
                             </p>
                         </div>
                         <div class="nickname_div">
-                            <input type="hidden" role="uploadcare-uploader" data-public-key="43cc829c5d2fae8676a5" data-tabs="file gdrive gphotos"/>
+                            <input type="hidden" role="uploadcare-uploader" 
+                            data-public-key="43cc829c5d2fae8676a5" data-tabs="file gdrive gphotos"/>
                             <br>
                             <p style="color:red; font-size:13px;">*파일은 jpg,png파일만 가능합니다.</p>
                         </div>
@@ -231,17 +233,11 @@
 $("#p_won").click(function() {
 	$("#won_modal").show();
 	console.log("잔액 클릭");
-	
 	$.ajax({
 		url: "listPencil.ax",
 		type: "post",
 		dataType: "json",
 		success: function(result) {
-			console.log(result);
-			console.log(result[0]);
-
-			console.log(result.alarm_receiveid);
-			console.log(result.length);
 			var html = "";
 			for (var i = 0; i < result.length; i++) {
 				var vo = result[i];
@@ -255,32 +251,22 @@ $("#p_won").click(function() {
 				html += '<td>' + vo.cpContent + '</td>';
 				html += '<td>' + vo.cpDate + '</td>';
 				html += '</tr>';
-
 				console.log("html:" + html);
-
 			}
 			$("#won_table_tr1").nextAll().remove();
 			$("#won_table").append(html);
 		},
-		error: function() {
-
-		}
 	});
 });
 
+// 연락 요청 받은 내역
 $("#p_receive_alarm").on("click", function() {
 	$("#receive_alarm_modal").show();
-
 	$.ajax({
 		url: "receiveAlarmList.ax",
 		type: "post",
 		dataType: "json",
 		success: function(result) {
-			console.log(result);
-			console.log(result[0]);
-
-			console.log(result.alarm_receiveid);
-			console.log(result.length);
 			var html = "";
 			for (var i = 0; i < result.length; i++) {
 				var vo = result[i];
@@ -289,43 +275,33 @@ $("#p_receive_alarm").on("click", function() {
 				html += '<td>' + vo.alarm_sendid + '</td>';
 				html += '<td>' + vo.alarm_date + '</td>';
 				html += '</tr>';
-
-				console.log("html:" + html);
-
 			}
 			$("#receive_alarm_table_tr1").nextAll().remove();
 			$("#receive_alarm_table").append(html);
 		},
-		error: function() {
-
-		}
 	});
 });
+
 var msgRecruitVal = '${msgRecruit}';
 if(msgRecruitVal != "" && msgRecruitVal != null){
 	alert('${msgRecruit}');
 	location.href="mypage";
 }
-	
 var msgAlarmVal = '${msgAlarm}';
 if(msgAlarmVal != "" && msgAlarmVal != null){
 	alert('${msgAlarm}');
 	location.replace("mypage");
 }
-	
 var msgChargeVal = '${msgCharge}';
 if(msgChargeVal != "" && msgChargeVal != null){
 	alert('${msgCharge}');
 	location.replace("mypage");
 }
-
 var msgUpdateVal = '${msgUpdate}';
 if(msgUpdateVal != "" && msgUpdateVal != null){
 	alert('${msgUpdate}');
 	location.href="mypage";
 }
-
-
 var msgTeacherUpdateVal = '${msgTeacherUpdate}';
 if(msgTeacherUpdateVal != "" && msgTeacherUpdateVal != null){
 	alert('${msgTeacherUpdate}');
@@ -342,6 +318,14 @@ if(msgApprovalVal != "" && msgApprovalVal != null){
 	alert('${msgApproval}');
 	location.replace("mypage");
 }
+
+$("#checkbox").change(function(){
+	location.href = "alarmYNChange";
+});
+$("#checkbox2").change(function(){
+	location.href = "recruitYNChange";
+});
+
 
 </script>
 

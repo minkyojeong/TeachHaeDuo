@@ -99,20 +99,6 @@
 	</div>
 	<script>
 		$(function() {
-			/* 회원정보 수정*/
-			var pwdChk = false;
-			var emailChk = false;
-			var phoneChk = false;
-			var chkVal = false;
-			
-			
-			
-			console.log($("#mId").val());
-			console.log($('#mEmail').val());
-			console.log("<%=ssMV.getmEmail() %>");
-			console.log($("#phone").val());
-			
-
 			$("#cancel").click(function() {
 				console.log("취소 버튼 클릭");
 				location.href = "mypage";
@@ -127,7 +113,6 @@
 					frm.submit();
 				} 
 			});
-			
 			/* 회원 탈퇴 */
 			$("#member_delete_btn").click(function() {
 				var confm = confirm("정말로 회원 탈퇴를 진행하시겠습니까? 삭제된 정보는 복구 불가능합니다.");
@@ -154,12 +139,17 @@
 					alert("회원탈퇴를 취소했습니다.");
 				}
 			});
-
+			
+			/* 회원정보 수정*/
+			var pwdChk = false;
+			var emailChk = false;
+			var phoneChk = false;
+			var chkVal = false;
 			//패스워드 형식 확인	 -ok
 			$("#pw").on("input",function() {
 				pwdChk = true;
-				
-				var passwordRegEx = /^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[!@#$%^&*-]).{8,}$/;// 8자리이상  대소문자, 숫자, 특수문자가 각각 1개 이상 (패스워드 체크시 활용)
+				var passwordRegEx = /^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[!@#$%^&*-]).{8,}$/;
+				// 8자리이상  대소문자, 숫자, 특수문자가 각각 1개 이상 (패스워드 체크시 활용)
 				var passwordVal = null;
 				if ($("#pw").val().trim() == null || $("#pw").val().trim() == ""){
 					passwordVal = $("#initPw").val();
@@ -169,7 +159,6 @@
 				} else {
 					passwordVal = $("#pw").val();
 				}
-				
 				if (!passwordRegEx.test(passwordVal)) { //passwordVal값이 정규식에 맞는지 체크
 					console.log("패스워드 형식을 바르게 입력해주세요.");
 					pwdChk = true;
@@ -181,7 +170,6 @@
 					$("#pwd_info").html("");
 				}
 			});
-			
 			//이메일 형식 확인-ok 
 			$("#mEmail").on("input",function() {
 				emailChk = true;
@@ -189,25 +177,23 @@
 					emailChk = false;
 					return;
 				}
-				var EmailRegEx = /^[A-Za-z0-9_]+[A-Za-z0-9]*[@]{1}[A-Za-z0-9]+[A-Za-z0-9]*[.]{1}[A-Za-z]{1,3}$/;// 이메일 정규식 
+				var EmailRegEx = /^[A-Za-z0-9_]+[A-Za-z0-9]*[@]{1}[A-Za-z0-9]+[A-Za-z0-9]*[.]{1}[A-Za-z]{1,3}$/;
+				// 이메일 정규식 
 				var EmailVal = $("#mEmail").val();
 				if (!EmailRegEx.test(EmailVal)) { // mEmail 이메일 정규식 맞는지 체크
 					console.log("이메일 형식을 바르게 입력해주세요. console");
 					emailChk = true;
 					$("#checkmEmail_info").html("이메일 형식이 맞지 않습니다.");
 					$("#checkmEmail_info").attr('color', 'red');
-
 				} else {
 					emailChk = false;
 					$("#checkmEmail_info").html("");
-					
 					//중복체크 - 이메일 -ok
 					$('#mEmail').focusout(function() {
 						emailChk = true;
 						console.log("이메일 중복체크 실행");
 						let findStr = $('#mEmail').val();
 						if(findStr  ==  '<%=ssMV.getmEmail() %>'){
-							console.log("이메일 같니?");
 							emailChk = false;
 							return;
 						} else {
@@ -223,7 +209,6 @@
 									type : 'mEmail'
 								},
 								success : function(data, textStatus) {
-		
 									if (data == 'not-usable') {
 										$("#checkmEmail_info").html('사용할 수 없는 이메일입니다.');
 										$("#checkmEmail_info").attr('color', 'red');
@@ -289,7 +274,19 @@
 			} 
 			
 		});
-		
+		function check_pw() { //비밀번호 확인 - ok
+			var p = document.getElementById('pw').value;
+			var p_cf = document.getElementById('pw_cf').value;
+			if (p != p_cf) {
+				document.getElementById('pw_check_msg').innerHTML = "비밀번호가 다릅니다. 다시 확인해 주세요.";
+				$("#pw_check_msg").attr('color', 'red');
+			} else {
+				document.getElementById('pw_check_msg').innerHTML = "";
+			}
+			if (p_cf == "") {
+				document.getElementById('pw_check_msg').innerHTML = "";
+			}
+		}
 		function open_Postcode() { //다음 카카오 주소찾기 
 			new daum.Postcode({
 				oncomplete : function(data) {
@@ -301,20 +298,7 @@
 			}).open();
 		}
 		
-		function check_pw() { //비밀번호 확인 - ok
-			var p = document.getElementById('pw').value;
-			var p_cf = document.getElementById('pw_cf').value;
-
-			if (p != p_cf) {
-				document.getElementById('pw_check_msg').innerHTML = "비밀번호가 다릅니다. 다시 확인해 주세요.";
-				$("#pw_check_msg").attr('color', 'red');
-			} else {
-				document.getElementById('pw_check_msg').innerHTML = "";
-			}
-			if (p_cf == "") {
-				document.getElementById('pw_check_msg').innerHTML = "";
-			}
-		}
+		
 	</script>
 </body>
 </html>

@@ -197,16 +197,9 @@ public class TeacherService {
 	public int recruitYNChange(MemberVo vo) {
 		int result = 0;
 		Connection conn = null;
-
 		conn = getConnection();
 		result = dao.recruitYNChange(conn, vo);
-		if(result == 1) {
-			commit(conn);
-		} else {
-			rollback(conn);
-		}
 		close(conn);
-
 		return result;
 	}
 	

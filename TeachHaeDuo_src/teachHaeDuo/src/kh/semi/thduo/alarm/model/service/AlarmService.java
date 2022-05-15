@@ -29,12 +29,10 @@ public class AlarmService {
 
 	// 보낸 알람 리스트
 	public ArrayList<AlarmVo> sendListAlarm(String mNickname) {
-
 		Connection conn = null;
 		conn = getConnection();
 		ArrayList<AlarmVo> voList = dao.sendListAlarm(conn, mNickname);
 		close(conn);
-
 		return voList;
 	}
 
@@ -53,12 +51,10 @@ public class AlarmService {
 
 	// 받은 알람 리스트
 	public ArrayList<AlarmVo> receiveListAlarm(String mNickname) {
-
 		Connection conn = null;
 		conn = getConnection();
 		ArrayList<AlarmVo> voList = dao.receiveListAlarm(conn, mNickname);
 		close(conn);
-
 		return voList;
 	}
 
@@ -75,12 +71,10 @@ public class AlarmService {
 
 	// 모든 알람 리스트
 	public ArrayList<AlarmVo> allListAlarm(String mNickname) {
-
 		Connection conn = null;
 		conn = getConnection();
 		ArrayList<AlarmVo> voList = dao.allListAlarm(conn, mNickname);
 		close(conn);
-
 		return voList;
 	}
 
@@ -88,11 +82,9 @@ public class AlarmService {
 	public int alarmYNChange(MemberVo vo) {
 		int result = 0;
 		Connection conn = null;
-
 		conn = getConnection();
 		result = dao.alarmYNChange(conn, vo);
 		close(conn);
-
 		return result;
 	}
 

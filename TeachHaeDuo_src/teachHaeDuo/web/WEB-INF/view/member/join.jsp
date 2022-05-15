@@ -15,6 +15,7 @@
 <meta charset="UTF-8">
 <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
 <script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
+<script src="https://ucarecdn.com/libs/widget/3.x/uploadcare.full.min.js"></script>
 <title>회원가입 화면</title>
 
 <script>
@@ -392,7 +393,23 @@
 			
 			chkVal = true;
 		}
-		
+		/* 증명서 등록 */
+	    UPLOADCARE_LOCALE = "ko"
+	    UPLOADCARE_LOCALE_TRANSLATIONS = {
+	        buttons: {
+	            choose: {
+	                files: {
+	                    one: '사진 변경'
+	                }
+	            }
+	        }
+	    }
+	    var singleWidget = uploadcare.SingleWidget('[role=uploadcare-uploader]');
+		singleWidget.onUploadComplete(function(info){
+			console.log(info.cdnUrl);
+			var fileUrl = info.cdnUrl;
+			$("input[name=certificate]").val(fileUrl);
+		});
 	}); // onload
 </script>
 
@@ -514,7 +531,9 @@ function open_Postcode() { //다음 카카오 주소찾기
 							</tr>
 							<tr id="fileupload">
 								<td id="file">증명서류</td>
-								<td><input type="file" name="joinupload"></td>
+								<td><input type="hidden" role="uploadcare-uploader" 
+                            data-public-key="43cc829c5d2fae8676a5" data-tabs="file gdrive gphotos"/>
+                            <input type="hidden" id="certificate" name="certificate"></td>
 								<td></td>
 							</tr>
 						</table>

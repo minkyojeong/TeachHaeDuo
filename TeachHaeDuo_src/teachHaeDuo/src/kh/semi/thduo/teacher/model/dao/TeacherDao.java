@@ -673,7 +673,6 @@ public class TeacherDao {
 		} else {
 			sql = "update t_profile set T_RECRUIT_YN = " + "'Y' where m_id =? ";
 		}
-		
 		if(sql != "") {
 			try {
 				pstmt = conn.prepareStatement(sql);

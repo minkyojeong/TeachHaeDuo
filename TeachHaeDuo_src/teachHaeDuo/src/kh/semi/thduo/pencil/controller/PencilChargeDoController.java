@@ -54,7 +54,6 @@ public class PencilChargeDoController extends HttpServlet {
 		}catch(NumberFormatException e) {
 			e.printStackTrace();
 		}
-		
 		// 로그인 확인
 		MemberVo ssMV = (MemberVo)request.getSession().getAttribute("ssMV");
 		if(ssMV == null) {  
@@ -67,7 +66,6 @@ public class PencilChargeDoController extends HttpServlet {
 			vo.setCpCash(wonInt);
 			// 서비스 호출
 			result = new PencilService().plusPencil(vo);
-			
 			// 충전 실패
 			if(result < 1 ) { 
 				request.getSession().setAttribute("msgCharge", "충전이 실패했습니다.");

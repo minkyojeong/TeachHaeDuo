@@ -45,8 +45,10 @@ public class LikeListAjaxController extends HttpServlet {
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) 
+			throws ServletException, IOException {
 		System.out.println("찜내역 컨트롤러 dopost");
+		
 		// ajax로 데이터 넘겨주기 위한 객체 생성
 		PrintWriter out = response.getWriter();
 		// 로그인 여부 확인

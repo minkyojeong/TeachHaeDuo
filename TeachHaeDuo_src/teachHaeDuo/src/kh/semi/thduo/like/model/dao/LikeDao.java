@@ -61,8 +61,9 @@ public class LikeDao {
 	// 자기가 찜한 선생님 리스트 모두 보기
 	public ArrayList<LikeVo> readLikeList(Connection conn, String s_no) {
 		ArrayList<LikeVo> retVolist = null;
-		String sql = "select s_no, t_no, m_nickname from dibs join t_profile using(t_no) join member using(m_id)where s_no=?";
-
+		String sql = "select s_no, t_no, m_nickname from dibs "
+				+ "join t_profile using(t_no) "
+				+ "join member using(m_id)where s_no=?";
 		try {
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, s_no);
@@ -77,13 +78,11 @@ public class LikeDao {
 					retVolist.add(vo);
 				}
 			}
-
 		} catch(SQLException e) {
 			e.printStackTrace();
 		} finally {
 			close(pstmt);
 		}
-		
 		return retVolist;
 	}
 	

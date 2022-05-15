@@ -48,12 +48,11 @@ public class ReceiveAlarmListAjaxController extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		System.out.println("받은알람 컨트롤러 dopost");
-
+		
 		// ajax로 데이터 보내기 위한 객체 생성
 		PrintWriter out = response.getWriter();
 		// 세션에 담긴 정보 가져오기
 		MemberVo vo = (MemberVo) request.getSession().getAttribute("ssMV");
-
 		// 로그인이 안되어있다면
 		if (vo == null) {
 			request.getSession().setAttribute("msgLogin", "로그인 먼저 해주세요");
@@ -61,7 +60,6 @@ public class ReceiveAlarmListAjaxController extends HttpServlet {
 			return;
 		} else { // 되어있다면
 			System.out.println("받은 알람 서비스 호출 mNickname:" + vo.getmNickname());
-
 			if (vo.getmNickname() != null) {
 				// 서비스 호출
 				ArrayList<AlarmVo> voList = new AlarmService().receiveListAlarm(vo.getmNickname());

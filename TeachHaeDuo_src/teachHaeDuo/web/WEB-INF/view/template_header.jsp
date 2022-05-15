@@ -129,7 +129,6 @@ $(".menu > ul li:eq(2)").hover(function() {
 $("#p_alarm").on("click", function() {
 	console.log("알람클릭");
 	$("#alarm_modal").show();
-	
 	$.ajax({
 		url: "allAlarmList.ax",
 		type:"post",
@@ -371,7 +370,7 @@ var selectBoxChange = function(value){
 	console.log($("#header_alarm_receiveid").val());
 }
 
-
+	// header가 로딩되면
 	$.ajax({
 		url: "receiveIdList.ax",
 		type: "post",
@@ -379,7 +378,6 @@ var selectBoxChange = function(value){
 		success: function(result){
 		},
 		error: function(){
-			
 		}
 	});
 

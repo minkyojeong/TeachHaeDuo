@@ -22,8 +22,10 @@ public class PencilDao {
 	public int plusPencil(Connection conn, PencilVo vo) {
 		System.out.println("충전하기 dao vo:" + vo);
 		int result = 0;
-		String sql = "insert into check_pencil (cp_no, cp_content, cp_cash, cp_date,m_id) values ((select (nvl(max(cp_no)+1,0)) from check_pencil where m_id=?), '연필충전', ?, default,?)";
-
+		String sql = "insert into check_pencil "
+				+ "(cp_no, cp_content, cp_cash, cp_date,m_id) values "
+				+ "((select (nvl(max(cp_no)+1,0)) from check_pencil where m_id=?),"
+				+ " '연필충전', ?, default,?)";
 		try {
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, vo.getmId());
@@ -35,10 +37,8 @@ public class PencilDao {
 		} finally {
 			close(pstmt);
 		}
-
 		System.out.println("충전하기 dao result:" + result);
 		return result;
-
 	}
 
 	// 연필 잔액 확인

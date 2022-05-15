@@ -32,6 +32,7 @@ public class AlarmYNChangeController extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		System.out.println("알람 수신거부 doget");
+		
 		// 세션에 담긴 정보 가져오기
 		MemberVo ssMV = (MemberVo) request.getSession().getAttribute("ssMV");
 		System.out.println(ssMV);
@@ -44,7 +45,7 @@ public class AlarmYNChangeController extends HttpServlet {
 			response.sendRedirect("login");
 			return;
 		} else { // 되어있을때
-			// 세션에서 가져온 정보 변수, 객체에 담기
+			// 세션에서 가져온 정보, 객체에 담기
 			vo.setmAlarmYn(ssMV.getmAlarmYn());
 			vo.setmId(ssMV.getmId());
 			// 담은 정보 가지고 서비스 호출

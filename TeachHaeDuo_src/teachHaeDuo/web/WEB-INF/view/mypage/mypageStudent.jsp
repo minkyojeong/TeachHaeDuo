@@ -284,7 +284,6 @@ $("#p_send_alarm").on("click", function() {
 // 찜한 선생님 리스트
 $("#p_like").on("click", function() {
 	$("#like_modal").show();
-	
 	$.ajax({
 		url: "likeList.ax",
 		type:"post",
@@ -295,17 +294,14 @@ $("#p_like").on("click", function() {
 				var vo = result[i];
 				html += "<tr>";
 				html += '<td><img src="${pageContext.request.contextPath}/resources/icons/heart.png" width="20" height="20"></td>';
-				html += '<td><a href="teacherInfo?tNo='+vo.t_no+'">'+ vo.mNickname + '</td>';
+				html += '<td><a href="teacherInfo?tNo='+vo.t_no+'">'
+						+ vo.mNickname + '</td>';
 				html += '</tr>';
 				console.log(vo.t_no);
 			}
 			$("#like_table_tr1").nextAll().remove();
 			$("#like_table").append(html);
 		},
-		error: function(){
-		
-		}
-	
 	});
 });
 	

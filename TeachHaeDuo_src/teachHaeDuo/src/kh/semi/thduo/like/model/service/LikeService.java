@@ -50,11 +50,8 @@ public class LikeService {
 	public ArrayList<LikeVo> readLikeList(String s_no) {
 		ArrayList<LikeVo> retVolist = null;
 		Connection conn = getConnection();
-
 		retVolist = dao.readLikeList(conn, s_no);
-		
 		close(conn);
-		
 		return retVolist;
 	}
 	

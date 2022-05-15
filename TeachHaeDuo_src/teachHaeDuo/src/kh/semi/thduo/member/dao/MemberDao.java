@@ -223,7 +223,7 @@ public class MemberDao {
 	
 	
 	
- //회원 수정
+    //회원 수정
 	public int updateMember(Connection conn, MemberVo vo) {
 		int result = 0;
 		String sql = "update member set m_pw=?, m_PHONE=?, m_address=?  where m_id=?";

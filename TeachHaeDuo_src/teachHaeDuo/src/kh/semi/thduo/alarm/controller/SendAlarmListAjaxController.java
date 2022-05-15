@@ -52,7 +52,6 @@ public class SendAlarmListAjaxController extends HttpServlet {
 		PrintWriter out = response.getWriter();
 		// 세션에 담긴 정보 가져오기
 		MemberVo vo = (MemberVo) request.getSession().getAttribute("ssMV");
-
 		// 로그인이 안되어있을때
 		if (vo == null) {
 			request.getSession().setAttribute("msgLogin", "로그인 먼저 해주세요");

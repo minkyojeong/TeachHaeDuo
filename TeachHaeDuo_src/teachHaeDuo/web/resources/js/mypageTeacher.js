@@ -71,7 +71,8 @@ $(function() {
 			$("#pencilcharge_modal").hide();
 		}
 	})
-
+	
+	// 금액 버튼
 	var pencilwon = 0;
 	$("#won").text(pencilwon);
 
@@ -97,13 +98,10 @@ $(function() {
 		pencilwon += 100000
 		$("#won").val(pencilwon);
 	});
-
-	$("#reset").click(function() {
-		pencilwon = 0;
-		$("#won").val(pencilwon);
-	});
-	$("#charge").click(goCharge);
 	
+	
+	// 충전하기, 정정 버튼
+	$("#charge").click(goCharge);
 	function goCharge() {
 		console.log("충전하기 들어옴");
 		var won = $("#won").val()
@@ -118,7 +116,10 @@ $(function() {
 			alert("충전 금액은 0원 초과로 입력해주세요");
 		}
 	}
-
+	$("#reset").click(function() {
+		pencilwon = 0;
+		$("#won").val(pencilwon);
+	});
 	
 
 
@@ -150,7 +151,6 @@ $(function() {
 	})
 
 	/* 프로필 사진 변경 */
-	
     UPLOADCARE_LOCALE = "ko"
     UPLOADCARE_LOCALE_TRANSLATIONS = {
         buttons: {
@@ -161,8 +161,6 @@ $(function() {
             }
         }
     }
-
-    
     var singleWidget = uploadcare.SingleWidget('[role=uploadcare-uploader]');
 	singleWidget.onUploadComplete(function(info){
 		console.log(info.cdnUrl);
@@ -177,13 +175,10 @@ $(function() {
 				location.replace("mypage");
 				},
 			error: function(){
-			
 			}
 		}); //ajax 끝
 	});
-	singleWidget.onUploadFail(function(){
-		console.log("실패");
-	});
+	
 
 
 
