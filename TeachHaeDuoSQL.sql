@@ -741,5 +741,5 @@ CREATE SEQUENCE b_r_no_sequence
        NOORDER;
        commit;
        
-       select * from q_board;
+       
        
