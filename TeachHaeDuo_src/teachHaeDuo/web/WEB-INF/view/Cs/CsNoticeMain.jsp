@@ -11,12 +11,13 @@ rel="stylesheet" type="text/css">
 <link href="<%=request.getContextPath()%>/resources/css/font.css" rel="stylesheet" type="text/css">
 <link href="<%=request.getContextPath()%>/resources/css/reset.css" rel="stylesheet" type="text/css">
 <link href="<%=request.getContextPath()%>/resources/css/common.css" rel="stylesheet" type="text/css">
+<link href="<%=request.getContextPath()%>/resources/icons/sun.ico" rel="shortcut icon" type="image/x-icon">
 	
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>공지사항</title>
 <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
     <script>
 
