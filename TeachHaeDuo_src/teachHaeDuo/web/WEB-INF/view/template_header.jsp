@@ -19,9 +19,9 @@
 				<li>
 					<a href="${pageContext.request.contextPath}/CsMain" style="cursor: pointer">고객센터</a><span>&nbsp;&nbsp;</span>
 					<ul class="sub_menu">
-						<li><a href="#">공지사항</a></li>
-						<li><a href="#">1대1 문의</a></li>
-						<li><a href="#">자주묻는 질문</a></li>
+						<li><a href="${pageContext.request.contextPath}/CsNoticeMain">공지사항</a></li>
+						<li><a href="${pageContext.request.contextPath}/CsFaqMain">1대1 문의</a></li>
+						<li><a href="${pageContext.request.contextPath}/CsOne.jsp">자주묻는 질문</a></li>
 					</ul>
 				</li>
 				<li><a href="${pageContext.request.contextPath}/guide">이용방법</a><span>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;</span></li>
