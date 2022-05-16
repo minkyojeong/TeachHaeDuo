@@ -28,6 +28,11 @@
 .page_nation .arrow.next.btnPage {
     opacity: 1;
 }
+
+.btnPage {
+	cursor: pointer;
+}
+
 .page_nation .arrow.next{
     background: #f8f8f8  no-repeat center center;
     font-size:0;
