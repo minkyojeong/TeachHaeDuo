@@ -9,23 +9,20 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import kh.semi.thduo.admin.vo.AdminVo;
 import kh.semi.thduo.board.service.BoardService;
-import kh.semi.thduo.board.vo.BoardReCommentVo;
 import kh.semi.thduo.board.vo.BoardVo;
-import kh.semi.thduo.member.vo.MemberVo;
 
 /**
- * Servlet implementation class BoardReadController
+ * Servlet implementation class BoardSearchController
  */
-@WebServlet("/BoardRead")
-public class BoardReadController extends HttpServlet {
+@WebServlet("/BoardSearch")
+public class BoardSearchController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public BoardReadController() {
+    public BoardSearchController() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -35,24 +32,17 @@ public class BoardReadController extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		String bNo = request.getParameter("bno");	
-		MemberVo ssvo = (MemberVo)request.getSession().getAttribute("ssMV");
-		if(ssvo == null)  {  // 로그아웃 상태라면 login 페이지로 진입
-			response.sendRedirect("login");
-		} else { 
-		BoardVo result = new BoardService().boardRead(bNo);
-		ArrayList<BoardReCommentVo> rvo = new BoardService().boardReCommentRead(bNo);
-		System.out.println(result);
-		result.setbContent(result.getbContent().replaceAll("(\r\n|\n)", "<br>"));
-		result.setbContent(result.getbContent().replaceAll(" ", "&nbsp;"));
-		System.out.println(result);
-		System.out.println(rvo);
-		request.setAttribute("rvo", rvo);
-		request.setAttribute("bvo", result);
-		request.getRequestDispatcher("WEB-INF/view/Board/BoardRead.jsp").forward(request, response);
-	}
+		String bSearch = request.getParameter("boardsearch");
+		String select = request.getParameter("boardOption");
+		String Search = "b_title";
+		if(select != null) 
+			select = Search;
 	
-	}
+		ArrayList<BoardVo> boardList = new BoardService().boardSearch( select, bSearch);
+		request.setAttribute("boardList", boardList);
+		request.getRequestDispatcher("WEB-INF/view/Board/BoardList.jsp").forward(request, response);
+		}
+		
 	
 
 	/**

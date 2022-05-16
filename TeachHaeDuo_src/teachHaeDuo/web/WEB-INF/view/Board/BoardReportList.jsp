@@ -26,7 +26,7 @@
 </head>
 <body>
 	<div class="container">
-		<jsp:include page="../template_header.jsp"></jsp:include>
+		<jsp:include page="../admin_header.jsp"></jsp:include>
 		<jsp:include page="../template_nav.jsp"></jsp:include>
 		<div class="wrap_all" style="width:1400px; text-align:center; display:inline-block;">
 		<div style=" padding: 10px;width:1000px;height:60px;" >

@@ -42,7 +42,8 @@ $(function btn2(){
 
 						<%
 					    MemberVo ssvo = (MemberVo)session.getAttribute("ssMV");
-						String ssId = ssvo.getmNickname();%>
+						String ssId = ssvo.getmNickname();
+						String ssmv = ssvo.getmName();%>
 					
 <%
 ArrayList<BoardReCommentVo> rvolist = (ArrayList<BoardReCommentVo>)request.getAttribute("rvo");
@@ -76,7 +77,7 @@ ArrayList<BoardReCommentVo> rvolist = (ArrayList<BoardReCommentVo>)request.getAt
 						<dd id="cnt"><button type="button" onclick="location.href='BoardModify?bno=<%= vo.getbNo() %>&mid=<%= vo.getmId() %>'">글 수정</button></dd>
 						<dd id="bno"><button type="button" onclick="location.href='BoardDelete?bno=<%= vo.getbNo() %>&mid=<%= vo.getmId() %>'">글 삭제</button></dd>
 		                <%} %> 
-		                <%if( !ssId.equals(vo.getbWriter())) { %>
+		                <%if( !ssId.equals(vo.getbWriter()) && ssId != null) { %>
 		                <dd><button type="button" id="report" onclick="javascript:btn()">신고</button></dd>
 						<%} %>
 		</div>
@@ -108,7 +109,7 @@ ArrayList<BoardReCommentVo> rvolist = (ArrayList<BoardReCommentVo>)request.getAt
 					<td width=50px style="word-break:break-all"><%= rvo.getrWriter() %></td>
 					<td width=40 style="word-break:break-all"><%= rvo.getrWriteDate().substring(0,10) %></td>
 					<td width=200 style="word-break:break-all"><%= rvo.getrContent() %></td>
-						<%if( ssId.equals(vo.getbWriter()))  { %>
+						<%if(ssmv.equals(rvo.getrWriter()))  { %>
 					<td width=40 style="word-break:break-all"><button type="button" onclick="location.href='BoardReCommentDelete?bno=<%= vo.getbNo() %>&rno=<%= rvo.getrNo() %>'">삭제</button>
 					<%} %>
 				</tr>

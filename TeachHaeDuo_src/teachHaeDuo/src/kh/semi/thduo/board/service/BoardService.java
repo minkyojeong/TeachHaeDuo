@@ -23,11 +23,11 @@ public class BoardService {
 		close(conn);
 		return boardList;
 	}
-	public ArrayList<BoardVo> boardSearchTt(String bContent){
+	public ArrayList<BoardVo> boardSearch(String select,String bSearch){
 		ArrayList<BoardVo> boardList = null;
 		Connection conn = null;
 		conn = getConnection();
-		boardList = dao.boardSearchTt(conn, bContent);
+		boardList = dao.boardSearch(conn,select, bSearch);
 		close(conn);
 		return boardList;
 	}
@@ -45,22 +45,15 @@ public class BoardService {
 		close(conn);
 		return boardList;
 	}
-	public ArrayList<BoardVo> boardSearchCt(String bContent){
+	public ArrayList<BoardVo> boardSearchtt(String bSearch){
 		ArrayList<BoardVo> boardList = null;
 		Connection conn = null;
 		conn = getConnection();
-		boardList = dao.boardSearchCt(conn, bContent);
+		boardList = dao.boardSearchtt(conn, bSearch);
 		close(conn);
 		return boardList;
 	}
-	public ArrayList<BoardVo> boardSearchWt(String bContent){
-		ArrayList<BoardVo> boardList = null;
-		Connection conn = null;
-		conn = getConnection();
-		boardList = dao.boardSearchWt(conn, bContent);
-		close(conn);
-		return boardList;
-	}
+
 	public ArrayList<BoardVo> boardList(int startRnum, int endRnum){
 		Connection conn=null;
 		conn = getConnection();

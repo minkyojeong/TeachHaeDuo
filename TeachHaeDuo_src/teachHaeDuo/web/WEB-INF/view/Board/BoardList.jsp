@@ -51,13 +51,12 @@ a {
 		<div class="board_box">
 			<div class="board_title">
 				<h1>질문하기 게시판</h1>
-				<form action="BoardList" method="post">
+				<form action="BoardSearch" method="get">
 				<button type="submit" id="searchBt">검색</button>
-				<input type="text" name="boardSearch" value="" class="boardright">
+				<input type="text" name="boardsearch"class="boardright">
 				<select class="boardright" name="boardOption">
-        			<option name="select1" value="1">제목</option>
-        			<option name="select2" value="2">내용</option>
-        			<option name="select3" value="3">작성자</option>
+        			<option value="b_title">제목</option>
+        			<option value="b_content">내용</option>
 				</select>
 				</form>
 			</div>

@@ -489,5 +489,59 @@ public class BoardDao {
 		
 		return count;
 	}
-	
+	public ArrayList<BoardVo> boardSearch(Connection conn, String select, String bSearch) {
+		ArrayList<BoardVo> boardList = null;
+		String sql = "select * from q_board where " +select+ " like '%'||?||'%'";
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1,bSearch);
+			rs = pstmt.executeQuery();
+			boardList = new ArrayList<BoardVo>();
+			while(rs.next()) {
+				BoardVo vo = new BoardVo();
+				vo.setbNo(rs.getString("b_no"));
+				vo.setbCategory(rs.getString("b_category"));
+				vo.setbTitle(rs.getString("b_title"));
+				vo.setbContent(rs.getString("b_content"));
+				vo.setbWriter(rs.getString("b_writer"));
+				vo.setbWriteDate(rs.getString("b_write_date"));
+				vo.setbCnt(rs.getString("b_cnt"));
+				vo.setmId(rs.getString("m_id"));
+				boardList.add(vo);
+			}
+		}catch(SQLException e){
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}
+		return boardList;
+	}
+
+	public ArrayList<BoardVo> boardSearchtt(Connection conn, String bSearch) {
+		ArrayList<BoardVo> boardList = null;
+		String sql = "select * from q_board where b_title like '%'||?||'%'";
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1,bSearch);
+			rs = pstmt.executeQuery();
+			boardList = new ArrayList<BoardVo>();
+			while(rs.next()) {
+				BoardVo vo = new BoardVo();
+				vo.setbNo(rs.getString("b_no"));
+				vo.setbCategory(rs.getString("b_category"));
+				vo.setbTitle(rs.getString("b_title"));
+				vo.setbContent(rs.getString("b_content"));
+				vo.setbWriter(rs.getString("b_writer"));
+				vo.setbWriteDate(rs.getString("b_write_date"));
+				vo.setbCnt(rs.getString("b_cnt"));
+				vo.setmId(rs.getString("m_id"));
+				boardList.add(vo);
+			}
+		}catch(SQLException e){
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}
+		return boardList;
+	}
 }

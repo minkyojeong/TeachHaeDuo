@@ -42,21 +42,18 @@ public class BoardListController extends HttpServlet {
 			e.printStackTrace();
 		}
 		
-		final int pageSize = 5;  // 한페이지에 보여줄 행
-		final int pageBlock = 3;  // 페이징에 나타날 페이지수
+		final int pageSize = 5;  		
+		final int pageBlock = 3;  		
 		int startPage=0;
 		int endPage=0;
 		int startRnum=0;
 		int entRnum=0;
 		
-		int totalCnt = 0; // 총 글 수
+		int totalCnt = 0; 
 		totalCnt = new BoardService().boardCount();
 		
 		System.out.println("총"+totalCnt);
-		// select count(*) from board
 		
-		/* Paging 처리 */
-//		int totalPageCnt = (int)Math.ceil(totalCnt/pageSize); 
 		int totalPageCnt = (totalCnt/pageSize) + (totalCnt%pageSize==0 ? 0 : 1);
 		if(currentPage%pageBlock == 0) {
 			startPage = ((currentPage/pageBlock)-1)*pageBlock + 1;
@@ -69,7 +66,7 @@ public class BoardListController extends HttpServlet {
 		}
 		System.out.println("page:"+ startPage +"~"+endPage);
 		
-		/* rownum 처리 */
+		
 		startRnum = (currentPage-1)*pageSize + 1;
 		entRnum = startRnum + pageSize -1;
 		if(entRnum>totalCnt) {
@@ -94,26 +91,7 @@ public class BoardListController extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		
-		String bContent = request.getParameter("boardSearch");
-		String select = request.getParameter("boardOption");
-		String option1 = request.getParameter("select1");
-		String option2 = request.getParameter("select2");
-		String option3 = request.getParameter("select3");
-		if(select == option1) {
-			ArrayList<BoardVo> boardList = new BoardService().boardSearchTt(bContent);
-			request.setAttribute("boardList", boardList);
-			request.getRequestDispatcher("WEB-INF/view/Board/BoardList.jsp").forward(request, response);;
-		}
-		else if(select == option2) {
-			ArrayList<BoardVo> boardList = new BoardService().boardSearchCt(bContent);
-			request.setAttribute("boardList", boardList);
-			request.getRequestDispatcher("WEB-INF/view/Board/BoardList.jsp").forward(request, response);;
-		}else if(select == option3){
-			ArrayList<BoardVo> boardList = new BoardService().boardSearchWt(bContent);
-			request.setAttribute("boardList", boardList);
-			request.getRequestDispatcher("WEB-INF/view/Board/BoardList.jsp").forward(request, response);;
-		}
-
+		
 	}
 
 }
