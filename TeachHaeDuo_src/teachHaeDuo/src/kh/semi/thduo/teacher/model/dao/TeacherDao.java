@@ -474,13 +474,13 @@ public class TeacherDao {
 		String sql = "update t_profile set t_major=? , online_yna=? , " + "t_tcnt=? , t_tprice=? , t_wantstud=? , "
 				+ "t_career=? , t_language=? , t_special=? , t_profile_yn='Y' , " + "t_intro=? where t_no=?";
 		String sqlPencil = "INSERT INTO check_pencil(cp_no, cp_content, cp_cash, cp_date, m_id) "
-							+ "values((SELECT NVL(MAX(cp_no), 0) + 1 FROM check_pencil WHERE m_id = ?), ?, ?, default, ?)";
+				+ "values((SELECT NVL(MAX(cp_no), 0) + 1 FROM check_pencil WHERE m_id = ?), ?, ?, default, ?)";
 		String sqlDeleteObject = "delete from teach_object where t_no=?";
 		String sqlInsertObject = "insert into TEACH_OBJECT (ob_code, t_no) "
-								+ "values( (select ob_code from object where ob_name=?) , ?)";
+				+ "values( (select ob_code from object where ob_name=?) , ?)";
 		String sqlDeleteactiveArea = "delete from acti_area where t_no=?";
 		String sqlInsertactiveArea = "insert into ACTI_AREA (t_no, area_code) "
-									+ "values(?, (select area_code from area where area_name=?) )";
+				+ "values(?, (select area_code from area where area_name=?) )";
 		try {
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, tVo.getT_major());
@@ -521,7 +521,7 @@ public class TeacherDao {
 						for (int i = 0; i < objectArr.length; i++) {
 							pstmt.setString(1, objectArr[i]);
 							result = pstmt.executeUpdate();
-							System.out.println("담당과목 넣기 result" + i +": " + result);
+							System.out.println("담당과목 넣기 result" + i + ": " + result);
 							if (result < 1) { // 담당과목 넣기 실패한다면 반복문 빠져나감
 								break;
 							}
@@ -551,8 +551,89 @@ public class TeacherDao {
 							System.out.println("활동지역 넣기 result" + result);
 							if (result < 1) { // 반복문 빠져나와서 리턴
 								return 0;
-							} 
+							}
 						}
+					}
+				}
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		System.out.println("[[[[[[최종 result :]]]]]]]" + result);
+		return result;
+	}
+
+	// 선생님 교습정보 최초 수정
+	public int updateTeacherInit(Connection conn, TeacherVo tVo, PencilVo pVo, String[] objectArr,
+			String[] activeAreaArr) {
+		int result = 0;
+		System.out.println("dao tVo:" + tVo);
+		System.out.println("tVo.getOnline_yna() :" + tVo.getOnline_yna());
+		String sql = "update t_profile set t_major=? , online_yna=? , " + "t_tcnt=? , t_tprice=? , t_wantstud=? , "
+				+ "t_career=? , t_language=? , t_special=? , t_profile_yn='Y' , " + "t_intro=? where t_no=?";
+		String sqlPencil = "INSERT INTO check_pencil(cp_no, cp_content, cp_cash, cp_date, m_id) "
+				+ "values((SELECT NVL(MAX(cp_no), 0) + 1 FROM check_pencil WHERE m_id = ?), ?, ?, default, ?)";
+		String sqlInsertObject = "insert into TEACH_OBJECT (ob_code, t_no) "
+				+ "values( (select ob_code from object where ob_name=?) , ?)";
+		String sqlInsertactiveArea = "insert into ACTI_AREA (t_no, area_code) "
+				+ "values(?, (select area_code from area where area_name=?) )";
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, tVo.getT_major());
+			pstmt.setString(2, tVo.getOnline_yna());
+			pstmt.setString(3, tVo.getT_tcnt());
+			pstmt.setString(4, tVo.getT_tprice());
+			pstmt.setString(5, tVo.getT_wantstud());
+			pstmt.setString(6, tVo.getT_career());
+			pstmt.setString(7, tVo.getT_language());
+			pstmt.setString(8, tVo.getT_special());
+			pstmt.setString(9, tVo.getT_intro());
+			pstmt.setString(10, tVo.getT_no());
+			result = pstmt.executeUpdate();
+			System.out.println("t_profile update result:" + result);
+			if (result < 1) { // update 실패한다면 리턴
+				return 0;
+			} else { // update 성공한다면 연필테이블에 insert
+				pstmt = conn.prepareStatement(sqlPencil);
+				pstmt.setString(1, pVo.getmId());
+				pstmt.setString(2, pVo.getCpContent());
+				pstmt.setInt(3, pVo.getCpCash());
+				pstmt.setString(4, pVo.getmId());
+				result = pstmt.executeUpdate();
+				System.out.println("연필테이블 result:" + result);
+				if (result < 1) { // insert 실패한다면 리턴
+					return 0;
+				} else { // 성공한다면 담당 과목 넣기
+					pstmt = conn.prepareStatement(sqlInsertObject);
+					pstmt.setString(2, tVo.getT_no());
+					for (int i = 0; i < objectArr.length; i++) {
+						pstmt.setString(1, objectArr[i]);
+						result = pstmt.executeUpdate();
+						System.out.println("담당과목 넣기 result" + i + ": " + result);
+						if (result < 1) { // 담당과목 넣기 실패한다면 반복문 빠져나감
+							break;
+						}
+					}
+					System.out.println("담당과목 넣기 result:" + result);
+					if (result < 1) { // 반복문 빠져나와서 리턴
+						return 0;
+					} else { // 성공한다면 활동지역 넣기
+						pstmt = conn.prepareStatement(sqlInsertactiveArea);
+						pstmt.setString(1, tVo.getT_no());
+						for (int i = 0; i < activeAreaArr.length; i++) {
+							pstmt.setString(2, activeAreaArr[i]);
+							result = pstmt.executeUpdate();
+							System.out.println("활동지역 넣기 result" + i + ":" + result);
+							if (result < 1) { // 넣다가 실패하면 반복만 빠져나감
+								break;
+							}
+						}
+					}
+					System.out.println("활동지역 넣기 result" + result);
+					if (result < 1) { // 반복문 빠져나와서 리턴
+						return 0;
 					}
 				}
 			}
@@ -607,8 +688,6 @@ public class TeacherDao {
 		return result;
 	}
 
-	
-
 	// 선생님 프로필 사진 등록/변경
 	public int updateProfilePicture(Connection conn, TeacherVo tVo) {
 		int result = 0;
@@ -633,8 +712,7 @@ public class TeacherDao {
 		ArrayList<MemberVo> voList = null;
 		String sql = "select m_id, m_name, m_nickname, m_birth, "
 				+ "m_phone, m_email, gender_fm, m_date, m_certificate, "
-				+ "t_no from member m join t_profile t USING(M_ID) "
-				+ "where T_APPROVAL='N'";
+				+ "t_no from member m join t_profile t USING(M_ID) " + "where T_APPROVAL='N'";
 		try {
 			pstmt = conn.prepareStatement(sql);
 			rs = pstmt.executeQuery();
@@ -663,18 +741,18 @@ public class TeacherDao {
 		}
 		return voList;
 	}
-	
+
 	// 선생님 모집 여부 변경
 	public int recruitYNChange(Connection conn, MemberVo vo) {
 		int result = 0;
 		String sql = "";
 		String yn = vo.gettRecruitYn();
-		if(yn.equals("Y")) {
+		if (yn.equals("Y")) {
 			sql = "update t_profile set T_RECRUIT_YN = " + "'N' where m_id =? ";
 		} else {
 			sql = "update t_profile set T_RECRUIT_YN = " + "'Y' where m_id =? ";
 		}
-		if(sql != "") {
+		if (sql != "") {
 			try {
 				pstmt = conn.prepareStatement(sql);
 				pstmt.setString(1, vo.getmId());
@@ -687,7 +765,6 @@ public class TeacherDao {
 		}
 		return result;
 	}
-	
 
 	// 성별에 맞는 선생님 정보 읽기
 //	public ArrayList<TeacherVo> readGenderTeacher(Connection conn, String genderFm) {
@@ -773,7 +850,6 @@ public class TeacherDao {
 //	}
 //
 
-	
 //	// 선생님 담당 과목 넣기
 //		public int insertObject(Connection conn, String object, String tNo) {
 //			int result = 0;

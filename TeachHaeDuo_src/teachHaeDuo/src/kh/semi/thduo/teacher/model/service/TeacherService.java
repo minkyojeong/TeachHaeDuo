@@ -53,7 +53,7 @@ public class TeacherService {
 	}
 
 	// 검색한 과목에 맞는 선생님 정보 읽기
-	public ArrayList<TeacherVo> readTeacher(String object,int startRnum,int endRnum) {
+	public ArrayList<TeacherVo> readTeacher(String object, int startRnum, int endRnum) {
 		ArrayList<TeacherVo> retVolist = null;
 		Connection conn = getConnection();
 
@@ -128,16 +128,34 @@ public class TeacherService {
 
 		return retVo;
 	}
-	
+
 	// 선생님 교습정보 수정
-	public int updateTeacher(TeacherVo tVo, PencilVo pVo, String[] objectArr,String[] activeAreaArr) {
+	public int updateTeacher(TeacherVo tVo, PencilVo pVo, String[] objectArr, String[] activeAreaArr) {
 		int result = 0;
 		Connection conn = getConnection();
 		setAutocommit(conn, false);
 		System.out.println("서비스 tVo:" + tVo);
 		result = dao.updateTeacher(conn, tVo, pVo, objectArr, activeAreaArr);
-		
-		if(result < 1) { // 쿼리문 여러개 중에 하나라도 실패하면
+
+		if (result < 1) { // 쿼리문 여러개 중에 하나라도 실패하면
+			rollback(conn);
+		} else { // 모두 다 성공한다면
+			commit(conn);
+		}
+		close(conn);
+
+		return result;
+	}
+
+	// 선생님 교습정보 최초 등록
+	public int updateTeacherInit(TeacherVo tVo, PencilVo pVo, String[] objectArr, String[] activeAreaArr) {
+		int result = 0;
+		Connection conn = getConnection();
+		setAutocommit(conn, false);
+		System.out.println("서비스 tVo:" + tVo);
+		result = dao.updateTeacherInit(conn, tVo, pVo, objectArr, activeAreaArr);
+
+		if (result < 1) { // 쿼리문 여러개 중에 하나라도 실패하면
 			rollback(conn);
 		} else { // 모두 다 성공한다면
 			commit(conn);
@@ -169,8 +187,6 @@ public class TeacherService {
 		return result;
 	}
 
-	
-	
 	// 선생님 프로필 사진 등록/변경
 	public int updateProfilePicture(TeacherVo tVo) {
 		int result = 0;
@@ -181,16 +197,16 @@ public class TeacherService {
 
 		return result;
 	}
-	
+
 	// 비승인 선생님 정보 읽기
-	public ArrayList<MemberVo> readTeacherApprovalList(){
+	public ArrayList<MemberVo> readTeacherApprovalList() {
 		ArrayList<MemberVo> voList = null;
 		Connection conn = getConnection();
 		voList = dao.readTeacherApprovalList(conn);
 		close(conn);
 		return voList;
 	}
-	
+
 	// 선생님 모집여부 변경
 	public int recruitYNChange(MemberVo vo) {
 		int result = 0;
@@ -200,7 +216,7 @@ public class TeacherService {
 		close(conn);
 		return result;
 	}
-	
+
 	// 성별에 맞는 선생님 정보 읽기
 //		public ArrayList<TeacherVo> readGenderTeacher(String genderFm) {
 //			ArrayList<TeacherVo> retVolist = null;
