@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN" 
+		"http://mybatis.org/dtd/mybatis-3-config.dtd" >
+<configuration>
+	<properties resource="mybatis/db.properties"/>
+	<settings>
+		<setting name="jdbcTypeForNull" value="NULL"/>
+	</settings>
+	<typeAliases>
+		<typeAlias type="kh.semi.thduo.teacher.model.vo.TeacherVo" alias="Teacher"/>
+		<typeAlias type="kh.semi.thduo.report.model.vo.ReportVo" alias="Report"/>
+	</typeAliases>
+	<environments default="THDUOPclass">
+		<environment id="THDUOPclass">
+			<transactionManager type="JDBC"/>
+			<dataSource type="POOLED">
+				<property name="driver" value="${jdbc.driver}"/>
+				<property name="url" value="${jdbc.url}"/>
+				<property name="username" value="${jdbc.username}"/>
+				<property name="password" value="${jdbc.password}"/>
+			</dataSource>
+		</environment>
+		<environment id="THDUOLocal">
+			<transactionManager type="JDBC"/>
+			<dataSource type="POOLED">
+				<property name="driver" value="${jdbc.driver}"/>
+				<property name="url" value="${jdbc.urlLocal}"/>
+				<property name="username" value="${jdbc.username}"/>
+				<property name="password" value="${jdbc.password}"/>
+			</dataSource>
+		</environment>
+	</environments>
+	<mappers>
+		<mapper resource="mybatis/mappers/teacher-mapper.xml"/>
+		<mapper resource="mybatis/mappers/report-mapper.xml"/>
+	</mappers>
+</configuration>

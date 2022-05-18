@@ -1,6 +1,7 @@
 package kh.semi.thduo.report.model.dao;
 
 import static kh.semi.thduo.common.jdbc.JdbcTemplate.close;
+import static kh.semi.thduo.common.jdbc.JdbcUtil.getSqlSession;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -9,9 +10,12 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 
+import org.apache.ibatis.session.SqlSession;
+
 import kh.semi.thduo.report.model.vo.ReportVo;
 
 public class ReportDao {
+	private SqlSession sqlSessoin = null;
 	private Statement stmt = null;
 	private PreparedStatement pstmt = null;
 	private ResultSet rs = null;
@@ -37,6 +41,14 @@ public class ReportDao {
 			close(pstmt);
 		}
 
+		return result;
+	}
+	
+	// 신고 삽입(mybatis 사용)
+	public int insertReport(ReportVo setVo) {
+		System.out.println("setVo: "+setVo);
+		int result = getSqlSession().insert("reportMapper.insertReport", setVo);
+		System.out.println("DAO 결과 : " +result );
 		return result;
 	}
 
@@ -103,5 +115,10 @@ public class ReportDao {
 			close(pstmt);
 		}
 		return rVo;
+	}
+	
+	// 선택한 신고 내역 읽기(mybatis 사용)
+	public ReportVo readOneReport(int m_r_no) {
+		return getSqlSession().selectOne("reportMapper.readOneReport", m_r_no);
 	}
 }

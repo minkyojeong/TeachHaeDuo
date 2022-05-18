@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="reportMapper">
+	<resultMap type="Report" id="newReportMap">
+		<result column="m_r_no" property="m_r_no"/>
+		<result column="m_r_sendid" property="m_r_sendid"/>
+		<result column="m_r_sendName" property="m_r_sendName"/>
+		<result column="m_r_receiveid" property="m_r_receiveid"/>
+		<result column="m_r_receiveName" property="m_r_receiveName"/>
+		<result column="m_r_category" property="m_r_category"/>
+		<result column="m_r_content" property="m_r_content"/>
+		<result column="t_r_date" property="t_r_date"/>
+		<result column="m_id" property="m_id"/>
+		<result column="t_no" property="t_no"/>
+		<result column="m_r_receiveNickname" property="m_r_receiveNickname"/>
+	</resultMap>
+	
+   <insert id="insertReport" parameterType="Report">
+	INSERT INTO member_report(M_R_NO, M_R_SENDID, M_R_RECEIVEID, M_R_CATEGORY, M_R_CONTENT, M_R_DATE, M_ID)
+	VALUES((SELECT NVL(MAX(m_r_no), 0) + 1 FROM member_report), #{m_r_sendid}, #{m_r_receiveid}, #{m_r_category}, #{m_r_content}, default, #{m_id})
+  </insert>
+  
+  <select id="readAllReport" resultMap="newReportMap">
+  	select t.t_no t_no, m_r_no, M_R_SENDID, m1.m_name send_name, M_R_RECEIVEID, m2.m_name receive_name, m2.m_nickname m_nickname, M_R_CATEGORY, M_R_CONTENT, M_R_DATE
+  	from member_report mr join member m1
+  						on mr.m_r_sendid=m1.m_id
+  						join member m2
+  						on mr.m_r_receiveid=m2.m_id
+  						join t_profile t
+  						on t.m_id=mr.m_r_receiveid
+  </select>
+  
+  <select id="readOneReport" parameterType="_int" resultMap="newReportMap">
+  	select m_r_no, M_R_SENDID, m1.m_name send_name, M_R_RECEIVEID, m2.m_name receive_name, M_R_CATEGORY, M_R_CONTENT, M_R_DATE
+  	from member_report mr join member m1
+  						on mr.m_r_sendid=m1.m_id
+  						join member m2
+  						on mr.m_r_receiveid=m2.m_id
+  	where m_r_no=#{m_r_no}
+  </select>
+  
+  <update id="">
+  </update>
+</mapper>
