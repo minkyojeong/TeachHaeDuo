@@ -1,4 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="teacherMapper">
+<select id="">
+SELECT pro.t_no, pro.t_major, pro.t_picture, m.m_nickname, round(rscore.avg_rscore, 2) avg_rscore, olist.object_list, alist.area_list
+FROM t_profile pro JOIN member m ON pro.m_id = m.m_id
+JOIN view_teacher_rscroe_avg rscore"
+ON rscore.m_nickname = m.m_nickname"
+JOIN view_teacher_object olist"
+ON olist.m_nickname = m.m_nickname"
+JOIN view_teacher_area alist"
+ON alist.m_nickname = m.m_nickname"
+ORDER BY TO_NUMBER(SUBSTR(t_no, 2)) desc
+</select>
 </mapper>

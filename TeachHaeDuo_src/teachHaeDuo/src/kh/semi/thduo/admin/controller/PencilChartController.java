@@ -2,6 +2,7 @@ package kh.semi.thduo.admin.controller;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -57,7 +58,7 @@ public class PencilChartController extends HttpServlet {
 			response.sendRedirect("login");
 			return;
 		} else { // 되어 있다면
-			ArrayList<MemberVo> voList = null;
+			List<MemberVo> voList = null;
 			// 전체 매출 조회
 			if (type != null) {
 				if (type.equals("A")) {
@@ -89,7 +90,7 @@ public class PencilChartController extends HttpServlet {
 	}
 
 	private void voListRequestForward(HttpServletRequest request, HttpServletResponse response,
-			ArrayList<MemberVo> voList) throws ServletException, IOException {
+			List<MemberVo> voList) throws ServletException, IOException {
 		if (voList != null) {
 			// 가져온 데이터 request에 담기
 			request.setAttribute("voList", voList);

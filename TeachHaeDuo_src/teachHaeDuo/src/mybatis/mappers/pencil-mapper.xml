@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="pencilMapper">
+	<!-- <cache-ref namespace=""/> 안쓸거야 -->
+	<!-- 쿼리문이 토해낸 컬럼명이랑 집어넣을 변수명이랑 다르자나, 그거 변환해서 넣어주는거야 -->
+	<resultMap type="Pencil" id="newPencilMap">
+		<!-- 지금은 특별한 기능 없는데, pk라고 좀 특별한 애라고 지칭해주는것 -->
+		<id column="cp_No" property="cpNo" />
+		<result column="cp_Content" property="cpContent" />
+		<result column="cp_Cash" property="cpCash" />
+		<result column="cp_Date" property="cpDate" />
+	</resultMap>
+	
+	<resultMap type="Member" id="newMemberMap">
+		<result column="cp_date" property="cpDate"/>
+		<result column="cp_cash" property="cpCash"/>
+		<result column="m_id" property="mId"/>
+		<result column="m_name" property="mName"/>
+		<result column="role_st" property="roleSt"/>
+		<result column="m_phone" property="mPhone"/>
+		<result column="m_email" property="mEmail"/>
+		<result column="gender_fm" property="genderFm"/>
+	</resultMap>
+	<!-- parameterType : 원래는 kh.semi. 풀네임써줘야되는데 별칭 설정한거 넣었음 -->
+	<!-- 연필 충전 -->
+	<insert id="plusPencil" parameterType="Pencil">
+	<![CDATA[
+		insert into check_pencil
+		(cp_no, cp_content, cp_cash, cp_date,m_id)
+		values
+		((select (nvl(max(cp_no)+1,0)) from check_pencil where m_id=#{mId}),
+		'연필충전', #{cpCash}, default,#{mId})
+		 ]]>
+	</insert>
+
+	<!-- 연필 잔액 확인 -->
+	<select id="checkPencil" parameterType="java.lang.String" resultType="_int">
+		<![CDATA[
+		SELECT SUM(cp_cash) cp_cash
+		FROM check_pencil
+		WHERE m_id = #{mId} GROUP BY m_id
+		 ]]>
+	</select>
+
+	<!-- 연필 차감 내역 삽입 -->
+	<insert id="minusPencil" parameterType="Pencil">
+	<![CDATA[
+		INSERT INTO check_pencil
+		(cp_no, cp_content, cp_cash, cp_date, m_id)
+		VALUES
+		((SELECT NVL(MAX(cp_no), 0) + 1 FROM check_pencil WHERE m_id = #{mId}),
+		#{cpContent}, #{cpCash}, default, #{mId})
+		 ]]>
+	</insert>
+
+	<!-- 연필 사용 내역 -->
+	<select id="listPencil" resultMap="newPencilMap" parameterType="string">
+	<![CDATA[
+		select cp_content, cp_cash, cp_date from check_pencil
+		where m_id=#{mId} order by cp_date desc
+		 ]]>
+	</select>
+
+	<!-- 기본연필테이블 insert -->
+	<insert id="insertPencilInit">
+ 	<![CDATA[
+	  insert into check_pencil
+	  (CP_NO, M_ID, CP_CONTENT, CP_cash,CP_DATE) 
+	  values
+	  (0,#{mId},'회원가입',0,default)
+	 ]]>
+	</insert>
+
+	<!-- 관리자 전체 매출 조회 -->
+	<select id="allPencilChart" resultMap="newMemberMap">
+	<![CDATA[
+		select cp_date, cp_cash, p.m_id, m.m_name, m.role_st, 
+		m.m_phone, m.m_email, m.gender_fm from check_pencil p 
+		join member m on p.m_id = m.m_id where cp_cash>0 order by cp_date desc
+	]]>
+	</select>
+	
+	<!-- 관리자 달 매출 조회 -->
+	<select id="monthPencilChart" parameterType="_int" resultMap="newMemberMap">
+	<![CDATA[
+		select cp_date, cp_cash, p.m_id, m.m_name, m.role_st,
+		m.m_phone, m.m_email, m.gender_fm from check_pencil p
+		join member m on p.m_id = m.m_id where cp_cash>0
+		and to_char(cp_date,'yymm') between to_char(add_months(sysdate,-${num}),'yymm')
+		and (to_char(sysdate,'yymm')) order by cp_date desc
+	]]>
+	</select>
+
+	<!-- 관리자 연도 매출 조회 -->
+	<select id="yearPencilChart" parameterType="_int" resultMap="newMemberMap">
+	<![CDATA[
+		select cp_date, cp_cash, p.m_id, m.m_name, m.role_st,
+		m.m_phone, m.m_email, m.gender_fm from check_pencil p
+		join member m on p.m_id = m.m_id where cp_cash>0 
+		and (to_char(cp_date,'yy')) = to_char(add_months(sysdate,-#{num}),'yy')
+		order by cp_date desc
+	]]>
+	</select>
+</mapper>

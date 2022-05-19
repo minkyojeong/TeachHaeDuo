@@ -2,11 +2,16 @@ package kh.semi.thduo.pencil.model.service;
 
 import java.sql.Connection;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+
+import org.apache.ibatis.session.SqlSession;
 
 import static kh.semi.thduo.common.jdbc.JdbcTemplate.*;
 
 import kh.semi.thduo.alarm.model.dao.AlarmDao;
 import kh.semi.thduo.alarm.model.vo.AlarmVo;
+import kh.semi.thduo.common.jdbc.JdbcUtil;
 import kh.semi.thduo.member.vo.MemberVo;
 import kh.semi.thduo.pencil.model.dao.PencilDao;
 import kh.semi.thduo.pencil.model.vo.PencilVo;
@@ -18,9 +23,15 @@ public class PencilService {
 	public int plusPencil(PencilVo vo) {
 		System.out.println("충전하기 서비스 vo:" + vo);
 		int result = 0;
-		Connection conn = getConnection();
-		result = dao.plusPencil(conn, vo);
-		close(conn);
+		SqlSession session = JdbcUtil.getSqlSession();
+		result = dao.plusPencil(session, vo);
+		if (result < 0) {
+			System.out.println("롤백");
+			session.rollback();
+		} else {
+			System.out.println("커밋");
+			session.commit();
+		}
 		System.out.println("충전하기 서비스 result:" + result);
 		return result;
 	}
@@ -28,11 +39,8 @@ public class PencilService {
 	// 연필 잔액 확인
 	public int checkPencil(String mId) {
 		int result = 0;
-		Connection conn = getConnection();
-
-		result = dao.checkPencil(conn, mId);
-
-		close(conn);
+		SqlSession session = JdbcUtil.getSqlSession();
+		result = dao.checkPencil(session, mId);
 
 		return result;
 	}
@@ -40,11 +48,9 @@ public class PencilService {
 	// 연필 차감 내역 삽입
 	public int minusPencil(PencilVo vo) {
 		int result = 0;
-		Connection conn = getConnection();
+		SqlSession session = JdbcUtil.getSqlSession();
+		result = dao.minusPencil(session,vo);
 
-		result = dao.minusPencil(conn, vo);
-
-		close(conn);
 
 		return result;
 	}
@@ -52,34 +58,28 @@ public class PencilService {
 	// 연필 차감 내역 삽입(쪽지 보내기 할 때)
 	public int minusPencil(PencilVo vo, AlarmVo avo) {
 		int result = 0;
-		Connection conn = getConnection();
-		setAutocommit(conn, false);
-
-		result = dao.minusPencil(conn, vo);
+		SqlSession session = JdbcUtil.getSqlSession();
+		result = dao.minusPencil(session,vo);
 		if (result < 1) {
-			rollback(conn);
+			session.rollback();
 		} else {
-			result = new AlarmDao().sendAlarm(conn, avo);
-			if(result < 1) {
-				rollback(conn);
+			result = new AlarmDao().sendAlarm(session, avo);
+			if (result < 1) {
+				session.rollback();
 			} else {
-				commit(conn);
+				session.commit();
 			}
 		}
 
-		close(conn);
 
 		return result;
 	}
 
 	// 연필 사용 내역
-	public ArrayList<PencilVo> listPencil(String mId) {
-		ArrayList<PencilVo> result = null;
-
-		Connection conn = getConnection();
-		result = dao.listPencil(conn, mId);
-
-		close(conn);
+	public List<PencilVo> listPencil(String mId) {
+		List<PencilVo> result = null;
+		SqlSession session = JdbcUtil.getSqlSession();
+		result = dao.listPencil(session,mId);
 
 		return result;
 
@@ -88,45 +88,33 @@ public class PencilService {
 	// 회원가입시 기본 연필 테이블 insert
 	public int insertPencilInit(String mId) {
 		int result = 0;
-		Connection conn = null;
-
-		conn = getConnection();
-		result = dao.insertPencilInit(conn, mId);
-		if (result == 1) {
-			commit(conn);
-		} else {
-			rollback(conn);
-		}
-		close(conn);
+		SqlSession session = JdbcUtil.getSqlSession();
+		result = dao.insertPencilInit(session,mId);
 
 		return result;
 	}
 
 	// 관리자 전체 매출 조회
-	public ArrayList<MemberVo> allPencilChart() {
-		ArrayList<MemberVo> result = null;
-		Connection conn = getConnection();
-		result = dao.allPencilChart(conn);
-		close(conn);
+	public List<MemberVo> allPencilChart() {
+		List<MemberVo> result = null;
+		SqlSession session = JdbcUtil.getSqlSession();
+		result = dao.allPencilChart(session);
 		return result;
 	}
 
 	// 관리자 달 매출 조회
-	public ArrayList<MemberVo> monthPencilChart(int num) {
-		ArrayList<MemberVo> result = null;
-		Connection conn = getConnection();
-		result = dao.monthPencilChart(conn, num);
-		close(conn);
+	public List<MemberVo> monthPencilChart(int num) {
+		List<MemberVo> result = null;
+		SqlSession session = JdbcUtil.getSqlSession();
+		result = dao.monthPencilChart(session,num);
 		return result;
 	}
 
 	// 관리자 년도 매출 조회
-	public ArrayList<MemberVo> yearPencilChart(int num) {
-		ArrayList<MemberVo> result = null;
-		Connection conn = getConnection();
-		result = dao.yearPencilChart(conn,num);
-		close(conn);
+	public List<MemberVo> yearPencilChart(int num) {
+		List<MemberVo> result = null;
+		SqlSession session = JdbcUtil.getSqlSession();
+		result = dao.yearPencilChart(session,num);
 		return result;
 	}
 }
-

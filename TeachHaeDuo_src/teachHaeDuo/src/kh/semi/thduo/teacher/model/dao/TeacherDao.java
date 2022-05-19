@@ -44,43 +44,43 @@ public class TeacherDao {
 	// 모든 선생님 정보 읽기
 	public ArrayList<TeacherVo> readAllTeacher(Connection conn, int startRnum, int endRnum) {
 		ArrayList<TeacherVo> retVolist = null;
-		String sql = "SELECT pro.t_no, pro.t_major, pro.t_picture, m.m_nickname, round(rscore.avg_rscore, 2) avg_rscore, olist.object_list, alist.area_list"
-				+ " FROM t_profile pro JOIN member m" + "                    ON pro.m_id = m.m_id"
-				+ "                    JOIN view_teacher_rscroe_avg rscore"
-				+ "                    ON rscore.m_nickname = m.m_nickname"
-				+ "                    JOIN view_teacher_object olist"
-				+ "                    ON olist.m_nickname = m.m_nickname"
-				+ "                    JOIN view_teacher_area alist"
-				+ "                    ON alist.m_nickname = m.m_nickname"
-				+ " ORDER BY TO_NUMBER(SUBSTR(t_no, 2)) desc";
-		System.out.println("sql: " + sql);
-		sql = "select * from (select ROWNUM rnum, tall.* from (" + sql + ") tall) tall2  where rnum>=? and rnum<=?";
-		System.out.println("sql: " + sql);
-		try {
-			pstmt = conn.prepareStatement(sql);
-			pstmt.setInt(1, startRnum);
-			pstmt.setInt(2, endRnum);
-			rs = pstmt.executeQuery();
-			retVolist = new ArrayList<TeacherVo>();
-			while (rs.next()) {
-				TeacherVo vo = new TeacherVo();
-				vo.setT_no(rs.getString("t_no"));
-				vo.setT_major(rs.getString("t_major"));
-				vo.setT_picture(rs.getString("t_picture"));
-				vo.setM_nickname(rs.getString("m_nickname"));
-				vo.setAvg_rscore(rs.getDouble("avg_rscore"));
-				vo.setObject_list(rs.getString("object_list"));
-				vo.setArea_list(rs.getString("area_list"));
-
-				retVolist.add(vo);
-			}
-		} catch (SQLException e) {
-			e.printStackTrace();
-		} finally {
-			close(rs);
-			close(pstmt);
-		}
-		System.out.println("dao retVolist 1:" + retVolist);
+//		String sql = "SELECT pro.t_no, pro.t_major, pro.t_picture, m.m_nickname, round(rscore.avg_rscore, 2) avg_rscore, olist.object_list, alist.area_list"
+//				+ " FROM t_profile pro JOIN member m" + "                    ON pro.m_id = m.m_id"
+//				+ "                    JOIN view_teacher_rscroe_avg rscore"
+//				+ "                    ON rscore.m_nickname = m.m_nickname"
+//				+ "                    JOIN view_teacher_object olist"
+//				+ "                    ON olist.m_nickname = m.m_nickname"
+//				+ "                    JOIN view_teacher_area alist"
+//				+ "                    ON alist.m_nickname = m.m_nickname"
+//				+ " ORDER BY TO_NUMBER(SUBSTR(t_no, 2)) desc";
+//		System.out.println("sql: " + sql);
+//		sql = "select * from (select ROWNUM rnum, tall.* from (" + sql + ") tall) tall2  where rnum>=? and rnum<=?";
+//		System.out.println("sql: " + sql);
+//		try {
+//			pstmt = conn.prepareStatement(sql);
+//			pstmt.setInt(1, startRnum);
+//			pstmt.setInt(2, endRnum);
+//			rs = pstmt.executeQuery();
+//			retVolist = new ArrayList<TeacherVo>();
+//			while (rs.next()) {
+//				TeacherVo vo = new TeacherVo();
+//				vo.setT_no(rs.getString("t_no"));
+//				vo.setT_major(rs.getString("t_major"));
+//				vo.setT_picture(rs.getString("t_picture"));
+//				vo.setM_nickname(rs.getString("m_nickname"));
+//				vo.setAvg_rscore(rs.getDouble("avg_rscore"));
+//				vo.setObject_list(rs.getString("object_list"));
+//				vo.setArea_list(rs.getString("area_list"));
+//
+//				retVolist.add(vo);
+//			}
+//		} catch (SQLException e) {
+//			e.printStackTrace();
+//		} finally {
+//			close(rs);
+//			close(pstmt);
+//		}
+//		System.out.println("dao retVolist 1:" + retVolist);
 
 		return retVolist;
 	}

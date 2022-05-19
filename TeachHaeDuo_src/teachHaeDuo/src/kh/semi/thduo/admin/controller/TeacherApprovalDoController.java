@@ -7,6 +7,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import kh.semi.thduo.admin.service.AdminService;
 import kh.semi.thduo.admin.vo.AdminVo;
 import kh.semi.thduo.alarm.model.service.AlarmService;
 import kh.semi.thduo.alarm.model.vo.AlarmVo;
@@ -60,9 +61,10 @@ public class TeacherApprovalDoController extends HttpServlet {
 				vo.setAlarm_receiveid(nickname);
 				vo.setAlarm_sendid("관리자");
 				vo.setM_id(mId);
-				yD = "D";
+				vo.setT_no(tNoNo);
+				vo.setApprovalStr("D");
 				if (vo != null && tNoNo != null) {
-					result = new AlarmService().sendApprovalAlarm(vo, yD, tNoNo);
+					result = new AdminService().sendApprovalAlarm(vo);
 				}
 				// 실패
 				if (result == 0) {
@@ -81,9 +83,10 @@ public class TeacherApprovalDoController extends HttpServlet {
 				vo.setAlarm_receiveid(nickname);
 				vo.setAlarm_sendid("관리자");
 				vo.setM_id(mId);
-				yD = "Y";
+				vo.setT_no(tNoOk);
+				vo.setApprovalStr("Y");
 				if (vo != null && tNoOk != null) {
-					result = new AlarmService().sendApprovalAlarm(vo, yD, tNoOk);
+					result = new AdminService().sendApprovalAlarm(vo);
 				}
 				// 실패
 				if (result == 0) {

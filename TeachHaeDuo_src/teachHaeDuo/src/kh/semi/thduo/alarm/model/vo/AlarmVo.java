@@ -11,6 +11,7 @@ public class AlarmVo {
 	private String alarm_receiveid;
 	private String m_id;
 	private String t_no;
+	private String approvalStr;
 	
 	public AlarmVo() {
 		super();
@@ -22,8 +23,17 @@ public class AlarmVo {
 	public String toString() {
 		return "AlarmVo [alarm_no=" + alarm_no + ", alarm_content=" + alarm_content + ", alarm_date=" + alarm_date
 				+ ", alarm_sendid=" + alarm_sendid + ", alarm_receiveid=" + alarm_receiveid + ", m_id=" + m_id
-				+ ", t_no=" + t_no + "]";
+				+ ", t_no=" + t_no + ", approvalStr=" + approvalStr + "]";
 	}
+	
+	public String getApprovalStr() {
+		return approvalStr;
+	}
+
+	public void setApprovalStr(String approvalStr) {
+		this.approvalStr = approvalStr;
+	}
+
 	public String getT_no() {
 		return t_no;
 	}

@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import kh.semi.thduo.admin.service.AdminService;
 import kh.semi.thduo.admin.vo.AdminVo;
 import kh.semi.thduo.alarm.model.service.AlarmService;
 import kh.semi.thduo.alarm.model.vo.AlarmVo;
@@ -43,7 +44,6 @@ public class TeacherCancelController extends HttpServlet {
 		String mNickname = request.getParameter("mNickname");
 		String tNo = request.getParameter("tNo");
 		// 사용할 변수 선언
-		String yD = "D";
 		int result = 0;
 		// 관리자 로그인 확인
 		AdminVo aVo = (AdminVo) request.getSession().getAttribute("ssMV");
@@ -58,8 +58,10 @@ public class TeacherCancelController extends HttpServlet {
 			vo.setAlarm_receiveid(mNickname);
 			vo.setAlarm_sendid("관리자");
 			vo.setM_id(mId);
+			vo.setT_no(tNo);
+			vo.setApprovalStr("D");
 			if (vo != null) {
-				result = new AlarmService().sendTeacherCancelAlarm(vo, yD, tNo);
+				result = new AdminService().sendTeacherCancelAlarm(vo);
 			}
 			// 실패
 			if (result == 0) {

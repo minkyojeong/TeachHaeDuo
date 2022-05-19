@@ -3,6 +3,7 @@ package kh.semi.thduo.pencil.controller;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
+import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -59,7 +60,7 @@ public class PencilListAjaxController extends HttpServlet {
 		} else { // 되어있다면
 			System.out.println("연필 사용내역 서비스 호출 m_id:" + vo.getmId());
 			// 서비스 호출
-			ArrayList<PencilVo> result = new PencilService().listPencil(vo.getmId());
+			List<PencilVo> result = new PencilService().listPencil(vo.getmId());
 			System.out.println("리스트 결과:" + result);
 			// gson에 담아 ajax로 데이터 넘겨주기
 			Gson gobj = new GsonBuilder().setPrettyPrinting().create();

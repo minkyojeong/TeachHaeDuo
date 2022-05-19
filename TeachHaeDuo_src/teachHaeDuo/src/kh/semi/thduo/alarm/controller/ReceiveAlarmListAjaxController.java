@@ -3,6 +3,7 @@ package kh.semi.thduo.alarm.controller;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
+import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -62,7 +63,7 @@ public class ReceiveAlarmListAjaxController extends HttpServlet {
 			System.out.println("받은 알람 서비스 호출 mNickname:" + vo.getmNickname());
 			if (vo.getmNickname() != null) {
 				// 서비스 호출
-				ArrayList<AlarmVo> voList = new AlarmService().receiveListAlarm(vo.getmNickname());
+				List<AlarmVo> voList = new AlarmService().receiveListAlarm(vo.getmNickname());
 				System.out.println("리스트 결과:" + voList);
 				// 데이터를 잘 받아왔는지
 				if (voList != null) {

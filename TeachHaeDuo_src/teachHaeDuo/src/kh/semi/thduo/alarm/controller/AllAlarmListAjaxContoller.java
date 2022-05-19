@@ -3,6 +3,7 @@ package kh.semi.thduo.alarm.controller;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
+import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -62,7 +63,7 @@ public class AllAlarmListAjaxContoller extends HttpServlet {
 			System.out.println("전체알람 서비스 호출 mNickname:" + vo.getmNickname());
 			if (vo.getmNickname() != null) {
 				// 서비스 호출
-				ArrayList<AlarmVo> voList = new AlarmService().allListAlarm(vo.getmNickname());
+				List<AlarmVo> voList = new AlarmService().allListAlarm(vo.getmNickname());
 				System.out.println("리스트 결과:" + voList);
 				if (voList != null) {
 //					// 리턴 값을 gson에 담아 ajax에 넘기기

@@ -9,6 +9,9 @@ import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
+import org.apache.ibatis.session.SqlSession;
+
+import kh.semi.thduo.common.jdbc.JdbcUtil;
 import kh.semi.thduo.member.dao.MemberDao;
 import kh.semi.thduo.member.vo.MemberVo;
 import kh.semi.thduo.pencil.model.dao.PencilDao;
@@ -79,7 +82,8 @@ public class MemberService {
 			
 		if (result == 1) {
 			// 연필 테이블에 기본 insert
-			result = penDao.insertPencilInit(conn, vo.getmId());
+			SqlSession session = JdbcUtil.getSqlSession();
+			result = penDao.insertPencilInit(session, vo.getmId());
 			
 			if (result < 1) {
 				rollback(conn);

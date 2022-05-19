@@ -3,6 +3,7 @@ package kh.semi.thduo.member.controller;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
+import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -71,7 +72,7 @@ public class MemberLoginController extends HttpServlet {
 			request.getSession().setAttribute("ssMV", vo2);
 			String mNickname = vo2.getmNickname();
 			System.out.println("받은 알람 서비스 호출 mNickname:" + mNickname);
-			ArrayList<AlarmVo> result = new AlarmService().receiveIdList(mNickname);
+			List<AlarmVo> result = new AlarmService().receiveIdList(mNickname);
 			System.out.println("리스트 결과:" + result);
 			request.getSession().setAttribute("nicknameList", result);
 			response.sendRedirect(request.getContextPath() + "/"); // 절대경로를 의미하며 -context root가 없음.

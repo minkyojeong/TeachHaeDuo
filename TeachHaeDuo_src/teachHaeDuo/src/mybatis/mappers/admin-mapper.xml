@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="adminMapper">
+
+	<!-- 관리자 승인 비승인 알람 보내기 -->
+	<insert id="sendApprovalAlarm" parameterType="Alarm">
+	INSERT INTO alarm 
+	VALUES 
+	((SELECT NVL(MAX(alarm_no), 0) + 1 FROM alarm)
+	, #{alarm_content}, DEFAULT, #{alarm_sendid}, #{alarm_receiveid}, #{m_id})
+	</insert>
+	
+	<update id="updateApproval" parameterType="Alarm">
+	update t_profile set T_APPROVAL=#{approvalStr} where t_no=#{t_no}
+	</update>
+	
+	
+	<!-- 관리자 자격박탈 알람 보내기 -->
+	<insert id="sendTeacherCancelAlarm" parameterType="Alarm">
+	INSERT INTO alarm VALUES 
+	((SELECT NVL(MAX(alarm_no), 0) + 1 FROM alarm)
+	, #{alarm_content}, DEFAULT, #{alarm_sendid}, #{alarm_receiveid}, #{m_id})
+	</insert>
+	
+	<delete id="deleteReport" parameterType="Alarm">
+	delete from member_report where m_r_receiveid = #{m_id}
+	</delete>
+</mapper>

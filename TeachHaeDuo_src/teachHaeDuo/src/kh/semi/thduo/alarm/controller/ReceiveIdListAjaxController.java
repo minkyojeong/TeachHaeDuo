@@ -3,6 +3,7 @@ package kh.semi.thduo.alarm.controller;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
+import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -61,7 +62,7 @@ public class ReceiveIdListAjaxController extends HttpServlet {
 			if (vo.getmNickname() != null) {
 				System.out.println("받은 알람 서비스 호출 mNickname:" + vo.getmNickname());
 				// 서비스 호출
-				ArrayList<AlarmVo> result = new AlarmService().receiveIdList(vo.getmNickname());
+				List<AlarmVo> result = new AlarmService().receiveIdList(vo.getmNickname());
 				System.out.println("리스트 결과:" + result);
 				// 리턴값 세션에 저장
 				request.getSession().setAttribute("nicknameList", result);

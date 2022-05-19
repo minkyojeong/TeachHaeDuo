@@ -1,3 +1,4 @@
+<%@page import="java.util.List"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="kh.semi.thduo.alarm.model.vo.AlarmVo"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
@@ -85,7 +86,7 @@
 	<div class="header_message_content">
 		<p class="header_modal_title">쪽지 보내기</p>
 		<%
-			ArrayList<AlarmVo> idList = (ArrayList<AlarmVo>) request.getSession().getAttribute("nicknameList");
+			List<AlarmVo> idList = (List<AlarmVo>) request.getSession().getAttribute("nicknameList");
 		%>
 		<select id="sel_send_message" onchange="selectBoxChange(this.value);">
 			<option value="">받는 사람을 선택해주세요</option>

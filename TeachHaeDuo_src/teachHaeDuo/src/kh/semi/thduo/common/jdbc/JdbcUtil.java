@@ -22,4 +22,5 @@ public class JdbcUtil {
 	public static SqlSession getSqlSession() {
 		return factory.openSession();
 	}
+	
 }

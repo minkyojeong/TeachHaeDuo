@@ -9,6 +9,9 @@
 	<typeAliases>
 		<typeAlias type="kh.semi.thduo.teacher.model.vo.TeacherVo" alias="Teacher"/>
 		<typeAlias type="kh.semi.thduo.report.model.vo.ReportVo" alias="Report"/>
+		<typeAlias type="kh.semi.thduo.pencil.model.vo.PencilVo" alias="Pencil"/>
+		<typeAlias type="kh.semi.thduo.member.vo.MemberVo" alias="Member"/>
+		<typeAlias type="kh.semi.thduo.alarm.model.vo.AlarmVo" alias="Alarm"/>
 	</typeAliases>
 	<environments default="THDUOPclass">
 		<environment id="THDUOPclass">
@@ -32,6 +35,9 @@
 	</environments>
 	<mappers>
 		<mapper resource="mybatis/mappers/teacher-mapper.xml"/>
+		<mapper resource="mybatis/mappers/pencil-mapper.xml"/>
 		<mapper resource="mybatis/mappers/report-mapper.xml"/>
+		<mapper resource="mybatis/mappers/alarm-mapper.xml"/>
+		<mapper resource="mybatis/mappers/admin-mapper.xml"/>
 	</mappers>
 </configuration>
