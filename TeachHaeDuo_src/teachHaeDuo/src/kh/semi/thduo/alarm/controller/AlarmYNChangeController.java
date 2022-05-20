@@ -49,7 +49,9 @@ public class AlarmYNChangeController extends HttpServlet {
 			vo.setmAlarmYn(ssMV.getmAlarmYn());
 			vo.setmId(ssMV.getmId());
 			// 담은 정보 가지고 서비스 호출
+			System.out.println("controller vo:"+vo);
 			result = new AlarmService().alarmYNChange(vo);
+			System.out.println("controller result:"+result);
 		}
 		// 알람 수신거부 여부 변경 성공
 		if (result == 1) {

@@ -55,6 +55,41 @@
 	insert into ACTI_AREA (t_no, area_code) values(#{tNo}, (select area_code from area where area_name=#{activeArea}) )
 	]]>
 	</insert>
+	
+	<!-- 선생님 승인 여부 체크 -->
+	<select id="checkApproval" resultType="string">
+	<![CDATA[
+	select T_APPROVAL from t_profile where t_no=#{tNo}
+	]]>
+	</select>
+	
+	<!-- 선생님 교습 정보 등록 여부 확인 -->
+	<select id="checkProfile" resultType="string">
+	<![CDATA[
+	select T_PROFILE_YN from t_profile where t_no=#{tNo}
+	]]>
+	</select>
+	
+	<!-- 선생님 프로필사진 등록/변경 -->
+	<update id="updateProfilePicture" parameterType="Teacher">
+	<![CDATA[
+	update t_profile set  T_PICTURE = #{t_picture} where t_no = #{t_no}
+	]]>
+	</update>
+	
+	<!-- 선생님 모집여부 변경 -->
+	<update id="recruitYNChange" parameterType="Member">
+	update t_profile set
+		<choose>
+			<when test='tRecruitYn.equals("Y")'>
+			T_RECRUIT_YN ='N'
+			</when>
+			<when test='tRecruitYn.equals("N")'>
+			T_RECRUIT_YN ='Y'
+			</when>
+		</choose>
+	where m_id =#{mId}
+	</update>
 </mapper>
 
 

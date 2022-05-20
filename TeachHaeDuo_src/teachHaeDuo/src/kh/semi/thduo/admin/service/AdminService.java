@@ -7,6 +7,8 @@ import static kh.semi.thduo.common.jdbc.JdbcTemplate.rollback;
 import static kh.semi.thduo.common.jdbc.JdbcTemplate.setAutocommit;
 
 import java.sql.Connection;
+import java.util.ArrayList;
+import java.util.List;
 
 import org.apache.ibatis.session.SqlSession;
 
@@ -14,6 +16,7 @@ import kh.semi.thduo.admin.dao.AdminDao;
 import kh.semi.thduo.admin.vo.AdminVo;
 import kh.semi.thduo.alarm.model.vo.AlarmVo;
 import kh.semi.thduo.common.jdbc.JdbcUtil;
+import kh.semi.thduo.member.vo.MemberVo;
 
 public class AdminService {
 
@@ -58,6 +61,15 @@ public class AdminService {
 			session.commit();
 		}
 		return result;
+	}
+	
+
+	// 비승인 선생님 정보 읽기
+	public List<MemberVo> readTeacherApprovalList() {
+		List<MemberVo> voList = null;
+		SqlSession session = JdbcUtil.getSqlSession();
+		voList = dao.readTeacherApprovalList(session);
+		return voList;
 	}
 
 }

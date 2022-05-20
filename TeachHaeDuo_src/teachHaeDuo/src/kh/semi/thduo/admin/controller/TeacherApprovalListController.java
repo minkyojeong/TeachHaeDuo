@@ -2,6 +2,7 @@ package kh.semi.thduo.admin.controller;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -9,6 +10,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import kh.semi.thduo.admin.service.AdminService;
 import kh.semi.thduo.admin.vo.AdminVo;
 import kh.semi.thduo.member.service.MemberService;
 import kh.semi.thduo.member.vo.MemberVo;
@@ -46,7 +48,7 @@ public class TeacherApprovalListController extends HttpServlet {
 			return;
 		} else {
 			// 화면에 뿌려줄 선생님 데이터 가져오기
-			ArrayList<MemberVo> voList = new TeacherService().readTeacherApprovalList();
+			List<MemberVo> voList = new AdminService().readTeacherApprovalList();
 			// 데이터 잘 가져왔다면
 			if (voList != null) {
 				// 가져온 데이터 request에 담기

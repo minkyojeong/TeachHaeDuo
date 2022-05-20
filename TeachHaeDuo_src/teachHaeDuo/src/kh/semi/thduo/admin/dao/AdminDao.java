@@ -7,6 +7,8 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.List;
 
 import org.apache.ibatis.session.SqlSession;
 
@@ -92,5 +94,11 @@ public class AdminDao {
 			}
 		}
 		return result;
+	}
+
+	// 비승인 선생님 정보 읽기
+	public List<MemberVo> readTeacherApprovalList(SqlSession session) {
+		List<MemberVo> voList = session.selectList("adminMapper.readTeacherApprovalList");
+		return voList;
 	}
 }

@@ -471,7 +471,7 @@ public class TeacherDao {
 
 	// 선생님 교습정보 수정
 	public int updateTeacher(SqlSession session, TeacherVo tVo) {
-		int result = session.insert("mypageMapper.updateTeacher",tVo);
+		int result = session.insert("mypageMapper.updateTeacher", tVo);
 		return result;
 	}
 
@@ -480,7 +480,7 @@ public class TeacherDao {
 		HashMap<String, String> map = new HashMap<String, String>();
 		map.put("object", object);
 		map.put("tNo", tNo);
-		int result = session.insert("mypageMapper.insertObject",map);
+		int result = session.insert("mypageMapper.insertObject", map);
 		return result;
 	}
 
@@ -495,137 +495,45 @@ public class TeacherDao {
 		HashMap<String, String> map = new HashMap<String, String>();
 		map.put("activeArea", activeArea);
 		map.put("tNo", tNo);
-		int result = session.insert("mypageMapper.insertActiveArea",map);
+		int result = session.insert("mypageMapper.insertActiveArea", map);
 		return result;
 	}
 
 	// 선생님 활동지역 삭제
 	public int deleteActiveArea(SqlSession session, String tNo) {
-		int result = session.delete("mypageMapper.deleteActiveArea",tNo);
+		int result = session.delete("mypageMapper.deleteActiveArea", tNo);
 		return result;
 	}
 
-
-
 	// 선생님 승인여부 체크
-	public String checkApproval(Connection conn, String tNo) {
-		String result = null;
-		String sql = "select T_APPROVAL from t_profile where t_no=?";
-
-		try {
-			pstmt = conn.prepareStatement(sql);
-			pstmt.setString(1, tNo);
-			rs = pstmt.executeQuery();
-			if (rs.next()) {
-				result = rs.getString("T_APPROVAL");
-			}
-		} catch (SQLException e) {
-			e.printStackTrace();
-		} finally {
-			close(pstmt);
-		}
-
+	public String checkApproval(SqlSession session, String tNo) {
+		String result = session.selectOne("mypageMapper.checkApproval", tNo);
 		return result;
 	}
 
 	// 선생님 교습정보 등록 여부 확인
-	public String checkProfile(Connection conn, String tNo) {
-		String result = null;
-		String sql = "select T_PROFILE_YN from t_profile where t_no=?";
-
-		try {
-			pstmt = conn.prepareStatement(sql);
-			pstmt.setString(1, tNo);
-			rs = pstmt.executeQuery();
-			if (rs.next()) {
-				result = rs.getString("T_PROFILE_YN");
-			}
-		} catch (SQLException e) {
-			e.printStackTrace();
-		} finally {
-			close(pstmt);
-		}
-
+	public String checkProfile(SqlSession session, String tNo) {
+		String result = session.selectOne("mypageMapper.checkProfile", tNo);
 		return result;
 	}
 
 	// 선생님 프로필 사진 등록/변경
-	public int updateProfilePicture(Connection conn, TeacherVo tVo) {
-		int result = 0;
-		String sql = "update t_profile set  T_PICTURE = ? where t_no = ?";
-
-		try {
-			pstmt = conn.prepareStatement(sql);
-			pstmt.setString(1, tVo.getT_picture());
-			pstmt.setString(2, tVo.getT_no());
-			result = pstmt.executeUpdate();
-		} catch (SQLException e) {
-			e.printStackTrace();
-		} finally {
-			close(pstmt);
-		}
-
+	public int updateProfilePicture(SqlSession session, TeacherVo tVo) {
+		System.out.println("dao vo:"+ tVo);
+		int result = session.update("mypageMapper.updateProfilePicture", tVo);
+		System.out.println("dao result:"+ result);
 		return result;
-	}
-
-	// 비승인 선생님 정보 읽기
-	public ArrayList<MemberVo> readTeacherApprovalList(Connection conn) {
-		ArrayList<MemberVo> voList = null;
-		String sql = "select m_id, m_name, m_nickname, m_birth, "
-				+ "m_phone, m_email, gender_fm, m_date, m_certificate, "
-				+ "t_no from member m join t_profile t USING(M_ID) " + "where T_APPROVAL='N'";
-		try {
-			pstmt = conn.prepareStatement(sql);
-			rs = pstmt.executeQuery();
-			if (rs != null) {
-				voList = new ArrayList<MemberVo>();
-				while (rs.next()) {
-					MemberVo vo = new MemberVo();
-					vo.setmId(rs.getString("m_id"));
-					vo.setmName(rs.getString("m_name"));
-					vo.setmNickname(rs.getString("m_nickname"));
-					vo.setmBirth(rs.getString("m_birth"));
-					vo.setmPhone(rs.getString("m_phone"));
-					vo.setmEmail(rs.getString("m_email"));
-					vo.setGenderFm(rs.getString("gender_fm"));
-					vo.setmDate(rs.getTimestamp("m_date"));
-					vo.setmCertificate(rs.getString("m_certificate"));
-					vo.settNo(rs.getString("t_no"));
-					voList.add(vo);
-				}
-			}
-		} catch (SQLException e) {
-			e.printStackTrace();
-		} finally {
-			close(rs);
-			close(pstmt);
-		}
-		return voList;
 	}
 
 	// 선생님 모집 여부 변경
-	public int recruitYNChange(Connection conn, MemberVo vo) {
-		int result = 0;
-		String sql = "";
-		String yn = vo.gettRecruitYn();
-		if (yn.equals("Y")) {
-			sql = "update t_profile set T_RECRUIT_YN = " + "'N' where m_id =? ";
-		} else {
-			sql = "update t_profile set T_RECRUIT_YN = " + "'Y' where m_id =? ";
-		}
-		if (sql != "") {
-			try {
-				pstmt = conn.prepareStatement(sql);
-				pstmt.setString(1, vo.getmId());
-				result = pstmt.executeUpdate();
-			} catch (SQLException e) {
-				e.printStackTrace();
-			} finally {
-				close(pstmt);
-			}
-		}
+	public int recruitYNChange(SqlSession session, MemberVo vo) {
+		System.out.println("dao vo:"+ vo);
+		int result = session.update("mypageMapper.recruitYNChange",vo);
+		System.out.println("dao result:"+ result);
 		return result;
 	}
+
+	
 
 	// 성별에 맞는 선생님 정보 읽기
 //	public ArrayList<TeacherVo> readGenderTeacher(Connection conn, String genderFm) {

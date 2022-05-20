@@ -134,10 +134,11 @@ public class TeacherService {
 	}
 
 	// 선생님 교습정보 수정
-	public int updateTeacher(TeacherVo tVo, PencilVo pVo, String[] objectArr, String[] activeAreaArr, String profileYn) {
+	public int updateTeacher(TeacherVo tVo, PencilVo pVo, String[] objectArr, String[] activeAreaArr,
+			String profileYn) {
 		int result = 0;
 		System.out.println("서비스 tVo:" + tVo);
-		
+
 		SqlSession session = JdbcUtil.getSqlSession();
 		result = dao.updateTeacher(session, tVo);
 		if (result < 1) { // 실패
@@ -149,15 +150,15 @@ public class TeacherService {
 			System.out.println("서비스 pVo:" + pVo);
 			result = new PencilService().minusPencil(pVo);
 			System.out.println("서비스 연필 테이블 result :" + result);
-			if(result < 1) { // 실패
+			if (result < 1) { // 실패
 				System.out.println("연필 정보 업데이트 실패");
 				session.rollback();
 				return 0;
 			} else { // 성공
 				System.out.println("연필 정보 업데이트 성공");
-				if(profileYn.equals("Y")) { // 기존 프로필이 있다면 담당 과목 삭제
+				if (profileYn.equals("Y")) { // 기존 프로필이 있다면 담당 과목 삭제
 					result = dao.deleteObject(session, tVo.getT_no());
-					if(result < 1) { // 실패
+					if (result < 1) { // 실패
 						System.out.println("담당과목 삭제 실패");
 						session.rollback();
 						return 0;
@@ -181,7 +182,7 @@ public class TeacherService {
 						} else { // 전부 성공했다면 기존 활동지역 삭제
 							System.out.println("담당과목 삽입 성공");
 							result = dao.deleteActiveArea(session, tVo.getT_no());
-							if(result < 1) { // 실패
+							if (result < 1) { // 실패
 								System.out.println("활동지역 삭제 실패");
 								session.rollback();
 								return 0;
@@ -200,18 +201,18 @@ public class TeacherService {
 								if (result == 0) { // 하나라도 실패했다면
 									session.rollback();
 									return 0;
-								} 
+								}
 							}
 						}
 					}
-				} else if(profileYn.equals("N")) { // 교습서 최초등록
+				} else if (profileYn.equals("N")) { // 교습서 최초등록
 					result = dao.updateTeacher(session, tVo);
-					if(result < 1) { // 실패
+					if (result < 1) { // 실패
 						session.rollback();
 						return 0;
 					} else { // 성공 했다면 연필 차감
 						result = new PencilService().minusPencil(pVo);
-						if(result < 1) { // 실패
+						if (result < 1) { // 실패
 							session.rollback();
 							return 0;
 						} else { // 성공 했다면 담당 과목 넣기
@@ -257,10 +258,8 @@ public class TeacherService {
 	// 선생님 승인여부 체크
 	public String checkApproval(String tNo) {
 		String result = null;
-		Connection conn = getConnection();
-
-		result = dao.checkApproval(conn, tNo);
-		close(conn);
+		SqlSession session = JdbcUtil.getSqlSession();
+		result = dao.checkApproval(session, tNo);
 
 		return result;
 	}
@@ -268,10 +267,8 @@ public class TeacherService {
 	// 선생님 교습정보 등록 여부 확인
 	public String checkProfile(String tNo) {
 		String result = null;
-		Connection conn = getConnection();
-
-		result = dao.checkProfile(conn, tNo);
-		close(conn);
+		SqlSession session = JdbcUtil.getSqlSession();
+		result = dao.checkProfile(session, tNo);
 
 		return result;
 	}
@@ -279,32 +276,29 @@ public class TeacherService {
 	// 선생님 프로필 사진 등록/변경
 	public int updateProfilePicture(TeacherVo tVo) {
 		int result = 0;
-		Connection conn = getConnection();
-
-		result = dao.updateProfilePicture(conn, tVo);
-		close(conn);
-
+		SqlSession session = JdbcUtil.getSqlSession();
+		System.out.println("service vo:"+tVo);
+		result = dao.updateProfilePicture(session, tVo);
+		System.out.println("service result:"+result);
+		if(result > 0) {
+			session.commit();
+		}
 		return result;
-	}
-
-	// 비승인 선생님 정보 읽기
-	public ArrayList<MemberVo> readTeacherApprovalList() {
-		ArrayList<MemberVo> voList = null;
-		Connection conn = getConnection();
-		voList = dao.readTeacherApprovalList(conn);
-		close(conn);
-		return voList;
 	}
 
 	// 선생님 모집여부 변경
 	public int recruitYNChange(MemberVo vo) {
 		int result = 0;
-		Connection conn = null;
-		conn = getConnection();
-		result = dao.recruitYNChange(conn, vo);
-		close(conn);
+		SqlSession session = JdbcUtil.getSqlSession();
+		System.out.println("service vo:"+vo);
+		result = dao.recruitYNChange(session, vo);
+		System.out.println("service result:"+result);
+		if(result > 0) {
+			session.commit();
+		}
 		return result;
 	}
+
 
 	// 성별에 맞는 선생님 정보 읽기
 //		public ArrayList<TeacherVo> readGenderTeacher(String genderFm) {
@@ -476,7 +470,7 @@ public class TeacherService {
 //
 //			return result;
 //		}
-	
+
 	// 선생님 교습정보 최초 등록
 //		public int updateTeacherInit(TeacherVo tVo, PencilVo pVo, String[] objectArr, String[] activeAreaArr) {
 //			int result = 0;

@@ -59,7 +59,9 @@ public class AlarmDao {
 
 	// 알람 수신거부
 	public int alarmYNChange(SqlSession session, MemberVo vo) {
+		System.out.println("dao vo:"+vo);
 		int result = JdbcUtil.getSqlSession().update("alarmMapper.alarmYNChange", vo);
+		System.out.println("dao result:"+result);
 		return result;
 	}
 

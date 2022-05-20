@@ -2,6 +2,18 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="adminMapper">
 
+	<resultMap type="Member" id="newMemberMap">
+		<result column="m_id" property="mId"/>
+		<result column="m_name" property="mName"/>
+		<result column="m_nickname" property="mNickname"/>
+		<result column="m_birth" property="mBirth"/>
+		<result column="m_phone" property="mPhone"/>
+		<result column="m_email" property="mEmail"/>
+		<result column="gender_fm" property="genderFm"/>
+		<result column="m_date" property="mDate"/>
+		<result column="m_certificate" property="mCertificate"/>
+		<result column="t_no" property="tNo"/>
+	</resultMap>
 	<!-- 관리자 승인 비승인 알람 보내기 -->
 	<insert id="sendApprovalAlarm" parameterType="Alarm">
 	<![CDATA[
@@ -33,4 +45,14 @@
 	delete from member_report where m_r_receiveid = #{m_id}
 	]]>
 	</delete>
+	
+	<!-- 비승인 선생님 정보 읽기 -->
+	<select id="readTeacherApprovalList" resultMap="newMemberMap">
+	<![CDATA[
+	select m_id, m_name, m_nickname, m_birth,
+	m_phone, m_email, gender_fm, m_date, m_certificate,
+	t_no from member m join t_profile t USING(M_ID) 
+	where T_APPROVAL='N'
+	]]>
+	</select>
 </mapper>

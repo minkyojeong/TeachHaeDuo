@@ -66,7 +66,13 @@ public class AlarmService {
 	public int alarmYNChange(MemberVo vo) {
 		int result = 0;
 		SqlSession session = JdbcUtil.getSqlSession();
+		System.out.println("service vo:"+vo);
 		result = dao.alarmYNChange(session, vo);
+		System.out.println("service result:"+result);
+		if(result > 0) {
+			System.out.println("커밋!!!!!");
+			session.commit();
+		}
 		return result;
 	}
 

@@ -182,7 +182,9 @@ public class ProfileUpdateDoController extends HttpServlet {
 				tVo.setT_no(ssMV.gettNo());
 				tVo.setT_picture(fileUrl);
 				// 서비스 호출
+				System.out.println("controller tVo"+tVo);
 				result = new TeacherService().updateProfilePicture(tVo);
+				System.out.println("controller result"+result);
 				// 성공
 				if (result == 1) {
 					request.setAttribute("tVo", tVo);
