@@ -5,8 +5,12 @@ import static kh.semi.thduo.common.jdbc.JdbcTemplate.*;
 import java.sql.Connection;
 import java.util.ArrayList;
 
+import org.apache.ibatis.session.SqlSession;
+
+import kh.semi.thduo.common.jdbc.JdbcUtil;
 import kh.semi.thduo.like.model.vo.LikeVo;
 import kh.semi.thduo.member.vo.MemberVo;
+import kh.semi.thduo.pencil.model.service.PencilService;
 import kh.semi.thduo.pencil.model.vo.PencilVo;
 import kh.semi.thduo.teacher.model.dao.TeacherDao;
 import kh.semi.thduo.teacher.model.vo.TeacherSearchSettingVo;
@@ -130,38 +134,123 @@ public class TeacherService {
 	}
 
 	// 선생님 교습정보 수정
-	public int updateTeacher(TeacherVo tVo, PencilVo pVo, String[] objectArr, String[] activeAreaArr) {
+	public int updateTeacher(TeacherVo tVo, PencilVo pVo, String[] objectArr, String[] activeAreaArr, String profileYn) {
 		int result = 0;
-		Connection conn = getConnection();
-		setAutocommit(conn, false);
 		System.out.println("서비스 tVo:" + tVo);
-		result = dao.updateTeacher(conn, tVo, pVo, objectArr, activeAreaArr);
-
-		if (result < 1) { // 쿼리문 여러개 중에 하나라도 실패하면
-			rollback(conn);
-		} else { // 모두 다 성공한다면
-			commit(conn);
+		
+		SqlSession session = JdbcUtil.getSqlSession();
+		result = dao.updateTeacher(session, tVo);
+		if (result < 1) { // 실패
+			System.out.println("교습 정보 업데이트 실패");
+			session.rollback();
+			return 0;
+		} else { // 성공
+			System.out.println("교습 정보 업데이트 성공");
+			System.out.println("서비스 pVo:" + pVo);
+			result = new PencilService().minusPencil(pVo);
+			System.out.println("서비스 연필 테이블 result :" + result);
+			if(result < 1) { // 실패
+				System.out.println("연필 정보 업데이트 실패");
+				session.rollback();
+				return 0;
+			} else { // 성공
+				System.out.println("연필 정보 업데이트 성공");
+				if(profileYn.equals("Y")) { // 기존 프로필이 있다면 담당 과목 삭제
+					result = dao.deleteObject(session, tVo.getT_no());
+					if(result < 1) { // 실패
+						System.out.println("담당과목 삭제 실패");
+						session.rollback();
+						return 0;
+					} else { // 성공 담당과목 넣기
+						System.out.println("담당과목 삭제 성공");
+						for (int i = 0; i < objectArr.length; i++) {
+							String object = objectArr[i];
+							System.out.println("activeArea" + i + ":" + object);
+							result = dao.insertObject(session, object, tVo.getT_no());
+							System.out.println("활동지역 서비스 result: " + i + ":" + result);
+							if (result == 0) {
+								// insert에 실패했다면 더 이상 지역 서비스를 insert할 필요 없으므로
+								break;
+							}
+						}
+						// 하나라도 insert 실패했다면
+						if (result == 0) {
+							System.out.println("담당과목 삽입 실패");
+							session.rollback();
+							return 0;
+						} else { // 전부 성공했다면 기존 활동지역 삭제
+							System.out.println("담당과목 삽입 성공");
+							result = dao.deleteActiveArea(session, tVo.getT_no());
+							if(result < 1) { // 실패
+								System.out.println("활동지역 삭제 실패");
+								session.rollback();
+								return 0;
+							} else { // 성공 활동지역 삽입
+								System.out.println("활동지역 삭제 성공");
+								for (int i = 0; i < activeAreaArr.length; i++) {
+									String activeArea = activeAreaArr[i];
+									System.out.println("activeArea" + i + ":" + activeArea);
+									result = dao.insertActiveArea(session, activeArea, tVo.getT_no());
+									if (result == 0) {
+										System.out.println("활동지역 삽입 실패");
+										// insert에 실패했다면 더 이상 지역 서비스를 insert할 필요 없으므로
+										break;
+									}
+								}
+								if (result == 0) { // 하나라도 실패했다면
+									session.rollback();
+									return 0;
+								} 
+							}
+						}
+					}
+				} else if(profileYn.equals("N")) { // 교습서 최초등록
+					result = dao.updateTeacher(session, tVo);
+					if(result < 1) { // 실패
+						session.rollback();
+						return 0;
+					} else { // 성공 했다면 연필 차감
+						result = new PencilService().minusPencil(pVo);
+						if(result < 1) { // 실패
+							session.rollback();
+							return 0;
+						} else { // 성공 했다면 담당 과목 넣기
+							for (int i = 0; i < objectArr.length; i++) {
+								String object = objectArr[i];
+								System.out.println("activeArea" + i + ":" + object);
+								result = dao.insertObject(session, object, tVo.getT_no());
+								System.out.println("활동지역 서비스 result: " + i + ":" + result);
+								if (result == 0) {
+									// insert에 실패했다면 더 이상 지역 서비스를 insert할 필요 없으므로
+									break;
+								}
+							}
+							// 하나라도 insert 실패했다면
+							if (result == 0) {
+								session.rollback();
+								return 0;
+							} else { // 성공 했다면 활동 지역 넣기
+								for (int i = 0; i < activeAreaArr.length; i++) {
+									String activeArea = activeAreaArr[i];
+									System.out.println("activeArea" + i + ":" + activeArea);
+									result = dao.insertActiveArea(session, activeArea, tVo.getT_no());
+									if (result == 0) {
+										// insert에 실패했다면 더 이상 지역 서비스를 insert할 필요 없으므로
+										break;
+									}
+								}
+								if (result == 0) { // 하나라도 실패했다면
+									session.rollback();
+									return 0;
+								}
+							}
+						}
+					}
+				}
+			}
 		}
-		close(conn);
-
-		return result;
-	}
-
-	// 선생님 교습정보 최초 등록
-	public int updateTeacherInit(TeacherVo tVo, PencilVo pVo, String[] objectArr, String[] activeAreaArr) {
-		int result = 0;
-		Connection conn = getConnection();
-		setAutocommit(conn, false);
-		System.out.println("서비스 tVo:" + tVo);
-		result = dao.updateTeacherInit(conn, tVo, pVo, objectArr, activeAreaArr);
-
-		if (result < 1) { // 쿼리문 여러개 중에 하나라도 실패하면
-			rollback(conn);
-		} else { // 모두 다 성공한다면
-			commit(conn);
-		}
-		close(conn);
-
+		System.out.println("커밋!!!!!!!");
+		session.commit();
 		return result;
 	}
 
@@ -385,6 +474,24 @@ public class TeacherService {
 //			}
 //			close(conn);
 //
+//			return result;
+//		}
+	
+	// 선생님 교습정보 최초 등록
+//		public int updateTeacherInit(TeacherVo tVo, PencilVo pVo, String[] objectArr, String[] activeAreaArr) {
+//			int result = 0;
+//			Connection conn = getConnection();
+//			setAutocommit(conn, false);
+//			System.out.println("서비스 tVo:" + tVo);
+//			result = dao.updateTeacherInit(conn, tVo, pVo, objectArr, activeAreaArr);
+	//
+//			if (result < 1) { // 쿼리문 여러개 중에 하나라도 실패하면
+//				rollback(conn);
+//			} else { // 모두 다 성공한다면
+//				commit(conn);
+//			}
+//			close(conn);
+	//
 //			return result;
 //		}
 }

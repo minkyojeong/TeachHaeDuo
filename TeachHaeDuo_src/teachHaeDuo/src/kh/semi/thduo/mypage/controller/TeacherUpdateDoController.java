@@ -177,7 +177,7 @@ public class TeacherUpdateDoController extends HttpServlet {
 
 				// 데이터 가지고 서비스 호출
 				System.out.println("컨트롤러 tVo :" + tVo);
-				result = new TeacherService().updateTeacherInit(tVo, pVo, objectArr, activeAreaArr);
+				result = new TeacherService().updateTeacher(tVo, pVo, objectArr, activeAreaArr,profileYn);
 				// 실패
 				if (result == 0) {
 					System.out.println("t_profile 넣기 실패");
@@ -222,7 +222,8 @@ public class TeacherUpdateDoController extends HttpServlet {
 				tVo.setT_intro(tIntro.replace("\r\n", "<br>"));
 
 				// 변수 가지고 서비스 호출
-				result = new TeacherService().updateTeacher(tVo, pVo, objectArr, activeAreaArr);
+				result = new TeacherService().updateTeacher(tVo, pVo, objectArr, activeAreaArr, profileYn);
+				System.out.println("컨트롤러 result"+result);
 				// 실패
 				if (result == 0) {
 					System.out.println("t_profile 넣기 실패");

@@ -10,6 +10,8 @@ import java.sql.Statement;
 import java.sql.Timestamp;
 import java.util.ArrayList;
 
+import org.apache.ibatis.session.SqlSession;
+
 import kh.semi.thduo.member.vo.MemberVo;
 
 public class MemberDao {
@@ -224,41 +226,15 @@ public class MemberDao {
 	
 	
     //회원 수정
-	public int updateMember(Connection conn, MemberVo vo) {
-		int result = 0;
-		String sql = "update member set m_pw=?, m_PHONE=?, m_address=?  where m_id=?";
-		System.out.println("회원정보수정 dao vo:" + vo);
-		try {
-			pstmt = conn.prepareStatement(sql);
-			pstmt.setString(1, vo.getmPw());
-			pstmt.setString(2, vo.getmPhone());
-			pstmt.setString(3, vo.getmAddress());
-			pstmt.setString(4, vo.getmId());
-			result = pstmt.executeUpdate();
-		} catch (SQLException e) {
-			e.printStackTrace();
-		} finally {
-			close(pstmt);
-		}
-		System.out.println("회원정보수정 dao result:" + result);
-			return result;
+	public int updateMember(SqlSession session, MemberVo vo) {
+		int result = session.update("mypageMapper.updateMember",vo) ;
+		return result;
 	}
 
 	// 한 회원 삭제(강제 삭제)
-	public int deleteMember(Connection conn, String mId) { 
+	public int deleteMember(SqlSession session, String mId) { 
 		System.out.println("회원탈퇴 Dao, 아이디: " + mId);
-		int result = 0;
-		String sql = "delete from member where m_id=?";
-		try {
-			pstmt = conn.prepareStatement(sql);
-			pstmt.setString(1, mId);
-			result = pstmt.executeUpdate();
-			
-		} catch (SQLException e) {
-			e.printStackTrace();
-		} finally {
-			close(pstmt);
-		}
+		int result = session.delete("mypageMapper.deleteMember", mId);
 		System.out.println("회원탈퇴 Dao, result: " + result);
 		return result;
 	}

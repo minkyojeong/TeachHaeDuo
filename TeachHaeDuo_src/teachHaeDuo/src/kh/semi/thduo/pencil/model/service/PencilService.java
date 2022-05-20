@@ -46,12 +46,13 @@ public class PencilService {
 	}
 
 	// 연필 차감 내역 삽입
-	public int minusPencil(PencilVo vo) {
+	public int minusPencil(PencilVo pVo) {
+		System.out.println("{{{{{{{{{{{{{{{{들어오냐}}}}}}}}}}");
 		int result = 0;
 		SqlSession session = JdbcUtil.getSqlSession();
-		result = dao.minusPencil(session,vo);
-
-
+		System.out.println("dao pVo :" + pVo);
+		result = dao.minusPencil(session,pVo);
+		System.out.println("dao result" + result);
 		return result;
 	}
 

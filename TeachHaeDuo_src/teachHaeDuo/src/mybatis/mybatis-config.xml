@@ -39,5 +39,6 @@
 		<mapper resource="mybatis/mappers/report-mapper.xml"/>
 		<mapper resource="mybatis/mappers/alarm-mapper.xml"/>
 		<mapper resource="mybatis/mappers/admin-mapper.xml"/>
+		<mapper resource="mybatis/mappers/mypage-mapper.xml"/>
 	</mappers>
 </configuration>

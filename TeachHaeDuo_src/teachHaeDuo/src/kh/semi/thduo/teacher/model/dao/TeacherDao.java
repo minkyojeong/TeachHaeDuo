@@ -11,6 +11,9 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.HashMap;
+
+import org.apache.ibatis.session.SqlSession;
 
 import kh.semi.thduo.like.model.vo.LikeVo;
 import kh.semi.thduo.member.vo.MemberVo;
@@ -467,184 +470,42 @@ public class TeacherDao {
 	}
 
 	// 선생님 교습정보 수정
-	public int updateTeacher(Connection conn, TeacherVo tVo, PencilVo pVo, String[] objectArr, String[] activeAreaArr) {
-		int result = 0;
-		System.out.println("dao tVo:" + tVo);
-		System.out.println("tVo.getOnline_yna() :" + tVo.getOnline_yna());
-		String sql = "update t_profile set t_major=? , online_yna=? , " + "t_tcnt=? , t_tprice=? , t_wantstud=? , "
-				+ "t_career=? , t_language=? , t_special=? , t_profile_yn='Y' , " + "t_intro=? where t_no=?";
-		String sqlPencil = "INSERT INTO check_pencil(cp_no, cp_content, cp_cash, cp_date, m_id) "
-				+ "values((SELECT NVL(MAX(cp_no), 0) + 1 FROM check_pencil WHERE m_id = ?), ?, ?, default, ?)";
-		String sqlDeleteObject = "delete from teach_object where t_no=?";
-		String sqlInsertObject = "insert into TEACH_OBJECT (ob_code, t_no) "
-				+ "values( (select ob_code from object where ob_name=?) , ?)";
-		String sqlDeleteactiveArea = "delete from acti_area where t_no=?";
-		String sqlInsertactiveArea = "insert into ACTI_AREA (t_no, area_code) "
-				+ "values(?, (select area_code from area where area_name=?) )";
-		try {
-			pstmt = conn.prepareStatement(sql);
-			pstmt.setString(1, tVo.getT_major());
-			pstmt.setString(2, tVo.getOnline_yna());
-			pstmt.setString(3, tVo.getT_tcnt());
-			pstmt.setString(4, tVo.getT_tprice());
-			pstmt.setString(5, tVo.getT_wantstud());
-			pstmt.setString(6, tVo.getT_career());
-			pstmt.setString(7, tVo.getT_language());
-			pstmt.setString(8, tVo.getT_special());
-			pstmt.setString(9, tVo.getT_intro());
-			pstmt.setString(10, tVo.getT_no());
-			result = pstmt.executeUpdate();
-			System.out.println("t_profile update result:" + result);
-			if (result < 1) { // update 실패한다면 리턴
-				return 0;
-			} else { // update 성공한다면 연필테이블에 insert
-				pstmt = conn.prepareStatement(sqlPencil);
-				pstmt.setString(1, pVo.getmId());
-				pstmt.setString(2, pVo.getCpContent());
-				pstmt.setInt(3, pVo.getCpCash());
-				pstmt.setString(4, pVo.getmId());
-
-				result = pstmt.executeUpdate();
-				System.out.println("연필테이블 result:" + result);
-				if (result < 1) { // insert 실패한다면 리턴
-					return 0;
-				} else { // insert 성공한다면 기존에 담당 과목 삭제
-					pstmt = conn.prepareStatement(sqlDeleteObject);
-					pstmt.setString(1, tVo.getT_no());
-					result = pstmt.executeUpdate();
-					System.out.println("담당과목삭제 result:" + result);
-					if (result < 1) { // delete 실패한다면 리턴
-						return 0;
-					} else { // 성공한다면 담당 과목 넣기
-						pstmt = conn.prepareStatement(sqlInsertObject);
-						pstmt.setString(2, tVo.getT_no());
-						for (int i = 0; i < objectArr.length; i++) {
-							pstmt.setString(1, objectArr[i]);
-							result = pstmt.executeUpdate();
-							System.out.println("담당과목 넣기 result" + i + ": " + result);
-							if (result < 1) { // 담당과목 넣기 실패한다면 반복문 빠져나감
-								break;
-							}
-						}
-						System.out.println("담당과목 넣기 result:" + result);
-						if (result < 1) { // 반복문 빠져나와서 리턴
-							return 0;
-						} else { // 담당과목 넣기 성공한다면 기존에 활동지역 삭제
-							pstmt = conn.prepareStatement(sqlDeleteactiveArea);
-							pstmt.setString(1, tVo.getT_no());
-							result = pstmt.executeUpdate();
-							System.out.println("활동지역 삭제 result" + result);
-							if (result < 1) { // 활동 지역 삭제 실패한다면 리턴
-								return 0;
-							} else { // 활동지역 삭제 성공한다면 활동지역 넣기
-								pstmt = conn.prepareStatement(sqlInsertactiveArea);
-								pstmt.setString(1, tVo.getT_no());
-								for (int i = 0; i < activeAreaArr.length; i++) {
-									pstmt.setString(2, activeAreaArr[i]);
-									result = pstmt.executeUpdate();
-									System.out.println("활동지역 넣기 result" + i + ":" + result);
-									if (result < 1) { // 넣다가 실패하면 반복만 빠져나감
-										break;
-									}
-								}
-							}
-							System.out.println("활동지역 넣기 result" + result);
-							if (result < 1) { // 반복문 빠져나와서 리턴
-								return 0;
-							}
-						}
-					}
-				}
-			}
-		} catch (SQLException e) {
-			e.printStackTrace();
-		} finally {
-			close(pstmt);
-		}
-		System.out.println("[[[[[[최종 result :]]]]]]]" + result);
+	public int updateTeacher(SqlSession session, TeacherVo tVo) {
+		int result = session.insert("mypageMapper.updateTeacher",tVo);
 		return result;
 	}
 
-	// 선생님 교습정보 최초 수정
-	public int updateTeacherInit(Connection conn, TeacherVo tVo, PencilVo pVo, String[] objectArr,
-			String[] activeAreaArr) {
-		int result = 0;
-		System.out.println("dao tVo:" + tVo);
-		System.out.println("tVo.getOnline_yna() :" + tVo.getOnline_yna());
-		String sql = "update t_profile set t_major=? , online_yna=? , " + "t_tcnt=? , t_tprice=? , t_wantstud=? , "
-				+ "t_career=? , t_language=? , t_special=? , t_profile_yn='Y' , " + "t_intro=? where t_no=?";
-		String sqlPencil = "INSERT INTO check_pencil(cp_no, cp_content, cp_cash, cp_date, m_id) "
-				+ "values((SELECT NVL(MAX(cp_no), 0) + 1 FROM check_pencil WHERE m_id = ?), ?, ?, default, ?)";
-		String sqlInsertObject = "insert into TEACH_OBJECT (ob_code, t_no) "
-				+ "values( (select ob_code from object where ob_name=?) , ?)";
-		String sqlInsertactiveArea = "insert into ACTI_AREA (t_no, area_code) "
-				+ "values(?, (select area_code from area where area_name=?) )";
-		try {
-			pstmt = conn.prepareStatement(sql);
-			pstmt.setString(1, tVo.getT_major());
-			pstmt.setString(2, tVo.getOnline_yna());
-			pstmt.setString(3, tVo.getT_tcnt());
-			pstmt.setString(4, tVo.getT_tprice());
-			pstmt.setString(5, tVo.getT_wantstud());
-			pstmt.setString(6, tVo.getT_career());
-			pstmt.setString(7, tVo.getT_language());
-			pstmt.setString(8, tVo.getT_special());
-			pstmt.setString(9, tVo.getT_intro());
-			pstmt.setString(10, tVo.getT_no());
-			result = pstmt.executeUpdate();
-			System.out.println("t_profile update result:" + result);
-			if (result < 1) { // update 실패한다면 리턴
-				return 0;
-			} else { // update 성공한다면 연필테이블에 insert
-				pstmt = conn.prepareStatement(sqlPencil);
-				pstmt.setString(1, pVo.getmId());
-				pstmt.setString(2, pVo.getCpContent());
-				pstmt.setInt(3, pVo.getCpCash());
-				pstmt.setString(4, pVo.getmId());
-				result = pstmt.executeUpdate();
-				System.out.println("연필테이블 result:" + result);
-				if (result < 1) { // insert 실패한다면 리턴
-					return 0;
-				} else { // 성공한다면 담당 과목 넣기
-					pstmt = conn.prepareStatement(sqlInsertObject);
-					pstmt.setString(2, tVo.getT_no());
-					for (int i = 0; i < objectArr.length; i++) {
-						pstmt.setString(1, objectArr[i]);
-						result = pstmt.executeUpdate();
-						System.out.println("담당과목 넣기 result" + i + ": " + result);
-						if (result < 1) { // 담당과목 넣기 실패한다면 반복문 빠져나감
-							break;
-						}
-					}
-					System.out.println("담당과목 넣기 result:" + result);
-					if (result < 1) { // 반복문 빠져나와서 리턴
-						return 0;
-					} else { // 성공한다면 활동지역 넣기
-						pstmt = conn.prepareStatement(sqlInsertactiveArea);
-						pstmt.setString(1, tVo.getT_no());
-						for (int i = 0; i < activeAreaArr.length; i++) {
-							pstmt.setString(2, activeAreaArr[i]);
-							result = pstmt.executeUpdate();
-							System.out.println("활동지역 넣기 result" + i + ":" + result);
-							if (result < 1) { // 넣다가 실패하면 반복만 빠져나감
-								break;
-							}
-						}
-					}
-					System.out.println("활동지역 넣기 result" + result);
-					if (result < 1) { // 반복문 빠져나와서 리턴
-						return 0;
-					}
-				}
-			}
-		} catch (SQLException e) {
-			e.printStackTrace();
-		} finally {
-			close(pstmt);
-		}
-		System.out.println("[[[[[[최종 result :]]]]]]]" + result);
+	// 선생님 담당 과목 넣기
+	public int insertObject(SqlSession session, String object, String tNo) {
+		HashMap<String, String> map = new HashMap<String, String>();
+		map.put("object", object);
+		map.put("tNo", tNo);
+		int result = session.insert("mypageMapper.insertObject",map);
 		return result;
 	}
+
+	// 선생님 담당 과목 삭제
+	public int deleteObject(SqlSession session, String tNo) {
+		int result = session.delete("mypageMapper.deleteObject", tNo);
+		return result;
+	}
+
+	// 선생님 활동지역 넣기
+	public int insertActiveArea(SqlSession session, String activeArea, String tNo) {
+		HashMap<String, String> map = new HashMap<String, String>();
+		map.put("activeArea", activeArea);
+		map.put("tNo", tNo);
+		int result = session.insert("mypageMapper.insertActiveArea",map);
+		return result;
+	}
+
+	// 선생님 활동지역 삭제
+	public int deleteActiveArea(SqlSession session, String tNo) {
+		int result = session.delete("mypageMapper.deleteActiveArea",tNo);
+		return result;
+	}
+
+
 
 	// 선생님 승인여부 체크
 	public String checkApproval(Connection conn, String tNo) {
@@ -849,75 +710,85 @@ public class TeacherDao {
 //		return retsult;
 //	}
 //
+	// 선생님 교습정보 최초 수정
+//	public int updateTeacherInit(Connection conn, TeacherVo tVo, PencilVo pVo, String[] objectArr,
+//			String[] activeAreaArr) {
+//		int result = 0;
+//		System.out.println("dao tVo:" + tVo);
+//		System.out.println("tVo.getOnline_yna() :" + tVo.getOnline_yna());
+//		String sql = "update t_profile set t_major=? , online_yna=? , " + "t_tcnt=? , t_tprice=? , t_wantstud=? , "
+//				+ "t_career=? , t_language=? , t_special=? , t_profile_yn='Y' , " + "t_intro=? where t_no=?";
+//		String sqlPencil = "INSERT INTO check_pencil(cp_no, cp_content, cp_cash, cp_date, m_id) "
+//				+ "values((SELECT NVL(MAX(cp_no), 0) + 1 FROM check_pencil WHERE m_id = ?), ?, ?, default, ?)";
+//		String sqlInsertObject = "insert into TEACH_OBJECT (ob_code, t_no) "
+//				+ "values( (select ob_code from object where ob_name=?) , ?)";
+//		String sqlInsertactiveArea = "insert into ACTI_AREA (t_no, area_code) "
+//				+ "values(?, (select area_code from area where area_name=?) )";
+//		try {
+//			pstmt = conn.prepareStatement(sql);
+//			pstmt.setString(1, tVo.getT_major());
+//			pstmt.setString(2, tVo.getOnline_yna());
+//			pstmt.setString(3, tVo.getT_tcnt());
+//			pstmt.setString(4, tVo.getT_tprice());
+//			pstmt.setString(5, tVo.getT_wantstud());
+//			pstmt.setString(6, tVo.getT_career());
+//			pstmt.setString(7, tVo.getT_language());
+//			pstmt.setString(8, tVo.getT_special());
+//			pstmt.setString(9, tVo.getT_intro());
+//			pstmt.setString(10, tVo.getT_no());
+//			result = pstmt.executeUpdate();
+//			System.out.println("t_profile update result:" + result);
+//			if (result < 1) { // update 실패한다면 리턴
+//				return 0;
+//			} else { // update 성공한다면 연필테이블에 insert
+//				pstmt = conn.prepareStatement(sqlPencil);
+//				pstmt.setString(1, pVo.getmId());
+//				pstmt.setString(2, pVo.getCpContent());
+//				pstmt.setInt(3, pVo.getCpCash());
+//				pstmt.setString(4, pVo.getmId());
+//				result = pstmt.executeUpdate();
+//				System.out.println("연필테이블 result:" + result);
+//				if (result < 1) { // insert 실패한다면 리턴
+//					return 0;
+//				} else { // 성공한다면 담당 과목 넣기
+//					pstmt = conn.prepareStatement(sqlInsertObject);
+//					pstmt.setString(2, tVo.getT_no());
+//					for (int i = 0; i < objectArr.length; i++) {
+//						pstmt.setString(1, objectArr[i]);
+//						result = pstmt.executeUpdate();
+//						System.out.println("담당과목 넣기 result" + i + ": " + result);
+//						if (result < 1) { // 담당과목 넣기 실패한다면 반복문 빠져나감
+//							break;
+//						}
+//					}
+//					System.out.println("담당과목 넣기 result:" + result);
+//					if (result < 1) { // 반복문 빠져나와서 리턴
+//						return 0;
+//					} else { // 성공한다면 활동지역 넣기
+//						pstmt = conn.prepareStatement(sqlInsertactiveArea);
+//						pstmt.setString(1, tVo.getT_no());
+//						for (int i = 0; i < activeAreaArr.length; i++) {
+//							pstmt.setString(2, activeAreaArr[i]);
+//							result = pstmt.executeUpdate();
+//							System.out.println("활동지역 넣기 result" + i + ":" + result);
+//							if (result < 1) { // 넣다가 실패하면 반복만 빠져나감
+//								break;
+//							}
+//						}
+//					}
+//					System.out.println("활동지역 넣기 result" + result);
+//					if (result < 1) { // 반복문 빠져나와서 리턴
+//						return 0;
+//					}
+//				}
+//			}
+//		} catch (SQLException e) {
+//			e.printStackTrace();
+//		} finally {
+//			close(pstmt);
+//		}
+//		System.out.println("[[[[[[최종 result :]]]]]]]" + result);
+//		return result;
+//	}
 
-//	// 선생님 담당 과목 넣기
-//		public int insertObject(Connection conn, String object, String tNo) {
-//			int result = 0;
-//			String sql = "insert into TEACH_OBJECT (ob_code, t_no) values( (select ob_code from object where ob_name=?) , ?)";
-//			try {
-//				pstmt = conn.prepareStatement(sql);
-//				pstmt.setString(2, tNo);
-//				pstmt.setString(1, object);
-//				result = pstmt.executeUpdate();
-//			} catch (SQLException e) {
-//				e.printStackTrace();
-//			} finally {
-//				close(pstmt);
-//			}
-//
-//			return result;
-//		}
-//
-//		// 선생님 담당 과목 삭제
-//		public int deleteObject(Connection conn, String tNo) {
-//			int result = 0;
-//			String sql = "delete from teach_object where t_no=?";
-//
-//			try {
-//				pstmt = conn.prepareStatement(sql);
-//				pstmt.setString(1, tNo);
-//				result = pstmt.executeUpdate();
-//			} catch (SQLException e) {
-//				e.printStackTrace();
-//			} finally {
-//				close(pstmt);
-//			}
-//			return result;
-//		}
-//
-//		// 선생님 활동지역 넣기
-//		public int insertActiveArea(Connection conn, String activeArea, String tNo) {
-//			int result = 0;
-//			String sql = "insert into ACTI_AREA (t_no, area_code) values(?, (select area_code from area where area_name=?) )";
-//			try {
-//				pstmt = conn.prepareStatement(sql);
-//				pstmt.setString(1, tNo);
-//				pstmt.setString(2, activeArea);
-//				result = pstmt.executeUpdate();
-//			} catch (SQLException e) {
-//				e.printStackTrace();
-//			} finally {
-//				close(pstmt);
-//			}
-//
-//			return result;
-//		}
-//
-//		// 선생님 활동지역 삭제
-//		public int deleteActiveArea(Connection conn, String tNo) {
-//			int result = 0;
-//			String sql = "delete from acti_area where t_no=?";
-//
-//			try {
-//				pstmt = conn.prepareStatement(sql);
-//				pstmt.setString(1, tNo);
-//				result = pstmt.executeUpdate();
-//			} catch (SQLException e) {
-//				e.printStackTrace();
-//			} finally {
-//				close(pstmt);
-//			}
-//
-//			return result;
-//		}
 }

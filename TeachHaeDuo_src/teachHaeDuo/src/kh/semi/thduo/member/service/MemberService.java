@@ -161,9 +161,8 @@ public class MemberService {
 		System.out.println("회원탈퇴 service, 아이디: " + mId);
 
 		int result = 0;
-		Connection conn = getConnection();
-		result = dao.deleteMember(conn, mId);
-		close(conn);
+		SqlSession session = JdbcUtil.getSqlSession();
+		result = dao.deleteMember(session, mId);
 		System.out.println("회원탈퇴 service, result" + result);
 		return result;
 	}
@@ -171,9 +170,8 @@ public class MemberService {
 	// 회원수정
 	public int updateMember(MemberVo vo) {
 		int result = 0;
-		Connection conn = getConnection();
-		result = dao.updateMember(conn, vo);
-		close(conn);
+		SqlSession session = JdbcUtil.getSqlSession();
+		result = dao.updateMember(session, vo);
 		return result;
 	}
 
