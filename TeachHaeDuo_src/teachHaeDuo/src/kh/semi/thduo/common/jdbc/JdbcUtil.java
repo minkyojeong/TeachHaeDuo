@@ -20,7 +20,7 @@ public class JdbcUtil {
 	}
 	
 	public static SqlSession getSqlSession() {
-		return factory.openSession();
+		return factory.openSession(true);
 	}
 	
 }

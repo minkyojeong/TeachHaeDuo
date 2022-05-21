@@ -252,6 +252,7 @@ public class TeacherService {
 		}
 		System.out.println("커밋!!!!!!!");
 		session.commit();
+		session.close();
 		return result;
 	}
 
@@ -260,7 +261,7 @@ public class TeacherService {
 		String result = null;
 		SqlSession session = JdbcUtil.getSqlSession();
 		result = dao.checkApproval(session, tNo);
-
+		session.close();
 		return result;
 	}
 
@@ -269,7 +270,7 @@ public class TeacherService {
 		String result = null;
 		SqlSession session = JdbcUtil.getSqlSession();
 		result = dao.checkProfile(session, tNo);
-
+		session.close();
 		return result;
 	}
 
@@ -283,6 +284,7 @@ public class TeacherService {
 		if(result > 0) {
 			session.commit();
 		}
+		session.close();
 		return result;
 	}
 
@@ -296,6 +298,7 @@ public class TeacherService {
 		if(result > 0) {
 			session.commit();
 		}
+		session.close();
 		return result;
 	}
 

@@ -164,6 +164,7 @@ public class MemberService {
 		SqlSession session = JdbcUtil.getSqlSession();
 		result = dao.deleteMember(session, mId);
 		System.out.println("회원탈퇴 service, result" + result);
+		session.close();
 		return result;
 	}
 
@@ -172,6 +173,7 @@ public class MemberService {
 		int result = 0;
 		SqlSession session = JdbcUtil.getSqlSession();
 		result = dao.updateMember(session, vo);
+		session.close();
 		return result;
 	}
 

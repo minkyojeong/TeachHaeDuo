@@ -21,6 +21,7 @@ public class AlarmService {
 		int result = 0;
 		SqlSession session = JdbcUtil.getSqlSession();
 		result = dao.sendAlarm(session, vo);
+		session.close();
 		return result;
 	}
 
@@ -28,6 +29,7 @@ public class AlarmService {
 	public List<AlarmVo> sendListAlarm(String mNickname) {
 		SqlSession session = JdbcUtil.getSqlSession();
 		List<AlarmVo> voList = dao.sendListAlarm(session, mNickname);
+		session.close();
 		return voList;
 	}
 
@@ -37,6 +39,7 @@ public class AlarmService {
 		SqlSession session = JdbcUtil.getSqlSession();
 		int result = dao.numberOfSendAlarm(session, mNickname);
 		System.out.println("보낸 건수 서비스 result:" + result);
+		session.close();
 		return result;
 	}
 
@@ -44,6 +47,7 @@ public class AlarmService {
 	public List<AlarmVo> receiveListAlarm(String mNickname) {
 		SqlSession session = JdbcUtil.getSqlSession();
 		List<AlarmVo> voList = dao.receiveListAlarm(session, mNickname);
+		session.close();
 		return voList;
 	}
 
@@ -52,6 +56,7 @@ public class AlarmService {
 		int result = 0;
 		SqlSession session = JdbcUtil.getSqlSession();
 		result = dao.numberOfReceiveAlarm(session, mNickname);
+		session.close();
 		return result;
 	}
 
@@ -59,6 +64,7 @@ public class AlarmService {
 	public List<AlarmVo> allListAlarm(String mNickname) {
 		SqlSession session = JdbcUtil.getSqlSession();
 		List<AlarmVo> voList = dao.allListAlarm(session, mNickname);
+		session.close();
 		return voList;
 	}
 
@@ -73,6 +79,7 @@ public class AlarmService {
 			System.out.println("커밋!!!!!");
 			session.commit();
 		}
+		session.close();
 		return result;
 	}
 
@@ -80,6 +87,7 @@ public class AlarmService {
 	public List<AlarmVo> receiveIdList(String mNickname) {
 		SqlSession session = JdbcUtil.getSqlSession();
 		List<AlarmVo> idList = dao.receiveIdList(session, mNickname);
+		session.close();
 		return idList;
 	}
 

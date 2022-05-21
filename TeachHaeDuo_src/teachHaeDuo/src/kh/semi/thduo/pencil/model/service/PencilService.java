@@ -32,6 +32,7 @@ public class PencilService {
 			System.out.println("커밋");
 			session.commit();
 		}
+		session.close();
 		System.out.println("충전하기 서비스 result:" + result);
 		return result;
 	}
@@ -41,7 +42,7 @@ public class PencilService {
 		int result = 0;
 		SqlSession session = JdbcUtil.getSqlSession();
 		result = dao.checkPencil(session, mId);
-
+		session.close();
 		return result;
 	}
 
@@ -53,6 +54,7 @@ public class PencilService {
 		System.out.println("dao pVo :" + pVo);
 		result = dao.minusPencil(session,pVo);
 		System.out.println("dao result" + result);
+		session.close();
 		return result;
 	}
 
@@ -72,7 +74,7 @@ public class PencilService {
 			}
 		}
 
-
+		session.close();
 		return result;
 	}
 
@@ -81,7 +83,7 @@ public class PencilService {
 		List<PencilVo> result = null;
 		SqlSession session = JdbcUtil.getSqlSession();
 		result = dao.listPencil(session,mId);
-
+		session.close();
 		return result;
 
 	}
@@ -91,7 +93,7 @@ public class PencilService {
 		int result = 0;
 		SqlSession session = JdbcUtil.getSqlSession();
 		result = dao.insertPencilInit(session,mId);
-
+		session.close();
 		return result;
 	}
 
@@ -100,6 +102,7 @@ public class PencilService {
 		List<MemberVo> result = null;
 		SqlSession session = JdbcUtil.getSqlSession();
 		result = dao.allPencilChart(session);
+		session.close();
 		return result;
 	}
 
@@ -108,6 +111,7 @@ public class PencilService {
 		List<MemberVo> result = null;
 		SqlSession session = JdbcUtil.getSqlSession();
 		result = dao.monthPencilChart(session,num);
+		session.close();
 		return result;
 	}
 
@@ -116,6 +120,7 @@ public class PencilService {
 		List<MemberVo> result = null;
 		SqlSession session = JdbcUtil.getSqlSession();
 		result = dao.yearPencilChart(session,num);
+		session.close();
 		return result;
 	}
 }

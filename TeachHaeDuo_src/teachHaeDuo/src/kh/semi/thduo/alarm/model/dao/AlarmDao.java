@@ -29,45 +29,45 @@ public class AlarmDao {
 
 	// 보낸 알람 리스트
 	public List<AlarmVo> sendListAlarm(SqlSession session, String mNickname) {
-		List<AlarmVo> voList = JdbcUtil.getSqlSession().selectList("alarmMapper.sendListAlarm",mNickname);
+		List<AlarmVo> voList = session.selectList("alarmMapper.sendListAlarm",mNickname);
 		return voList;
 	}
 
 	// 보낸 알람 횟수
 	public int numberOfSendAlarm(SqlSession session, String mNickname) {
-		int result = JdbcUtil.getSqlSession().selectOne("alarmMapper.numberOfSendAlarm",mNickname);
+		int result = session.selectOne("alarmMapper.numberOfSendAlarm",mNickname);
 		return result;
 	}
 
 	// 받은 알람 리스트
 	public List<AlarmVo> receiveListAlarm(SqlSession session, String mNickname) {
-		List<AlarmVo> voList = JdbcUtil.getSqlSession().selectList("alarmMapper.receiveListAlarm",mNickname);
+		List<AlarmVo> voList = session.selectList("alarmMapper.receiveListAlarm",mNickname);
 		return voList;
 	}
 
 	// 받은 알람 횟수
 	public int numberOfReceiveAlarm(SqlSession session, String mNickname) {
-		int result = JdbcUtil.getSqlSession().selectOne("alarmMapper.numberOfReceiveAlarm",mNickname);
+		int result = session.selectOne("alarmMapper.numberOfReceiveAlarm",mNickname);
 		return result;
 	}
 
 	// 모든 알람 리스트
 	public List<AlarmVo> allListAlarm(SqlSession session, String mNickname) {
-		List<AlarmVo> voList = JdbcUtil.getSqlSession().selectList("alarmMapper.allListAlarm",mNickname);
+		List<AlarmVo> voList = session.selectList("alarmMapper.allListAlarm",mNickname);
 		return voList;
 	}
 
 	// 알람 수신거부
 	public int alarmYNChange(SqlSession session, MemberVo vo) {
 		System.out.println("dao vo:"+vo);
-		int result = JdbcUtil.getSqlSession().update("alarmMapper.alarmYNChange", vo);
+		int result = session.update("alarmMapper.alarmYNChange", vo);
 		System.out.println("dao result:"+result);
 		return result;
 	}
 
 	// 받은 알람 아이디 리스트
 	public List<AlarmVo> receiveIdList(SqlSession session, String mNickname) {
-		List<AlarmVo> voList = JdbcUtil.getSqlSession().selectList("alarmMapper.receiveIdList",mNickname);
+		List<AlarmVo> voList = session.selectList("alarmMapper.receiveIdList",mNickname);
 		return voList;
 	}
 

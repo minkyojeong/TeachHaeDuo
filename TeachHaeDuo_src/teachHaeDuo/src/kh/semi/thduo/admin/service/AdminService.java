@@ -44,6 +44,7 @@ public class AdminService {
 		} else { // 2개 다 성공하면 커밋
 			session.commit();
 		}
+		session.close();
 		return result;
 	}
 
@@ -60,6 +61,7 @@ public class AdminService {
 		} else { // 2개 다 성공하면 커밋
 			session.commit();
 		}
+		session.close();
 		return result;
 	}
 	
@@ -69,6 +71,7 @@ public class AdminService {
 		List<MemberVo> voList = null;
 		SqlSession session = JdbcUtil.getSqlSession();
 		voList = dao.readTeacherApprovalList(session);
+		session.close();
 		return voList;
 	}
 
